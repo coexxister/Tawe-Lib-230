@@ -4,7 +4,7 @@ public class DBTester {
 
 	public static void main(String[] args) {
 
-		/*DatabaseManager dbManager = new DatabaseManager("C:/Users/Noah/Desktop/TaweLib Database/TaweLibDB.db");
+		DatabaseManager dbManager = new DatabaseManager("TaweLibDB.db");
 		
 		try {
 			String[][] tuples = dbManager.searchTuples("Resources", "Title", "mac");
