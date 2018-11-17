@@ -1,3 +1,5 @@
+import jdk.management.resource.ResourceId;
+
 /**
  * This class represents a resource and its information.
  * @author Noah Lenagan, Paris Kelly Skopelitis
@@ -103,6 +105,19 @@ public class Resource {
      */
     public void setThumbImage(int thumbImage) {
         this.thumbImageID = thumbImage;
+    }
+
+    /**
+     * Creates a summary of information for the resource.
+     * @return Returns a summary of the resource.
+     */
+    public String toString() {
+
+        String out  = "ID - " + resourceID +
+                "\nTitle - " + title +
+                "\nRelease Year - " + year;
+        return out;
+
     }
 
 }

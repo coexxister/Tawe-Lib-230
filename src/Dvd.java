@@ -112,4 +112,26 @@ public class Dvd extends Resource{
         this.subLang = subLang;
     }
 
+    /**
+     * Creates a summary of information for the Dvd.
+     * @return Returns a summary of the Dvd.
+     */
+    public String toString() {
+
+        //create summary
+        String out  = super.toString() +
+                "\nType - Dvd" +
+                "\nDirector - " + director +
+                "\nRuntime - " + runTime + "min" +
+                "\nLanguage - " + language +
+                "\nSubtitle Languages: ";
+
+        //for every subtitle lang, add to summary
+        for (String sub: subLang) {
+            out+= "\n    " + sub;
+        }
+        return out;
+
+    }
+
 }

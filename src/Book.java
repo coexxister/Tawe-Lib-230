@@ -135,4 +135,23 @@ public class Book extends  Resource {
         this.lang = lang;
     }
 
+    /**
+     * Creates a summary of information for the Book.
+     * @return Returns a summary of the Book.
+     */
+    public String toString() {
+
+        //create summary
+        String out  = super.toString() +
+                "\nType - Book" +
+                "\nAuthor - " + author +
+                "\nPublisher - " + publisher +
+                "\nGenre - " + genre +
+                "\nISBN - " + isbn +
+                "\nLanguage - " + lang;
+
+        return out;
+
+    }
+
 }
