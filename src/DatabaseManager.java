@@ -1,19 +1,34 @@
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/**
+ * This class allows the fetching and writing of data to the database.
+ * @author Noah Lenagan
+ * @version 1.0
+ */
 public class DatabaseManager {
 
+	/**
+	 * The directory to the database file.
+	 */
 	private String dbLocation;
 
+	/**
+	 * Creates a DatabaseManager.
+	 * @param dbLocation The directory to the database file.
+	 */
 	public DatabaseManager(String dbLocation) {
 		this.dbLocation = dbLocation;
 	}
 
+	/**
+	 * Creates a connection (session) with the database.
+	 * @return The connection to the database.
+	 */
 	private Connection createConnection() {
 
 		try {
