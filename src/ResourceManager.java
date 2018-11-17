@@ -40,17 +40,19 @@ public class ResourceManager {
         String[][] table;
 
         try {
+
             table = dbManager.getTupleList(RESOURCE_TABLE_NAME);
 
-            for (String[] rows: table) {
-                for (String column : rows) {
-                    System.out.print(column + " | ");
+            for (String[] row : table) {
+
+                if (row[TID_ATTRIBUTE_POSITION].equals("1")) {
+                    resources.add(createBook(row));
                 }
-                System.out.print("\n");
+
             }
 
+            return resources.toArray(new Resource[resources.size()]);
 
-            return null;
         } catch (SQLException e) {
             System.out.println("SQLException upon calling getTupleList");
             return null;
@@ -58,15 +60,45 @@ public class ResourceManager {
 
     }
 
-    private String[] getBookData() {
+    private Book createBook(String[] row) {
+
+        String[] bookExtraData = getBookData(Integer.parseInt(row[0]));
+
+        if (bookExtraData != null) {
+
+            /*
+
+            GET THE LANGUAGE AND REPLACE TURKEY
+
+             */
+
+            return new Book(Integer.parseInt(row[0]), row[1], Integer.parseInt(row[2]), Integer.parseInt(row[3]),
+                    bookExtraData[0], bookExtraData[1], bookExtraData[2], bookExtraData[3], "Turkey");
+
+        } else {
+            return null;
+        }
+    }
+
+    private String[] getBookData(int rid) {
+
+        String[] tuple = null;
+        try {
+            tuple = dbManager.getFirstTupleByQuery("SELECT Author, Publisher, Genre, ISBN " +
+                    "FROM " + BOOK_TABLE_NAME + " WHERE RID = " + rid + ";");
+        } catch (SQLException e) {
+            System.out.println("SQLException upon calling getBookData");
+        } finally {
+            return tuple;
+        }
+
+    }
+
+    private String[] getDvdData(int rid) {
         return null;
     }
 
-    private String[] getDvdData() {
-        return null;
-    }
-
-    private String[] getComputerData() {
+    private String[] getComputerData(int rid) {
         return null;
     }
 

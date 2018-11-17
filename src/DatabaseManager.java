@@ -190,6 +190,25 @@ public class DatabaseManager {
 	}
 
 	/**
+	 * Gets the first tuple/row from a specified query.
+	 * @param query The query to execute on the database.
+	 * @return The first tuple found from a specified query.
+	 * @throws SQLException Thrown if query is incorrect or connection could not be established.
+	 */
+	public String[] getFirstTupleByQuery(String query) throws SQLException {
+
+		//Get the list of tuples/rows satisfied by the query.
+		String[][] tupleList = getTupleListByQuery(query);
+		//If the tupleList has atleast one row, then return the first row. Otherwise return null.
+		if (tupleList.length > 0) {
+			return tupleList[0];
+		} else {
+			return null;
+		}
+
+	}
+
+	/**
 	 * Gets the database directory.
 	 * @return The database directory.
 	 */

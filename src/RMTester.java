@@ -6,7 +6,11 @@ public class RMTester {
 
         ResourceManager rm = new ResourceManager(dbManager);
 
-        rm.getResourceList();
+        Resource[] resources = rm.getResourceList();
+
+        for (Resource r : resources) {
+            System.out.println("____________________\n\n" + r.toString());
+        }
 
     }
 
