@@ -7,7 +7,7 @@ public class DBTester {
 		DatabaseManager dbManager = new DatabaseManager("TaweLibDB.db");
 		
 		try {
-			String[][] tuples = dbManager.searchTuples("Resources", "Title", "mac");
+			String[][] tuples = dbManager.searchTuples("Resource", "Title", "ring");
 			
 			for (String[] row : tuples) {
 				for (String col: row) {
@@ -17,18 +17,13 @@ public class DBTester {
 			}
 		} catch (SQLException e) {
 			System.out.println("Table not found");
-		}*/
+		}
 		
 		/*try {
 			dbManager.editTuple("Resources", new String[] {"Title"}, new String[] {"'iMac Pro'"}, "Title = 'iMac Pro'");
-		} catch (IllegalArgumentException | SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (IllegalArgumentException | SQLException e) { // TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		
-		//dbManager.sqlQuery("UPDATE Resources SET MacbookPro");
-
-		System.out.println("hello");
 		
 		
 	}
