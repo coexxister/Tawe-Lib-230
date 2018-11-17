@@ -5,9 +5,24 @@
  */
 public class Resource {
 
+    /**
+     * Uniquely identifies the resource.
+     */
     protected int resourceID;
+
+    /**
+     * The title of the resource.
+     */
     protected String title;
+
+    /**
+     * The release year of the resource.
+     */
     protected int year;
+
+    /**
+     * The thumbnail image id the identifies an image.
+     */
     protected int thumbImage;
 
     /**
