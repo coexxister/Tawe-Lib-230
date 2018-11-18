@@ -26,3 +26,4 @@ hs_err_pid*
 .idea/Tawe-Lib-230.iml
 .idea/vcs.xml
 .idea/workspace.xml
+.idea/libraries/sqlite_jdbc_3_23_1.xml
