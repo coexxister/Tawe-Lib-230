@@ -50,9 +50,6 @@ public class ResourceManager {
     }
 
     /*
-
-    + getResourceList () : Resource[]
-    + getResourceList (query : String) : Resource[]
     + getCopies (resourceID: Integer) : Copy[]
     + getCopies () : Copy[]
     + editResource (resourceID: Integer, newResource : Book) : Boolean
@@ -71,32 +68,12 @@ public class ResourceManager {
      */
     public Resource[] getResourceList() {
 
-        ArrayList<Resource> resources = new ArrayList<>();
         String[][] table;
 
         try {
 
             table = dbManager.getTupleList(RESOURCE_TABLE_NAME);
-
-            for (String[] row : table) {
-
-                Resource newResource = null;
-
-                if (row[TID_ATTRIBUTE_POSITION].equals("1")) {
-                    newResource = createBook(row);
-                } else if (row[TID_ATTRIBUTE_POSITION].equals("2")) {
-                    newResource = createDvd(row);
-                } else if (row[TID_ATTRIBUTE_POSITION].equals("3")) {
-                    newResource = createComputer(row);
-                }
-
-                if (newResource != null) {
-                    resources.add(newResource);
-                }
-
-            }
-
-            return resources.toArray(new Resource[resources.size()]);
+            return constructResources(table);
 
         } catch (SQLException e) {
             System.out.println("SQLException upon calling getTupleList");
@@ -105,12 +82,115 @@ public class ResourceManager {
 
     }
 
+    public Resource[] getResourceList(String SQLQuery) {
+
+        String[][] table;
+
+        try {
+
+            table = dbManager.getTupleListByQuery(SQLQuery);
+            return constructResources(table);
+
+        } catch (SQLException e) {
+            System.out.println("SQLException upon calling getTupleListByQuery");
+            return null;
+        }
+
+    }
+
+    public Resource[] searchResources(String selectColumn, String searchQuery) {
+
+        String[][] table;
+
+        try {
+
+            table = dbManager.searchTuples("Resource", selectColumn, searchQuery);
+            return constructResources(table);
+
+        } catch (SQLException e) {
+            System.out.println("SQLException upon calling getTupleListByQuery");
+            return null;
+        }
+
+    }
+
+    public void addResource(Book newBook) {
+
+        /*
+        Stage indicates how far the progression of the operation has gone. If an exception were to be thrown, the database
+        must be reverted.
+         */
+        int stage = 0;
+        int resourceID = 0;
+
+        try {
+            dbManager.addTuple("Resource", new String[]{"null", newBook.title, Integer.toString(newBook.year),
+                    Integer.toString(newBook.thumbImageID), Integer.toString(newBook.thumbImageID), "null", "null", "null",
+                    "null"});
+
+            resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT last_insert_rowid()")[0]);
+
+            stage = 1;
+
+            dbManager.addTuple("Book", new String[] {"null", Integer.toString(resourceID),
+                    newBook.getAuthor(), newBook.getPublisher(), newBook.getGenre(), newBook.getIsbn()});
+
+            stage = 2;
+
+            //check if language already exists in db.
+            String[][] result = dbManager.searchTuples("Language", "Language", newBook.getLang());
+
+            //The id of the language, a string is used as will only be used in sqlQueries.
+            String langID;
+
+            //if length is greater than 0, then the language must exist.
+            if (result.length > 0) {
+                //set the langID where langID is the first column in the row. The first row is taken.
+                langID = result[0][0];
+
+                dbManager.addTuple("ResourceLanguage", new String[] {Integer.toString(resourceID),
+                        langID});
+            } else {
+                System.out.println("fuck");
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Adding resource failed.");
+        }
+
+    }
+
+    private Resource[] constructResources(String[][] table) {
+        ArrayList<Resource> resources = new ArrayList<>();
+
+        for (String[] row : table) {
+
+            Resource newResource = null;
+
+            if (row[TID_ATTRIBUTE_POSITION].equals("1")) {
+                newResource = constructBook(row);
+            } else if (row[TID_ATTRIBUTE_POSITION].equals("2")) {
+                newResource = constructDvd(row);
+            } else if (row[TID_ATTRIBUTE_POSITION].equals("3")) {
+                newResource = constructComputer(row);
+            }
+
+            if (newResource != null) {
+                resources.add(newResource);
+            }
+
+        }
+
+        return resources.toArray(new Resource[resources.size()]);
+
+    }
+
     /**
      * Creates a Book object from the database and passed data.
      * @param row The row data from resources.
      * @return The constructed Book object.
      */
-    private Book createBook(String[] row) {
+    private Book constructBook(String[] row) {
 
         int rid = Integer.parseInt(row[0]);
 
@@ -142,7 +222,7 @@ public class ResourceManager {
      * @param row The row data from resources.
      * @return The constructed Dvd object.
      */
-    private Dvd createDvd(String[] row) {
+    private Dvd constructDvd(String[] row) {
 
         int rid = Integer.parseInt(row[0]);
 
@@ -182,7 +262,7 @@ public class ResourceManager {
      * @param row The row data from resources.
      * @return The constructed Computer object.
      */
-    private Computer createComputer(String[] row) {
+    private Computer constructComputer(String[] row) {
 
         int rid = Integer.parseInt(row[0]);
 
@@ -252,6 +332,7 @@ public class ResourceManager {
         }
 
     }
+
 
     private String[] getBookData(int rid) {
 

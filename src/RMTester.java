@@ -6,7 +6,14 @@ public class RMTester {
 
         ResourceManager rm = new ResourceManager(dbManager);
 
-        Resource[] resources = rm.getResourceList();
+        //Get all resources
+        //Resource[] resources = rm.getResourceList();
+
+        //Filter by DVDs
+        //Resource[] resources = rm.getResourceList("SELECT * FROM Resource WHERE TID = 2");
+
+        //Search resources
+        Resource[] resources = rm.searchResources("Title", "Ring");
 
         for (Resource r : resources) {
             System.out.println("____________________\n\n" + r.toString());
