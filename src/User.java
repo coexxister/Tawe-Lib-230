@@ -164,46 +164,90 @@ public class User {
         return postCode;
     }
 
+    /**
+     * Set the account id.
+     * @param accountID The new account id.
+     */
     public void setAccountID(int accountID) {
         this.accountID = accountID;
     }
 
+    /**
+     * Set the username.
+     * @param username The new username.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Set the user's first name.
+     * @param firstName  The new user's first name.
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Set the user's last name.
+     * @param lastName  The new user's last name.
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Set the user's telephone number.
+     * @param telNum The new user's telephone number.
+     */
     public void setTelNum(String telNum) {
         this.telNum = telNum;
     }
 
+    /**
+     * Set the user's street number.
+     * @param streetNum  The new user's street number.
+     */
     public void setStreetNum(String streetNum) {
         this.streetNum = streetNum;
     }
 
+    /**
+     * Set the user's street name.
+     * @param streetName  The new user's street name.
+     */
     public void setStreetName(String streetName) {
         this.streetName = streetName;
     }
 
+    /**
+     * Set the user's county.
+     * @param county  The new user's county.
+     */
     public void setCounty(String county) {
         this.county = county;
     }
 
+    /**
+     * Set the user's city.
+     * @param city  The new user's city.
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Set the user's post code.
+     * @param postCode  The new user's post code.
+     */
     public void setPostCode(String postCode) {
         this.postCode = postCode;
     }
 
+    /**
+     * Creates a summary of information for the User.
+     * @return Returns a summary of the User.
+     */
     public String toString() {
         String out  = "Account ID - " + accountID +
                 "\nUsername - " + username +

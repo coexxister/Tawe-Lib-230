@@ -41,22 +41,42 @@ public class Staff extends User {
 
     }
 
+    /**
+     * Get the Employment Date
+     * @return The Employment Date.
+     */
     public Date getEmploymentDate() {
         return employmentDate;
     }
 
+    /**
+     * Get the staff number.
+     * @return The staff number.
+     */
     public int getStaffNum() {
         return staffNum;
     }
 
+    /**
+     * Set the Employment Date
+     * @param employmentDate  The new Employment Date.
+     */
     public void setEmploymentDate(Date employmentDate) {
         this.employmentDate = employmentDate;
     }
 
+    /**
+     * Get the staff number.
+     * @param staffNum  The new staff number.
+     */
     public void setStaffNum(int staffNum) {
         this.staffNum = staffNum;
     }
 
+    /**
+     * Creates a summary of information for the member of Staff.
+     * @return Returns a summary of the member of Staff.
+     */
     public String toString() {
 
         //create summary
