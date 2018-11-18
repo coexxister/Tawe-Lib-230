@@ -1,3 +1,5 @@
+import jdk.management.resource.ResourceId;
+
 /**
  * This class represents a resource and its information.
  * @author Noah Lenagan, Paris Kelly Skopelitis
@@ -23,21 +25,21 @@ public class Resource {
     /**
      * The thumbnail image id the identifies an image.
      */
-    protected int thumbImage;
+    protected int thumbImageID;
 
     /**
      * Creates a resource with specified id, title, release year and image id.
      * @param resourceID A unique identifier for the resource.
      * @param title The resource title/name.
      * @param year The release year.
-     * @param thumbImage The thumbnail image id which identifies a certain image.
+     * @param thumbImageID The thumbnail image id which identifies a certain image.
      */
-    public Resource(int resourceID, String title, int year, int thumbImage) {
+    public Resource(int resourceID, String title, int year, int thumbImageID) {
 
         this.resourceID = resourceID;
         this.title = title;
         this.year = year;
-        this.thumbImage = thumbImage;
+        this.thumbImageID = thumbImageID;
 
     }
 
@@ -70,7 +72,7 @@ public class Resource {
      * @return The thumbnail image id.
      */
     public int getThumbImage() {
-        return thumbImage;
+        return thumbImageID;
     }
 
     /**
@@ -102,7 +104,20 @@ public class Resource {
      * @param thumbImage The new thumbnail image id.
      */
     public void setThumbImage(int thumbImage) {
-        this.thumbImage = thumbImage;
+        this.thumbImageID = thumbImage;
+    }
+
+    /**
+     * Creates a summary of information for the resource.
+     * @return Returns a summary of the resource.
+     */
+    public String toString() {
+
+        String out  = "ID - " + resourceID +
+                "\nTitle - " + title +
+                "\nRelease Year - " + year;
+        return out;
+
     }
 
 }
