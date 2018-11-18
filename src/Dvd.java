@@ -118,11 +118,16 @@ public class Dvd extends Resource{
      */
     public String toString() {
 
+        //calculate runTime in hours and minutes
+        final int MIN_IN_HOUR = 60;
+        int hours = runTime / MIN_IN_HOUR;
+        int min = runTime % MIN_IN_HOUR;
+
         //create summary
         String out  = super.toString() +
                 "\nType - Dvd" +
                 "\nDirector - " + director +
-                "\nRuntime - " + runTime + "min" +
+                "\nRuntime - " + hours + "hr " + min + "min (" + runTime + "min)" +
                 "\nLanguage - " + language +
                 "\nSubtitle Languages: ";
 
