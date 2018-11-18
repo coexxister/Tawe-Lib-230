@@ -114,50 +114,102 @@ public class ResourceManager {
 
     }
 
-    public void addResource(Book newBook) {
+    public boolean addResource(Book newBook) {
 
         /*
         Stage indicates how far the progression of the operation has gone. If an exception were to be thrown, the database
         must be reverted.
          */
         int stage = 0;
-        int resourceID = 0;
+
+        String resourceID = "0";
+
+        //The id of the language, a string is used as will only be used in sqlQueries.
+        String langID = "0";
 
         try {
-            dbManager.addTuple("Resource", new String[]{"null", newBook.title, Integer.toString(newBook.year),
-                    Integer.toString(newBook.thumbImageID), Integer.toString(newBook.thumbImageID), "null", "null", "null",
-                    "null"});
 
-            resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT last_insert_rowid()")[0]);
+            if (!dbManager.checkIfExist(RESOURCE_TABLE_NAME, new String[] {"Title", "RYear"}, new String[]
+                    {encase(newBook.getTitle()), Integer.toString(newBook.getYear())}))
+            {
+                int bookTypeID = 1;
 
-            stage = 1;
+                dbManager.addTuple("Resource", new String[]{"null", encase(newBook.title), Integer.toString(newBook.year),
+                        Integer.toString(newBook.thumbImageID), Integer.toString(bookTypeID), "null", "null", "null",
+                        "null"});
 
-            dbManager.addTuple("Book", new String[] {"null", Integer.toString(resourceID),
-                    newBook.getAuthor(), newBook.getPublisher(), newBook.getGenre(), newBook.getIsbn()});
+                resourceID = dbManager.getFirstTupleByQuery("SELECT max(RID) FROM Resource")[0];
 
-            stage = 2;
+                stage = 1;
 
-            //check if language already exists in db.
-            String[][] result = dbManager.searchTuples("Language", "Language", newBook.getLang());
+                dbManager.addTuple("Book", new String[]{"null", resourceID,
+                        encase(newBook.getAuthor()), encase(newBook.getPublisher()), encase(newBook.getGenre()),
+                        encase(newBook.getIsbn())});
 
-            //The id of the language, a string is used as will only be used in sqlQueries.
-            String langID;
+                stage = 2;
 
-            //if length is greater than 0, then the language must exist.
-            if (result.length > 0) {
-                //set the langID where langID is the first column in the row. The first row is taken.
-                langID = result[0][0];
+                //check if language already exists in db.
+                String[][] result = dbManager.searchTuples("Language", "Language", newBook.getLang());
 
-                dbManager.addTuple("ResourceLanguage", new String[] {Integer.toString(resourceID),
+                //if length is greater than 0, then the language must exist. Otherwise add the language.
+                if (result.length > 0) {
+                    //set the langID where langID is the first column in the row. The first row is taken.
+                    langID = result[0][0];
+                } else {
+                    System.out.println("Unknown language detected - adding to database.");
+
+                    dbManager.addTuple("Language", new String[]{"null", encase(newBook.getLang())});
+                    langID = dbManager.getFirstTupleByQuery("SELECT max(LangID) FROM Language")[0];
+                }
+
+                //Now make the association between the langID and RID
+                dbManager.addTuple("ResourceLanguage", new String[]{resourceID,
                         langID});
-            } else {
-                System.out.println("fuck");
-            }
 
+                stage = 3;
+
+                System.out.println("Successfully added Book");
+                return true;
+
+            } else {
+                System.out.println("Book already exists");
+                return false;
+            }
         } catch (SQLException e) {
             System.out.println("Adding resource failed.");
+
+            //Revert the database to the previous state.
+            /*
+            break is not used in cases as for every stage increased, the previous stages must be reverted
+            from the database.
+            */
+            switch (stage) {
+                case 3: //del language entry in db.
+                    dbManager.deleteTuple("ResourceLanguage", new String[]{"LangID"}, new String[]{langID});
+                case 2: //del book entry in db.
+                    dbManager.deleteTuple("Book", new String[]{"RID"}, new String[]{resourceID});
+                case 1: //del resource entry in db.
+                    dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                default:
+                    break;
+            }
+
+            System.out.println("Successfully reverted database");
+            return false;
         }
 
+    }
+
+    public boolean addResource(Dvd newDvd) {
+        return false;
+    }
+
+    public boolean addResource(Computer newComputer) {
+        return false;
+    }
+
+    private String encase(String str) {
+        return "'" + str + "'";
     }
 
     private Resource[] constructResources(String[][] table) {

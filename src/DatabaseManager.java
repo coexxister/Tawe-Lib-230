@@ -47,8 +47,54 @@ public class DatabaseManager {
 		}
 
 	}
-	
-	//THINGS TO ADD: get a primary key returned when adding a row
+
+	/**
+	 * Checks if a row exists in the table where the values satisfies the keys.
+	 * @param tableName The name of the table.
+	 * @param keys The keys to filter the row by.
+	 * @param values The values to check in the keys.
+	 * @return If at least one row is found, true is returned. Otherwise, false is returned.
+	 * @throws SQLException Thrown if parameters are incorrect or connection could not be established.
+	 */
+	public boolean checkIfExist(String tableName, String[] keys, String[] values) throws SQLException {
+
+		//Create a query to count the amount of rows that satisfies the search.
+		String query = "SELECT count(*) FROM " + tableName + " WHERE ";
+
+		//For every key, add the comparison between the key and value to the where condition.
+		for (int iCount = 0; iCount < keys.length - 1; iCount++) {
+			query+= keys[iCount] + " = " + values[iCount] + " AND ";
+		}
+		query+= keys[keys.length-1] + " = " + values[keys.length-1] + ";";
+
+		//return true if count is not equal to 0. Otherwise false.
+		return !getTupleListByQuery(query)[0][0].equals("0");
+	}
+
+	public void deleteTuple(String tableName, String[] keys, String[] values) {
+		try {
+			if (checkIfExist(tableName, keys, values)) {
+				//Create a query delete row.
+				String query = "DELETE FROM " + tableName + " WHERE ";
+
+				//For every key, add comparisons between keys and values.
+				for (int iCount = 0; iCount < keys.length - 1; iCount++) {
+					query += keys[iCount] + " = " + values[iCount] + " AND ";
+				}
+
+				query += keys[keys.length - 1] + " = " + values[keys.length - 1] + ";";
+
+				sqlQuery(query);
+
+				System.out.println("Successfully deleted");
+			} else {
+				System.out.println("Could not find row to delete.");
+			}
+		} catch (SQLException e) {
+			System.out.println("Failed to delete row from - " + tableName);
+		}
+
+	}
 
 	/**
 	 * Queries the database with a specified query
@@ -71,7 +117,7 @@ public class DatabaseManager {
 	/**
 	 * Adds a tuple/row to a database table.
 	 * @param tableName The name of the database table.
-	 * @param columnData The tuple/row data to add. Each item in the array represents a column.
+	 * @param columnData The tuple/row data to add. Each item in the array represents a column. Text values must be encased in ''.
 	 * @throws SQLException Thrown if passed data is incorrect or connection could not be established.
 	 */
 	public void addTuple(String tableName, String[] columnData) throws SQLException {
@@ -86,6 +132,7 @@ public class DatabaseManager {
 		sqlQuery += columnData[columnData.length - 1] + ")";
 		
 		sqlQuery(sqlQuery);
+
 	}
 
 	/**

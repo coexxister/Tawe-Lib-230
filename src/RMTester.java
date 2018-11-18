@@ -9,16 +9,31 @@ public class RMTester {
         //Get all resources
         //Resource[] resources = rm.getResourceList();
 
-        //Filter by DVDs
-        //Resource[] resources = rm.getResourceList("SELECT * FROM Resource WHERE TID = 2");
-
         //Search resources
-        Resource[] resources = rm.searchResources("Title", "Ring");
+        //Resource[] resources = rm.searchResources("Title", "Kirk");
+
+        //Add resource
+        rm.addResource(new Book(0, "Grimms Fairy Tales", 1812, 1, "Jacob Grimm, Wilhelm Grimm",
+                "Unknown", "Fairy Tale", "9788847227910", "German"));
+
+        //Delete row (multiple calls are required to delete a resource!)
+        /*dbManager.deleteTuple("Resource", new String[] {"Title"},
+                new String[] {"'Grimms Fairy Tales2'"});*/
+
+        /*try {
+            System.out.println(dbManager.checkIfExist("Resource", new String[]{"Title"},
+                    new String[]{"'Grimms Fairy Tales'"}));
+        } catch(Exception e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }*/
+
+        //Filter by DVDs
+        /*Resource[] resources = rm.getResourceList("SELECT * FROM Resource WHERE TID = 1");
 
         for (Resource r : resources) {
             System.out.println("____________________\n\n" + r.toString());
-        }
-
+        }*/
     }
 
 }
