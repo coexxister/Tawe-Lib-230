@@ -129,42 +129,32 @@ public class ResourceManager {
 
         try {
 
+            //if the resource doesnt exist then add to the database. Otherwise return false.
             if (!dbManager.checkIfExist(RESOURCE_TABLE_NAME, new String[] {"Title", "RYear"}, new String[]
                     {encase(newBook.getTitle()), Integer.toString(newBook.getYear())}))
             {
+                //The resource type is 1 corresponding to a book.
                 int bookTypeID = 1;
 
+                //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newBook.title), Integer.toString(newBook.year),
                         Integer.toString(newBook.thumbImageID), Integer.toString(bookTypeID), "null", "null", "null",
                         "null"});
 
+                //get the resourceID of the resource by getting the largest primary key in Resource.
                 resourceID = dbManager.getFirstTupleByQuery("SELECT max(RID) FROM Resource")[0];
 
                 stage = 1;
 
+                //add book to book table.
                 dbManager.addTuple("Book", new String[]{"null", resourceID,
                         encase(newBook.getAuthor()), encase(newBook.getPublisher()), encase(newBook.getGenre()),
                         encase(newBook.getIsbn())});
 
                 stage = 2;
 
-                //check if language already exists in db.
-                String[][] result = dbManager.searchTuples("Language", "Language", newBook.getLang());
-
-                //if length is greater than 0, then the language must exist. Otherwise add the language.
-                if (result.length > 0) {
-                    //set the langID where langID is the first column in the row. The first row is taken.
-                    langID = result[0][0];
-                } else {
-                    System.out.println("Unknown language detected - adding to database.");
-
-                    dbManager.addTuple("Language", new String[]{"null", encase(newBook.getLang())});
-                    langID = dbManager.getFirstTupleByQuery("SELECT max(LangID) FROM Language")[0];
-                }
-
-                //Now make the association between the langID and RID
-                dbManager.addTuple("ResourceLanguage", new String[]{resourceID,
-                        langID});
+                //Assign the language to the resource, returning its new id.
+                langID = assignResourceLanguage(resourceID, newBook.getLang());
 
                 stage = 3;
 
@@ -185,7 +175,7 @@ public class ResourceManager {
             */
             switch (stage) {
                 case 3: //del language entry in db.
-                    dbManager.deleteTuple("ResourceLanguage", new String[]{"LangID"}, new String[]{langID});
+                    dbManager.deleteTuple("ResourceLanguage", new String[]{"RID", "LangID"}, new String[]{resourceID, langID});
                 case 2: //del book entry in db.
                     dbManager.deleteTuple("Book", new String[]{"RID"}, new String[]{resourceID});
                 case 1: //del resource entry in db.
@@ -201,11 +191,145 @@ public class ResourceManager {
     }
 
     public boolean addResource(Dvd newDvd) {
-        return false;
+
+        /*
+        Stage indicates how far the progression of the operation has gone. If an exception were to be thrown, the database
+        must be reverted.
+         */
+        int stage = 0;
+
+        String resourceID = "";
+
+        //The id of the language, a string is used as will only be used in sqlQueries.
+        String langID = "";
+        String[] subLangID = null;
+
+        try {
+
+            //if the resource doesnt exist then add to the database. Otherwise return false.
+            if (!dbManager.checkIfExist(RESOURCE_TABLE_NAME, new String[]{"Title", "RYear"}, new String[]
+                    {encase(newDvd.getTitle()), Integer.toString(newDvd.getYear())})) {
+                //The resource type is 1 corresponding to a book.
+                int bookTypeID = 1;
+
+                //Add the the resource to the resource table.
+                dbManager.addTuple("Resource", new String[]{"null", encase(newDvd.title), Integer.toString(newDvd.year),
+                        Integer.toString(newDvd.thumbImageID), Integer.toString(bookTypeID), "null", "null", "null",
+                        "null"});
+
+                //get the resourceID of the resource by getting the largest primary key in Resource.
+                resourceID = dbManager.getFirstTupleByQuery("SELECT max(RID) FROM Resource")[0];
+
+                stage = 1;
+
+                //add book to book table.
+                dbManager.addTuple("Dvd", new String[]{"null", resourceID,
+                        encase(newDvd.getDirector()), Integer.toString(newDvd.getRunTime())});
+
+                stage = 2;
+
+                //Assign the language to the resource, returning its new lang ID.
+                langID = assignResourceLanguage(resourceID, newDvd.getLanguage());
+
+                stage = 3;
+
+                //Assign the subtitle languages to the resource, returning its new subLangIDs.
+                subLangID = assignSubtitleLanguages(resourceID, newDvd.getSubLang());
+
+                System.out.println("Successfully added Dvd");
+                return true;
+
+            } else {
+                System.out.println("Dvd already exists");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Adding resource failed.");
+
+            //Revert the database to the previous state.
+            /*
+            break is not used in cases as for every stage increased, the previous stages must be reverted
+            from the database.
+            */
+            switch (stage) {
+                case 4: //del every sub languages entry in db.
+                case 3: //del language entry in db.
+                    dbManager.deleteTuple("ResourceLanguage", new String[]{"RID", "LangID"}, new String[]{resourceID, langID});
+                case 2: //del book entry in db.
+                    dbManager.deleteTuple("Dvd", new String[]{"RID"}, new String[]{resourceID});
+                case 1: //del resource entry in db.
+                    dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                default:
+                    break;
+            }
+
+            System.out.println("Successfully reverted database");
+            return false;
+        }
+
     }
 
     public boolean addResource(Computer newComputer) {
         return false;
+    }
+
+    private String assignResourceLanguage(String rid, String language) throws SQLException {
+
+        //Uniquely identifies the language.
+        String langID;
+
+        //check if language already exists in db.
+        String[][] result = dbManager.searchTuples("Language", "Language", language);
+
+        //if length is greater than 0, then the language must exist. Otherwise add the language.
+        if (result.length > 0) {
+            //set the langID where langID is the first column in the row. The first row is taken.
+            langID = result[0][0];
+        } else {
+            System.out.println("Unknown language detected - adding to database.");
+
+            dbManager.addTuple("Language", new String[]{"null", encase(language)});
+            langID = dbManager.getFirstTupleByQuery("SELECT max(LangID) FROM Language")[0];
+        }
+
+        //Now make the association between the langID and RID
+        dbManager.addTuple("ResourceLanguage", new String[]{rid,
+                langID});
+
+        return langID;
+
+    }
+
+    private String[] assignSubtitleLanguages(String rid, String[] subtitleLang) throws SQLException {
+
+        //Uniquely identifies the subtitle languages.
+        String[] langID = new String[subtitleLang.length];
+
+        for (int iCount = 0; iCount < subtitleLang.length; iCount++) {
+
+            //check if language already exists in db.
+            String[][] result = dbManager.searchTuples("SubtitleLanguage", "Subtitle_Language",
+                        subtitleLang[iCount]);
+
+            //if length is greater than 0, then the language must exist. Otherwise add the language.
+            if (result.length > 0) {
+                //set the langID where langID is the first column in the row. The first row is taken.
+                langID[iCount] = result[0][0];
+            } else {
+                System.out.println("Unknown subtitle language detected - " + subtitleLang[iCount] + " - adding to database.");
+
+                dbManager.addTuple("SubtitleLanguage", new String[]{"null", encase(subtitleLang[iCount])});
+                langID[iCount] = dbManager.getFirstTupleByQuery("SELECT max(SubID) FROM SubtitleLanguage")[0];
+            }
+
+            //Now make the association between the langID and RID
+            dbManager.addTuple("DvdSubtitleLanguage", new String[]{rid,
+                    langID[iCount]});
+
+        }
+
+        return langID;
+
     }
 
     private String encase(String str) {
