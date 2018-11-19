@@ -8,7 +8,7 @@ public class Tester {
 
         //Test for Staff
         Staff testStaff = new Staff(92372, "parisskopelitis", "Paris", "Skopelitis", "07403576267", "27", "Ernald Place", "Uplands", "Swansea", "SA2 OHN", "12-13-2016", 95568);
-        System.out.println(testUser.toString());
+        System.out.println(testStaff.toString());
         System.out.println("\n");
 
         //Test for Book
