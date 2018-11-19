@@ -209,12 +209,12 @@ public class ResourceManager {
             //if the resource doesnt exist then add to the database. Otherwise return false.
             if (!dbManager.checkIfExist(RESOURCE_TABLE_NAME, new String[]{"Title", "RYear"}, new String[]
                     {encase(newDvd.getTitle()), Integer.toString(newDvd.getYear())})) {
-                //The resource type is 1 corresponding to a book.
-                int bookTypeID = 1;
+                //The resource type is 1 corresponding to a Dvd.
+                int dvdTypeID = 2;
 
                 //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newDvd.title), Integer.toString(newDvd.year),
-                        Integer.toString(newDvd.thumbImageID), Integer.toString(bookTypeID), "null", "null", "null",
+                        Integer.toString(newDvd.thumbImageID), Integer.toString(dvdTypeID), "null", "null", "null",
                         "null"});
 
                 //get the resourceID of the resource by getting the largest primary key in Resource.
@@ -222,7 +222,7 @@ public class ResourceManager {
 
                 stage = 1;
 
-                //add book to book table.
+                //add Dvd to Dvd table.
                 dbManager.addTuple("Dvd", new String[]{"null", resourceID,
                         encase(newDvd.getDirector()), Integer.toString(newDvd.getRunTime())});
 
@@ -235,6 +235,8 @@ public class ResourceManager {
 
                 //Assign the subtitle languages to the resource, returning its new subLangIDs.
                 subLangID = assignSubtitleLanguages(resourceID, newDvd.getSubLang());
+
+                stage = 4;
 
                 System.out.println("Successfully added Dvd");
                 return true;
@@ -253,6 +255,10 @@ public class ResourceManager {
             */
             switch (stage) {
                 case 4: //del every sub languages entry in db.
+                    for (int iCount = 0; iCount < subLangID.length; iCount++) {
+                        dbManager.deleteTuple("DvdSubtitleLanguage", new String[] {"RID", "SubID"},
+                                new String[] {resourceID, subLangID[iCount]});
+                    }
                 case 3: //del language entry in db.
                     dbManager.deleteTuple("ResourceLanguage", new String[]{"RID", "LangID"}, new String[]{resourceID, langID});
                 case 2: //del book entry in db.
@@ -270,7 +276,71 @@ public class ResourceManager {
     }
 
     public boolean addResource(Computer newComputer) {
-        return false;
+
+        /*
+        Stage indicates how far the progression of the operation has gone. If an exception were to be thrown, the database
+        must be reverted.
+         */
+        int stage = 0;
+
+        String resourceID = "";
+
+        //The id of the language, a string is used as will only be used in sqlQueries.
+        String langID = "";
+        String[] subLangID = null;
+
+        try {
+
+            //if the resource doesnt exist then add to the database. Otherwise return false.
+            if (!dbManager.checkIfExist(RESOURCE_TABLE_NAME, new String[]{"Title", "RYear"}, new String[]
+                    {encase(newComputer.getTitle()), Integer.toString(newComputer.getYear())})) {
+                //The resource type is 1 corresponding to a Computer.
+                int computerTypeID = 1;
+
+                //Add the the resource to the resource table.
+                dbManager.addTuple("Resource", new String[]{"null", encase(newComputer.title), Integer.toString(newComputer.year),
+                        Integer.toString(newComputer.thumbImageID), Integer.toString(computerTypeID), "null", "null", "null",
+                        "null"});
+
+                //get the resourceID of the resource by getting the largest primary key in Resource.
+                resourceID = dbManager.getFirstTupleByQuery("SELECT max(RID) FROM Resource")[0];
+
+                stage = 1;
+
+                //add Computer to Computer table.
+                dbManager.addTuple("Computer", new String[]{"null", resourceID,
+                        encase(newComputer.getManufacturer()), encase(newComputer.getModel()), encase(newComputer.getOs())});
+
+                stage = 2;
+
+                System.out.println("Successfully added Computer");
+                return true;
+
+            } else {
+                System.out.println("Computer already exists");
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println("Adding resource failed.");
+
+            //Revert the database to the previous state.
+            /*
+            break is not used in cases as for every stage increased, the previous stages must be reverted
+            from the database.
+            */
+            switch (stage) {
+                case 2: //del book entry in db.
+                    dbManager.deleteTuple("Computer", new String[]{"RID"}, new String[]{resourceID});
+                case 1: //del resource entry in db.
+                    dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                default:
+                    break;
+            }
+
+            System.out.println("Successfully reverted database");
+            return false;
+        }
+
     }
 
     private String assignResourceLanguage(String rid, String language) throws SQLException {
