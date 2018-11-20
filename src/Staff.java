@@ -1,4 +1,4 @@
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * This class represents a Staff user.
@@ -10,7 +10,7 @@ public class Staff extends User {
     /**
      * The employment date of the member of staff.
      */
-    private Date employmentDate;
+    private String employmentDate;
 
     /**
      * The member of staff's staff number.
@@ -32,7 +32,7 @@ public class Staff extends User {
      * @param employmentDate The employment date of the member of staff.
      * @param staffNum The member of staff's staff number.
      */
-    public Staff(int accountID, String username, String firstName, String lastName, String telNum, String streetNum, String streetName, String county, String city, String postCode, Date employmentDate, int staffNum){
+    public Staff(int accountID, String username, String firstName, String lastName, String telNum, String streetNum, String streetName, String county, String city, String postCode, String employmentDate, int staffNum){
 
         super(accountID, username, firstName, lastName, telNum, streetNum, streetName, county, city, postCode);
 
@@ -45,7 +45,7 @@ public class Staff extends User {
      * Get the Employment Date
      * @return The Employment Date.
      */
-    public Date getEmploymentDate() {
+    public String getEmploymentDate() {
         return employmentDate;
     }
 
@@ -61,7 +61,7 @@ public class Staff extends User {
      * Set the Employment Date
      * @param employmentDate  The new Employment Date.
      */
-    public void setEmploymentDate(Date employmentDate) {
+    public void setEmploymentDate(String employmentDate) {
         this.employmentDate = employmentDate;
     }
 
