@@ -1,5 +1,3 @@
-import java.util.Calendar;
-
 /**
  * This class represents a Staff user.
  * @author Noah Lenagan, Paris Kelly Skopelitis

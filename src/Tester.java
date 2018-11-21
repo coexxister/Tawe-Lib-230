@@ -7,7 +7,7 @@ public class Tester {
         System.out.println("\n");
 
         //Test for Staff
-        Staff testStaff = new Staff(92372, "parisskopelitis", "Paris", "Skopelitis", "07403576267", "27", "Ernald Place", "Uplands", "Swansea", "SA2 OHN", "12-13-2016", 95568);
+        Staff testStaff = new Staff(92372, "parisskopelitis", "Paris", "Skopelitis", "07403576267", "27", "Ernald Place", "Uplands", "Swansea", "SA2 OHN", "1999-07-26", 95568);
         System.out.println(testStaff.toString());
         System.out.println("\n");
 
