@@ -43,9 +43,13 @@ public class RMTester {
         //Filter by DVDs
         /*Resource[] resources = rm.getResourceList("SELECT * FROM Resource WHERE TID = 1");*/
 
-        for (Resource r : resources) {
+        /*for (Resource r : resources) {
             System.out.println("____________________\n\n" + r.toString());
-        }
+        }*/
+
+        Copy copy = new Copy(0, 0, 7, "2018-11-22", 0, 0);
+
+        System.out.println(copy.calculateDaysOffset("2018-11-20"));
 
     }
 
