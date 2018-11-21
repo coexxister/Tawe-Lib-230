@@ -55,9 +55,6 @@ public class ResourceManager {
     + editResource (resourceID: Integer, newResource : Book) : Boolean
     + editResource (resourceID: Integer, newResource : Dvd) : Boolean
     + editResource (resourceID: Integer, newResource : Computer) : Boolean
-    + addResource (newResource : Book)
-    + addResource (newResource : Dvd)
-    + addResource (newResource : Computer)
 
 
      */
@@ -113,6 +110,157 @@ public class ResourceManager {
         }
 
     }
+
+    private boolean editResource(Resource newResource, int type) {
+
+        try {
+            //get old resource data
+            String[] resourceRow = dbManager.searchTuples("Resource", "RID",
+                    Integer.toString(newResource.getResourceID()))[0];
+
+            //edit resource in resource table
+            dbManager.editTuple("Resource", new String[]{"RID", "Title", "RYear",
+                            "ImageID", "TID", "HeadOfAvailableQueue", "TailOfAvailableQueue",
+                            "HeadOfBorrowedQueue", "TailOfBorrowedQueue"},
+                    new String[]{Integer.toString(newResource.resourceID), encase(newResource.getTitle()),
+                            Integer.toString(newResource.getYear()), Integer.toString(newResource.getThumbImage()),
+                            Integer.toString(type), resourceRow[5], resourceRow[6], resourceRow[7], resourceRow[8]},
+                    "RID", Integer.toString(newResource.resourceID));
+            return true;
+        } catch(SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean editResource(Book newResource) {
+
+        try {
+
+            boolean isEditSuccess = editResource((Resource)newResource, 1);
+
+            if (isEditSuccess) {
+                //get old book data
+                String[] bookRow = dbManager.searchTuples("Book", "RID",
+                        Integer.toString(newResource.getResourceID()))[0];
+
+                //edit book in book table
+                dbManager.editTuple("Book", new String[]{"BID", "RID", "Author", "Publisher",
+                        "Genre", "ISBN"}, new String[]{bookRow[0], Integer.toString(newResource.resourceID),
+                        encase(newResource.getAuthor()), encase(newResource.getPublisher()), encase(newResource.getGenre()),
+                        encase(newResource.getIsbn())}, "RID", Integer.toString(newResource.resourceID));
+
+                dbManager.deleteTuple("ResourceLanguage", new String[]{"RID"},
+                        new String[]{Integer.toString(newResource.resourceID)});
+
+                assignResourceLanguage(Integer.toString(newResource.resourceID), newResource.getLang());
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch(SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean editResource(Dvd newResource) {
+
+        try {
+
+            boolean isEditSuccess = editResource((Resource) newResource, 2);
+
+            if (isEditSuccess) {
+
+                //get old dvd data
+                String[] dvdRow = dbManager.searchTuples("Dvd", "RID",
+                        Integer.toString(newResource.getResourceID()))[0];
+
+                //edit book in dvd table
+                dbManager.editTuple("Dvd", new String[]{"DID", "RID", "Director", "Runtime"},
+                        new String[]{dvdRow[0], Integer.toString(newResource.resourceID),
+                        encase(newResource.getDirector()), Integer.toString(newResource.getRunTime())},
+                        "RID", Integer.toString(newResource.resourceID));
+
+                //remove language
+                dbManager.deleteTuple("ResourceLanguage", new String[] {"RID"},
+                        new String[] {Integer.toString(newResource.resourceID)});
+
+                //add language
+                assignResourceLanguage(Integer.toString(newResource.resourceID), newResource.getLanguage());
+
+                //remove subtitles
+                dbManager.deleteTuple("DvdSubtitleLanguage", new String[] {"RID"},
+                        new String[] {Integer.toString(newResource.resourceID)});
+
+                //add subtitles
+                assignSubtitleLanguages(Integer.toString(newResource.resourceID), newResource.getSubLang());
+
+                return true;
+
+            } else {
+                return false;
+            }
+
+        } catch(SQLException e) {
+            return false;
+        }
+    }
+
+    public boolean editResource(Computer newResource) {
+
+        try {
+
+            boolean isEditSuccess = editResource((Resource)newResource, 3);
+
+            if (isEditSuccess) {
+
+                //get old computer data
+                String[] computerRow = dbManager.searchTuples("Computer", "RID",
+                        Integer.toString(newResource.getResourceID()))[0];
+
+                //edit book in computer table
+                dbManager.editTuple("Computer", new String[]{"CID", "RID", "Manufacturer", "Model", "Installed_OS"},
+                        new String[]{computerRow[0], Integer.toString(newResource.resourceID),
+                                encase(newResource.getManufacturer()), encase(newResource.getModel()),
+                                encase(newResource.getOs())},"RID", Integer.toString(newResource.resourceID));
+
+                return true;
+
+            } else {
+                return false;
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    /*public boolean doesLanguageExist(String language) {
+
+        try {
+            boolean exist = dbManager.getFirstTupleByQuery("SELECT Language FROM Language WHERE Language = " +
+                    encase(language)).length > 0;
+            return exist;
+        } catch(SQLException e) {
+            return false;
+        }
+
+    }
+
+    public boolean doesSubLanguageExist(String subLanguage) {
+
+        try {
+            boolean exist = dbManager.getFirstTupleByQuery("SELECT Subtitle_Language FROM SubtitleLanguage WHERE " +
+                    "Subtitle_Language = " + encase(subLanguage)).length > 0;
+            return exist;
+        } catch(SQLException e) {
+            return false;
+        }
+
+    }*/
 
     public boolean addResource(Book newBook) {
 
@@ -295,7 +443,7 @@ public class ResourceManager {
             if (!dbManager.checkIfExist(RESOURCE_TABLE_NAME, new String[]{"Title", "RYear"}, new String[]
                     {encase(newComputer.getTitle()), Integer.toString(newComputer.getYear())})) {
                 //The resource type is 1 corresponding to a Computer.
-                int computerTypeID = 1;
+                int computerTypeID = 3;
 
                 //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newComputer.title), Integer.toString(newComputer.year),

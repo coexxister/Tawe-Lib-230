@@ -250,7 +250,7 @@ public class DatabaseManager {
 		if (tupleList.length > 0) {
 			return tupleList[0];
 		} else {
-			return null;
+			return new String[0];
 		}
 
 	}

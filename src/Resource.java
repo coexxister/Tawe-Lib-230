@@ -76,14 +76,6 @@ public class Resource {
     }
 
     /**
-     * Set the resource id.
-     * @param resourceID The new resource id.
-     */
-    public void setResourceID(int resourceID) {
-        this.resourceID = resourceID;
-    }
-
-    /**
      * Set the resource title.
      * @param title The new resource title.
      */
