@@ -47,9 +47,8 @@ public class RMTester {
             System.out.println("____________________\n\n" + r.toString());
         }*/
 
-        Copy copy = new Copy(0, 0, 7, "2018-11-22", 0, 0);
-
-        System.out.println(copy.calculateDaysOffset("2018-11-20"));
+        Copy copy = new Copy(1, 1, 14, "2018-12-6", 0, 0);
+        rm.addCopy(copy);
 
     }
 

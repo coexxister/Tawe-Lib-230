@@ -52,10 +52,6 @@ public class ResourceManager {
     /*
     + getCopies (resourceID: Integer) : Copy[]
     + getCopies () : Copy[]
-    + editResource (resourceID: Integer, newResource : Book) : Boolean
-    + editResource (resourceID: Integer, newResource : Dvd) : Boolean
-    + editResource (resourceID: Integer, newResource : Computer) : Boolean
-
 
      */
 
@@ -109,6 +105,57 @@ public class ResourceManager {
             return null;
         }
 
+    }
+
+    public void addCopy(Copy newCopy) {
+        try {
+
+            //Add the copy to the database.
+            dbManager.addTuple("Copy", new String[] {"null", Integer.toString(newCopy.getResourceID()),
+                    Integer.toString(newCopy.getLoanDuration()), encase(newCopy.getDueDate()),
+                    Integer.toString(newCopy.getStateID()), Integer.toString(newCopy.getCurrentBorrowerID()),
+                    "null", "null"});
+
+            //ENQUEUE THE COPY
+
+            //Get copy id.
+            String copyID = dbManager.getFirstTupleByQuery("SELECT max(CPID) FROM Copy")[0];
+            String resourceID = Integer.toString(newCopy.getResourceID());
+
+            //check if there is an a item in the available queue.
+            String[] queryResult = dbManager.getFirstTupleByQuery("SELECT HeadOfAvailableQueue, TailOfAvailableQueue" +
+                    " FROM Resource WHERE RID = " + Integer.toString(newCopy.getResourceID()));
+            String head = queryResult[0];
+            String tail = queryResult[1];
+
+            System.out.println(queryResult[1]);
+
+            if (head == null) {
+                //add copy to head and tail, the row is edited as the auto increment primary key must be found before
+                //adding the id to the queue.
+                dbManager.editTuple("Resource", new String[] {"HeadOfAvailableQueue", "TailOfAvailableQueue"},
+                        new String[] {copyID, copyID}, "RID", resourceID);
+            } else {
+                //insert at the tail.
+
+                //assign the next queue item for the tail item.
+                dbManager.editTuple("Copy", new String[] {"NextCopyInQueue"}, new String[] {copyID},
+                        "CPID", tail);
+
+                //assign the previous queue item for the new item.
+                dbManager.editTuple("Copy", new String[] {"PreviousCopyInQueue"}, new String[] {tail},
+                        "CPID", copyID);
+
+                //assign the new tail.
+                dbManager.editTuple("Resource", new String[] {"TailOfAvailableQueue"},
+                        new String[] {copyID}, "RID", resourceID);
+            }
+
+        } catch(SQLException e) {
+
+            System.out.println("error");
+
+        }
     }
 
     private boolean editResource(Resource newResource, int type) {
