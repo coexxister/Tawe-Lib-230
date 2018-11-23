@@ -1,3 +1,4 @@
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -33,6 +34,8 @@ public class ResourceManager {
      * (The type ID of the resource).
      */
     private static final int TID_ATTRIBUTE_POSITION = 4;
+
+    private static final int DEFAULT_COPIES_PER_RESOURCE = 5;
 
     /**
      * An instance of DatabaseManager.
@@ -105,6 +108,38 @@ public class ResourceManager {
             return null;
         }
 
+    }
+
+    public Copy[] getCopies(int resourceID) {
+        try {
+            int amountOfCopies = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT count(*) FROM Copy GROUP BY RID")[0]);
+
+            Copy[] copies = new Copy[amountOfCopies];
+
+            String[][] copyRows = dbManager.getTupleListByQuery("SELECT * FROM Copy WHERE RID = "
+                    + Integer.toString(resourceID));
+
+            for (int iCount = 0; iCount < amountOfCopies; iCount++) {
+                copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]), Integer.parseInt(copyRows[iCount][1]),
+                        Integer.parseInt(copyRows[iCount][2]), copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
+                        Integer.parseInt(copyRows[iCount][5]));
+            }
+
+            return copies;
+
+        } catch(SQLException e) {
+            return null;
+        }
+    }
+
+    public void addBulkCopies(Copy newCopy) {
+        addBulkCopies(newCopy, DEFAULT_COPIES_PER_RESOURCE);
+    }
+
+    public void addBulkCopies(Copy newCopy, int amount) {
+        for (int iCount = 0; iCount < amount; iCount++) {
+            addCopy(newCopy);
+        }
     }
 
     public void addCopy(Copy newCopy) {

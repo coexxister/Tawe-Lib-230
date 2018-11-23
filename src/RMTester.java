@@ -47,8 +47,14 @@ public class RMTester {
             System.out.println("____________________\n\n" + r.toString());
         }*/
 
-        Copy copy = new Copy(1, 1, 14, "2018-12-6", 0, 0);
-        rm.addCopy(copy);
+        /*Copy copy = new Copy(1, 1, 14, "2018-12-6", 0, 0);
+        rm.addCopy(copy);*/
+        Copy[] copies = rm.getCopies(1);
+
+        for (Copy copy : copies) {
+            System.out.println(copy.toString());
+        }
+
 
     }
 

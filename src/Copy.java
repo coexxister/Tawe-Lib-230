@@ -145,4 +145,27 @@ public class Copy {
         this.currentBorrowerID = currentBorrowerID;
     }
 
+    /**
+     * Creates a summary of information for the Copy.
+     * @return Returns a summary of the Copy.
+     */
+    public String toString() {
+        //create summary
+        String out  = "\nCopy ID - " + copyID +
+                "\nResource ID - " + resourceID +
+                "\nLoan Duration - " + loanDuration;
+        if (stateID == 0) {
+            out+= "\nCopy is available.";
+        } else if (stateID == 1) {
+            out+= "\nCopy is current on loan";
+            out+= "\nIt is due on " + LocalDate.parse(dueDate).getDayOfMonth() + "/" +
+                    LocalDate.parse(dueDate).getMonthValue() + "/" +
+                    LocalDate.parse(dueDate).getYear();
+        } else {
+            out+= "\nCopy is currently reserved";
+        }
+
+        return out;
+    }
+
 }
