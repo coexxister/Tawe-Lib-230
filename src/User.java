@@ -57,6 +57,11 @@ public class User {
     protected String postCode;
 
     /**
+     * Uniquely identifies the image id of the avatar.
+     */
+    protected int avatarID;
+
+    /**
      * Creates a user with specified account id, username, first name, last name, telephone number,
      * street number, street name, county, city and postcode.
      * @param accountID A unique identifier for the user.
@@ -68,8 +73,10 @@ public class User {
      * @param county The county of the user's address.
      * @param city The city of the user's address.
      * @param postCode The post code of the user's address.
+     * @param avatarID The unique identifier for the avatar image.
      */
-    public User(int accountID, String username, String firstName, String lastName, String telNum, String streetNum, String streetName, String county, String city, String postCode){
+    public User(int accountID, String username, String firstName, String lastName, String telNum, String streetNum,
+                String streetName, String county, String city, String postCode, int avatarID){
 
         this.accountID = accountID;
         this.username = username;
@@ -81,6 +88,7 @@ public class User {
         this.county = county;
         this.city = city;
         this.postCode = postCode;
+        this.avatarID = avatarID;
 
     }
 
@@ -165,6 +173,14 @@ public class User {
     }
 
     /**
+     * Get the avatar image id.
+     * @return The unique identifier for the avatar image.
+     */
+    public int getAvatarID() {
+        return avatarID;
+    }
+
+    /**
      * Set the account id.
      * @param accountID The new account id.
      */
@@ -242,6 +258,14 @@ public class User {
      */
     public void setPostCode(String postCode) {
         this.postCode = postCode;
+    }
+
+    /**
+     * Sets the avatar id.
+     * @param avatarID The new unique identifier for the avatar image.
+     */
+    public void setAvatarID(int avatarID) {
+        this.avatarID = avatarID;
     }
 
     /**
