@@ -2,12 +2,12 @@
 public class Tester {
     public static void main(String[] args) {
         //Test for User
-        User testUser = new User(92372, "parisskopelitis", "Paris", "Skopelitis", "07403576267", "27", "Ernald Place", "Uplands", "Swansea", "SA2 OHN");
+        User testUser = new User(92372, "parisskopelitis", "Paris", "Skopelitis", "07403576267", "27", "Ernald Place", "Uplands", "Swansea", "SA2 OHN", 1);
         System.out.println(testUser.toString());
         System.out.println("\n");
 
         //Test for Staff
-        Staff testStaff = new Staff(92372, "parisskopelitis", "Paris", "Skopelitis", "07403576267", "27", "Ernald Place", "Uplands", "Swansea", "SA2 OHN", "1999-07-26", 95568);
+        Staff testStaff = new Staff(92372, "parisskopelitis", "Paris", "Skopelitis", "07403576267", "27", "Ernald Place", "Uplands", "Swansea", "SA2 OHN", "1999-07-26", 95568, 1);
         System.out.println(testStaff.toString());
         System.out.println("\n");
 

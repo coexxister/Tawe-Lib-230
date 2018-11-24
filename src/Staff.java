@@ -29,10 +29,15 @@ public class Staff extends User {
      * @param postCode The post code of the user's address.
      * @param employmentDate The employment date of the member of staff.
      * @param staffNum The member of staff's staff number.
+     * @param avatarID The unique identifier for the avatar image.
      */
-    public Staff(int accountID, String username, String firstName, String lastName, String telNum, String streetNum, String streetName, String county, String city, String postCode, String employmentDate, int staffNum){
+    public Staff(int accountID, String username, String firstName, String lastName,
+                 String telNum, String streetNum, String streetName, String county,
+                 String city, String postCode, String employmentDate, int staffNum,
+                 int avatarID){
 
-        super(accountID, username, firstName, lastName, telNum, streetNum, streetName, county, city, postCode);
+        super(accountID, username, firstName, lastName, telNum, streetNum,
+                streetName, county, city, postCode, avatarID);
 
         this.employmentDate = employmentDate;
         this.staffNum = staffNum;
