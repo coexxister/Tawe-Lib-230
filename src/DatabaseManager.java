@@ -33,16 +33,18 @@ public class DatabaseManager {
 
 		try {
 			Class.forName("org.sqlite.JDBC");
-			Connection dbConn = null;
+
+			//attempt to establish connection with database.
 			try {
-				dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
-			} catch (SQLException e) {
-				System.out.println("Connection could not be established");
-			} finally {
+
+				//create connection
+				Connection dbConn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
 				return dbConn;
+
+			} catch (SQLException e) {
+				return null;
 			}
 		} catch (ClassNotFoundException e) {
-			System.out.println("sqliteJDBC not found");
 			return null;
 		}
 
@@ -71,27 +73,25 @@ public class DatabaseManager {
 		return !getTupleListByQuery(query)[0][0].equals("0");
 	}
 
-	public void deleteTuple(String tableName, String[] keys, String[] values) {
-		try {
-			if (checkIfExist(tableName, keys, values)) {
-				//Create a query delete row.
-				String query = "DELETE FROM " + tableName + " WHERE ";
+	public void deleteTuple(String tableName, String[] keys, String[] values) throws SQLException, IllegalArgumentException {
 
-				//For every key, add comparisons between keys and values.
-				for (int iCount = 0; iCount < keys.length - 1; iCount++) {
-					query += keys[iCount] + " = " + values[iCount] + " AND ";
-				}
+		if (checkIfExist(tableName, keys, values)) {
 
-				query += keys[keys.length - 1] + " = " + values[keys.length - 1] + ";";
+			//Create a query delete row.
+			String query = "DELETE FROM " + tableName + " WHERE ";
 
-				sqlQuery(query);
-
-				System.out.println("Successfully deleted");
-			} else {
-				System.out.println("Could not find row to delete.");
+			//For every key, add comparisons between keys and values.
+			for (int iCount = 0; iCount < keys.length - 1; iCount++) {
+				query += keys[iCount] + " = " + values[iCount] + " AND ";
 			}
-		} catch (SQLException e) {
-			System.out.println("Failed to delete row from - " + tableName);
+
+			query += keys[keys.length - 1] + " = " + values[keys.length - 1] + ";";
+
+			//execute query
+			sqlQuery(query);
+
+		} else {
+			throw new IllegalArgumentException("Row specified does not exist.");
 		}
 
 	}
