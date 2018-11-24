@@ -74,8 +74,52 @@ public class AccountManager {
 
     }
 
-    public User getAccount(int userID) {
-        return null;
+    /**
+     * Constructs and returns a user from the database specified by the user id.
+     * @param userID The user id of the user to return.
+     * @return The constructed user.
+     * @throws IllegalArgumentException Thrown if the specified user does not exist.
+     */
+    public User getAccount(int userID) throws IllegalArgumentException {
+
+        try {
+            //check if user exists
+            if (dbManager.checkIfExist("User", new String[] {"UID"},
+                    new String[] {Integer.toString(userID)})) {
+
+                //get user details
+                String[] userRow = dbManager.getFirstTupleByQuery("SELECT * FROM User WHERE UID = " +
+                        Integer.toString(userID));
+
+                //check if user is a staff member
+                boolean isStaff = dbManager.checkIfExist("Staff", new String[] {"UID"},
+                        new String[] {Integer.toString(userID)});
+
+                User user;
+
+                //get staff details and construct staff object if staff member, otherwise construct user object
+                if (isStaff) {
+
+                    String[] staffRow = dbManager.getFirstTupleByQuery("SELECT * FROM Staff WHERE UID = " +
+                            Integer.toString(userID));
+
+                    user = new Staff(Integer.parseInt(userRow[0]), userRow[1], userRow[2], userRow[3], userRow[4],
+                            userRow[5], userRow[6], userRow[8], userRow[7], staffRow[2],
+                            Integer.parseInt(staffRow[0]), Integer.parseInt(userRow[9]));
+
+                } else {
+                    user = new User(Integer.parseInt(userRow[0]), userRow[1], userRow[2], userRow[3], userRow[4],
+                            userRow[5], userRow[6], userRow[8], userRow[7], Integer.parseInt(userRow[9]));
+                }
+
+                return user;
+
+            } else {
+                throw new IllegalArgumentException("Specified user does not exist");
+            }
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
     /**

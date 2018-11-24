@@ -9,12 +9,7 @@ public class User {
     /**
      * Uniquely identifies the account.
      */
-    protected int accountID;
-
-    /**
-     * Uniquely identifies the user.
-     */
-    protected String username;
+    protected int userID;
 
     /**
      * The first name of the user.
@@ -64,7 +59,7 @@ public class User {
     /**
      * Creates a user with specified account id, username, first name, last name, telephone number,
      * street number, street name, county, city and postcode.
-     * @param accountID A unique identifier for the user.
+     * @param userID A unique identifier for the user.
      * @param firstName The first name of the user.
      * @param lastName The last name of the user.
      * @param telNum The telephone number of the user.
@@ -75,11 +70,10 @@ public class User {
      * @param postCode The post code of the user's address.
      * @param avatarID The unique identifier for the avatar image.
      */
-    public User(int accountID, String username, String firstName, String lastName, String telNum, String streetNum,
+    public User(int userID, String firstName, String lastName, String telNum, String streetNum,
                 String streetName, String county, String city, String postCode, int avatarID){
 
-        this.accountID = accountID;
-        this.username = username;
+        this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.telNum = telNum;
@@ -92,20 +86,13 @@ public class User {
 
     }
 
-    /**
-     * Get the account id.
-     * @return The account id.
-     */
-    public int getAccountID() {
-        return accountID;
-    }
 
     /**
-     * Get the username.
-     * @return The username.
+     * Get the user id of the user..
+     * @return The user id.
      */
-    public String getUsername() {
-        return username;
+    public int getUserID() {
+        return userID;
     }
 
     /**
@@ -178,22 +165,6 @@ public class User {
      */
     public int getAvatarID() {
         return avatarID;
-    }
-
-    /**
-     * Set the account id.
-     * @param accountID The new account id.
-     */
-    public void setAccountID(int accountID) {
-        this.accountID = accountID;
-    }
-
-    /**
-     * Set the username.
-     * @param username The new username.
-     */
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     /**
@@ -273,8 +244,7 @@ public class User {
      * @return Returns a summary of the User.
      */
     public String toString() {
-        String out  = "Account ID - " + accountID +
-                "\nUsername - " + username +
+        String out  = "User ID - " + userID +
                 "\nFirst Name - " + firstName +
                 "\nLast Name - " + lastName +
                 "\nTelephone Number - " + telNum +
