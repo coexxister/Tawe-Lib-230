@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
+   <bottom>
+      <HBox prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="113.0" prefWidth="100.0" spacing="5.0">
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label style="-fx-border-color: black; -fx-label-padding: 5;" text="Fine Due">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets></Label>
+                  <Label style="-fx-border-color: black; -fx-label-padding: 5;" text="Item Due" />
+            </VBox>
+      </HBox>
+   </bottom>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="278.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" text="Items Due" />
+            <Button mnemonicParsing="false" text="Borrowed Items" />
+            <Button mnemonicParsing="false" text="Requested Items" />
+            <Button mnemonicParsing="false" text="Reserved Items" />
+            <Button mnemonicParsing="false" text="Transaction History" />
+            <Button mnemonicParsing="false" text="User Statistics" />
+      </VBox>
+   </center>
+   <top>
+      <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="50.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets right="350.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="25.0" prefWidth="40.0" style="-fx-border-radius: 5; -fx-border-color: black;" text="£0.00" textAlignment="CENTER" HBox.hgrow="NEVER" />
+            <Button fx:id="homeButton" mnemonicParsing="false" onAction="#handleHomeButtonAction" text="Home" textAlignment="CENTER" />
+      </HBox>
+   </top>
+</BorderPane>
