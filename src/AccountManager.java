@@ -49,6 +49,10 @@ public class AccountManager {
 
     }
 
+    public String[][] getTransactionHistory(int userID) {
+        return null;
+    }
+
     /**
      * Edits/replaces an existing user account with the new data.
      * @param user The new user data to add to the account.

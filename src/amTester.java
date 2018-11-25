@@ -15,10 +15,10 @@ public class amTester {
         /*rm.addAccount(testUser);
         rm.addAccount(testStaff);*/
 
-        rm.editAccount(testStaff);
-        System.out.println(rm.getAccount(2).toString());
+        /*rm.editAccount(testStaff);
+        System.out.println(rm.getAccount(2).toString());*/
 
-
+        System.out.println(rm.getAccountBalance(2));
 
     }
 
