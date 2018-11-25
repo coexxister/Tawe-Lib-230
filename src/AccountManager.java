@@ -21,11 +21,13 @@ public class AccountManager {
 
     + changeBalance (userID : Integer, money: Float) : Boolean
     + deleteAccount (userID : Integer)
-    + checkBalance() : Boolean
     + getTransactionHistory(userID : User) : String[][]
-
-
      */
+    public void changeBalance(int userID, float money) throws IllegalArgumentException, SQLException{
+        float accountBalance = getAccountBalance(userID);
+        accountBalance = accountBalance + money;
+        dbManager.editTuple("User", new String[] {"Current_Balance"}, new String[] {String.valueOf(accountBalance)}, "UID", String.valueOf(userID));
+        }
 
     /**
      * Gets the account balance of an account.
@@ -177,6 +179,7 @@ public class AccountManager {
             return null;
         }
     }
+
 
     /**
      * Encases a string in apostrophe marks.
