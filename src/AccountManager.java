@@ -27,7 +27,7 @@ public class AccountManager {
         float accountBalance = getAccountBalance(userID);
         accountBalance = accountBalance + money;
         dbManager.editTuple("User", new String[] {"Current_Balance"}, new String[] {String.valueOf(accountBalance)}, "UID", String.valueOf(userID));
-        }
+    }
 
     /**
      * Gets the account balance of an account.
