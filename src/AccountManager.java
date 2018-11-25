@@ -20,7 +20,6 @@ public class AccountManager {
     TODO
 
     + getCurrentAccount() : User
-    + getAccount (userID : Integer) : User
     + editAccount (userID : Integer, newAccount : User) : Boolean
     + changeBalance (userID : Integer, money: Float) : Boolean
     + deleteAccount (userID : Integer)
@@ -30,6 +29,39 @@ public class AccountManager {
 
      */
 
+    /**
+     * Edits/replaces an existing user account with the new data.
+     * @param user The new user data to add to the account.
+     * @throws SQLException Thrown if connection to the database fails or tables do not exist.
+     */
+    public void editAccount(User user) throws SQLException {
+
+        //Edit user details
+        dbManager.editTuple("User", new String[] {"First_Name", "Last_Name", "Phone_Number",
+                "Address1", "Address2", "County", "Postcode", "City", "ImageID"},
+                new String[] {encase(user.getFirstName()),
+                        encase(user.getLastName()), encase(user.getTelNum()), encase(user.getStreetNum()),
+                        encase(user.getStreetName()), encase(user.getCounty()), encase(user.getPostCode()),
+                        encase(user.getCity()), Integer.toString(user.getAvatarID())},"UID",
+                        Integer.toString(user.getUserID()));
+
+    }
+
+    /**
+     * Edits/replaces an existing staff account with the new data.
+     * @param staff The new staff data to add to the account.
+     * @throws SQLException Thrown if connection to the database fails or tables do not exist.
+     */
+    public void editAccount(Staff staff) throws SQLException {
+
+        //Edit basic user details first
+        editAccount((User)staff);
+
+        //Edit staff details
+        dbManager.editTuple("Staff", new String[] {"Employment_Date"},
+                new String[] {encase(staff.getEmploymentDate())}, "SID", Integer.toString(staff.getStaffNum()));
+
+    }
 
     /**
      * Adds a user account to the database and return its user id.
