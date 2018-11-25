@@ -1,6 +1,8 @@
+import java.sql.SQLException;
+
 public class RMTester {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
         DatabaseManager dbManager = new DatabaseManager("TaweLibDB.db");
 
@@ -10,18 +12,23 @@ public class RMTester {
         //Resource[] resources = rm.getResourceList();
 
         //Search resources
-        //Resource[] resources = rm.searchResources("Title", "Kirk");
+        Resource[] resources = rm.searchResources("Title", "Crimes");
 
-        //Add resource
-        /*rm.addResource(new Book(0, "Grimms Fairy Tales", 1812, 1, "Jacob Grimm, Wilhelm Grimm",
+        //Edit a resource
+        /*rm.editResource(new Book(21, "Grimms Fairy Tales", 1812, 1, "Jacob Grimm, Wilhelm Grimm",
                 "Unknown", "Fairy Tale", "9788847227910", "German"));*/
 
-        /*rm.addResource(new Dvd(0, "First Man", 2018, 1, "Damien Chazelle",
-                142, "English", new String[] {"English", "German",
-                "French", "Chinese", "Italian", "Japanese", "Korean", "Dutch"}));*/
+        //Add resource
+        /*rm.addResource(new Dvd(0, "Fantastic Beasts: The Crimes of Grindelwald", 2018, 1, "David Yates",
+                133, "English", new String[] {"English", "German",
+                "French", "Chinese", "Italian", "Japanese", "Korean", "Braille"}));*/
 
-        rm.addResource(new Computer(0, "Surface Pro 6", 2018, 1,
-                "Microsoft", "12.3\" Intel® Core™ i5", "Windows 10"));
+        /*rm.addResource(new Computer(34, "Surface Pro 6", 2018, 1,
+                "Microsoft", "12.3\" Intel® Core™ i5", "Windows 10"));*/
+
+        //Add a resource
+        /*rm.addResource(new Computer(0, "Surface Pro 6", 2018, 1,
+                "Microsoft", "12.3\" Intel® Core™ i5", "Windows 10"));*/
 
         //Delete row (multiple calls are required to delete a resource!)
         /*dbManager.deleteTuple("Resource", new String[] {"Title"},
@@ -36,11 +43,21 @@ public class RMTester {
         }*/
 
         //Filter by DVDs
-        /*Resource[] resources = rm.getResourceList("SELECT * FROM Resource WHERE TID = 1");
+        /*Resource[] resources = rm.getResourceList("SELECT * FROM Resource WHERE TID = 1");*/
 
         for (Resource r : resources) {
             System.out.println("____________________\n\n" + r.toString());
+        }
+
+        /*Copy copy = new Copy(1, 1, 14, "2018-12-6", 0, 0);
+        rm.addCopy(copy);*/
+        /*Copy[] copies = rm.getCopies(1);
+
+        for (Copy copy : copies) {
+            System.out.println(copy.toString());
         }*/
+
+
     }
 
 }
