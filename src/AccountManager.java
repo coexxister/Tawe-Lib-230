@@ -19,13 +19,44 @@ public class AccountManager {
     /*
     TODO
     + deleteAccount (userID : Integer)
-    + getTransactionHistory(userID : User) : String[][]
+     */
+
+    /**
+     * Changes the balance of an account.
+     * @param userID The user id of the account.
+     * @param money The change in balance.
+     * @throws IllegalArgumentException Thrown when the specified user does not exist.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
      */
     public void changeBalance(int userID, float money) throws IllegalArgumentException, SQLException{
 
+        //get the account balance, IllegalArgumentException is thrown if user does not exist.
         float accountBalance = getAccountBalance(userID);
-        accountBalance = accountBalance + money;
-        dbManager.editTuple("User", new String[] {"Current_Balance"}, new String[] {String.valueOf(accountBalance)}, "UID", String.valueOf(userID));
+
+        //transaction
+        accountBalance += money;
+
+        //change balance in user table.
+        dbManager.editTuple("User", new String[] {"Current_Balance"},
+                new String[] {Float.toString(accountBalance)}, "UID", Integer.toString(userID));
+
+        //create transaction/
+        Transaction transaction = new Transaction(userID, "WAITING FOR ALBERTO", money);
+
+        //add the transaction to the history.
+        addTransaction(transaction);
+
+    }
+
+    /**
+     * Adds a transaction to history.
+     * @param transaction The transaction object.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     */
+    public void addTransaction(Transaction transaction) throws SQLException {
+
+        dbManager.addTuple("TransactionHistory", new String[] {Integer.toString(transaction.getUserID()),
+            encase(transaction.getDate()), Float.toString(transaction.getChange())});
 
     }
 
