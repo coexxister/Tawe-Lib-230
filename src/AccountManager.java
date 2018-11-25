@@ -21,6 +21,34 @@ public class AccountManager {
     + deleteAccount (userID : Integer)
      */
 
+    public void deleteAccount(int userID) throws IllegalArgumentException, SQLException, IllegalStateException {
+
+        //check if account exists
+
+        //check if balance is below 0
+
+        //check if user has borrowed any borrowed books
+
+        //check if user has requested any books
+
+        //check if user has any reserved books
+
+        //check if staff
+
+        //delete user account
+
+        //delete staff account
+
+        //delete transaction history
+
+        //delete resource request history
+
+        //delete borrow history
+
+        //fuck :/
+
+    }
+
     /**
      * Changes the balance of an account.
      * @param userID The user id of the account.
