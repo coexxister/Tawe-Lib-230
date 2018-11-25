@@ -1,7 +1,7 @@
 /**
  * This class represents a Staff user.
  * @author Noah Lenagan, Paris Kelly Skopelitis
- * @version 1.0
+ * @version 1.1
  */
 public class Staff extends User {
 

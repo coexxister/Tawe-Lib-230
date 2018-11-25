@@ -22,9 +22,11 @@ public class AccountManager {
     + getTransactionHistory(userID : User) : String[][]
      */
     public void changeBalance(int userID, float money) throws IllegalArgumentException, SQLException{
+
         float accountBalance = getAccountBalance(userID);
         accountBalance = accountBalance + money;
         dbManager.editTuple("User", new String[] {"Current_Balance"}, new String[] {String.valueOf(accountBalance)}, "UID", String.valueOf(userID));
+
     }
 
     /**
@@ -49,8 +51,47 @@ public class AccountManager {
 
     }
 
-    public String[][] getTransactionHistory(int userID) {
-        return null;
+    /**
+     * Get all transactions from a specific account.
+     * @param userID The user id of the account.
+     * @return An array of transactions.
+     * @throws IllegalArgumentException Thrown if the specified user does not exist.
+     */
+    public Transaction[] getTransactionHistory(int userID) throws IllegalArgumentException {
+
+        try {
+            //if user exists then get transactions
+            if (dbManager.checkIfExist("User", new String[]{"UID"}, new String[]{Integer.toString(userID)})) {
+
+                //get amount of transactions
+                int amountOfTransactions = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT count(*) FROM " +
+                        "TransactionHistory WHERE UID = " + Integer.toString(userID))[0]);
+
+                //create array
+                Transaction[] transactions = new Transaction[amountOfTransactions];
+
+                //get transactions
+                String[][] transRows = dbManager.getTupleListByQuery("SELECT * FROM TransactionHistory WHERE UID = " +
+                        Integer.toString(userID));
+
+                //for every transaction construct a transaction
+                for (int iCount = 0; iCount < amountOfTransactions; iCount++) {
+
+                    //construct transaction
+                    transactions[iCount] = new Transaction(userID, transRows[iCount][1],
+                            Float.parseFloat(transRows[iCount][2]));
+
+                }
+
+                return transactions;
+
+            } else {
+                throw new IllegalArgumentException("User specified does not exist");
+            }
+        } catch(SQLException e) {
+            return null;
+        }
+
     }
 
     /**
