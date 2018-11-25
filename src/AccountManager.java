@@ -24,28 +24,43 @@ public class AccountManager {
     public void deleteAccount(int userID) throws IllegalArgumentException, SQLException, IllegalStateException {
 
         //check if account exists
+        if (dbManager.checkIfExist("User", new String[]{"UID"}, new String[]{Integer.toString(userID)})) {
 
-        //check if balance is below 0
+            //check if account balance is greater or equal to 0
+            if (getAccountBalance(userID) >= 0.0F) {
 
-        //check if user has borrowed any borrowed books
+                //check if user has borrowed any borrowed books
+                if (dbManager.getFirstTupleByQuery("SELECT count(*) FROM Copy WHERE UID = " +
+                        Integer.toString(userID))[0].equals("0")) {
 
-        //check if user has requested any books
+                    //remove from request queue
+                    dbManager.sqlQuery("DELETE FROM ResoureRequestQueue WHERE UID = " + Integer.toString(userID));
 
-        //check if user has any reserved books
+                    //remove any reserved resources
+                    //for every reserved copy, un-reserve the copy and make it available
 
-        //check if staff
 
-        //delete user account
+                    //delete transaction history
 
-        //delete staff account
+                    //delete resource request history
 
-        //delete transaction history
+                    //delete borrow history
 
-        //delete resource request history
+                    //check if staff
 
-        //delete borrow history
+                    //delete user account
 
-        //fuck :/
+                    //delete staff account
+
+                }
+
+            } else {
+                throw new IllegalStateException("User must pay fines to delete account.");
+            }
+
+        } else {
+            throw new IllegalArgumentException("Specified user does not exist");
+        }
 
     }
 
