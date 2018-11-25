@@ -19,8 +19,6 @@ public class AccountManager {
     /*
     TODO
 
-    + getCurrentAccount() : User
-    + editAccount (userID : Integer, newAccount : User) : Boolean
     + changeBalance (userID : Integer, money: Float) : Boolean
     + deleteAccount (userID : Integer)
     + checkBalance() : Boolean
@@ -28,6 +26,28 @@ public class AccountManager {
 
 
      */
+
+    /**
+     * Gets the account balance of an account.
+     * @param userID The user id of the account.
+     * @return The account balance.
+     * @throws IllegalArgumentException Thrown if the specified user does not exist.
+     * @throws SQLException Thrown if connection to the database failed or tables do not exist.
+     */
+    public float getAccountBalance(int userID) throws IllegalArgumentException, SQLException {
+
+        //check if user exists
+        if (dbManager.checkIfExist("User", new String[]{"UID"}, new String[]{Integer.toString(userID)})) {
+
+            //get the balance
+            return Float.parseFloat(dbManager.getFirstTupleByQuery("SELECT Current_Balance FROM User WHERE UID = " +
+                    Integer.toString(userID))[0]);
+
+        } else {
+            throw new IllegalArgumentException("User specified does not exist.");
+        }
+
+    }
 
     /**
      * Edits/replaces an existing user account with the new data.
