@@ -18,8 +18,6 @@ public class AccountManager {
 
     /*
     TODO
-
-    + changeBalance (userID : Integer, money: Float) : Boolean
     + deleteAccount (userID : Integer)
     + getTransactionHistory(userID : User) : String[][]
      */
