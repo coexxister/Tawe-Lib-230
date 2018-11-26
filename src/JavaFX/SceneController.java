@@ -11,7 +11,7 @@ import java.io.IOException;
 
 public class SceneController {
 
-    public static final String MAIN_INTERFACE = "MainInterface.fxml";
+    public static final String MAIN_INTERFACE = "LoginLoginInterface.fxml";
     public static final String HOME_INTERFACE = "HomeInterface.fxml";
     public static final String DASHBOARD_INTERFACE = "UserDashboardInterface.fxml";
 

@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class MainInterfaceController extends SceneController {
+public class LoginInterfaceController extends SceneController {
 
     @FXML protected void handleLoginButtonAction(ActionEvent event) throws IOException {
         handleButtonAction(event, SceneController.HOME_INTERFACE);
