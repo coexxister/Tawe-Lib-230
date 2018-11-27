@@ -73,26 +73,27 @@ public class DatabaseManager {
 		return !getTupleListByQuery(query)[0][0].equals("0");
 	}
 
-	public void deleteTuple(String tableName, String[] keys, String[] values) throws SQLException, IllegalArgumentException {
+	/**
+	 * Deletes a tuple/row from a table.
+	 * @param tableName The name of the table.
+	 * @param keys The columns to search by.
+	 * @param values The values to filter the columns by.
+	 * @throws SQLException Thrown if parameters are incorrect or connection could not be established.
+	 */
+	public void deleteTuple(String tableName, String[] keys, String[] values) throws SQLException {
 
-		if (checkIfExist(tableName, keys, values)) {
+		//Create a query delete row.
+		String query = "DELETE FROM " + tableName + " WHERE ";
 
-			//Create a query delete row.
-			String query = "DELETE FROM " + tableName + " WHERE ";
-
-			//For every key, add comparisons between keys and values.
-			for (int iCount = 0; iCount < keys.length - 1; iCount++) {
-				query += keys[iCount] + " = " + values[iCount] + " AND ";
-			}
-
-			query += keys[keys.length - 1] + " = " + values[keys.length - 1] + ";";
-
-			//execute query
-			sqlQuery(query);
-
-		} else {
-			throw new IllegalArgumentException("Row specified does not exist.");
+		//For every key, add comparisons between keys and values.
+		for (int iCount = 0; iCount < keys.length - 1; iCount++) {
+			query += keys[iCount] + " = " + values[iCount] + " AND ";
 		}
+
+		query += keys[keys.length - 1] + " = " + values[keys.length - 1] + ";";
+
+		//execute query
+		sqlQuery(query);
 
 	}
 
