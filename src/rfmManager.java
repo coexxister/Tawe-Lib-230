@@ -12,7 +12,7 @@ public class rfmManager {
 
         Copy copy = new Copy(1, 1, 14, "2018-12-6", 0, 0);
 
-        System.out.println(rfm.calculateFine(rmManager.getCopies(1)[0]));
+//        System.out.println(rfm.calculateFine(rmManager.getCopies(1)[0]));
         //System.out.println(DateManager.returnCurrentDate());
 
     }

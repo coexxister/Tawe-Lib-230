@@ -7,6 +7,6 @@ public class UserDashboardInterfaceController extends SceneController {
 
     @FXML
     private void handleHomeButtonAction(ActionEvent event) throws Exception {
-        handleButtonAction(event, SceneController.HOME_INTERFACE);
+        handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
     }
 }

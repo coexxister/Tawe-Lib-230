@@ -7,7 +7,9 @@ import java.io.IOException;
 
 public class LoginInterfaceController extends SceneController {
 
-    @FXML protected void handleLoginButtonAction(ActionEvent event) throws IOException {
-        handleButtonAction(event, SceneController.HOME_INTERFACE);
+    @FXML
+    protected void handleLoginButtonAction(ActionEvent event) throws IOException {
+        handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
+        handleSubsceneChangeButtonAction("VistaTest1.fxml");
     }
 }
