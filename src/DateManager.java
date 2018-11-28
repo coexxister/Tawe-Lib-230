@@ -23,7 +23,7 @@ public class DateManager {
 		String filePathString = null;
 		File dateFile = new File(filePathString);
 		if(!dateFile.exists() && !dateFile.isDirectory()) { 
-		BufferedWriter writer = new BufferedWriter(new FileWriter("dateFile.text"));
+		BufferedWriter writer = new BufferedWriter(new FileWriter("dateFile.txt"));
         writer.write(df.format(date));
         writer.close();
 		}
@@ -34,7 +34,7 @@ public class DateManager {
 	 * @return
 	 */
 	public static String returnCurrentDate(){
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	    Date date = new Date();
 	    
 	    return (df.format(date));
@@ -45,7 +45,7 @@ public class DateManager {
 	 * @throws IOException
 	 */
 	public static void  updateForward() throws IOException{
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	    Date date = new Date();
 	    
 		Calendar cal = Calendar.getInstance();
@@ -61,7 +61,6 @@ public class DateManager {
 	       
 	      } catch (FileNotFoundException e) {
 	    	  e.printStackTrace();
-		       
 	      }
 	        
 	    
