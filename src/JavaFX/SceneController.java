@@ -34,7 +34,7 @@ public class SceneController {
     }
 
     public void handleSubsceneChangeButtonAction(String fxml) throws IOException {
-        mainPane.getCenter();
+//        mainPane.getCenter();
         mainPane.setCenter(FXMLLoader.load(getClass().getResource(fxml)));
     }
 }
