@@ -8,23 +8,27 @@ import java.sql.SQLException;
 public class ResourceFlowManager {
 
     /*
+       TODO
 
-
-    - dbManager : DatabaseManager
-    - accountManager : AccountManager
-    - resourceManager : ResourceManager
-    + ResourceFlowManager (dbManager : DataBaseManager, accountManager: AccountManager)
     + returnCopy (copy : Copy, user : User) : Bool
     + returnCopy (copyID : Integer, userID : Integer) : Bool
     + borrowCopy (copy : Copy, user : User) : Bool
     + borrowCopy (copyID : Integer, userID : Integer) : Bool
     + requestCopy (copy : Copy, user : User) : Bool
     + requestCopy (copyID : Integer, userID : Integer) : Bool
-    - calculateFine (copy : Copy) : Float
     + showOverdueCopies() : Copy[]
     + getBorrowedCopies (userID: Integer) : Copy[]
     + getBorrowHistory (userID: Integer) : String[][]
-    - setCopyAvailability (isAvailable : Boolean, userID, Integer)
+
+    vvv note if de-queued, copy is left in state -1 vvv
+    vvv if enqueued the copy must be in state -1    vvv
+
+    - dequeue available
+    - enqueue borrowed
+    - dequeue borrowed
+    - reserve
+    - un reserve
+
 
 
      */
@@ -72,7 +76,7 @@ public class ResourceFlowManager {
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      * @throws IllegalStateException Thrown if the copy is not on loan.
      */
-    public float calculateFine(Copy copy) throws SQLException, IllegalStateException {
+    private float calculateFine(Copy copy) throws SQLException, IllegalStateException {
 
         //calculate the days before or after the due date.
         int daysOffset = copy.calculateDaysOffset(DateManager.returnCurrentDate());
@@ -99,6 +103,51 @@ public class ResourceFlowManager {
         }
 
         return fine;
+
+    }
+
+    /**
+     * Makes a copy available. The copy must not already be available, on loan or reserved.
+     * @param copy The copy to make available.
+     * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    private void enqueueAvailable(Copy copy) throws IllegalStateException, SQLException {
+
+        //enqueue if not borrowed, reserved or available, otherwise throw a illegal state exception.
+        //state of -1 represents an undefined state of the copy.
+        if (copy.getStateID() == -1) {
+
+            String resourceID = Integer.toString(copy.getResourceID());
+            String copyID = Integer.toString(copy.getCopyID());
+
+            //get queue tail
+            String tail = dbManager.getFirstTupleByQuery("SELECT TailOfAvailableQueue FROM " +
+                    "Resource WHERE RID = " + resourceID)[0];
+
+            //If the tail is null then set the head and tail, otherwise make the tail point to the copy.
+            if (tail == null) {
+                //set head and tail
+                dbManager.editTuple("Resource",
+                        new String[]{"HeadOfAvailableQueue", "HeadOfAvailableQueue"},
+                        new String[]{copyID, copyID}, "RID", resourceID);
+            } else {
+                //Make the tail point to the first copy.
+                dbManager.editTuple("Copy", new String[]{"NextCopyInQueue"},
+                        new String[]{copyID}, "CPID", tail);
+            }
+
+            //make copy the new tail.
+            dbManager.editTuple("Resource", new String[]{"TailOfAvailableQueue"},
+                    new String[]{copyID}, "RID", resourceID);
+
+            //set copy state id and due date.
+            dbManager.editTuple("Copy", new String[]{"StateID", "Due_Date"},
+                    new String[]{"0", "''"}, "CPID", copyID);
+
+        } else {
+            throw new IllegalStateException("Copy must not be reserved, on loan or available.");
+        }
 
     }
 
