@@ -1,0 +1,59 @@
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import java.sql.SQLException;
+
+/**
+ * Responsible for authenticating accounts
+ * @author Daryl Tan
+ * @version 1.0
+ */
+
+public class AuthenticationManager{
+    private String username;
+    private DatabaseManager dbManager;
+
+    /**
+     * constructor for the Authentication manager
+     * @param username
+     * @param dbManager
+     */
+    public AuthenticationManager(String username, DatabaseManager dbManager) {
+        this.username = username;
+        this.dbManager = dbManager;
+    }
+
+    /**
+     * method that authenticates a user through their username
+     * @param username
+     * @return true if the username can be authenticated, else false
+     * @throws IllegalArgumentException
+     */
+    private boolean Authenticate(String username)throws IllegalArgumentException {
+        try {
+            if(dbManager.checkIfExist("User", new String[]{"UID"},
+                    new String[]{username})){
+                return true;
+        }
+        else {
+            throw new IllegalArgumentException("Account corresponding to specified username does not exist");
+        }
+    } catch (SQLException e) {
+            return false;
+    }
+    }
+
+    /**
+     * method that checks whether a user is a staff member
+     * @param username
+     * @return true if specified user is a staff member, else false
+     * @throws IllegalArgumentException, SQLException
+     */
+    private boolean isStaff(String username)throws IllegalArgumentException, SQLException{
+            if (dbManager.checkIfExist("Staff", new String[]{"UID"},
+                    new String[]{username})) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        }
+
