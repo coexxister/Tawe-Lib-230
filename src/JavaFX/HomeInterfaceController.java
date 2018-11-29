@@ -44,6 +44,12 @@ public class HomeInterfaceController extends SceneController {
     }
 
     @FXML
+    public void handleListAllButtonAction(ActionEvent event) throws IOException{
+        loadSubscene("ListAllScene.fxml");
+        changeLogoutToHome(logoutButton);
+    }
+
+    @FXML
     public void changeLogoutToHome(Button logoutButton){
         logoutButton.setText("Home");
     }

@@ -16,7 +16,7 @@
                   <Image url="@laptopIcon.png" />
                </image>
             </ImageView>
-         <TextField>
+         <TextField fx:id="loginUsername">
             <VBox.margin>
                <Insets left="150.0" right="150.0" />
             </VBox.margin>
