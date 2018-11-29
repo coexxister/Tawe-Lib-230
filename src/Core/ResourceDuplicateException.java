@@ -1,3 +1,5 @@
+package Core;
+
 /**
  * This class represents the exception when there are duplicate resources.
  * @author Noah Lenagan
