@@ -9,7 +9,7 @@ import java.io.IOException;
 public class HomeInterfaceController extends SceneController {
 
     @FXML
-    private Button logoutButton;
+    public Button logoutButton;
 
     @FXML
     protected void handleDashboardButtonAction(ActionEvent event) throws IOException {
@@ -34,11 +34,13 @@ public class HomeInterfaceController extends SceneController {
     @FXML
     public void handleDVDMenuButtonAction(ActionEvent event) throws IOException {
         loadSubscene("DVDSearchMenu.fxml");
+        changeLogoutToHome(logoutButton);
     }
 
     @FXML
     public void handleLaptopMenuButtonAction(ActionEvent event) throws IOException {
         loadSubscene("LaptopSearchMenu.fxml");
+        changeLogoutToHome(logoutButton);
     }
 
     @FXML

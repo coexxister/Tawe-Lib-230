@@ -42,4 +42,10 @@ public class SceneController {
     public void loadSubscene(String fxml) throws IOException {
         mainPane.setCenter(load(getClass().getResource(fxml)));
     }
+
+    @FXML
+    public void changeLogoutToHome(Button logoutButton){
+        logoutButton.setText("Home");
+    }
+
 }
