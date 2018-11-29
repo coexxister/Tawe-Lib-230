@@ -32,7 +32,7 @@ public class SceneController {
     public static final String ACCOUNT_CREATOR_INTERFACE = "AccountsCreatorInterface.fxml";
 
     private static BorderPane mainPane = new BorderPane();
-    private DatabaseManager db = new DatabaseManager("TaweLibDB.db");
+    private DatabaseManager db = new DatabaseManager("./TaweLibDB.db");
     private ResourceManager rm = new ResourceManager(db);
     private AccountManager am = new AccountManager(db);
     private ResourceFlowManager rfm;
