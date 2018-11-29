@@ -10,6 +10,5 @@ public class LoginInterfaceController extends SceneController {
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) throws IOException {
         handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
-        handleSubsceneChangeButtonAction("VistaTest1.fxml");
     }
 }

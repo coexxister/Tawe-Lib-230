@@ -1,6 +1,7 @@
 package JavaFX;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -9,6 +10,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+
+import static javafx.fxml.FXMLLoader.load;
 
 public class SceneController {
 
@@ -24,7 +27,7 @@ public class SceneController {
     private static BorderPane mainPane = new BorderPane();
 
     public void handleSceneChangeButtonAction(ActionEvent event, String fxml) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxml));
+        Parent root = load(getClass().getResource(fxml));
         Scene userScreen = new Scene(root);
         mainPane = (BorderPane) root;
 
@@ -33,8 +36,7 @@ public class SceneController {
         window.show();
     }
 
-    public void handleSubsceneChangeButtonAction(String fxml) throws IOException {
-//        mainPane.getCenter();
-        mainPane.setCenter(FXMLLoader.load(getClass().getResource(fxml)));
+    public void loadSubscene(String fxml) throws IOException {
+        mainPane.setCenter(load(getClass().getResource(fxml)));
     }
 }

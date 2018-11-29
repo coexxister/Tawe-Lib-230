@@ -16,4 +16,19 @@ public class HomeInterfaceController extends SceneController {
     protected void handleLogoutButtonAction(ActionEvent event) throws Exception {
         handleSceneChangeButtonAction(event, SceneController.MAIN_INTERFACE);
     }
+
+    @FXML
+    public void handleBookMenuButtonAction(ActionEvent event) throws IOException {
+        loadSubscene("BookSearchMenu.fxml");
+    }
+
+    @FXML
+    public void handleDVDMenuButtonAction(ActionEvent event) throws IOException {
+        loadSubscene("DVDSearchMenu.fxml");
+    }
+
+    @FXML
+    public void handleLaptopMenuButtonAction(ActionEvent event) throws IOException {
+        loadSubscene("LaptopSearchMenu.fxml");
+    }
 }

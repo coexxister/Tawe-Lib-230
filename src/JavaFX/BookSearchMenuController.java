@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-public class VistaTest2Controller extends SceneController{
+public class BookSearchMenuController extends SceneController{
     @FXML
     public void handlePreviousPaneButtonAction(ActionEvent event) throws IOException {
-        handleSubsceneChangeButtonAction("VistaTest1.fxml");
+        handleSceneChangeButtonAction(event, SceneController.USER_DASHBOARD_INTERFACE);
     }
 }
