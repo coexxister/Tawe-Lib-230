@@ -19,13 +19,147 @@ public class AccountManager {
     /*
     TODO
     + deleteAccount (userID : Integer)
-    + getTransactionHistory(userID : User) : String[][]
+     */
+
+    /**
+     * Deletes an account.
+     * @param userID The user id of the account to delete.
+     * @throws IllegalArgumentException Thrown if the specified user does not exist.
+     * @throws SQLException Thrown if connection to the database failed or the table doesn't exist.
+     * @throws IllegalStateException Thrown if the user has fines to pay.
+     */
+    public void deleteAccount(int userID) throws IllegalArgumentException, SQLException, IllegalStateException {
+
+        //check if account exists
+        if (dbManager.checkIfExist("User", new String[]{"UID"}, new String[]{Integer.toString(userID)})) {
+
+            //check if account balance is greater or equal to 0
+            if (getAccountBalance(userID) >= 0.0F) {
+
+                //check if user has borrowed any borrowed books
+                if (dbManager.getFirstTupleByQuery("SELECT count(*) FROM Copy WHERE UID = " +
+                        Integer.toString(userID))[0].equals("0")) {
+
+                    //remove from request queue
+                    dbManager.sqlQuery("DELETE FROM ResourceRequestQueue WHERE UID = " + Integer.toString(userID));
+
+                    //remove any reserved resources
+                    String[][] copies = dbManager.getTupleListByQuery("SELECT CPID, RID FROM " +
+                            "Copy WHERE UID = " + Integer.toString(userID));
+
+                    //if there are reserved copies, then add them to the availability queue.
+                    if (copies.length > 0) {
+                        //remove reserved copies from ReservedResource table.
+                        dbManager.deleteTuple("ReservedResource", new String[]{"UID"},
+                                new String[]{Integer.toString(userID)});
+
+                        //get queue tail
+                        String tail = dbManager.getFirstTupleByQuery("SELECT TailOfAvailableQueue FROM " +
+                                "Resource WHERE RID = " + copies[0][1])[0];
+
+                        //If the tail is null then set the head and tail, otherwise make the tail point to the first copy.
+                        if (tail == null) {
+                            //set head and tail
+                            dbManager.editTuple("Resource",
+                                    new String[]{"HeadOfAvailableQueue", "HeadOfAvailableQueue"},
+                                    new String[]{copies[0][0], copies[0][0]}, "RID", copies[0][1]);
+                        } else {
+                            //Make the tail point to the first copy.
+                            dbManager.editTuple("Copy", new String[]{"NextCopyInQueue"},
+                                    new String[]{copies[0][0]}, "CPID", tail);
+                        }
+
+                        //for every reserved copy make it available
+                        for (int iCount = 1; iCount < copies.length; iCount++) {
+                            //set the previous copy to point to this copy.
+                            dbManager.editTuple("Copy", new String[]{"NextCopyInQueue"},
+                                    new String[]{copies[iCount][0]}, "CPID", tail);
+
+                            //if last copy to make available, then must be the new tail
+                            if (iCount == copies.length - 1) {
+                                dbManager.editTuple("Resource", new String[]{"TailOfAvailableQueue"},
+                                        new String[]{copies[iCount][0]}, "RID", copies[iCount][1]);
+                            }
+
+                        }
+
+                    }
+
+                    //delete transaction history
+                    dbManager.deleteTuple("TransactionHistory",
+                            new String[]{"UID"}, new String[]{Integer.toString(userID)});
+
+                    //delete resource request history
+                    dbManager.deleteTuple("ResourceRequestHistory",
+                            new String[]{"UID"}, new String[]{Integer.toString(userID)});
+
+                    //delete borrow history
+                    dbManager.deleteTuple("BorrowHistory",
+                            new String[]{"UID"}, new String[]{Integer.toString(userID)});
+
+                    //check if staff
+                    boolean isStaff = dbManager.checkIfExist("User", new String[]{"UID"},
+                            new String[]{Integer.toString(userID)});
+
+                    //if staff, then delete staff details
+                    if (isStaff) {
+                        //delete staff details
+                        dbManager.deleteTuple("Staff",
+                                new String[]{"UID"}, new String[]{Integer.toString(userID)});
+                    }
+
+                    //delete account
+                    dbManager.deleteTuple("User",
+                            new String[]{"UID"}, new String[]{Integer.toString(userID)});
+
+                }
+
+            } else {
+                throw new IllegalStateException("User must pay fines to delete account.");
+            }
+
+        } else {
+            throw new IllegalArgumentException("Specified user does not exist");
+        }
+
+    }
+
+    /**
+     * Changes the balance of an account.
+     * @param userID The user id of the account.
+     * @param money The change in balance.
+     * @throws IllegalArgumentException Thrown when the specified user does not exist.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
      */
     public void changeBalance(int userID, float money) throws IllegalArgumentException, SQLException{
 
+        //get the account balance, IllegalArgumentException is thrown if user does not exist.
         float accountBalance = getAccountBalance(userID);
-        accountBalance = accountBalance + money;
-        dbManager.editTuple("User", new String[] {"Current_Balance"}, new String[] {String.valueOf(accountBalance)}, "UID", String.valueOf(userID));
+
+        //transaction
+        accountBalance += money;
+
+        //change balance in user table.
+        dbManager.editTuple("User", new String[] {"Current_Balance"},
+                new String[] {Float.toString(accountBalance)}, "UID", Integer.toString(userID));
+
+        //create transaction/
+        Transaction transaction = new Transaction(userID, "WAITING FOR ALBERTO", money);
+
+        //add the transaction to the history.
+        addTransaction(transaction);
+
+    }
+
+    /**
+     * Adds a transaction to history.
+     * @param transaction The transaction object.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     */
+    public void addTransaction(Transaction transaction) throws SQLException {
+
+        dbManager.addTuple("TransactionHistory", new String[] {Integer.toString(transaction.getUserID()),
+            encase(transaction.getDate()), Float.toString(transaction.getChange())});
 
     }
 

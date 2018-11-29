@@ -8,17 +8,17 @@ public class Transaction {
     /**
      * The user id of the transaction
      */
-    int userID;
+    private int userID;
 
     /**
      * The date of the transaction.
      */
-    String date;
+    private String date;
 
     /**
      * The change in money.
      */
-    float change;
+    private float change;
 
     /**
      * Creates a transaction.

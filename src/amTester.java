@@ -18,7 +18,18 @@ public class amTester {
         /*rm.editAccount(testStaff);
         System.out.println(rm.getAccount(2).toString());*/
 
+        /*rm.changeBalance(1, 3.679F);
+
         System.out.println(rm.getAccountBalance(2));
+
+        Transaction[] transactions = rm.getTransactionHistory(1);
+
+        for (Transaction t : transactions) {
+            System.out.println(t.toString());
+        }*/
+
+        //rm.changeBalance(2,10000);
+        rm.deleteAccount(2);
 
     }
 
