@@ -9,7 +9,7 @@
    <children>
       <BorderPane prefHeight="600.0" prefWidth="900.0">
          <center>
-            <Pagination fx:id="resourceView" maxPageIndicatorCount="5" pageCount="5" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="BOTTOM_CENTER" />
+            <Pagination fx:id="resourceView" maxPageIndicatorCount="5" pageCount="5" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
    </children>
