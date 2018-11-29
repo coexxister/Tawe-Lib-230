@@ -71,5 +71,7 @@ public class SceneController {
         return db;
     }
 
+    public AccountManager getAccountManager() { return am; }
+
     public ResourceManager getResourceManager(){ return rm;}
 }

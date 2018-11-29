@@ -2,14 +2,21 @@ package JavaFX;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class HomeInterfaceController extends SceneController {
+public class HomeInterfaceController extends SceneController implements Initializable {
 
     @FXML
-    public Button logoutButton;
+    private Button logoutButton;
+
+    @FXML
+    private Label usernameDisplay;
 
     @FXML
     protected void handleDashboardButtonAction(ActionEvent event) throws IOException {
@@ -45,12 +52,17 @@ public class HomeInterfaceController extends SceneController {
 
     @FXML
     public void handleListAllButtonAction(ActionEvent event) throws IOException{
-        loadSubscene("ListAllScene.fxml");
+        loadSubscene("ListAll.fxml");
         changeLogoutToHome(logoutButton);
     }
 
     @FXML
     public void changeLogoutToHome(Button logoutButton){
         logoutButton.setText("Home");
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(LoginInterfaceController.username).getFirstName());
     }
 }

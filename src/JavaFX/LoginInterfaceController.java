@@ -5,13 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
-import java.sql.SQLException;
-
 public class LoginInterfaceController extends SceneController {
 
     @FXML
     private TextField loginUsername;
+    public static int username;
 
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) throws Exception {
@@ -21,6 +19,7 @@ public class LoginInterfaceController extends SceneController {
                 handleLoginButtonAction(event, SceneController.STAFF_INTERFACE, loginUsername.getText());
             }
             handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
+            username = Integer.parseInt(loginUsername.getText()) + 1;
         }
     }
 }

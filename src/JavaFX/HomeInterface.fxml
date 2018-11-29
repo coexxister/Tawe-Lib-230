@@ -95,7 +95,7 @@
                     </VBox>
                 </right>
                 <bottom>
-                    <Label text="Welcome, [username]" BorderPane.alignment="CENTER" />
+                    <Label fx:id="usernameDisplay" text="Welcome, [username]" BorderPane.alignment="CENTER" />
                 </bottom>
             </BorderPane>
         </HBox>

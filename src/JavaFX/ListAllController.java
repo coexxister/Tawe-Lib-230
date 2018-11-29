@@ -13,20 +13,12 @@ import javafx.scene.layout.Pane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ListAllSceneController extends SceneController implements Initializable {
-
-    @FXML
-    private Label r1;
+public class ListAllController extends SceneController implements Initializable {
 
     @FXML
     private Pagination resourceView;
 
     public void initialize(URL location, ResourceBundle resources) {
-/*        Resource resourceList[] = getResourceManager().getResourceList();
-        for(int i = 0; i < resourceList.length; i++){
-            r1.setText(resourceList[i].toString());
-        }
-*/
         resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
     }
 
