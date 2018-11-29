@@ -14,7 +14,7 @@ public class RMTester {
         //Resource[] resources = rm.getResourceList();
 
         //Search resources
-        Resource[] resources = rm.searchResources("Title", "Crimes");
+        Resource[] resources = rm.searchResources(new String[] {"Title", "RYear"}, new String[] {"M", "2017"});
 
         //Edit a resource
         /*rm.editResource(new Book(21, "Grimms Fairy Tales", 1812, 1, "Jacob Grimm, Wilhelm Grimm",
