@@ -197,6 +197,27 @@ public class DatabaseManager {
 	}
 
 	/**
+	 * Gets all tuples/rows of a select table that satisfies the search queries on the column(s).
+	 * @param tableName The name of the table.
+	 * @param columns The name of the columns to query.
+	 * @param searchQueries The data to search on the columns.
+	 * @return The array of tuple/rows.
+	 * @throws SQLException Thrown if passed data is incorrect or connection could not be established.
+	 */
+	public String[][] searchTuples(String tableName, String[] columns, String[] searchQueries) throws SQLException {
+		// selects all rows from table tableName where the columns is satisfied by the search queries
+		String query = "SELECT * FROM " + tableName + " WHERE ";
+
+		//for every column to search, add to the sql query.
+		for (int iCount = 0; iCount < columns.length - 1; iCount++) {
+			query+= columns[iCount] + " LIKE " + "'%" + searchQueries[iCount] + "%' AND ";
+		}
+		query+= columns[columns.length-1] + " LIKE " + "'%" + searchQueries[columns.length-1] + "%'";
+
+		return getTupleListByQuery(query);
+	}
+
+	/**
 	 * Gets the tuples/rows from a specified query.
 	 * @param query The query to execute on the database.
 	 * @return The array of tuples/rows.

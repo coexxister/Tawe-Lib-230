@@ -84,6 +84,21 @@ public class ResourceManager {
     }
 
     /**
+     * Gets all resource objects based upon searches on the column(s).
+     * @param selectColumns The columns to search upon.
+     * @param searchQueries The queries to search on the column(s).
+     * @return An array of resource objects.
+     * @throws SQLException Thrown if column specified is incorrect or connection to database couldn't be established.
+     */
+    public Resource[] searchResources(String[] selectColumns, String[] searchQueries) throws SQLException {
+
+        String[][] table;
+        table = dbManager.searchTuples("Resource", selectColumns, searchQueries);
+        return constructResources(table);
+
+    }
+
+    /**
      * Gets all copies of a resource.
      * @param resourceID The resource id of a copy.
      * @return All copies of a resource.
