@@ -14,12 +14,12 @@ public class LoginInterfaceController extends SceneController {
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) throws Exception {
         AuthenticationManager login = new AuthenticationManager(loginUsername.getText(), getDatabase());
+        username = Integer.parseInt(loginUsername.getText());
         if(login.authenticate()){
             if(login.isStaff()){
                 handleLoginButtonAction(event, SceneController.STAFF_INTERFACE, loginUsername.getText());
             }
             handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
-            username = Integer.parseInt(loginUsername.getText()) + 1;
         }
     }
 }
