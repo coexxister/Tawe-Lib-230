@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane fx:id="subscene2" alignment="CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #00BFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.DVDSearchMenuController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="900.0">
+         <top>
+            <ImageView fitHeight="221.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../Resources/laptopIcon.png" />
+               </image>
+            </ImageView>
+         </top>
+         <center>
+            <HBox alignment="CENTER" prefHeight="227.0" prefWidth="868.0" spacing="10.0" BorderPane.alignment="CENTER">
+               <BorderPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </BorderPane.margin>
+               <children>
+                  <VBox alignment="CENTER" prefHeight="405.0" prefWidth="214.0" spacing="20.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" text="Model">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label contentDisplay="CENTER" text="Manufacturer">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Installed Operating System" textOverrun="CLIP" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="405.0" prefWidth="119.0" spacing="20.0">
+                     <children>
+                        <TextField />
+                        <TextField />
+                        <TextField />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </center>
+         <bottom>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+         </bottom>
+      </BorderPane>
+   </children>
+</FlowPane>

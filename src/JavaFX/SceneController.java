@@ -22,14 +22,14 @@ import static javafx.fxml.FXMLLoader.load;
 
 public class SceneController {
 
-    public static final String MAIN_INTERFACE = "LoginInterface.fxml";
-    public static final String HOME_INTERFACE = "HomeInterface.fxml";
-    public static final String USER_DASHBOARD_INTERFACE = "UserDashboardInterface.fxml";
+    public static final String MAIN_INTERFACE = "/View/LoginInterface.fxml";
+    public static final String HOME_INTERFACE = "/View/HomeInterface.fxml";
+    public static final String USER_DASHBOARD_INTERFACE = "/View/UserDashboardInterface.fxml";
 
-    public static final String STAFF_INTERFACE = "StaffInterface.fxml";
-    public static final String RESOURCE_INTERFACE = "ResourceInterface.fxml";
-    public static final String ACCOUNTS_PAGE_INTERFACE = "AccountsPageInterface.fxml";
-    public static final String ACCOUNT_CREATOR_INTERFACE = "AccountsCreatorInterface.fxml";
+    public static final String STAFF_INTERFACE = "/View/StaffInterface.fxml";
+    public static final String RESOURCE_INTERFACE = "/View/ResourceInterface.fxml";
+    public static final String ACCOUNTS_PAGE_INTERFACE = "/View/AccountsPageInterface.fxml";
+    public static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountsCreatorInterface.fxml";
 
     private static BorderPane mainPane = new BorderPane();
     private DatabaseManager db = new DatabaseManager("./TaweLibDB.db");

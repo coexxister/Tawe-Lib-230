@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" snapToPixel="false" stylesheets="CoreStyle.css" styleClass="HomeInterfaceBorder" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.HomeInterfaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" snapToPixel="false" styleClass="HomeInterfaceBorder" stylesheets="/Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.HomeInterfaceController">
     <center>
-      <FlowPane fx:id="subscene1" alignment="CENTER" columnHalignment="CENTER" stylesheets="CoreStyle.css" styleClass="HomeInterfaceFlow">
+      <FlowPane fx:id="subscene1" alignment="CENTER" columnHalignment="CENTER" styleClass="HomeInterfaceFlow" stylesheets="/Resources/CoreStyle.css">
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <center>
@@ -23,7 +23,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@bookIcon.png" />
+                                    <Image url="@../Resources/bookIcon.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="bookMenuButton" mnemonicParsing="false" onAction="#handleBookMenuButtonAction" text="Book" />
@@ -33,7 +33,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@dvdIcon.png" />
+                                    <Image url="@../Resources/dvdIcon.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="dvdMenuButton" mnemonicParsing="false" onAction="#handleDVDMenuButtonAction" text="DVD" />
@@ -43,7 +43,7 @@
                            <children>
                               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@laptopIcon.png" />
+                                    <Image url="@../Resources/laptopIcon.png" />
                                  </image>
                               </ImageView>
                               <Button fx:id="laptopMenuButton" mnemonicParsing="false" onAction="#handleLaptopMenuButtonAction" text="Laptop" />
@@ -83,7 +83,7 @@
                   <graphic>
                      <ImageView fitHeight="78.0" fitWidth="114.0" pickOnBounds="true" preserveRatio="true">
                         <image>
-                           <Image url="@dvdIcon.png" />
+                           <Image url="@../Resources/dvdIcon.png" />
                         </image>
                      </ImageView>
                   </graphic></Button>
@@ -105,7 +105,7 @@
             <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@tawelibIcon.png" />
+                  <Image url="@../Resources/tawelibIcon.png" />
                </image>
             </ImageView>
                 <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1135.0" layoutY="14.0" prefHeight="26.0" prefWidth="64.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: #2db92d; -fx-background-radius: 10;" text="£0.00" textAlignment="CENTER" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="14.0" />
