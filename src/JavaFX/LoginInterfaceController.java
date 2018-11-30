@@ -18,8 +18,9 @@ public class LoginInterfaceController extends SceneController {
         if(login.authenticate()){
             if(login.isStaff()){
                 handleLoginButtonAction(event, SceneController.STAFF_INTERFACE, loginUsername.getText());
+            } else {
+                handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
             }
-            handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
         }
     }
 }
