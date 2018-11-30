@@ -17,6 +17,11 @@ import java.io.IOException;
 
 import static javafx.fxml.FXMLLoader.load;
 
+/**
+ * Superclass of FXML controllers for the user interface.
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
 public class SceneController {
 
     public static final String MAIN_INTERFACE = "/View/LoginInterface.fxml";
