@@ -46,6 +46,7 @@ public class ListAllController extends SceneController implements Initializable 
             image.setCache(true);
 
             Label text = new Label(resourceList[i].toString());
+            text.wrapTextProperty().setValue(true);
             element.getChildren().addAll(image, text);
             element.setAlignment(Pos.TOP_CENTER);
             element.setSpacing(10);
