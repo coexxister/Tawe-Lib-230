@@ -98,6 +98,46 @@ public class ResourceFlowManager {
     }
 
     /**
+     * Reserves a copy for a user.
+     * @param copyID The copy id of a copy.
+     * @param userID The user id of a user.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    private void reserveCopy(int copyID, int userID) throws SQLException, IllegalStateException {
+        //If the copy state is undefined then reserve the copy.
+        if (getCopyState(copyID) == -1) {
+            dbManager.addTuple("ReservedResource",
+                    new String[]{Integer.toString(copyID), Integer.toString(userID)});
+            setCopyState(copyID, 2);
+        } else {
+            throw new IllegalStateException("Copy state must be undefined");
+        }
+    }
+
+    /**
+     * Un-reserves a copy for a user.
+     * @param copyID The copy id of a copy.
+     * @param userID The user id of a user.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    public void unreserveCopy(int copyID, int userID) throws SQLException, IllegalStateException {
+        if (getCopyState(copyID) == 2) {
+            dbManager.deleteTuple("ReservedResource",
+                    new String[]{"CPID", "UID"},
+                    new String[]{Integer.toString(copyID), Integer.toString(userID)});
+            setCopyState(copyID,-1);
+
+            //get resource id of copy.
+            int resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT RID FROM Copy WHERE CPID = " +
+                    Integer.toString(userID))[0]);
+
+            enqueueAvailable(copyID, resourceID);
+        } else {
+            throw new IllegalStateException("Copy must be reserved");
+        }
+    }
+
+    /**
      * Requests a select resource for a user.
      * @param resourceID The resource id of the resource.
      * @param userID The user id of the user.
@@ -128,7 +168,7 @@ public class ResourceFlowManager {
      * @param userID The user id of a user.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
-    public void deleteAllRequests(int userID) throws SQLException {
+    public  void deleteAllRequests(int userID) throws SQLException {
 
         dbManager.deleteTuple("ResourceRequestQueue", new String[] {"UID"},
                 new String[] {Integer.toString(userID)});
@@ -137,18 +177,19 @@ public class ResourceFlowManager {
 
     /**
      * Makes a copy available. The copy must not already be available, on loan or reserved.
-     * @param copy The copy to make available.
+     * @param copyID The copy id of the copy.
+     * @param resourceID The resource id of the resource.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
-    public void enqueueBorrowed(Copy copy) throws IllegalStateException, SQLException {
+    private void enqueueBorrowed(int copyID, int resourceID) throws IllegalStateException, SQLException {
 
         //enqueue if not borrowed, reserved or available, otherwise throw a illegal state exception.
         //state of -1 represents an undefined state of the copy.
-        if (getCopyState(copy.getCopyID()) == -1) {
+        if (getCopyState(copyID) == -1) {
 
-            String resourceID = Integer.toString(copy.getResourceID());
-            String copyID = Integer.toString(copy.getCopyID());
+            String stResourceID = Integer.toString(resourceID);
+            String stCopyID = Integer.toString(copyID);
 
             //get queue tail
             String tail = dbManager.getFirstTupleByQuery("SELECT TailOfBorrowedQueue FROM " +
@@ -159,22 +200,22 @@ public class ResourceFlowManager {
                 //set head and tail
                 dbManager.editTuple("Resource",
                         new String[]{"HeadOfBorrowedQueue"},
-                        new String[]{copyID}, "RID", resourceID);
+                        new String[]{stCopyID}, "RID", stResourceID);
             } else {
                 //Make the tail point to the first copy.
                 setNextCopy(Integer.parseInt(tail), copyID);
 
                 //Make the copy point to the tail.
-                setPrevCopy(copy.getCopyID(), tail);
+                setPrevCopy(copyID, tail);
             }
 
             //make copy the new tail.
             dbManager.editTuple("Resource", new String[]{"TailOfBorrowedQueue"},
-                    new String[]{copyID}, "RID", resourceID);
+                    new String[]{stCopyID}, "RID", stResourceID);
 
             //set copy state id and due date.
             dbManager.editTuple("Copy", new String[]{"StateID", "Due_Date"},
-                    new String[]{"1", "null"}, "CPID", copyID);
+                    new String[]{"1", "null"}, "CPID", stCopyID);
 
         } else {
             throw new IllegalStateException("Copy must not be reserved, on loan or available.");
@@ -184,18 +225,18 @@ public class ResourceFlowManager {
 
     /**
      * Makes a copy unavailable. The copy must not already be available, on loan or reserved.
-     * @param copy The copy to make unavailable.
+     * @param copyID The copy id of the copy.
+     * @param resourceID The resource id of the resource.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
-    public void removeBorrowedCopy(Copy copy) throws IllegalStateException, SQLException {
+    private void removeBorrowedCopy(int copyID, int resourceID) throws IllegalStateException, SQLException {
 
         //dequeue if only currently available, otherwise throw a illegal state exception.
         //state of -1 represents an undefined state of the copy.
-        if (getCopyState(copy.getCopyID()) == 1) {
+        if (getCopyState(copyID) == 1) {
 
-            String resourceID = Integer.toString(copy.getResourceID());
-            String copyID = Integer.toString(copy.getCopyID());
+            String stResourceID = Integer.toString(resourceID);
 
             //get queue head
             String head = dbManager.getFirstTupleByQuery("SELECT HeadOfBorrowedQueue FROM " +
@@ -211,13 +252,13 @@ public class ResourceFlowManager {
                 int next = -1;
 
                 //Get previous copy id if exists.
-                if (isPrev(copy.getCopyID())) {
-                    prev = getPrev(copy.getCopyID());
+                if (isPrev(copyID)) {
+                    prev = getPrev(copyID);
                 }
 
                 //Get next copy id if exists.
-                if (isNext(copy.getCopyID())) {
-                    next = getNext(copy.getCopyID());
+                if (isNext(copyID)) {
+                    next = getNext(copyID);
                 }
 
                 if (prev != -1 && next != -1) {
@@ -230,7 +271,7 @@ public class ResourceFlowManager {
                     dbManager.editTuple("Resource",
                             new String[]{"HeadOfBorrowedQueue"},
                             new String[]{Integer.toString(next)},
-                            "RID", resourceID);
+                            "RID", stResourceID);
                     setPrevCopy(next, "null");
                 } else if (prev != -1 && next == -1) {
                     //If the copy is the tail but isn't the head.
@@ -238,7 +279,7 @@ public class ResourceFlowManager {
                     dbManager.editTuple("Resource",
                             new String[]{"TailOfBorrowedQueue"},
                             new String[]{Integer.toString(prev)},
-                            "RID", resourceID);
+                            "RID", stResourceID);
                     setNextCopy(prev, "null");
                 } else {
                     //If the copy is both the head and tail.
@@ -246,19 +287,19 @@ public class ResourceFlowManager {
                     dbManager.editTuple("Resource",
                             new String[]{"HeadOfBorrowedQueue"},
                             new String[]{"null"},
-                            "RID", resourceID);
+                            "RID", stResourceID);
                     dbManager.editTuple("Resource",
                             new String[]{"TailOfBorrowedQueue"},
                             new String[]{"null"},
-                            "RID", resourceID);
+                            "RID", stResourceID);
                 }
 
                 //Set the copys next and prev to null.
-                setNextCopy(copy.getCopyID(), "null");
-                setPrevCopy(copy.getCopyID(), "null");
+                setNextCopy(copyID, "null");
+                setPrevCopy(copyID, "null");
 
                 //Set the state
-                setCopyState(copy.getCopyID(), -1);
+                setCopyState(copyID, -1);
 
             }
 
@@ -270,18 +311,19 @@ public class ResourceFlowManager {
 
     /**
      * Makes a copy available. The copy must not already be available, on loan or reserved.
-     * @param copy The copy to make available.
+     * @param copyID The copy id of the copy.
+     * @param resourceID The resource id of the resource.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
-    public void enqueueAvailable(Copy copy) throws IllegalStateException, SQLException {
+    private void enqueueAvailable(int copyID, int resourceID) throws IllegalStateException, SQLException {
 
         //enqueue if not borrowed, reserved or available, otherwise throw a illegal state exception.
         //state of -1 represents an undefined state of the copy.
-        if (getCopyState(copy.getCopyID()) == -1) {
+        if (getCopyState(copyID) == -1) {
 
-            String resourceID = Integer.toString(copy.getResourceID());
-            String copyID = Integer.toString(copy.getCopyID());
+            String stResourceID = Integer.toString(resourceID);
+            String stCopyID = Integer.toString(copyID);
 
             //get queue tail
             String tail = dbManager.getFirstTupleByQuery("SELECT TailOfAvailableQueue FROM " +
@@ -292,22 +334,22 @@ public class ResourceFlowManager {
                 //set head and tail
                 dbManager.editTuple("Resource",
                         new String[]{"HeadOfAvailableQueue"},
-                        new String[]{copyID}, "RID", resourceID);
+                        new String[]{stCopyID}, "RID", stResourceID);
             } else {
                 //Make the tail point to the copy.
                 setNextCopy(Integer.parseInt(tail), copyID);
 
                 //Make the copy point to the tail.
-                setPrevCopy(copy.getCopyID(), tail);
+                setPrevCopy(copyID, tail);
             }
 
             //make copy the new tail.
             dbManager.editTuple("Resource", new String[]{"TailOfAvailableQueue"},
-                    new String[]{copyID}, "RID", resourceID);
+                    new String[]{stCopyID}, "RID", stResourceID);
 
             //set copy state id and due date.
             dbManager.editTuple("Copy", new String[]{"StateID", "Due_Date"},
-                    new String[]{"0", "null"}, "CPID", copyID);
+                    new String[]{"0", "null"}, "CPID", stCopyID);
 
         } else {
             throw new IllegalStateException("Copy must not be reserved, on loan or available.");
@@ -317,18 +359,18 @@ public class ResourceFlowManager {
 
     /**
      * Makes a copy unavailable. The copy must not already be available, on loan or reserved.
-     * @param copy The copy to make unavailable.
+     * @param copyID The copy id of the copy.
+     * @param resourceID The resource id of the resource.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
-    public void removeAvailable(Copy copy) throws IllegalStateException, SQLException {
+    private void removeAvailable(int copyID, int resourceID) throws IllegalStateException, SQLException {
 
         //dequeue if only currently available, otherwise throw a illegal state exception.
         //state of -1 represents an undefined state of the copy.
-        if (getCopyState(copy.getCopyID()) == 0) {
+        if (getCopyState(copyID) == 0) {
 
-            String resourceID = Integer.toString(copy.getResourceID());
-            String copyID = Integer.toString(copy.getCopyID());
+            String stResourceID = Integer.toString(resourceID);
 
             //get queue head
             String head = dbManager.getFirstTupleByQuery("SELECT HeadOfAvailableQueue FROM " +
@@ -344,13 +386,13 @@ public class ResourceFlowManager {
                 int next = -1;
 
                 //Get previous copy id if exists.
-                if (isPrev(copy.getCopyID())) {
-                    prev = getPrev(copy.getCopyID());
+                if (isPrev(copyID)) {
+                    prev = getPrev(copyID);
                 }
 
                 //Get next copy id if exists.
-                if (isNext(copy.getCopyID())) {
-                    next = getNext(copy.getCopyID());
+                if (isNext(copyID)) {
+                    next = getNext(copyID);
                 }
 
                 if (prev != -1 && next != -1) {
@@ -363,7 +405,7 @@ public class ResourceFlowManager {
                     dbManager.editTuple("Resource",
                             new String[]{"HeadOfAvailableQueue"},
                             new String[]{Integer.toString(next)},
-                            "RID", resourceID);
+                            "RID", stResourceID);
                     setPrevCopy(next, "null");
                 } else if (prev != -1 && next == -1) {
                     //If the copy is the tail but isn't the head.
@@ -371,7 +413,7 @@ public class ResourceFlowManager {
                     dbManager.editTuple("Resource",
                             new String[]{"TailOfAvailableQueue"},
                             new String[]{Integer.toString(prev)},
-                            "RID", resourceID);
+                            "RID", stResourceID);
                     setNextCopy(prev, "null");
                 } else {
                     //If the copy is both the head and tail.
@@ -379,19 +421,19 @@ public class ResourceFlowManager {
                     dbManager.editTuple("Resource",
                             new String[]{"HeadOfAvailableQueue"},
                             new String[]{"null"},
-                            "RID", resourceID);
+                            "RID", stResourceID);
                     dbManager.editTuple("Resource",
                             new String[]{"TailOfAvailableQueue"},
                             new String[]{"null"},
-                            "RID", resourceID);
+                            "RID", stResourceID);
                 }
 
                 //Set the copys next and prev to null.
-                setNextCopy(copy.getCopyID(), "null");
-                setPrevCopy(copy.getCopyID(), "null");
+                setNextCopy(copyID, "null");
+                setPrevCopy(copyID, "null");
 
                 //Set the state
-                setCopyState(copy.getCopyID(), -1);
+                setCopyState(copyID, -1);
 
             }
 
