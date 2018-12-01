@@ -99,6 +99,21 @@ public class ResourceManager {
     }
 
     /**
+     * Determines whether a copy exists or not.
+     * @param copyID The copy id of the copy.
+     * @return True if the copy exists. False if does not exist.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     */
+    public boolean doesCopyExist(int copyID) throws SQLException {
+        if (dbManager.checkIfExist("Copy", new String[] {"CPID"},
+                new String[] {Integer.toString(copyID)})) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Gets all copies of a resource.
      * @param resourceID The resource id of a copy.
      * @return All copies of a resource.

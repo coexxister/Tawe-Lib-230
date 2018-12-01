@@ -145,7 +145,7 @@ public class ResourceFlowManager {
 
             //set copy state id and due date.
             dbManager.editTuple("Copy", new String[]{"StateID", "Due_Date"},
-                    new String[]{"0", "''"}, "CPID", copyID);
+                    new String[]{"0", "'HMMMMMMMMM'"}, "CPID", copyID);
 
         } else {
             throw new IllegalStateException("Copy must not be reserved, on loan or available.");
@@ -153,6 +153,227 @@ public class ResourceFlowManager {
 
     }
 
+    /**
+     * Makes a copy unavailable. The copy must not already be available, on loan or reserved.
+     * @param copy The copy to make unavailable.
+     * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    private void removeAvailable(Copy copy) throws IllegalStateException, SQLException {
 
+        //dequeue if only currently available, otherwise throw a illegal state exception.
+        //state of -1 represents an undefined state of the copy.
+        if (copy.getStateID() == 1) {
+
+            String resourceID = Integer.toString(copy.getResourceID());
+            String copyID = Integer.toString(copy.getCopyID());
+
+            //get queue tail
+            String tail = dbManager.getFirstTupleByQuery("SELECT TailOfAvailableQueue FROM " +
+                    "Resource WHERE RID = " + resourceID)[0];
+
+            //get queue head
+            String head = dbManager.getFirstTupleByQuery("SELECT HeadOfAvailableQueue FROM " +
+                    "Resource WHERE RID = " + resourceID)[0];
+
+            //If head is null then throw illegal state exception, otherwise remove copy
+
+            //Get previous id and next id.
+
+            //If previous id null then make next head
+
+            //If next is null then make previous tail
+
+            //Otherwise make previous point to next.
+
+            //If the tail is null then set the head and tail, otherwise make the tail point to the copy.
+            if (tail == null) {
+                //set head and tail
+                dbManager.editTuple("Resource",
+                        new String[]{"HeadOfAvailableQueue", "HeadOfAvailableQueue"},
+                        new String[]{copyID, copyID}, "RID", resourceID);
+            } else {
+                //Make the tail point to the first copy.
+                dbManager.editTuple("Copy", new String[]{"NextCopyInQueue"},
+                        new String[]{copyID}, "CPID", tail);
+            }
+
+            //make copy the new tail.
+            dbManager.editTuple("Resource", new String[]{"TailOfAvailableQueue"},
+                    new String[]{copyID}, "RID", resourceID);
+
+            //set copy state id and due date.
+            dbManager.editTuple("Copy", new String[]{"StateID", "Due_Date"},
+                    new String[]{"-1", "''"}, "CPID", copyID);
+
+        } else {
+            throw new IllegalStateException("Copy must not be reserved, on loan or available.");
+        }
+
+    }
+
+    /**
+     * Sets the next copy of the copy and sets the previous copy of the next copy.
+     * @param copyID The copy id of the Copy.
+     * @param nextID The copy id of the next Copy.
+     * @throws IllegalStateException Thrown if the copy or next copy doesn't exist.
+     * @throws SQLException Thrown if table does not exist or connection to database failed.
+     */
+    private void setNextCopy(int copyID, int nextID) throws IllegalStateException, SQLException {
+        //If the copy exists then check if the next copy exists. Otherwise thrown exception.
+        if (rmManager.doesCopyExist(copyID)) {
+            //If the next copy exists then set the next copy of the copy. Otherwise thrown exception.
+            if (rmManager.doesCopyExist(nextID)) {
+
+                //Set the next copy of the copy.
+                dbManager.editTuple("Copy", new String[] {"NextCopyInQueue"},
+                        new String[] {Integer.toString(nextID)},"CPID", Integer.toString(copyID));
+                //Set the previous copy of the next copy.
+                dbManager.editTuple("Copy", new String[] {"PreviousCopyInQueue"},
+                        new String[] {Integer.toString(copyID)},"CPID", Integer.toString(nextID));
+
+            } else {
+                //Thrown if next copy doesn't exist.
+                throw new IllegalStateException("The next ID speicified does not exist");
+            }
+
+        } else {
+            //Thrown if copy doesn't exist.
+            throw new IllegalStateException("The copy ID specified does not exist");
+        }
+    }
+
+    /**
+     * Sets the previous copy of the copy and sets the next copy of the previous copy.
+     * @param copyID The copy id of the Copy.
+     * @param prevID The copy id of the prev Copy.
+     * @throws IllegalStateException Thrown if the copy or next copy doesn't exist.
+     * @throws SQLException Thrown if table does not exist or connection to database failed.
+     */
+    private void setPrevCopy(int copyID, int prevID) throws IllegalStateException, SQLException {
+        //If the copy exists then check if the next copy exists. Otherwise thrown exception.
+        if (rmManager.doesCopyExist(copyID)) {
+            //If the next copy exists then set the prev copy of the copy. Otherwise thrown exception.
+            if (rmManager.doesCopyExist(prevID)) {
+
+                //Set the next copy of the copy.
+                dbManager.editTuple("Copy", new String[] {"PreviousCopyInQueue"},
+                        new String[] {Integer.toString(prevID)},"CPID", Integer.toString(copyID));
+                //Set the next copy of the prev copy.
+                dbManager.editTuple("Copy", new String[] {"NextCopyInQueue"},
+                        new String[] {Integer.toString(copyID)},"CPID", Integer.toString(prevID));
+
+            } else {
+                //Thrown if next copy doesn't exist.
+                throw new IllegalStateException("The next ID speicified does not exist");
+            }
+
+        } else {
+            //Thrown if copy doesn't exist.
+            throw new IllegalStateException("The copy ID specified does not exist");
+        }
+    }
+
+    /**
+     * Gets the previous copy id of the copy.
+     * @param copyID The copy id of the copy.
+     * @return The copy id of the previous copy.
+     * @throws SQLException Thrown if connection to database failed or table does not exist.
+     * @throws IllegalStateException Thrown if the copy or previous copy does not exist.
+     */
+    private int getPrev(int copyID) throws SQLException, IllegalStateException {
+        //If the copy exists, get the previous copy.
+        if (rmManager.doesCopyExist(copyID)) {
+
+            String prev = dbManager.getFirstTupleByQuery("SELECT PreviousCopyInQueue FROM Copy WHERE" +
+                    " CPID = " + Integer.toString(copyID))[0];
+
+            if (prev.equals("null")) {
+                throw new IllegalStateException("Previous copy does not exist");
+            } else {
+                return Integer.parseInt(prev);
+            }
+
+        } else {
+            throw new IllegalStateException("Copy does not exist");
+        }
+    }
+
+    /**
+     * Gets the next copy id of the copy.
+     * @param copyID The copy id of the copy.
+     * @return The copy id of the next copy.
+     * @throws SQLException Thrown if connection to database failed or table does not exist.
+     * @throws IllegalStateException Thrown if the copy or next copy does not exist.
+     */
+    private int getNext(int copyID) throws SQLException, IllegalStateException {
+        //If the copy exists, get the next copy.
+        if (rmManager.doesCopyExist(copyID)) {
+
+            String next = dbManager.getFirstTupleByQuery("SELECT NextCopyInQueue FROM Copy WHERE" +
+                    " CPID = " + Integer.toString(copyID))[0];
+
+            if (next.equals("null")) {
+                throw new IllegalStateException("Next copy does not exist");
+            } else {
+                return Integer.parseInt(next);
+            }
+
+        } else {
+            throw new IllegalStateException("Copy does not exist");
+        }
+    }
+
+    /**
+     * Determines if there is a previous copy in the queue.
+     * @param copyID The copy id of the copy.
+     * @return Returns true, if previous copy exists. False is does not exist.
+     * @throws SQLException Thrown if connection to database failed or table does not exist.
+     * @throws IllegalStateException Thrown if the copy specified does not exist.
+     */
+    private boolean isPrev(int copyID) throws SQLException, IllegalStateException {
+        //If the copy exists, get the previous copy.
+        if (rmManager.doesCopyExist(copyID)) {
+
+            String prev = dbManager.getFirstTupleByQuery("SELECT PreviousCopyInQueue FROM Copy WHERE" +
+                    " CPID = " + Integer.toString(copyID))[0];
+
+            //if previous is null then return false, otherwise true.
+            if (prev.equals("null")) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            throw new IllegalStateException("Copy does not exist");
+        }
+    }
+
+    /**
+     * Determines if there is a next copy in the queue.
+     * @param copyID The copy id of the copy.
+     * @return Returns true, if next copy exists. False is does not exist.
+     * @throws SQLException Thrown if connection to database failed or table does not exist.
+     * @throws IllegalStateException Thrown if the copy specified does not exist.
+     */
+    private boolean isNext(int copyID) throws SQLException, IllegalStateException {
+        //If the copy exists, get the next copy.
+        if (rmManager.doesCopyExist(copyID)) {
+
+            String next = dbManager.getFirstTupleByQuery("SELECT NextCopyInQueue FROM Copy WHERE" +
+                    " CPID = " + Integer.toString(copyID))[0];
+
+            //if next is null then return false, otherwise true.
+            if (next.equals("null")) {
+                return false;
+            } else {
+                return true;
+            }
+
+        } else {
+            throw new IllegalStateException("Copy does not exist");
+        }
+    }
 
 }
