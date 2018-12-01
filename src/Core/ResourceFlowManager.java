@@ -16,8 +16,6 @@ public class ResourceFlowManager {
     + returnCopy (copyID : Integer, userID : Integer) : Bool
     + borrowCopy (copy : Copy, user : User) : Bool
     + borrowCopy (copyID : Integer, userID : Integer) : Bool
-    + requestCopy (copy : Copy, user : User) : Bool
-    + requestCopy (copyID : Integer, userID : Integer) : Bool
     + showOverdueCopies() : Copy[]
     + getBorrowedCopies (userID: Integer) : Copy[]
     + getBorrowHistory (userID: Integer) : String[][]
@@ -98,6 +96,45 @@ public class ResourceFlowManager {
     }
 
     /**
+     * Borrows a specified copy for a user.
+     * @param copyID The copy id of a copy.
+     * @param userID The user id of a copy.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws IllegalStateException Thrown if specified copy or user does not exist.
+     */
+    public void borrowCopy(int copyID, int userID) throws SQLException, IllegalStateException {
+
+        //check if copy is available, if so then borrow copy. Otherwise throw exception.
+        if (getCopyState(copyID) == 0) {
+            //Get the resource id.
+            int resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT RID FROM Copy WHERE CPID = " +
+                    Integer.toString(copyID))[0]);
+
+            //If the user exists then borrow the copy.
+            if (dbManager.checkIfExist("User", new String[] {"UID"},
+                    new String[] {Integer.toString(userID)})) {
+
+                //remove copy from availability queue.
+                removeAvailable(copyID, resourceID);
+                //enqueue in borrowed queue.
+                enqueueBorrowed(copyID, resourceID, userID);
+
+                //adds to borrow history
+                dbManager.addTuple("BorrowHistory",
+                        new String[] {Integer.toString(userID), Integer.toString(copyID),
+                        encase(DateManager.returnCurrentDate()), "''"});
+
+            } else {
+                throw new IllegalStateException("User does not exist");
+            }
+
+        } else {
+            throw new IllegalStateException("Copy is not available");
+        }
+
+    }
+
+    /**
      * Reserves a copy for a user.
      * @param copyID The copy id of a copy.
      * @param userID The user id of a user.
@@ -129,7 +166,7 @@ public class ResourceFlowManager {
 
             //get resource id of copy.
             int resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT RID FROM Copy WHERE CPID = " +
-                    Integer.toString(userID))[0]);
+                    Integer.toString(copyID))[0]);
 
             enqueueAvailable(copyID, resourceID);
         } else {
@@ -176,13 +213,14 @@ public class ResourceFlowManager {
     }
 
     /**
-     * Makes a copy available. The copy must not already be available, on loan or reserved.
+     * Makes the copy borrowed. The copy must not already be available, on loan or reserved.
      * @param copyID The copy id of the copy.
      * @param resourceID The resource id of the resource.
+     * @param userID The user id of the user.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
-    private void enqueueBorrowed(int copyID, int resourceID) throws IllegalStateException, SQLException {
+    private void enqueueBorrowed(int copyID, int resourceID, int userID) throws IllegalStateException, SQLException {
 
         //enqueue if not borrowed, reserved or available, otherwise throw a illegal state exception.
         //state of -1 represents an undefined state of the copy.
@@ -214,8 +252,8 @@ public class ResourceFlowManager {
                     new String[]{stCopyID}, "RID", stResourceID);
 
             //set copy state id and due date.
-            dbManager.editTuple("Copy", new String[]{"StateID", "Due_Date"},
-                    new String[]{"1", "null"}, "CPID", stCopyID);
+            dbManager.editTuple("Copy", new String[]{"StateID", "Due_Date", "UID"},
+                    new String[]{"1", "null", Integer.toString(userID)}, "CPID", stCopyID);
 
         } else {
             throw new IllegalStateException("Copy must not be reserved, on loan or available.");
@@ -641,6 +679,15 @@ public class ResourceFlowManager {
         } else {
             throw new IllegalArgumentException("Specified copy does not exist");
         }
+    }
+
+    /**
+     * Encases a string in apostrophe marks.
+     * @param str The string to encase.
+     * @return The encased string.
+     */
+    private String encase(String str) {
+        return "'" + str + "'";
     }
 
 }
