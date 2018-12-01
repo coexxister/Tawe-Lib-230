@@ -17,8 +17,6 @@ public class rfmManager {
         //System.out.println(rfm.calculateFine(rmManager.getCopies(1)[0]));
         //System.out.println(DateManager.returnCurrentDate());
 
-        rfm.removeBorrowedCopy(copy);
-
     }
 
 }

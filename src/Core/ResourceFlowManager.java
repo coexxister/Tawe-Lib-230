@@ -22,14 +22,6 @@ public class ResourceFlowManager {
     + getBorrowedCopies (userID: Integer) : Copy[]
     + getBorrowHistory (userID: Integer) : String[][]
 
-    vvv note if de-queued, copy is left in state -1 vvv
-    vvv if enqueued the copy must be in state -1    vvv
-
-    - reserve
-    - un reserve
-
-
-
      */
 
     /**
@@ -102,6 +94,44 @@ public class ResourceFlowManager {
         }
 
         return fine;
+
+    }
+
+    /**
+     * Requests a select resource for a user.
+     * @param resourceID The resource id of the resource.
+     * @param userID The user id of the user.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    public void requestResource(int resourceID, int userID) throws SQLException {
+
+        dbManager.addTuple("ResourceRequestQueue",
+                new String[] {"null", Integer.toString(resourceID), Integer.toString(userID)});
+
+    }
+
+    /**
+     * Deletes a request for a resource.
+     * @param resourceID The resource id of the resource.
+     * @param userID The user id of the resource.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    public void deleteRequest(int resourceID, int userID) throws SQLException {
+
+        dbManager.deleteTuple("ResourceRequestQueue", new String[] {"RID", "UID"},
+                new String[] {Integer.toString(resourceID), Integer.toString(userID)});
+
+    }
+
+    /**
+     * Deletes all requests from a user.
+     * @param userID The user id of a user.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    public void deleteAllRequests(int userID) throws SQLException {
+
+        dbManager.deleteTuple("ResourceRequestQueue", new String[] {"UID"},
+                new String[] {Integer.toString(userID)});
 
     }
 
