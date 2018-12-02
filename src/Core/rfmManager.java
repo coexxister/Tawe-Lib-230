@@ -19,7 +19,7 @@ public class rfmManager {
 
         //rmManager.addBulkCopies(copy);
 
-        rfm.borrowCopy(21, 1);
+        rfm.returnCopy(21,1);
 
     }
 

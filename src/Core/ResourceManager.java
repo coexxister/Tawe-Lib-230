@@ -114,6 +114,33 @@ public class ResourceManager {
     }
 
     /**
+     * Gets the copy which corresponds to the copy id.
+     * @param copyID The copy id of the copy.
+     * @return The Copy.
+     */
+    public Copy getCopy(int copyID) throws IllegalArgumentException {
+
+        try {
+
+            //Get all copy rows based upon a rid
+            String[] copyRow = dbManager.getFirstTupleByQuery("SELECT * FROM Copy WHERE CPID = "
+                    + Integer.toString(copyID));
+
+            //Create copy from row information.
+            Copy copy = new Copy(Integer.parseInt(copyRow[0]), Integer.parseInt(copyRow[1]),
+                    Integer.parseInt(copyRow[2]), copyRow[3], Integer.parseInt(copyRow[4]),
+                    Integer.parseInt(copyRow[5]));
+
+            //Return the create Copy.
+            return copy;
+
+        } catch(SQLException e) {
+            return null;
+        }
+
+    }
+
+    /**
      * Gets all copies of a resource.
      * @param resourceID The resource id of a copy.
      * @return All copies of a resource.

@@ -11,15 +11,9 @@ public class ResourceFlowManager {
 
     /*
        TODO
-
-    + returnCopy (copy : Copy, user : User) : Bool
-    + returnCopy (copyID : Integer, userID : Integer) : Bool
-    + borrowCopy (copy : Copy, user : User) : Bool
-    + borrowCopy (copyID : Integer, userID : Integer) : Bool
     + showOverdueCopies() : Copy[]
     + getBorrowedCopies (userID: Integer) : Copy[]
     + getBorrowHistory (userID: Integer) : String[][]
-
      */
 
     /**
@@ -122,7 +116,7 @@ public class ResourceFlowManager {
                 //adds to borrow history
                 dbManager.addTuple("BorrowHistory",
                         new String[] {Integer.toString(userID), Integer.toString(copyID),
-                        encase(DateManager.returnCurrentDate()), "''"});
+                        encase(DateManager.returnCurrentDate()), "null"});
 
             } else {
                 throw new IllegalStateException("User does not exist");
@@ -132,6 +126,77 @@ public class ResourceFlowManager {
             throw new IllegalStateException("Copy is not available");
         }
 
+    }
+
+    /**
+     * Returns a specified copy from a user.
+     * @param copyID The copy id of a copy.
+     * @param userID The user id of a copy.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws IllegalStateException Thrown if specified copy or user does not exist.
+     */
+    public void returnCopy(int copyID, int userID) throws SQLException, IllegalStateException {
+        //check if copy is on loan, if so then return the copy. Otherwise throw exception.
+        if (getCopyState(copyID) == 1) {
+            //Get the resource id.
+            int resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT RID FROM Copy WHERE CPID = " +
+                    Integer.toString(copyID))[0]);
+
+            //If the user exists then return the copy.
+            if (dbManager.checkIfExist("User", new String[] {"UID"},
+                    new String[] {Integer.toString(userID)})) {
+
+                //set date returned.
+                dbManager.sqlQuery("UPDATE BorrowHistory SET Date_Returned = " +
+                        DateManager.returnCurrentDate() + " WHERE UID = " + Integer.toString(userID) +
+                        " AND CID = " + Integer.toString(copyID) + " AND Date_Returned = null");
+                //Calculate fine.
+                float fine = calculateFine(rmManager.getCopy(copyID));
+
+                //If there is a fine then take from balance.
+                if (fine < 0) {
+                    acManager.changeBalance(userID, fine);
+                }
+
+                //check request queue. If there is a request then reserve copy. Otherwise make copy available.
+                if (dbManager.checkIfExist("ResourceRequestQueue", new String[] {"RID"},
+                        new String[] {Integer.toString(resourceID)})) {
+
+                    //get the request data.
+                    String[] data = dbManager.getFirstTupleByQuery("SELECT min(Position), UID FROM ( " +
+                            "SELECT Position, UID FROM ResourceRequestQueue WHERE RID = " + Integer.toString(resourceID) +
+                            " )");
+
+                    int pos = Integer.parseInt(data[0]);
+                    int firstUser = Integer.parseInt(data[1]);
+
+                    //remove from borrowed queue.
+                    removeBorrowedCopy(copyID, resourceID);
+
+                    //reserve the copy for the request user.
+                    reserveCopy(copyID,firstUser);
+
+                    //delete request
+                    dbManager.deleteTuple("ResourceRequestQueue", new String[] {"Position"},
+                            new String[] {Integer.toString(pos)});
+
+                } else {
+
+                    //remove from borrowed queue.
+                    removeBorrowedCopy(copyID, resourceID);
+
+                    //make copy available.
+                    enqueueAvailable(copyID, resourceID);
+
+                }
+
+            } else {
+                throw new IllegalStateException("User does not exist");
+            }
+
+        } else {
+            throw new IllegalStateException("Copy is not on loan");
+        }
     }
 
     /**
@@ -175,15 +240,68 @@ public class ResourceFlowManager {
     }
 
     /**
-     * Requests a select resource for a user.
+     * Requests a select resource for a user. If a copy is already available, it will be reserved.
      * @param resourceID The resource id of the resource.
      * @param userID The user id of the user.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
     public void requestResource(int resourceID, int userID) throws SQLException {
 
-        dbManager.addTuple("ResourceRequestQueue",
-                new String[] {"null", Integer.toString(resourceID), Integer.toString(userID)});
+        //add request to history
+        dbManager.addTuple("ResourceRequestHistory",
+                new String[] {Integer.toString(resourceID), Integer.toString(userID),
+                        encase(DateManager.returnCurrentDate())});
+
+        //check if there is a copy available to reserve
+        if (dbManager.checkIfExist("Copy", new String[] {"RID", "StateID"},
+                new String[] {Integer.toString(resourceID), "0"})) {
+            //there exists a copy that is available
+            //get the copy id
+            int copyID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT CPID FROM Copy WHERE RID = " +
+                    Integer.toString(resourceID) + " AND StateID = 0")[0]);
+
+            //removes copy from availability queue.
+            removeAvailable(copyID, resourceID);
+
+            //reserves copy.
+            reserveCopy(copyID, userID);
+        } else {
+
+            //otherwise add user to request queue and set due date on a borrowed copy.
+            dbManager.addTuple("ResourceRequestQueue",
+                    new String[]{"null", Integer.toString(resourceID), Integer.toString(userID)});
+
+            //traverse borrowed queue until copy without date set is found.
+            //get the head of the queue.
+            int head = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT HeadOfBorrowedQueue FROM " +
+                    "Resource WHERE RID = " + resourceID)[0]);
+
+            int currentCopy = head;
+            boolean isFound = false;
+            boolean isNext = true;
+
+            //traverse borrowed queue until end is reached or first copy has been found without due date
+            do {
+                //if the copy has no due date, then set the due date and exit the loop.
+                if (dbManager.getFirstTupleByQuery("SELECT Due_Date FROM Copy WHERE CPID = " +
+                        currentCopy)[0] == null) {
+
+                    //set due date
+                    dbManager.editTuple("Copy", new String[] {"Due_Date"}, new String[] {"'2019-11-11'"},
+                            "CPID", Integer.toString(currentCopy));
+
+                    isFound = true;
+                }
+
+                //if there is a next copy then set the next copy. Otherwise isNext becomes false.
+                if (isNext(currentCopy)) {
+                    currentCopy = getNext(currentCopy);
+                } else {
+                    isNext = false;
+                }
+            } while (isNext && !isFound);
+
+        }
 
     }
 
