@@ -17,7 +17,7 @@ public class DateManager {
      * @throws IOException
      */
 	public DateManager() throws IOException{
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
 	    Date date = new Date();
 	    
 		String filePathString = null;
@@ -41,11 +41,22 @@ public class DateManager {
 	}
 	
 	/**
+	 * Method that returns the time
+	 * @return
+	 */
+	public static String returnTime(){
+		DateFormat df = new SimpleDateFormat("HH:mm:ss");
+	    Date date = new Date();
+	    
+	    return (df.format(date));
+	}
+	
+	/**
 	 * Method to update the date by one and write it into a file
 	 * @throws IOException
 	 */
 	public static void  updateForward() throws IOException{
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	    Date date = new Date();
 	    
 		Calendar cal = Calendar.getInstance();
@@ -64,6 +75,22 @@ public class DateManager {
 	      }
 	        
 	    
+	}
+	/**
+	 * Method to add days to the current date
+	 * @return
+	 */
+	public static String returnDueDate(){
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	    Date date = new Date();
+	    
+	    Calendar cal = Calendar.getInstance();
+	    cal.setTime(date);
+	    
+	    int addDays = 0;
+	    
+	    cal.add(Calendar.DAY_OF_MONTH, addDays);
+	    return (df.format(cal.getTime()));
 	}
 
 }
