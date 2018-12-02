@@ -2,6 +2,7 @@ package Core;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Responsible for fetching, adding and editing resources from the database.
@@ -135,6 +136,7 @@ public class ResourceManager {
             return copy;
 
         } catch(SQLException e) {
+            e.printStackTrace();
             return null;
         }
 
@@ -213,7 +215,7 @@ public class ResourceManager {
 
             //Add the copy to the database.
             dbManager.addTuple("Copy", new String[] {"null", Integer.toString(newCopy.getResourceID()),
-                    Integer.toString(newCopy.getLoanDuration()), encase(newCopy.getDueDate()),
+                    Integer.toString(newCopy.getLoanDuration()), "null",
                     Integer.toString(newCopy.getStateID()), Integer.toString(newCopy.getCurrentBorrowerID()),
                     "null", "null"});
 

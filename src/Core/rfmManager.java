@@ -12,14 +12,16 @@ public class rfmManager {
 
         ResourceFlowManager rfm = new ResourceFlowManager(dbManager, acManager, rmManager, 1);
 
-        Copy copy = new Copy(18, 35, 14, "2018-12-6", 0, 0);
+        Copy copy = new Copy(1, 9, 14, "", 0, 0);
 
         //System.out.println(rfm.calculateFine(rmManager.getCopies(1)[0]));
-        //System.out.println(DateManager.returnCurrentDate());
 
         //rmManager.addBulkCopies(copy);
+        //rfm.borrowCopy(38,1);
+        //rfm.requestResource(9,3);
+        rfm.returnCopy(38, 1);
 
-        rfm.returnCopy(21,1);
+        //rfm.returnCopy(21,1);
 
     }
 

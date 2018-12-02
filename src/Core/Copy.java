@@ -110,10 +110,11 @@ public class Copy {
      * Returns the difference in days between current date and due date of the copy.
      * @param currentDate The current date (with YYYY-MM-DD format).
      * @return The difference in days between current date and due date of the copy.
+     * @throws IllegalStateException Thrown if due date is not set.
      */
     public int calculateDaysOffset(String currentDate) throws IllegalStateException {
         //Checks if due date is set. If set, then calculation can proceed.
-        if (!dueDate.equals("")) {
+        if (!(dueDate == null)) {
             return Math.toIntExact(ChronoUnit.DAYS.between(LocalDate.parse(currentDate), LocalDate.parse(dueDate)));
         } else {
             throw new IllegalStateException("No due date set.");

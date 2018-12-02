@@ -80,18 +80,17 @@ public class DateManager {
 	}
 	/**
 	 * Method to add days to the current date
+	 * @param
 	 * @return
 	 */
-	public static String returnDueDate(){
+	public static String returnDueDate(int days){
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 	    Date date = new Date();
 	    
 	    Calendar cal = Calendar.getInstance();
 	    cal.setTime(date);
 	    
-	    int addDays = 0;
-	    
-	    cal.add(Calendar.DAY_OF_MONTH, addDays);
+	    cal.add(Calendar.DAY_OF_MONTH, days);
 	    return (df.format(cal.getTime()));
 	}
 

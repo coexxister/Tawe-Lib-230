@@ -62,7 +62,15 @@ public class ResourceFlowManager {
     private float calculateFine(Copy copy) throws SQLException, IllegalStateException {
 
         //calculate the days before or after the due date.
-        int daysOffset = copy.calculateDaysOffset(DateManager.returnCurrentDate());
+        int daysOffset;
+
+        //may throw exception if due date is not set.
+        try {
+            daysOffset = copy.calculateDaysOffset(DateManager.returnCurrentDate());
+        } catch (IllegalStateException e) {
+            daysOffset = 0;
+        }
+
         float fine = 0;
 
         //if the copy is days after the due date then calculate fine otherwise return 0
@@ -148,8 +156,8 @@ public class ResourceFlowManager {
 
                 //set date returned.
                 dbManager.sqlQuery("UPDATE BorrowHistory SET Date_Returned = " +
-                        DateManager.returnCurrentDate() + " WHERE UID = " + Integer.toString(userID) +
-                        " AND CID = " + Integer.toString(copyID) + " AND Date_Returned = null");
+                        encase(DateManager.returnCurrentDate()) + " WHERE UID = " + Integer.toString(userID) +
+                        " AND CID = " + Integer.toString(copyID) + " AND Date_Returned IS NULL");
                 //Calculate fine.
                 float fine = calculateFine(rmManager.getCopy(copyID));
 
@@ -286,8 +294,14 @@ public class ResourceFlowManager {
                 if (dbManager.getFirstTupleByQuery("SELECT Due_Date FROM Copy WHERE CPID = " +
                         currentCopy)[0] == null) {
 
+                    //get the loan duration.
+                    int loanDuration = Integer.parseInt(
+                            dbManager.getFirstTupleByQuery("SELECT Loan_Duration FROM Copy " +
+                            "WHERE CPID = " + Integer.toString(currentCopy))[0]);
+
                     //set due date
-                    dbManager.editTuple("Copy", new String[] {"Due_Date"}, new String[] {"'2019-11-11'"},
+                    dbManager.editTuple("Copy", new String[] {"Due_Date"},
+                            new String[] {encase(DateManager.returnDueDate(loanDuration))},
                             "CPID", Integer.toString(currentCopy));
 
                     isFound = true;
