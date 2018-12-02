@@ -1,3 +1,5 @@
+package Core;
+
 import java.sql.SQLException;
 
 public class amTester {
@@ -12,8 +14,8 @@ public class amTester {
         Staff testStaff = new Staff(2, "Noah", "Lenagan", "07403576267", "27", "Ernald Place", "Uplands", "Swansea", "SA2 OHN", "1999-07-26", 1, 5);
 
 
-        /*rm.addAccount(testUser);
-        rm.addAccount(testStaff);*/
+        /*rm.addAccount(testUser);*/
+        rm.addAccount(testStaff);
 
         /*rm.editAccount(testStaff);
         System.out.println(rm.getAccount(2).toString());*/
@@ -29,7 +31,7 @@ public class amTester {
         }*/
 
         //rm.changeBalance(2,10000);
-        rm.deleteAccount(2);
+        //rm.deleteAccount(2);
 
     }
 

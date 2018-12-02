@@ -1,3 +1,5 @@
+package Core;
+
 import jdk.management.resource.ResourceId;
 
 /**
@@ -105,7 +107,7 @@ public class Resource {
      */
     public String toString() {
 
-        String out  = "ID - " + resourceID +
+        String out  =
                 "\nTitle - " + title +
                 "\nRelease Year - " + year;
         return out;

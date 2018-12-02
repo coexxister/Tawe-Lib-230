@@ -1,4 +1,5 @@
-import java.sql.Array;
+package Core;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -80,6 +81,36 @@ public class ResourceManager {
         table = dbManager.searchTuples("Resource", selectColumn, searchQuery);
         return constructResources(table);
 
+    }
+
+    /**
+     * Gets all resource objects based upon searches on the column(s).
+     * @param selectColumns The columns to search upon.
+     * @param searchQueries The queries to search on the column(s).
+     * @return An array of resource objects.
+     * @throws SQLException Thrown if column specified is incorrect or connection to database couldn't be established.
+     */
+    public Resource[] searchResources(String[] selectColumns, String[] searchQueries) throws SQLException {
+
+        String[][] table;
+        table = dbManager.searchTuples("Resource", selectColumns, searchQueries);
+        return constructResources(table);
+
+    }
+
+    /**
+     * Determines whether a copy exists or not.
+     * @param copyID The copy id of the copy.
+     * @return True if the copy exists. False if does not exist.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     */
+    public boolean doesCopyExist(int copyID) throws SQLException {
+        if (dbManager.checkIfExist("Copy", new String[] {"CPID"},
+                new String[] {Integer.toString(copyID)})) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

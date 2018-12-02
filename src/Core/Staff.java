@@ -1,3 +1,5 @@
+package Core;
+
 /**
  * This class represents a Staff user.
  * @author Noah Lenagan, Paris Kelly Skopelitis

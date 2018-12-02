@@ -1,4 +1,5 @@
-import com.sun.org.apache.xpath.internal.operations.Bool;
+package Core;
+
 import java.sql.SQLException;
 
 /**
@@ -14,7 +15,6 @@ public class AuthenticationManager{
     /**
      * constructor for the Authentication manager
      * @param username
-     * @param dbManager
      */
     public AuthenticationManager(String username, DatabaseManager dbManager) {
         this.username = username;
@@ -23,11 +23,10 @@ public class AuthenticationManager{
 
     /**
      * method that authenticates a user through their username
-     * @param username
      * @return true if the username can be authenticated, else false
      * @throws IllegalArgumentException
      */
-    private boolean Authenticate(String username)throws IllegalArgumentException {
+    public boolean authenticate()throws IllegalArgumentException {
         try {
             if(dbManager.checkIfExist("User", new String[]{"UID"},
                     new String[]{username})){
@@ -43,11 +42,10 @@ public class AuthenticationManager{
 
     /**
      * method that checks whether a user is a staff member
-     * @param username
      * @return true if specified user is a staff member, else false
      * @throws IllegalArgumentException, SQLException
      */
-    private boolean isStaff(String username)throws IllegalArgumentException, SQLException{
+    public boolean isStaff()throws IllegalArgumentException, SQLException{
             if (dbManager.checkIfExist("Staff", new String[]{"UID"},
                     new String[]{username})) {
                 return true;

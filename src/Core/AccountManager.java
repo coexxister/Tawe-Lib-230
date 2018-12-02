@@ -1,3 +1,5 @@
+package Core;
+
 import java.sql.SQLException;
 
 /**
@@ -12,7 +14,7 @@ public class AccountManager {
      */
     DatabaseManager dbManager;
 
-    AccountManager(DatabaseManager dbManager) {
+    public AccountManager(DatabaseManager dbManager) {
         this.dbManager = dbManager;
     }
 

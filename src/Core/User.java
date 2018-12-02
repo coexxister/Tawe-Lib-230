@@ -1,3 +1,5 @@
+package Core;
+
 /**
  * This class represents a user and its information.
  * @author Noah Lenagan, Paris Kelly Skopelitis

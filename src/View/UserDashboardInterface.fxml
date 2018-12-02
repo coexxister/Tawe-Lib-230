@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" style="-fx-background-color: #00BFFF;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
    <bottom>
       <HBox prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -32,7 +32,7 @@
          <children>
             <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@tawelibIcon.png" />
+                  <Image url="@../Resources/tawelibIcon.png" />
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="760.0" layoutY="14.0" prefHeight="26.0" prefWidth="64.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: #2db92d; -fx-background-radius: 10;" text="£0.00" textAlignment="CENTER" />
@@ -47,7 +47,7 @@
                <children>
                   <ImageView fitHeight="74.0" fitWidth="128.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@dvdIcon.png" />
+                        <Image url="@../Resources/dvdIcon.png" />
                      </image>
                   </ImageView>
                   <Button fx:id="itemDue" mnemonicParsing="false" prefWidth="150.0" text="Items Due" />

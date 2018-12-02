@@ -1,3 +1,5 @@
+package Core;
+
 /**
  * Represents a transaction.
  * @author Noah Lenagan
