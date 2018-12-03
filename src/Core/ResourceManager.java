@@ -212,7 +212,6 @@ public class ResourceManager {
      */
     public boolean addCopy(Copy newCopy) {
         try {
-
             //Add the copy to the database.
             dbManager.addTuple("Copy", new String[] {"null", Integer.toString(newCopy.getResourceID()),
                     Integer.toString(newCopy.getLoanDuration()), "null",

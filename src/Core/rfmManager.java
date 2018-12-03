@@ -19,9 +19,11 @@ public class rfmManager {
         //rmManager.addBulkCopies(copy);
         //rfm.borrowCopy(38,1);
         //rfm.requestResource(9,3);
-        rfm.returnCopy(38, 1);
+        //rfm.returnCopy(38, 1);
 
         //rfm.returnCopy(21,1);
+
+        rmManager.addCopy(copy);
 
     }
 

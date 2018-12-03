@@ -53,6 +53,7 @@ public class Copy {
                 int stateID, int currentBorrowerID) {
         this.copyID = copyID;
         this.resourceID = resourceID;
+        this.loanDuration = loanDuration;
         this.dueDate = dueDate;
         this.stateID = stateID;
         this.currentBorrowerID = currentBorrowerID;
