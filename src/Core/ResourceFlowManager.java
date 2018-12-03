@@ -10,11 +10,6 @@ import java.util.ArrayList;
  */
 public class ResourceFlowManager {
 
-    /*
-       TODO
-    + getBorrowHistory (userID: Integer) : BorrowHistory
-     */
-
     /**
      * The user id of the account.
      */
