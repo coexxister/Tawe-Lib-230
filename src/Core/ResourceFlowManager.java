@@ -175,6 +175,18 @@ public class ResourceFlowManager {
     }
 
     /**
+     * Un-reserves a copy and puts it on loan for the user.
+     * @param copyID The copy id of the copy.
+     * @param userID THe user id of the copy.
+     */
+    public void borrowFromReserve(int copyID, int userID) throws SQLException, IllegalStateException {
+
+        unreserveCopy(copyID, userID);
+        borrowCopy(copyID, userID);
+
+    }
+
+    /**
      * Borrows a specified copy for a user.
      * @param copyID The copy id of a copy.
      * @param userID The user id of a copy.
