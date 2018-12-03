@@ -1,5 +1,8 @@
 package JavaFX;
 
+import Core.Book;
+import Core.Computer;
+import Core.Dvd;
 import Core.Resource;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,11 +36,11 @@ public class ListAllController extends SceneController implements Initializable 
         for (int i = page; i < page + elementsPerPage; i++) {
             HBox element = new HBox(elementsPerPage);
             ImageView image = new ImageView();
-            if(resourceList[i].toString().contains("Type - Book")){
+            if(resourceList[i] instanceof Book){
                 image.setImage(new Image("/Resources/bookIcon.png"));
-            } else if(resourceList[i].toString().contains("Type - Dvd")){
+            } else if(resourceList[i] instanceof Dvd){
                 image.setImage(new Image("/Resources/dvdIcon.png"));
-            } else if(resourceList[i].toString().contains("Type - Computer")){
+            } else if(resourceList[i] instanceof Computer){
                 image.setImage(new Image("/Resources/laptopIcon.png"));
             }
             image.setFitWidth(100);
