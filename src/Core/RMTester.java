@@ -14,7 +14,7 @@ public class RMTester {
         //Resource[] resources = rm.getResourceList();
 
         //Search resources
-        Resource[] resources = rm.searchResources(new String[] {"Title", "RYear"}, new String[] {"M", "2017"});
+        //Resource[] resources = rm.searchResources(new String[] {"Title", "RYear"}, new String[] {"M", "2017"});
 
         //Edit a resource
         /*rm.editResource(new Book(21, "Grimms Fairy Tales", 1812, 1, "Jacob Grimm, Wilhelm Grimm",
@@ -47,17 +47,17 @@ public class RMTester {
         //Filter by DVDs
         /*Resource[] resources = rm.getResourceList("SELECT * FROM Resource WHERE TID = 1");*/
 
-        for (Resource r : resources) {
+        /*for (Resource r : resources) {
             System.out.println("____________________\n\n" + r.toString());
-        }
+        }*/
 
         /*Copy copy = new Copy(1, 1, 14, "2018-12-6", 0, 0);
         rm.addCopy(copy);*/
-        /*Copy[] copies = rm.getCopies(1);
+        Copy[] copies = rm.getCopies(9);
 
         for (Copy copy : copies) {
             System.out.println(copy.toString());
-        }*/
+        }
 
 
     }

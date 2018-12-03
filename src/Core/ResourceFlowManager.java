@@ -1,6 +1,7 @@
 package Core;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Manages operations that relate resources and users.
@@ -11,9 +12,7 @@ public class ResourceFlowManager {
 
     /*
        TODO
-    + showOverdueCopies() : Copy[]
-    + getBorrowedCopies (userID: Integer) : Copy[]
-    + getBorrowHistory (userID: Integer) : String[][]
+    + getBorrowHistory (userID: Integer) : BorrowHistory
      */
 
     /**
@@ -49,6 +48,89 @@ public class ResourceFlowManager {
         this.acManager = acManager;
         this.rmManager = rmManager;
         this.userID = userID;
+
+    }
+
+    /**
+     * Gets the borrow history of a user.
+     * @param userID The user id of the user.
+     * @return The array of loan events.
+     */
+    public LoanEvent[] getBorrowHistory(int userID) {
+
+        try {
+            //Get loan data.
+            String[][] loanData = dbManager.getTupleListByQuery("SELECT * FROM BorrowHistory WHERE UID = " +
+                    Integer.toString(userID));
+
+            //create array of LoanEvents
+            LoanEvent[] events = new LoanEvent[loanData.length];
+
+            //for every loan history, create a loan event.
+            for (int iCount = 0; iCount < loanData.length; iCount++) {
+                events[iCount] = new LoanEvent(Integer.parseInt(loanData[iCount][0]),
+                        Integer.parseInt(loanData[iCount][1]), encase(loanData[iCount][2]),
+                        encase(loanData[iCount][3]));
+            }
+
+            return events;
+        } catch (SQLException e) {
+            return null;
+        }
+
+    }
+
+    /**
+     * Gets all overdue copies.
+     * @return An array of copies that are overdue.
+     */
+    public Copy[] showOverdueCopies() {
+
+        //Get all copies
+        Copy[] copies = rmManager.getCopies();
+        ArrayList<Copy> overdueCopies = new ArrayList<>();
+
+        //Get current date
+        String currentDate = DateManager.returnCurrentDate();
+
+        //For every copy, check if overdue. If so, then add overdueCopies.
+        for (Copy currentCopy : copies) {
+            //If overdue, then add overdueCopies.
+            if (currentCopy.calculateDaysOffset(currentDate) < -1) {
+                overdueCopies.add(currentCopy);
+            }
+        }
+
+        //return as array.
+        return overdueCopies.toArray(new Copy[overdueCopies.size()]);
+
+    }
+
+    /**
+     * Gets all borrowed copies of a user.
+     * @param userID The user id of the user.
+     * @return The array of borrowed copies.
+     */
+    public Copy[] getBorrowedCopies(int userID) {
+
+        try {
+            //Get array of borrowed copy ids.
+            String[][] copyIDs = dbManager.getTupleListByQuery("SELECT CPID FROM Copy WHERE UID = " +
+                    Integer.toString(userID));
+
+            //Create array of copies
+            Copy[] copies = new Copy[copyIDs.length];
+
+            //For every copy id, construct the copy and add to array.
+            for (int iCount = 0; iCount < copyIDs.length; iCount++) {
+                copies[iCount] = rmManager.getCopy(Integer.parseInt(copyIDs[iCount][0]));
+            }
+
+            return copies;
+        } catch (SQLException e) {
+            return null;
+        }
+
 
     }
 
@@ -245,6 +327,15 @@ public class ResourceFlowManager {
         } else {
             throw new IllegalStateException("Copy must be reserved");
         }
+    }
+
+    /**
+     * Requests a select resource for the logged user. If a copy is already available, it will be reserved.
+     * @param resourceID The resource id of the resource.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    public void requestResource(int resourceID) throws SQLException {
+        requestResource(resourceID, this.userID);
     }
 
     /**
@@ -820,6 +911,22 @@ public class ResourceFlowManager {
      */
     private String encase(String str) {
         return "'" + str + "'";
+    }
+
+    /**
+     * Gets the currently logged in user id.
+     * @return User id of the user.
+     */
+    public int getUserID() {
+        return userID;
+    }
+
+    /**
+     * Sets the user id of the logged user.
+     * @param userID The user id of the user.
+     */
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
 }

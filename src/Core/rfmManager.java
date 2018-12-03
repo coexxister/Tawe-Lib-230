@@ -23,7 +23,7 @@ public class rfmManager {
 
         //rfm.returnCopy(21,1);
 
-        rmManager.addCopy(copy);
+        //rmManager.addCopy(copy);
 
     }
 

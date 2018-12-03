@@ -143,6 +143,33 @@ public class ResourceManager {
     }
 
     /**
+     * Gets all copies.
+     * @return An array of all copies.
+     */
+    public Copy[] getCopies() {
+
+        try {
+            //Get all copy rows based upon a rid
+            String[][] copyRows = dbManager.getTupleList("Copy");
+
+            Copy[] copies = new Copy[copyRows.length];
+
+            //For every copy associated with the rid, will be constructed and added to the array of copies.
+            for (int iCount = 0; iCount < copyRows.length; iCount++) {
+                copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]), Integer.parseInt(copyRows[iCount][1]),
+                        Integer.parseInt(copyRows[iCount][2]), copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
+                        Integer.parseInt(copyRows[iCount][5]));
+            }
+
+            return copies;
+
+        } catch(SQLException e) {
+            return null;
+        }
+
+    }
+
+    /**
      * Gets all copies of a resource.
      * @param resourceID The resource id of a copy.
      * @return All copies of a resource.
@@ -151,17 +178,14 @@ public class ResourceManager {
 
         try {
 
-            //Get the amount of copies
-            int amountOfCopies = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT count(*) FROM Copy GROUP BY RID")[0]);
-
-            Copy[] copies = new Copy[amountOfCopies];
-
             //Get all copy rows based upon a rid
             String[][] copyRows = dbManager.getTupleListByQuery("SELECT * FROM Copy WHERE RID = "
                     + Integer.toString(resourceID));
 
+            Copy[] copies = new Copy[copyRows.length];
+
             //For every copy associated with the rid, will be constructed and added to the array of copies.
-            for (int iCount = 0; iCount < amountOfCopies; iCount++) {
+            for (int iCount = 0; iCount < copyRows.length; iCount++) {
                 copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]), Integer.parseInt(copyRows[iCount][1]),
                         Integer.parseInt(copyRows[iCount][2]), copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
                         Integer.parseInt(copyRows[iCount][5]));
