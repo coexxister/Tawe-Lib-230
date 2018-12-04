@@ -17,6 +17,11 @@ import javafx.scene.layout.HBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Interface controller for the list all subscene of the staff interface
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
 public class ListAllController extends SceneController implements Initializable {
 
     @FXML
@@ -24,10 +29,19 @@ public class ListAllController extends SceneController implements Initializable 
 
     private int elementsPerPage = 3;
 
+    /**
+     * Initialises the paginated list of resources
+     */
     public void initialize(URL location, ResourceBundle resources) {
         resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
     }
 
+    /**
+     * Generates a list of pages as a horizontal box in the interface
+     * @param pageIndex ?
+     * @return box
+     * 			The generated horizontal box, containing the pages of the list
+     */
     public HBox createPage(int pageIndex) {
         HBox box = new HBox(elementsPerPage);
         Resource resourceList[] = getResourceManager().getResourceList();

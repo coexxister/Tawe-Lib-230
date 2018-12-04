@@ -46,9 +46,9 @@ public class SceneController {
     /**
      * Handles the action of clicking the button to login to the user or staff interface
      * @param event the event triggered by clicking the button
-     * @param fxml ?
+     * @param fxml the fxml file corresponding to the new scene
      * @param loginUsername the username entered at login 
-     * @throws Exception thrown when?
+     * @throws Exception thrown if the fxml file does not exist
      */
     public void handleLoginButtonAction(ActionEvent event, String fxml, String loginUsername) throws Exception {
         Parent root = load(getClass().getResource(fxml));
@@ -64,8 +64,8 @@ public class SceneController {
     /**
      * Handles the action of clicking a button to change scenes
      * @param event the event triggered by clicking the button
-     * @param fxml ?
-     * @throws IOException thrown when? 
+     * @param fxml the fxml file corresponding to the new scene
+     * @throws IOException thrown if the fxml file does not exist
      */
     public void handleSceneChangeButtonAction(ActionEvent event, String fxml) throws IOException {
         Parent root = load(getClass().getResource(fxml));
@@ -79,8 +79,8 @@ public class SceneController {
 
     /**
      * Sets the mainPane to a different scene
-     * @param fxml ?
-     * @throws IOException thrown when?
+     * @param fxml the fxml file corresponding to the new scene
+     * @throws IOException thrown if the fxml file does not exist
      */
     public void loadSubscene(String fxml) throws IOException {
         mainPane.setCenter(load(getClass().getResource(fxml)));
