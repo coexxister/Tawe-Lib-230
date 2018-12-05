@@ -1,17 +1,22 @@
-package sample;
+package JavaFX;
 
 /**
  * Drawing Environment Class
  *
  * @author Marcos Pallikaras
+ * @version 1.1
  */
 
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
@@ -31,13 +36,18 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 
 public class DrawingEnvironment extends Application {
+    // The ID of the current user
+    private static final String USER_ID = "123456";
+    // The number of avatars in user's folder
+    private static long aNo = 0;
+
     // The dimensions of the window
     private static final int WINDOW_WIDTH = 1920;
     private static final int WINDOW_HEIGHT = 1080;
@@ -112,9 +122,9 @@ public class DrawingEnvironment extends Application {
         straightButton.setToggleGroup(group);
         eraserButton.setToggleGroup(group);
 
-        //Creates event handlers for mouse actions on canvas
+        // Creates event handlers for mouse actions on canvas
 
-        //Begins the path for particle drawing on MOUSE_PRESSED
+        // Begins the path for particle drawing on MOUSE_PRESSED
         EventHandler beginFreeDraw = new EventHandler<MouseEvent>() {
 
             @Override
@@ -130,7 +140,7 @@ public class DrawingEnvironment extends Application {
             }
         };
 
-        //Continues the path for particle drawing on MOUSE_DRAGGED
+        // Continues the path for particle drawing on MOUSE_DRAGGED
         EventHandler dragFreeDraw = new EventHandler<MouseEvent>() {
 
             @Override
@@ -143,7 +153,7 @@ public class DrawingEnvironment extends Application {
             }
         };
 
-        //Begins the path for erasing on MOUSE_PRESSED
+        // Begins the path for erasing on MOUSE_PRESSED
         EventHandler beginErase = new EventHandler<MouseEvent>() {
 
             @Override
@@ -157,7 +167,7 @@ public class DrawingEnvironment extends Application {
             }
         };
 
-        //Continues the path for erasing on MOUSE_DRAGGED
+        // Continues the path for erasing on MOUSE_DRAGGED
         EventHandler dragErase = new EventHandler<MouseEvent>() {
 
             @Override
@@ -169,7 +179,7 @@ public class DrawingEnvironment extends Application {
             }
         };
 
-        //Closes the current path on MOUSE_RELEASE
+        // Closes the current path on MOUSE_RELEASE
         EventHandler closePath = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -177,7 +187,7 @@ public class DrawingEnvironment extends Application {
             }
         };
 
-        //Begins the creation of a straight line by holding initial X,Y coordinates
+        // Begins the creation of a straight line by holding initial X,Y coordinates
         EventHandler startStraightLine = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -187,12 +197,10 @@ public class DrawingEnvironment extends Application {
                 graphicsContext.setLineWidth(5);
                 graphicsContext.setStroke(colorPicker.getValue());
                 graphicsContext.stroke();
-
             }
-
         };
 
-        //Draws straight line after taking final X,Y coordinates
+        // Draws straight line after taking final X,Y coordinates
         EventHandler endStraightLine = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -211,7 +219,7 @@ public class DrawingEnvironment extends Application {
         clearButton.setMaxWidth(Double.MAX_VALUE);
         saveButton.setMaxWidth(Double.MAX_VALUE);
 
-        //Set events for Pen button and remove other events
+        // Set events for Pen button and remove other events
         penButton.setOnAction(e -> {
             canvas.removeEventHandler(MouseEvent.MOUSE_PRESSED, beginErase);
             canvas.removeEventHandler(MouseEvent.MOUSE_DRAGGED, dragErase);
@@ -223,7 +231,7 @@ public class DrawingEnvironment extends Application {
             canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, closePath);
         });
 
-        //Set events for Straight Line button and remove other events
+        // Set events for Straight Line button and remove other events
         straightButton.setOnAction(e -> {
             canvas.removeEventHandler(MouseEvent.MOUSE_PRESSED, beginFreeDraw);
             canvas.removeEventHandler(MouseEvent.MOUSE_DRAGGED, dragFreeDraw);
@@ -235,7 +243,7 @@ public class DrawingEnvironment extends Application {
             canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, endStraightLine);
         });
 
-        //Set events for Eraser button and remove other events
+        // Set events for Eraser button and remove other events
         eraserButton.setOnAction(e -> {
             canvas.removeEventHandler(MouseEvent.MOUSE_PRESSED, beginFreeDraw);
             canvas.removeEventHandler(MouseEvent.MOUSE_DRAGGED, dragFreeDraw);
@@ -248,7 +256,7 @@ public class DrawingEnvironment extends Application {
 
         });
 
-        //Set action for Clear Canvas button
+        // Set action for Clear Canvas button
         clearButton.setOnAction(e -> {
             graphicsContext.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
             graphicsContext.setFill(Color.WHITE);
@@ -256,21 +264,21 @@ public class DrawingEnvironment extends Application {
             graphicsContext.setFillRule(null);
         });
 
-        //Set action for Save Avatar button
-        //Allows only saving in .png format in the user specified location
+        // Set action for Save Avatar button
+        // Saves canvas in png format under the user's avatar folder and notifies with pop up
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
-                FileChooser fileChooser = new FileChooser();
+                // Counts number of avatars in user's folder and adds 1 to aNo
+                try (Stream<Path> files = Files.list(Paths.get("/CustomAvatars/"))) {
+                    aNo = files.count() + 1;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
-                //Set extension filter
-                FileChooser.ExtensionFilter extFilter =
-                        new FileChooser.ExtensionFilter("png files (*.png)", "*.png");
-                fileChooser.getExtensionFilters().add(extFilter);
-
-                //Show save file dialogue
-                File file = fileChooser.showSaveDialog(primaryStage);
+                // Creates file under user's avatar folder with the name USER_ID(aNo).png
+                File file = new File("/CustomAvatars/" + USER_ID + "(" + aNo + ").png");
 
                 if (file != null) {
                     try {
@@ -278,6 +286,7 @@ public class DrawingEnvironment extends Application {
                         canvas.snapshot(null, writableImage);
                         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                         ImageIO.write(renderedImage, "png", file);
+                        JOptionPane.showMessageDialog(null, "Successfully saved as " + USER_ID + "(" + aNo + ").png", "Avatar Saved", JOptionPane.INFORMATION_MESSAGE);
                     } catch (IOException ex) {
                         Logger.getLogger(DrawingEnvironment.class.getName()).log(Level.SEVERE, null, ex);
                     }
