@@ -30,6 +30,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     @FXML
     private ImageView avatarImage;
 
+    @FXML
+    private Label currentBalance;
+
     /**
      * Handles the action of clicking the button to open the user dashboard interface
      * @param event the event triggered by clicking the button
@@ -107,6 +110,14 @@ public class HomeInterfaceController extends SceneController implements Initiali
         logoutButton.setText("Home");
     }
 
+    private void updateBalanceLabel() {
+        try {
+            currentBalance.setText("£" + getAccountManager().getAccountBalance(SceneController.USER_ID));
+        } catch (SQLException e) {
+            currentBalance.setText("£0.00");
+        }
+    }
+
     /**
      * Initialises the label in the interface to display the first name of the user based on the account currently logged in
      */
@@ -121,5 +132,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
         } catch (SQLException e) {
             avatarImage.setImage(new Image("/DefaultAvatar/Avatar1.png"));
         }
+
+        updateBalanceLabel();
     }
 }
