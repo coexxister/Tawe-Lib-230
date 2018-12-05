@@ -32,7 +32,6 @@ public class BookSearchMenuController extends SceneController{
     @FXML
     private TextField language;
 
-    @FXML
     public void handleSearchByQueryButtonAction(ActionEvent event) throws IOException {
         createQuery();
         loadSubscene("/View/BookList.fxml");

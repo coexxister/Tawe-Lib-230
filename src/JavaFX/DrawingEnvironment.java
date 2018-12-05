@@ -24,6 +24,7 @@ import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -45,46 +46,35 @@ import javafx.util.Pair;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-public class DrawingEnvironment extends Application {
+public class DrawingEnvironment implements Initializable{
     // The ID of the current user
     private static final String USER_ID = "123456";
     // The number of avatars in user's folder
     private static long aNo = 0;
 
-    // The dimensions of the window
-    private static final int WINDOW_WIDTH = 1920;
-    private static final int WINDOW_HEIGHT = 1080;
-
-    // The dimensions of the canvas
-    private static final int CANVAS_WIDTH = 400;
-    private static final int CANVAS_HEIGHT = 400;
-
     // Holds the coordinates for drawing straight lines
     private Pair<Double, Double> initialTouch;
 
-    // The canvas in the GUI. This needs to be a global variable
-    // (in this setup) as we need to access it in different methods.
-    // We could use FXML to place code in the controller instead.
+    @FXML
+    private ToggleButton penButton;
+
+    @FXML
+    private ToggleButton straightButton;
+
+    @FXML
+    private ToggleButton eraserButton;
+
+    @FXML
+    private ToggleButton clearButton;
+
+    @FXML
+    private ToggleButton saveButton;
+
+    @FXML
+    private ColorPicker colorPicker;
+
+    @FXML
     private Canvas canvas;
-
-//    Stage primaryStage = new Stage();
-
-    /**
-     * Creates the Scene from current Stage
-     *
-     * @param primaryStage
-     */
-    public void start(Stage primaryStage) {
-        // Build the GUI
-        Pane root = buildGUI();
-
-        // Create a scene from the GUI
-        Scene scene = new Scene(root, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-        // Display the scene on the stage
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
 
     /**
      * Create the GUI.
@@ -92,34 +82,14 @@ public class DrawingEnvironment extends Application {
      * @return The panel that contains the created GUI.
      */
     @SuppressWarnings("unchecked")
-    private Pane buildGUI() {
-        // Create top-level panel that will hold all GUI
-        BorderPane root = new BorderPane();
+    private void buildGUI() {
 
-        // Create canvas
-        canvas = new Canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-        root.setCenter(canvas);
-        BufferedImage image = new BufferedImage(CANVAS_WIDTH, CANVAS_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        graphicsContext.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
+//        root.setCenter(canvas);
+        BufferedImage image = new BufferedImage((int)canvas.getWidth(), (int)canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
 
-
-        // Create a sidebar with some nice padding and spacing
-        VBox sidebar = new VBox();
-        sidebar.setSpacing(10);
-        sidebar.setPadding(new Insets(10, 10, 10, 10));
-        root.setLeft(sidebar);
-
-        // Create sidebar content
-        ToggleButton penButton = new ToggleButton("Pen");
-        ToggleButton straightButton = new ToggleButton("Straight Line");
-        ToggleButton eraserButton = new ToggleButton("Eraser");
-        Button clearButton = new Button("Clear Canvas");
-        Button saveButton = new Button("Save Avatar");
-        ColorPicker colorPicker;
-        colorPicker = new ColorPicker();
-        sidebar.getChildren().addAll(colorPicker, penButton, straightButton, eraserButton, clearButton, saveButton);
         final ToggleGroup group = new ToggleGroup();
         penButton.setToggleGroup(group);
         straightButton.setToggleGroup(group);
@@ -261,9 +231,9 @@ public class DrawingEnvironment extends Application {
 
         // Set action for Clear Canvas button
         clearButton.setOnAction(e -> {
-            graphicsContext.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             graphicsContext.setFill(Color.WHITE);
-            graphicsContext.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+            graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
             graphicsContext.setFillRule(null);
         });
 
@@ -287,7 +257,7 @@ public class DrawingEnvironment extends Application {
 
                 if (file != null) {
                     try {
-                        WritableImage writableImage = new WritableImage(CANVAS_WIDTH, CANVAS_HEIGHT);
+                        WritableImage writableImage = new WritableImage((int)canvas.getWidth(), (int)canvas.getHeight());
                         canvas.snapshot(null, writableImage);
                         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                         ImageIO.write(renderedImage, "png", file);
@@ -298,12 +268,10 @@ public class DrawingEnvironment extends Application {
                 }
             }
         });
-
-        return root;
     }
 
-/*    @Override
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         buildGUI();
     }
-*/}
+}
