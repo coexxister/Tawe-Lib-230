@@ -2,6 +2,7 @@ package Core;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Manages operations that relate resources and users.
@@ -64,8 +65,8 @@ public class ResourceFlowManager {
             //for every loan history, create a loan event.
             for (int iCount = 0; iCount < loanData.length; iCount++) {
                 events[iCount] = new LoanEvent(Integer.parseInt(loanData[iCount][0]),
-                        Integer.parseInt(loanData[iCount][1]), encase(loanData[iCount][2]),
-                        encase(loanData[iCount][3]));
+                        Integer.parseInt(loanData[iCount][1]), loanData[iCount][2],
+                        loanData[iCount][3], loanData[iCount][4], loanData[iCount][5]);
             }
 
             return events;
@@ -213,7 +214,8 @@ public class ResourceFlowManager {
                 //adds to borrow history
                 dbManager.addTuple("BorrowHistory",
                         new String[] {Integer.toString(userID), Integer.toString(copyID),
-                        encase(DateManager.returnCurrentDate()), "null"});
+                                encase(DateManager.returnCurrentDate()), "null",
+                                encase(DateManager.returnTime()),"null"});
 
             } else {
                 throw new IllegalStateException("User does not exist");
@@ -245,7 +247,9 @@ public class ResourceFlowManager {
 
                 //set date returned.
                 dbManager.sqlQuery("UPDATE BorrowHistory SET Date_Returned = " +
-                        encase(DateManager.returnCurrentDate()) + " WHERE UID = " + Integer.toString(userID) +
+                        encase(DateManager.returnCurrentDate()) +
+                        " , Time_Returned = " + encase(DateManager.returnTime()) +
+                        " WHERE UID = " + Integer.toString(userID) +
                         " AND CID = " + Integer.toString(copyID) + " AND Date_Returned IS NULL");
 
                 //Construct copy to perform fine operations.
@@ -326,8 +330,9 @@ public class ResourceFlowManager {
     public void unreserveCopy(int copyID, int userID) throws SQLException, IllegalStateException {
         if (getCopyState(copyID) == 2) {
             dbManager.deleteTuple("ReservedResource",
-                    new String[]{"CPID", "UID"},
+                    new String[]{"CID", "UID"},
                     new String[]{Integer.toString(copyID), Integer.toString(userID)});
+
             setCopyState(copyID,-1);
 
             //get resource id of copy.
