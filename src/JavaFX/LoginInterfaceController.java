@@ -27,7 +27,6 @@ public class LoginInterfaceController extends SceneController {
         username = Integer.parseInt(loginUsername.getText());
 
         SceneController.USER_ID = username;
-        System.out.println(username);
 
         if(login.authenticate()){
             if(login.isStaff()){

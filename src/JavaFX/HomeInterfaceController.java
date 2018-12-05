@@ -9,6 +9,10 @@ import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.paint.Color;
+
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -111,10 +115,22 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     private void updateBalanceLabel() {
+
+        float balance;
         try {
-            currentBalance.setText("£" + getAccountManager().getAccountBalance(SceneController.USER_ID));
+            //get balance and round to 2 decimal places.
+            balance = Math.round(getAccountManager().getAccountBalance(SceneController.USER_ID)*100)/100;
         } catch (SQLException e) {
-            currentBalance.setText("£0.00");
+            balance = 0.0F;
+        }
+
+        currentBalance.setText("£" + balance);
+
+        //if the balance is less than 0, then change background color to red. Otherwise change to green.
+        if (balance < 0) {
+            currentBalance.setStyle("-fx-background-color: #ff644e; -fx-text-fill: WHITE;");
+        } else {
+            currentBalance.setStyle("-fx-background-color: #228022; -fx-text-fill: WHITE;");
         }
     }
 
