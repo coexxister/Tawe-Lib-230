@@ -11,9 +11,11 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -22,6 +24,7 @@ import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -64,7 +67,7 @@ public class DrawingEnvironment extends Application {
     // We could use FXML to place code in the controller instead.
     private Canvas canvas;
 
-    Stage primaryStage = new Stage();
+//    Stage primaryStage = new Stage();
 
     /**
      * Creates the Scene from current Stage
@@ -116,7 +119,7 @@ public class DrawingEnvironment extends Application {
         Button saveButton = new Button("Save Avatar");
         ColorPicker colorPicker;
         colorPicker = new ColorPicker();
-        sidebar.getChildren().addAll(colorPicker, penButton, straightButton, eraserButton, clearButton, saveButton);
+//        sidebar.getChildren().addAll(colorPicker, penButton, straightButton, eraserButton, clearButton, saveButton);
         final ToggleGroup group = new ToggleGroup();
         penButton.setToggleGroup(group);
         straightButton.setToggleGroup(group);
@@ -297,4 +300,8 @@ public class DrawingEnvironment extends Application {
         return root;
     }
 
-}
+/*    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        buildGUI();
+    }
+*/}
