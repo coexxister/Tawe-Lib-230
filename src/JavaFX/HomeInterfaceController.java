@@ -3,11 +3,15 @@ package JavaFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
@@ -22,6 +26,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
 
     @FXML
     private Label usernameDisplay;
+
+    @FXML
+    private ImageView avatarImage;
 
     /**
      * Handles the action of clicking the button to open the user dashboard interface
@@ -105,6 +112,14 @@ public class HomeInterfaceController extends SceneController implements Initiali
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(LoginInterfaceController.username).getFirstName());
+        usernameDisplay.setText("Welcome, " + getAccountManager().
+                getAccount(SceneController.USER_ID).getFirstName());
+
+        System.out.println(SceneController.USER_ID);
+        try {
+            avatarImage.setImage(new Image(getResourceManager().getImageURL(getAccountManager().getAccount(SceneController.USER_ID).getAvatarID())));
+        } catch (SQLException e) {
+            avatarImage.setImage(new Image("/DefaultAvatar/Avatar1.png"));
+        }
     }
 }

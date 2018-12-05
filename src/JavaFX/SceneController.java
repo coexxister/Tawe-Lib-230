@@ -25,6 +25,8 @@ import static javafx.fxml.FXMLLoader.load;
  */
 public class SceneController {
 
+    public static int USER_ID;
+
     //File paths for user interface FXML files
     public static final String MAIN_INTERFACE = "/View/LoginInterface.fxml";
     public static final String HOME_INTERFACE = "/View/HomeInterface.fxml";

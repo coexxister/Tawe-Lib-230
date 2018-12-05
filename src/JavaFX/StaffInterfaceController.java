@@ -64,6 +64,6 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(LoginInterfaceController.username).getFirstName());
+        usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(SceneController.USER_ID).getFirstName());
     }
 }
