@@ -119,7 +119,7 @@ public class DrawingEnvironment extends Application {
         Button saveButton = new Button("Save Avatar");
         ColorPicker colorPicker;
         colorPicker = new ColorPicker();
-//        sidebar.getChildren().addAll(colorPicker, penButton, straightButton, eraserButton, clearButton, saveButton);
+        sidebar.getChildren().addAll(colorPicker, penButton, straightButton, eraserButton, clearButton, saveButton);
         final ToggleGroup group = new ToggleGroup();
         penButton.setToggleGroup(group);
         straightButton.setToggleGroup(group);
