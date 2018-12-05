@@ -402,6 +402,28 @@ public class ResourceManager {
     }
 
     /**
+     * Adds a resource image directory and returns the image id.
+     * @param imageURL The image directory of the image file.
+     * @return The image id of the newly added image.
+     * @throws SQLException Thrown if connection to database could not be established.
+     */
+    public int addResourceImage(int imageURL) throws SQLException {
+        dbManager.addTuple("Image", new String[] {"null", encase(Integer.toString(imageURL))});
+        return Integer.parseInt(dbManager.getFirstTupleByQuery("Select max(ImageID) FROM Image")[0]);
+    }
+
+    /**
+     * Determines whether an specified image exists or not by the image id.
+     * @param imageID The image id of the image.
+     * @return True if the image exists. False if not.
+     * @throws SQLException Thrown if connection to database could not be established.
+     */
+    public boolean isImageExist(int imageID) throws SQLException {
+        return dbManager.checkIfExist("Image", new String[] {"ImageID"},
+                new String[] {Integer.toString(imageID)});
+    }
+
+    /**
      * Edits/replaces an existing computer resource with the passed new computer.
      * @param newResource The new computer with information to overwrite.
      * @return Returns true if the operation was a success. False if failed.
@@ -457,6 +479,9 @@ public class ResourceManager {
         //The id of the language, a string is used as will only be used in sqlQueries.
         String langID = "0";
 
+        //Get image id from resource.
+        int imageID = newBook.getThumbImage();
+
         try {
 
             //if the resource doesnt exist then add to the database. Otherwise return false.
@@ -465,6 +490,11 @@ public class ResourceManager {
             {
                 //The resource type is 1 corresponding to a book.
                 int bookTypeID = 1;
+
+                //If image id doesnt exist then add image and get id.
+                if (!isImageExist(imageID)) {
+                    imageID = addResourceImage(imageID);
+                }
 
                 //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newBook.title), Integer.toString(newBook.year),
@@ -510,6 +540,8 @@ public class ResourceManager {
                         dbManager.deleteTuple("Book", new String[]{"RID"}, new String[]{resourceID});
                     case 1: //del resource entry in db.
                         dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                        dbManager.deleteTuple("Image", new String[] {"ImageID"},
+                                new String[] {Integer.toString(imageID)});
                     default:
                         break;
                 }
@@ -547,6 +579,10 @@ public class ResourceManager {
         String langID = "";
         String[] subLangID = null;
 
+        //Get image id from resource.
+        int imageID = newDvd.getThumbImage();
+
+
         try {
 
             //if the resource doesnt exist then add to the database. Otherwise return false.
@@ -554,6 +590,11 @@ public class ResourceManager {
                     {encase(newDvd.getTitle()), Integer.toString(newDvd.getYear())})) {
                 //The resource type is 1 corresponding to a Dvd.
                 int dvdTypeID = 2;
+
+                //If image id doesnt exist then add image and get id.
+                if (!isImageExist(imageID)) {
+                    imageID = addResourceImage(imageID);
+                }
 
                 //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newDvd.title), Integer.toString(newDvd.year),
@@ -607,6 +648,8 @@ public class ResourceManager {
                         dbManager.deleteTuple("Dvd", new String[]{"RID"}, new String[]{resourceID});
                     case 1: //del resource entry in db.
                         dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                        dbManager.deleteTuple("Image", new String[] {"ImageID"},
+                                new String[] {Integer.toString(imageID)});
                     default:
                         break;
                 }
@@ -644,6 +687,9 @@ public class ResourceManager {
         String langID = "";
         String[] subLangID = null;
 
+        //Get image id from resource.
+        int imageID = newComputer.getThumbImage();
+
         try {
 
             //if the resource doesnt exist then add to the database. Otherwise return false.
@@ -651,6 +697,11 @@ public class ResourceManager {
                     {encase(newComputer.getTitle()), Integer.toString(newComputer.getYear())})) {
                 //The resource type is 1 corresponding to a Computer.
                 int computerTypeID = 3;
+
+                //If image id doesnt exist then add image and get id.
+                if (!isImageExist(imageID)) {
+                    imageID = addResourceImage(imageID);
+                }
 
                 //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newComputer.title), Integer.toString(newComputer.year),
@@ -688,6 +739,8 @@ public class ResourceManager {
                         dbManager.deleteTuple("Computer", new String[]{"RID"}, new String[]{resourceID});
                     case 1: //del resource entry in db.
                         dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                        dbManager.deleteTuple("Image", new String[] {"ImageID"},
+                                new String[] {Integer.toString(imageID)});
                     default:
                         break;
                 }
