@@ -65,10 +65,10 @@ public class DrawingEnvironment implements Initializable{
     private ToggleButton eraserButton;
 
     @FXML
-    private ToggleButton clearButton;
+    private Button clearButton;
 
     @FXML
-    private ToggleButton saveButton;
+    private Button saveButton;
 
     @FXML
     private ColorPicker colorPicker;
