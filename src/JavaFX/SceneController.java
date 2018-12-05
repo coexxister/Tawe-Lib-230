@@ -14,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javafx.fxml.FXMLLoader.load;
 
@@ -27,6 +28,10 @@ public class SceneController {
     public static final String RESOURCE_INTERFACE = "/View/ResourceInterface.fxml";
     public static final String ACCOUNTS_PAGE_INTERFACE = "/View/AccountsPageInterface.fxml";
     public static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountsCreatorInterface.fxml";
+    public static final String AVATAR_CHANGE_INTERFACE ="/View/ProfileImageSelector.fxml";
+    public static final String DRAWING_INTERFACE = "/View/DrawingEnvironment.fxml";
+    public ArrayList<String> column = new ArrayList<>();
+    public ArrayList<String> input = new ArrayList<>();
 
     private static BorderPane mainPane = new BorderPane();
     private DatabaseManager db = new DatabaseManager("./TaweLibDB.db");
@@ -71,4 +76,20 @@ public class SceneController {
     public AccountManager getAccountManager() { return am; }
 
     public ResourceManager getResourceManager(){ return rm;}
+
+    public String[] getColumn(){
+        return column.toArray(new String[column.size()]);
+    }
+
+    public String[] getInput(){
+        return input.toArray(new String[input.size()]);
+    }
+
+    public void addColumn(String columnInput){
+        column.add(columnInput);
+    }
+
+    public void addInput(String userInput){
+        input.add(userInput);
+    }
 }

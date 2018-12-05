@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<FlowPane fx:id="subscene2" alignment="CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="SubScene" stylesheets="/Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.BookSearchMenuController">
+<FlowPane fx:id="subscene2" alignment="CENTER" columnHalignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="SubScene" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.BookSearchMenuController">
          <children>
       <BorderPane prefHeight="600.0" prefWidth="900.0">
          <top>
@@ -71,13 +71,13 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextField GridPane.columnIndex="1" />
-                  <TextField GridPane.columnIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextField GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                  <Button mnemonicParsing="false" text="Search" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+                  <TextField fx:id="title" GridPane.columnIndex="1" />
+                  <TextField fx:id="year" GridPane.columnIndex="4" />
+                  <TextField fx:id="author" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="genre" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                  <TextField fx:id="publisher" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="language" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                  <Button fx:id="searchByQuerryButton" mnemonicParsing="false" onAction="#handleSearchByQueryButtonAction" text="Search" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -93,7 +93,7 @@
                         <TextField />
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" text="Search By ISBN" />
+                  <Button fx:id="searchByISBNButton" mnemonicParsing="false" onAction="#handleSearchByISBNButtonAction" text="Search By ISBN" />
                </children>
             </VBox>
          </bottom>

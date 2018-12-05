@@ -19,7 +19,8 @@ public class ListAllController extends SceneController implements Initializable 
     @FXML
     private Pagination resourceView;
 
-    private int elementsPerPage = 3;
+    private double elementsPerPage = 3;
+    private Resource resourceList[] = getResourceManager().getResourceList();
 
     public void initialize(URL location, ResourceBundle resources) {
         resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
@@ -27,31 +28,32 @@ public class ListAllController extends SceneController implements Initializable 
 
     public HBox createPage(int pageIndex) {
         HBox box = new HBox(elementsPerPage);
-        Resource resourceList[] = getResourceManager().getResourceList();
-        resourceView.setPageCount(resourceList.length/elementsPerPage);
-        int page = pageIndex * elementsPerPage;
+        resourceView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
+        int page = pageIndex * (int)elementsPerPage;
         for (int i = page; i < page + elementsPerPage; i++) {
-            HBox element = new HBox(elementsPerPage);
-            ImageView image = new ImageView();
-            if(resourceList[i].toString().contains("Type - Book")){
-                image.setImage(new Image("/Resources/bookIcon.png"));
-            } else if(resourceList[i].toString().contains("Type - Dvd")){
-                image.setImage(new Image("/Resources/dvdIcon.png"));
-            } else if(resourceList[i].toString().contains("Type - Computer")){
-                image.setImage(new Image("/Resources/laptopIcon.png"));
-            }
-            image.setFitWidth(100);
-            image.setPreserveRatio(true);
-            image.setSmooth(true);
-            image.setCache(true);
+            if(i < resourceList.length) {
+                HBox element = new HBox(elementsPerPage);
+                ImageView image = new ImageView();
+                if (resourceList[i].toString().contains("Type - Book")) {
+                    image.setImage(new Image("/Resources/bookIcon.png"));
+                } else if (resourceList[i].toString().contains("Type - Dvd")) {
+                    image.setImage(new Image("/Resources/dvdIcon.png"));
+                } else if (resourceList[i].toString().contains("Type - Computer")) {
+                    image.setImage(new Image("/Resources/laptopIcon.png"));
+                }
+                image.setFitWidth(100);
+                image.setPreserveRatio(true);
+                image.setSmooth(true);
+                image.setCache(true);
 
-            Label text = new Label(resourceList[i].toString());
-            text.wrapTextProperty().setValue(true);
-            element.getChildren().addAll(image, text);
-            element.setAlignment(Pos.TOP_CENTER);
-            element.setSpacing(10);
-            element.setPadding(new Insets(100,0,0,0));
-            box.getChildren().add(element);
+                Label text = new Label(resourceList[i].toString());
+                text.wrapTextProperty().setValue(true);
+                element.getChildren().addAll(image, text);
+                element.setAlignment(Pos.TOP_CENTER);
+                element.setSpacing(10);
+                element.setPadding(new Insets(100, 0, 0, 0));
+                box.getChildren().add(element);
+            }
         }
         box.setAlignment(Pos.CENTER);
         return box;
