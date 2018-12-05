@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
@@ -14,8 +15,8 @@
             <ToggleButton fx:id="penButton" mnemonicParsing="false" text="Pen" />
             <ToggleButton fx:id="straightButton" mnemonicParsing="false" text="Straight Line" />
             <ToggleButton fx:id="eraserButton" mnemonicParsing="false" text="Eraser" />
-            <ToggleButton fx:id="clearButton" mnemonicParsing="false" text="Clear Canvas" />
-            <ToggleButton fx:id="saveButton" mnemonicParsing="false" text="Save Avatar" />
+            <Button fx:id="clearButton" mnemonicParsing="false" text="Clear Canvas" />
+            <Button fx:id="saveButton" mnemonicParsing="false" text="Save Avatar" />
          </children>
       </VBox>
    </left>
