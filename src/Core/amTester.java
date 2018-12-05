@@ -1,5 +1,6 @@
 package Core;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 public class amTester {
@@ -15,20 +16,18 @@ public class amTester {
 
 
         /*rm.addAccount(testUser);*/
-        rm.addAccount(testStaff);
+        /*rm.addAccount(testStaff);
 
         /*rm.editAccount(testStaff);
         System.out.println(rm.getAccount(2).toString());*/
 
-        /*rm.changeBalance(1, 3.679F);
-
-        System.out.println(rm.getAccountBalance(2));
+        //rm.addFine(1, -20, 1, 4);
 
         Transaction[] transactions = rm.getTransactionHistory(1);
 
         for (Transaction t : transactions) {
-            System.out.println(t.toString());
-        }*/
+            System.out.println("\n\n" + t.toString());
+        }
 
         //rm.changeBalance(2,10000);
         //rm.deleteAccount(2);

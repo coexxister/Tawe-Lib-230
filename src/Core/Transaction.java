@@ -8,7 +8,12 @@ package Core;
 public class Transaction {
 
     /**
-     * The user id of the transaction
+     * The transaction id.
+     */
+    private int tranID;
+
+    /**
+     * The user id of the transaction.
      */
     private int userID;
 
@@ -16,6 +21,11 @@ public class Transaction {
      * The date of the transaction.
      */
     private String date;
+
+    /**
+     * The time of the transaction.
+     */
+    private String time;
 
     /**
      * The change in money.
@@ -28,10 +38,20 @@ public class Transaction {
      * @param date The data of the transaction.
      * @param change The money change in the transaction.
      */
-    public Transaction(int userID, String date, float change) {
+    public Transaction(int userID, String date, String time, float change, int tranID) {
+        this.tranID = tranID;
         this.userID = userID;
         this.date = date;
+        this.time = time;
         this.change = change;
+    }
+
+    /**
+     * Gets the transaction id.
+     * @return The transaction id.
+     */
+    public int getTranID() {
+        return tranID;
     }
 
     /**
@@ -51,6 +71,14 @@ public class Transaction {
     }
 
     /**
+     * Gets the time of the transaction.
+     * @return
+     */
+    public String getTime() {
+        return time;
+    }
+
+    /**
      * Gets the money change of the transaction.
      * @return The change in money.
      */
@@ -63,8 +91,10 @@ public class Transaction {
      * @return The summary of the transaction.
      */
     public String toString() {
-        String out = "User: " + userID +
-                "\nDate: " + getDate() +
+        String out = "Transaction id: " + tranID +
+                "\nUser: " + userID +
+                "\nDate: " + date +
+                "\nTime: " + time +
                 "\nChange: ";
         if (change >= 0) {
             out+= "+ £" + change;

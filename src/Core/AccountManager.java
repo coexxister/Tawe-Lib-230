@@ -1,5 +1,6 @@
 package Core;
 
+import java.sql.Date;
 import java.sql.SQLException;
 
 /**
@@ -87,6 +88,10 @@ public class AccountManager {
 
                     }
 
+                    //delete fine history
+                    dbManager.sqlQuery("DELETE FROM FineHistory WHERE TranID IN (SELECT TranID FROM " +
+                            "TransactionHistory WHERE UID = " + Integer.toString(userID) + ")");
+
                     //delete transaction history
                     dbManager.deleteTuple("TransactionHistory",
                             new String[]{"UID"}, new String[]{Integer.toString(userID)});
@@ -127,13 +132,13 @@ public class AccountManager {
     }
 
     /**
-     * Changes the balance of an account.
+     * Changes the balance of an account and records the transaction.
      * @param userID The user id of the account.
      * @param money The change in balance.
      * @throws IllegalArgumentException Thrown when the specified user does not exist.
      * @throws SQLException Thrown if connection to database fails or table does not exist.
      */
-    public void changeBalance(int userID, float money) throws IllegalArgumentException, SQLException{
+    public void changeBalance(int userID, float money) throws IllegalArgumentException, SQLException {
 
         //get the account balance, IllegalArgumentException is thrown if user does not exist.
         float accountBalance = getAccountBalance(userID);
@@ -146,7 +151,38 @@ public class AccountManager {
                 new String[] {Float.toString(accountBalance)}, "UID", Integer.toString(userID));
 
         //create transaction/
-        Transaction transaction = new Transaction(userID, DateManager.returnCurrentDate(), money);
+        Transaction transaction = new Transaction(userID, DateManager.returnCurrentDate(),
+                DateManager.returnTime(), money, -1);
+
+        //add the transaction to the history.
+        addTransaction(transaction);
+
+    }
+
+    /**
+     * Changes the balance of an account and records the fine.
+     * @param userID The user id of the account.
+     * @param money The change in balance.
+     * @param copyID The copy id of the copy that caused the fine.
+     * @param days The amount of days the copy has been overdue.
+     * @throws IllegalArgumentException Thrown when the specified user does not exist.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     */
+    public void addFine(int userID, float money, int copyID, int days) throws IllegalArgumentException, SQLException {
+
+        //get the account balance, IllegalArgumentException is thrown if user does not exist.
+        float accountBalance = getAccountBalance(userID);
+
+        //transaction
+        accountBalance += money;
+
+        //change balance in user table.
+        dbManager.editTuple("User", new String[] {"Current_Balance"},
+                new String[] {Float.toString(accountBalance)}, "UID", Integer.toString(userID));
+
+        //create transaction/
+        FineTransaction transaction = new FineTransaction(userID, DateManager.returnCurrentDate(),
+                DateManager.returnTime(), money, -1, copyID, days);
 
         //add the transaction to the history.
         addTransaction(transaction);
@@ -158,10 +194,30 @@ public class AccountManager {
      * @param transaction The transaction object.
      * @throws SQLException Thrown if connection to database fails or table does not exist.
      */
-    public void addTransaction(Transaction transaction) throws SQLException {
+    private void addTransaction(Transaction transaction) throws SQLException {
 
-        dbManager.addTuple("TransactionHistory", new String[] {Integer.toString(transaction.getUserID()),
-            encase(transaction.getDate()), Float.toString(transaction.getChange())});
+        dbManager.addTuple("TransactionHistory", new String[] {"null",
+                Integer.toString(transaction.getUserID()), encase(transaction.getDate()),
+                encase(transaction.getTime()), Float.toString(transaction.getChange())});
+
+    }
+
+    /**
+     * Adds a fine transaction to history.
+     * @param transaction The fine transaction object.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     */
+    private void addTransaction(FineTransaction transaction) throws SQLException {
+
+        //add to the transaction history.
+        addTransaction((Transaction)transaction);
+
+        //get the transaction id.
+        String tranID = dbManager.getFirstTupleByQuery("SELECT max(TranID) FROM TransactionHistory")[0];
+
+        //add to the fine history
+        dbManager.addTuple("FineHistory", new String[] {tranID, Integer.toString(transaction.getCopyID()),
+            Integer.toString(transaction.getDays())});
 
     }
 
@@ -213,9 +269,20 @@ public class AccountManager {
                 //for every transaction construct a transaction
                 for (int iCount = 0; iCount < amountOfTransactions; iCount++) {
 
-                    //construct transaction
-                    transactions[iCount] = new Transaction(userID, transRows[iCount][1],
-                            Float.parseFloat(transRows[iCount][2]));
+                    if (isTransactionFine(Integer.parseInt(transRows[iCount][0]))) {
+
+                        String[] fineRow = dbManager.getFirstTupleByQuery("SELECT * FROM FineHistory WHERE TranID = " +
+                                transRows[iCount][0]);
+
+                        //construct fine transaction
+                        transactions[iCount] = new FineTransaction(userID, transRows[iCount][2], transRows[iCount][3],
+                                Float.parseFloat(transRows[iCount][4]), Integer.parseInt(transRows[iCount][0]),
+                                Integer.parseInt(fineRow[1]), Integer.parseInt(fineRow[2]));
+                    } else {
+                        //construct transaction
+                        transactions[iCount] = new Transaction(userID, transRows[iCount][2], transRows[iCount][3],
+                                Float.parseFloat(transRows[iCount][4]), Integer.parseInt(transRows[iCount][0]));
+                    }
 
                 }
 
@@ -228,6 +295,17 @@ public class AccountManager {
             return null;
         }
 
+    }
+
+    /**
+     * Determines if a transaction is a fine transaction.
+     * @param tranID The transaction id.
+     * @return True if a fine. False if not a fine.
+     * @throws SQLException Thrown if connection to the database fails or tables do not exist.
+     */
+    private boolean isTransactionFine(int tranID) throws SQLException {
+        return dbManager.checkIfExist("FineHistory", new String[] {"TranID"},
+            new String[] {Integer.toString(tranID)});
     }
 
     /**

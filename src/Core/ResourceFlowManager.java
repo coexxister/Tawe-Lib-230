@@ -247,12 +247,16 @@ public class ResourceFlowManager {
                 dbManager.sqlQuery("UPDATE BorrowHistory SET Date_Returned = " +
                         encase(DateManager.returnCurrentDate()) + " WHERE UID = " + Integer.toString(userID) +
                         " AND CID = " + Integer.toString(copyID) + " AND Date_Returned IS NULL");
+
+                //Construct copy to perform fine operations.
+                Copy copy = rmManager.getCopy(copyID);
+
                 //Calculate fine.
-                float fine = calculateFine(rmManager.getCopy(copyID));
+                float fine = calculateFine(copy);
 
                 //If there is a fine then take from balance.
                 if (fine < 0) {
-                    acManager.changeBalance(userID, fine);
+                    acManager.addFine(userID, fine,copyID,copy.calculateDaysOffset(DateManager.returnCurrentDate()));
                 }
 
                 //check request queue. If there is a request then reserve copy. Otherwise make copy available.
