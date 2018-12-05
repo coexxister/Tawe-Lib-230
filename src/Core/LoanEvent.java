@@ -23,9 +23,19 @@ public class LoanEvent {
     private String dateOut;
 
     /**
+     * The time of the borrow of the copy.
+     */
+    private String timeOut;
+
+    /**
      * The date of the return of the copy.
      */
     private String dateIn;
+
+    /**
+     * The time of the return of the copy.
+     */
+    private String timeIn;
 
     /**
      * Constructs the BorrowEvent.
@@ -33,13 +43,17 @@ public class LoanEvent {
      * @param copyID The copy id of a copy.
      * @param dateOut The date of the borrow of the copy.
      * @param dateIn The date of the return of the copy.
+     * @param timeIn The time of the borrow of the copy.
+     * @param timeOut The time of the return of the copy.
      */
-    public LoanEvent(int userID, int copyID, String dateOut, String dateIn) {
+    public LoanEvent(int userID, int copyID, String dateOut, String dateIn, String timeOut, String timeIn) {
 
         this.userID = userID;
         this.copyID = copyID;
         this.dateOut = dateOut;
         this.dateIn = dateIn;
+        this.timeOut = timeOut;
+        this.timeIn = timeIn;
 
     }
 
@@ -73,6 +87,22 @@ public class LoanEvent {
      */
     public String getDateIn() {
         return dateIn;
+    }
+
+    /**
+     * Gets the time of the borrow of the copy.
+     * @return The time of the borrow of the copy.
+     */
+    public String getTimeOut() {
+        return timeOut;
+    }
+
+    /**
+     * Gets the time of the return of the copy.
+     * @return The time of the return of the copy.
+     */
+    public String getTimeIn() {
+        return timeIn;
     }
 
 }
