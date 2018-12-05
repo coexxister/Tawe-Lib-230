@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class ListAllController extends SceneController implements Initializable {
@@ -34,12 +35,28 @@ public class ListAllController extends SceneController implements Initializable 
             if(i < resourceList.length) {
                 HBox element = new HBox(elementsPerPage);
                 ImageView image = new ImageView();
+
                 if (resourceList[i].toString().contains("Type - Book")) {
-                    image.setImage(new Image("/Resources/bookIcon.png"));
+                    try {
+                        image.setImage(new Image(getResourceManager().
+                                getImageURL(resourceList[i].getThumbImage())));
+                    } catch (SQLException e) {
+                        image.setImage(new Image("/Resources/bookIcon.png"));
+                    }
                 } else if (resourceList[i].toString().contains("Type - Dvd")) {
-                    image.setImage(new Image("/Resources/dvdIcon.png"));
+                    try {
+                        image.setImage(new Image(getResourceManager().
+                                getImageURL(resourceList[i].getThumbImage())));
+                    } catch (SQLException e) {
+                        image.setImage(new Image("/Resources/dvdIcon.png"));
+                    }
                 } else if (resourceList[i].toString().contains("Type - Computer")) {
-                    image.setImage(new Image("/Resources/laptopIcon.png"));
+                    try {
+                        image.setImage(new Image(getResourceManager().
+                                getImageURL(resourceList[i].getThumbImage())));
+                    } catch (SQLException e) {
+                        image.setImage(new Image("/Resources/laptopIcon.png"));
+                    }
                 }
                 image.setFitWidth(100);
                 image.setPreserveRatio(true);

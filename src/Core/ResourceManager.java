@@ -413,6 +413,22 @@ public class ResourceManager {
     }
 
     /**
+     * Gets the image directory url for the image associated with the image id.
+     * @param imageID The image id of the image.
+     * @return The image directory url.
+     * @throws SQLException Thrown if failed to connect to database.
+     * @throws IllegalStateException Thrown if imageID does not exist.
+     */
+    public String getImageURL(int imageID) throws SQLException, IllegalStateException {
+        if (isImageExist(imageID)) {
+            return dbManager.getFirstTupleByQuery("SELECT Image_Address FROM Image WHERE ImageID = " +
+                    Integer.toString(imageID))[0];
+        } else {
+            throw new IllegalStateException("Specified image does not exist");
+        }
+    }
+
+    /**
      * Determines whether an specified image exists or not by the image id.
      * @param imageID The image id of the image.
      * @return True if the image exists. False if not.
