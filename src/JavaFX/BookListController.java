@@ -1,3 +1,9 @@
+/**
+ * Interface controller for the book list scene
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
+
 package JavaFX;
 
 import Core.Resource;
@@ -31,6 +37,9 @@ public class BookListController extends SceneController implements Initializable
         }
     }
 
+    /**
+     * Initialises
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bookView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));

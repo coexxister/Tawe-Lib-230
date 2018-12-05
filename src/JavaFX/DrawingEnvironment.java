@@ -11,9 +11,11 @@ import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
@@ -22,6 +24,7 @@ import javafx.application.Application;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -64,7 +67,7 @@ public class DrawingEnvironment extends Application {
     // We could use FXML to place code in the controller instead.
     private Canvas canvas;
 
-    Stage primaryStage = new Stage();
+//    Stage primaryStage = new Stage();
 
     /**
      * Creates the Scene from current Stage
@@ -270,15 +273,17 @@ public class DrawingEnvironment extends Application {
 
             @Override
             public void handle(ActionEvent t) {
+                // Gets path of CustomAvatars folder
+                Path pathCA = Paths.get( "src/CustomAvatars");
                 // Counts number of avatars in user's folder and adds 1 to aNo
-                try (Stream<Path> files = Files.list(Paths.get("/CustomAvatars/"))) {
+                try (Stream<Path> files = Files.list(Paths.get(String.valueOf(pathCA)))) {
                     aNo = files.count() + 1;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
                 // Creates file under user's avatar folder with the name USER_ID(aNo).png
-                File file = new File("/CustomAvatars/" + USER_ID + "(" + aNo + ").png");
+                File file = new File(pathCA + "\\" + USER_ID + "(" + aNo + ").png");
 
                 if (file != null) {
                     try {
@@ -297,4 +302,8 @@ public class DrawingEnvironment extends Application {
         return root;
     }
 
-}
+/*    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        buildGUI();
+    }
+*/}
