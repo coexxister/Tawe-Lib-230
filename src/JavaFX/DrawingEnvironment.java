@@ -273,15 +273,17 @@ public class DrawingEnvironment extends Application {
 
             @Override
             public void handle(ActionEvent t) {
+                // Gets path of CustomAvatars folder
+                Path pathCA = Paths.get( "src/CustomAvatars");
                 // Counts number of avatars in user's folder and adds 1 to aNo
-                try (Stream<Path> files = Files.list(Paths.get("/CustomAvatars/"))) {
+                try (Stream<Path> files = Files.list(Paths.get(String.valueOf(pathCA)))) {
                     aNo = files.count() + 1;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
                 // Creates file under user's avatar folder with the name USER_ID(aNo).png
-                File file = new File("/CustomAvatars/" + USER_ID + "(" + aNo + ").png");
+                File file = new File(pathCA + "\\" + USER_ID + "(" + aNo + ").png");
 
                 if (file != null) {
                     try {
