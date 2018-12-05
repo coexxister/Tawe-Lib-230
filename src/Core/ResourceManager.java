@@ -2,6 +2,7 @@ package Core;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Responsible for fetching, adding and editing resources from the database.
@@ -99,6 +100,76 @@ public class ResourceManager {
     }
 
     /**
+     * Determines whether a copy exists or not.
+     * @param copyID The copy id of the copy.
+     * @return True if the copy exists. False if does not exist.
+     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     */
+    public boolean doesCopyExist(int copyID) throws SQLException {
+        if (dbManager.checkIfExist("Copy", new String[] {"CPID"},
+                new String[] {Integer.toString(copyID)})) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Gets the copy which corresponds to the copy id.
+     * @param copyID The copy id of the copy.
+     * @return The Copy.
+     */
+    public Copy getCopy(int copyID) throws IllegalArgumentException {
+
+        try {
+
+            //Get all copy rows based upon a rid
+            String[] copyRow = dbManager.getFirstTupleByQuery("SELECT * FROM Copy WHERE CPID = "
+                    + Integer.toString(copyID));
+
+            //Create copy from row information.
+            Copy copy = new Copy(Integer.parseInt(copyRow[0]), Integer.parseInt(copyRow[1]),
+                    Integer.parseInt(copyRow[2]), copyRow[3], Integer.parseInt(copyRow[4]),
+                    Integer.parseInt(copyRow[5]));
+
+            //Return the create Copy.
+            return copy;
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+    /**
+     * Gets all copies.
+     * @return An array of all copies.
+     */
+    public Copy[] getCopies() {
+
+        try {
+            //Get all copy rows based upon a rid
+            String[][] copyRows = dbManager.getTupleList("Copy");
+
+            Copy[] copies = new Copy[copyRows.length];
+
+            //For every copy associated with the rid, will be constructed and added to the array of copies.
+            for (int iCount = 0; iCount < copyRows.length; iCount++) {
+                copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]), Integer.parseInt(copyRows[iCount][1]),
+                        Integer.parseInt(copyRows[iCount][2]), copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
+                        Integer.parseInt(copyRows[iCount][5]));
+            }
+
+            return copies;
+
+        } catch(SQLException e) {
+            return null;
+        }
+
+    }
+
+    /**
      * Gets all copies of a resource.
      * @param resourceID The resource id of a copy.
      * @return All copies of a resource.
@@ -107,17 +178,14 @@ public class ResourceManager {
 
         try {
 
-            //Get the amount of copies
-            int amountOfCopies = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT count(*) FROM Copy GROUP BY RID")[0]);
-
-            Copy[] copies = new Copy[amountOfCopies];
-
             //Get all copy rows based upon a rid
             String[][] copyRows = dbManager.getTupleListByQuery("SELECT * FROM Copy WHERE RID = "
                     + Integer.toString(resourceID));
 
+            Copy[] copies = new Copy[copyRows.length];
+
             //For every copy associated with the rid, will be constructed and added to the array of copies.
-            for (int iCount = 0; iCount < amountOfCopies; iCount++) {
+            for (int iCount = 0; iCount < copyRows.length; iCount++) {
                 copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]), Integer.parseInt(copyRows[iCount][1]),
                         Integer.parseInt(copyRows[iCount][2]), copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
                         Integer.parseInt(copyRows[iCount][5]));
@@ -168,10 +236,9 @@ public class ResourceManager {
      */
     public boolean addCopy(Copy newCopy) {
         try {
-
             //Add the copy to the database.
             dbManager.addTuple("Copy", new String[] {"null", Integer.toString(newCopy.getResourceID()),
-                    Integer.toString(newCopy.getLoanDuration()), encase(newCopy.getDueDate()),
+                    Integer.toString(newCopy.getLoanDuration()), "null",
                     Integer.toString(newCopy.getStateID()), Integer.toString(newCopy.getCurrentBorrowerID()),
                     "null", "null"});
 
@@ -335,6 +402,28 @@ public class ResourceManager {
     }
 
     /**
+     * Adds a resource image directory and returns the image id.
+     * @param imageURL The image directory of the image file.
+     * @return The image id of the newly added image.
+     * @throws SQLException Thrown if connection to database could not be established.
+     */
+    public int addResourceImage(int imageURL) throws SQLException {
+        dbManager.addTuple("Image", new String[] {"null", encase(Integer.toString(imageURL))});
+        return Integer.parseInt(dbManager.getFirstTupleByQuery("Select max(ImageID) FROM Image")[0]);
+    }
+
+    /**
+     * Determines whether an specified image exists or not by the image id.
+     * @param imageID The image id of the image.
+     * @return True if the image exists. False if not.
+     * @throws SQLException Thrown if connection to database could not be established.
+     */
+    public boolean isImageExist(int imageID) throws SQLException {
+        return dbManager.checkIfExist("Image", new String[] {"ImageID"},
+                new String[] {Integer.toString(imageID)});
+    }
+
+    /**
      * Edits/replaces an existing computer resource with the passed new computer.
      * @param newResource The new computer with information to overwrite.
      * @return Returns true if the operation was a success. False if failed.
@@ -390,6 +479,9 @@ public class ResourceManager {
         //The id of the language, a string is used as will only be used in sqlQueries.
         String langID = "0";
 
+        //Get image id from resource.
+        int imageID = newBook.getThumbImage();
+
         try {
 
             //if the resource doesnt exist then add to the database. Otherwise return false.
@@ -398,6 +490,11 @@ public class ResourceManager {
             {
                 //The resource type is 1 corresponding to a book.
                 int bookTypeID = 1;
+
+                //If image id doesnt exist then add image and get id.
+                if (!isImageExist(imageID)) {
+                    imageID = addResourceImage(imageID);
+                }
 
                 //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newBook.title), Integer.toString(newBook.year),
@@ -443,6 +540,8 @@ public class ResourceManager {
                         dbManager.deleteTuple("Book", new String[]{"RID"}, new String[]{resourceID});
                     case 1: //del resource entry in db.
                         dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                        dbManager.deleteTuple("Image", new String[] {"ImageID"},
+                                new String[] {Integer.toString(imageID)});
                     default:
                         break;
                 }
@@ -480,6 +579,10 @@ public class ResourceManager {
         String langID = "";
         String[] subLangID = null;
 
+        //Get image id from resource.
+        int imageID = newDvd.getThumbImage();
+
+
         try {
 
             //if the resource doesnt exist then add to the database. Otherwise return false.
@@ -487,6 +590,11 @@ public class ResourceManager {
                     {encase(newDvd.getTitle()), Integer.toString(newDvd.getYear())})) {
                 //The resource type is 1 corresponding to a Dvd.
                 int dvdTypeID = 2;
+
+                //If image id doesnt exist then add image and get id.
+                if (!isImageExist(imageID)) {
+                    imageID = addResourceImage(imageID);
+                }
 
                 //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newDvd.title), Integer.toString(newDvd.year),
@@ -540,6 +648,8 @@ public class ResourceManager {
                         dbManager.deleteTuple("Dvd", new String[]{"RID"}, new String[]{resourceID});
                     case 1: //del resource entry in db.
                         dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                        dbManager.deleteTuple("Image", new String[] {"ImageID"},
+                                new String[] {Integer.toString(imageID)});
                     default:
                         break;
                 }
@@ -577,6 +687,9 @@ public class ResourceManager {
         String langID = "";
         String[] subLangID = null;
 
+        //Get image id from resource.
+        int imageID = newComputer.getThumbImage();
+
         try {
 
             //if the resource doesnt exist then add to the database. Otherwise return false.
@@ -584,6 +697,11 @@ public class ResourceManager {
                     {encase(newComputer.getTitle()), Integer.toString(newComputer.getYear())})) {
                 //The resource type is 1 corresponding to a Computer.
                 int computerTypeID = 3;
+
+                //If image id doesnt exist then add image and get id.
+                if (!isImageExist(imageID)) {
+                    imageID = addResourceImage(imageID);
+                }
 
                 //Add the the resource to the resource table.
                 dbManager.addTuple("Resource", new String[]{"null", encase(newComputer.title), Integer.toString(newComputer.year),
@@ -621,6 +739,8 @@ public class ResourceManager {
                         dbManager.deleteTuple("Computer", new String[]{"RID"}, new String[]{resourceID});
                     case 1: //del resource entry in db.
                         dbManager.deleteTuple("Resource", new String[]{"RID"}, new String[]{resourceID});
+                        dbManager.deleteTuple("Image", new String[] {"ImageID"},
+                                new String[] {Integer.toString(imageID)});
                     default:
                         break;
                 }

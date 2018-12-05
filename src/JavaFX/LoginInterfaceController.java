@@ -5,12 +5,22 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
+/**
+ * Interface controller for the login screen
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
 public class LoginInterfaceController extends SceneController {
 
     @FXML
     private TextField loginUsername;
     public static int username;
 
+    /**
+     * Handles the action of clicking the button to login to the user or staff interface
+     * @param event the event triggered by clicking the button
+     * @throws Exception thrown if no such interface exists
+     */
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) throws Exception {
         AuthenticationManager login = new AuthenticationManager(loginUsername.getText(), getDatabase());

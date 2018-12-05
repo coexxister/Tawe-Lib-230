@@ -146,7 +146,7 @@ public class AccountManager {
                 new String[] {Float.toString(accountBalance)}, "UID", Integer.toString(userID));
 
         //create transaction/
-        Transaction transaction = new Transaction(userID, "WAITING FOR ALBERTO", money);
+        Transaction transaction = new Transaction(userID, DateManager.returnCurrentDate(), money);
 
         //add the transaction to the history.
         addTransaction(transaction);
