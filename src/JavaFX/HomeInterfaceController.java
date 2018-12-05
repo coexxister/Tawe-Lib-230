@@ -10,6 +10,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Interface controller for the main user interface home scene
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
 public class HomeInterfaceController extends SceneController implements Initializable {
 
     @FXML
@@ -18,11 +23,21 @@ public class HomeInterfaceController extends SceneController implements Initiali
     @FXML
     private Label usernameDisplay;
 
+    /**
+     * Handles the action of clicking the button to open the user dashboard interface
+     * @param event the event triggered by clicking the button
+     * @throws IOException thrown when?
+     */
     @FXML
     protected void handleDashboardButtonAction(ActionEvent event) throws IOException {
         handleSceneChangeButtonAction(event, SceneController.USER_DASHBOARD_INTERFACE);
     }
 
+    /**
+     * Handles the action of clicking the button to logout of the user interface, or to return to the home scene if another scene is displayed 
+     * @param event the event triggered by clicking the button
+     * @throws Exception thrown if no such interface exists
+     */
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) throws Exception {
         if(logoutButton.getText().equals("Logout")) {
@@ -32,35 +47,62 @@ public class HomeInterfaceController extends SceneController implements Initiali
         }
     }
 
+    /**
+     * Handles the action of clicking the button to load the book menu
+     * @param event the event triggered by clicking the button
+     * @throws IOException thrown if the fxml file for the scene does not exist
+     */
     @FXML
     public void handleBookMenuButtonAction(ActionEvent event) throws IOException {
         loadSubscene("/View/BookSearchMenu.fxml");
         changeLogoutToHome(logoutButton);
     }
 
+    /**
+     * Handles the action of clicking the button to load the DVD menu
+     * @param event the event triggered by clicking the button
+     * @throws IOException thrown if the fxml file for the scene does not exist
+     */
     @FXML
     public void handleDVDMenuButtonAction(ActionEvent event) throws IOException {
         loadSubscene("/View/DVDSearchMenu.fxml");
         changeLogoutToHome(logoutButton);
     }
 
+    /**
+     * Handles the action of clicking the button to load the laptop menu
+     * @param event the event triggered by clicking the button
+     * @throws IOException thrown if the fxml file for the scene does not exist
+     */
     @FXML
     public void handleLaptopMenuButtonAction(ActionEvent event) throws IOException {
         loadSubscene("/View/LaptopSearchMenu.fxml");
         changeLogoutToHome(logoutButton);
     }
 
+    /**
+     * Handles the action of clicking the button to list all resources
+     * @param event the event triggered by clicking the button
+     * @throws IOException thrown if the fxml file for the scene does not exist
+     */
     @FXML
     public void handleListAllButtonAction(ActionEvent event) throws IOException{
         loadSubscene("/View/ListAll.fxml");
         changeLogoutToHome(logoutButton);
     }
 
+    /**
+     * Changes the text of the button to logout to say "Home"
+     * @param logoutButton the button to logout
+     */
     @FXML
     public void changeLogoutToHome(Button logoutButton){
         logoutButton.setText("Home");
     }
 
+    /**
+     * Initialises the label in the interface to display the first name of the user based on the account currently logged in
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(LoginInterfaceController.username).getFirstName());
