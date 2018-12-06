@@ -58,6 +58,16 @@ public class StaffInterfaceController extends SceneController implements Initial
     protected void handleAccountCreatorButtonAction(ActionEvent event) throws Exception {
         handleSceneChangeButtonAction(event, SceneController.ACCOUNT_CREATOR_INTERFACE);
     }
+    
+    /**
+     * Handles the action of clicking the button to change to the issues interface
+     * @param event the event triggered by clicking the button
+     * @throws Exception thrown if no such interface exists
+     */
+    @FXML
+    protected void handleIssuesButtonAction(ActionEvent event) throws Exception {
+    	handleSceneChangeButtonAction(event, SceneController.ISSUES_INTERFACE);
+    }
 
     /**
      * Initialises the label in the interface to display the first name of the user based on the account currently logged in
