@@ -46,7 +46,7 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleAccountsButtonAction(ActionEvent event) throws Exception {
-        handleSceneChangeButtonAction(event, SceneController.ACCOUNTS_PAGE_INTERFACE);
+//        handleSceneChangeButtonAction(event, SceneController.ACCOUNTS_PAGE_INTERFACE);
     }
     
     /**

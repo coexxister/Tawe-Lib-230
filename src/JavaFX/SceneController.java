@@ -32,7 +32,7 @@ public class SceneController {
     //File paths for staff interface FXML files
     public static final String STAFF_INTERFACE = "/View/StaffInterface.fxml";
     public static final String RESOURCE_INTERFACE = "/View/ResourceInterface.fxml";
-    public static final String ACCOUNTS_PAGE_INTERFACE = "/View/AccountsPageInterface.fxml";
+    public static final String ACCOUNTS_SEARCH_CONTROLLER = "";
     public static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountsCreatorInterface.fxml";
     public static final String AVATAR_CHANGE_INTERFACE ="/View/ProfileImageSelector.fxml";
     public static final String DRAWING_INTERFACE = "/View/DrawingEnvironment.fxml";
