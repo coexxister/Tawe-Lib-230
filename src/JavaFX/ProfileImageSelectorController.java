@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLException;
 
 public class ProfileImageSelectorController extends SceneController {
 
@@ -20,50 +21,60 @@ public class ProfileImageSelectorController extends SceneController {
     @FXML
     private void selectDefault1(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar1.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault2(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar2.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault3(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar3.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault4(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar4.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault5(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar5.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault6(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar6.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault7(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar7.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault8(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar8.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault9(ActionEvent event) {
         selectedPath = Paths.get( "src/DefaultAvatars/Avatar9.png");
+        setAvatar();
     }
 
     @FXML
     private void selectDefault10(ActionEvent event) { selectedPath = Paths.get( "src/DefaultAvatars/Avatar10.png");
+        setAvatar();
     }
 
     @FXML
@@ -73,6 +84,20 @@ public class ProfileImageSelectorController extends SceneController {
         File file  = avatarChooser.showOpenDialog(node.getScene().getWindow());
         selectedPath = Paths.get(file.getAbsolutePath());
         System.out.println(selectedPath);
+
+        setAvatar();
+    }
+
+    private void setAvatar() {
+        try {
+            User account = getAccountManager().getAccount(SceneController.USER_ID);
+            System.out.println(selectedPath.toString());
+            int avatarID = getResourceManager().getImageID(selectedPath.toString());
+            account.setAvatarID(avatarID);
+            getAccountManager().editAccount(account);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
