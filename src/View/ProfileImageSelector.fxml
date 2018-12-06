@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +16,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.ProfileImageSelectorController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.ProfileImageSelectorController">
    <center>
       <GridPane fx:id="PIS" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -26,22 +32,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.halignment="CENTER" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.columnIndex="4" GridPane.halignment="CENTER" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#5aa0dd" height="100.0" stroke="#2d6bd7" strokeLineCap="ROUND" strokeWidth="5.0" width="100.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
-            <Button fx:id="drawingEnvironment" mnemonicParsing="false" onAction="#handleDrawingEnvironmentButtonAction" text="Draw Custom Avatar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Button fx:id="drawingEnvironment" mnemonicParsing="false" onAction="#handleDrawingEnvironmentButtonAction" styleClass="UniversalButton" text="Draw Custom Avatar" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="-50.0" right="-50.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="selectCustomAvatar" mnemonicParsing="false" onAction="#selectCustomAvatar" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Button fx:id="selectCustomAvatar" mnemonicParsing="false" onAction="#selectCustomAvatar" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                <graphic>
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -50,7 +46,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault1" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectDefault1" GridPane.halignment="CENTER">
+            <Button fx:id="selectDefault1" contentDisplay="CENTER" mnemonicParsing="false" onAction="#selectDefault1" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.halignment="CENTER">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -59,7 +55,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault2" mnemonicParsing="false" onAction="#selectDefault2" GridPane.columnIndex="1">
+            <Button fx:id="selectDefault2" mnemonicParsing="false" onAction="#selectDefault2" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="1">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -68,7 +64,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#selectDefault3" GridPane.columnIndex="2">
+            <Button mnemonicParsing="false" onAction="#selectDefault3" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="2">
                <graphic>
                   <ImageView fx:id="selectDefault3" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -77,7 +73,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault4" mnemonicParsing="false" onAction="#selectDefault4" GridPane.columnIndex="3">
+            <Button fx:id="selectDefault4" mnemonicParsing="false" onAction="#selectDefault4" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="3">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -86,7 +82,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault5" mnemonicParsing="false" onAction="#selectDefault5" GridPane.columnIndex="4">
+            <Button fx:id="selectDefault5" mnemonicParsing="false" onAction="#selectDefault5" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="4">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -95,7 +91,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault6" mnemonicParsing="false" onAction="#selectDefault6" GridPane.rowIndex="1">
+            <Button fx:id="selectDefault6" mnemonicParsing="false" onAction="#selectDefault6" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -104,7 +100,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault7" mnemonicParsing="false" onAction="#selectDefault7" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button fx:id="selectDefault7" mnemonicParsing="false" onAction="#selectDefault7" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -113,7 +109,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault8" mnemonicParsing="false" onAction="#selectDefault8" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button fx:id="selectDefault8" mnemonicParsing="false" onAction="#selectDefault8" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -122,7 +118,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault9" mnemonicParsing="false" onAction="#selectDefault9" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <Button fx:id="selectDefault9" mnemonicParsing="false" onAction="#selectDefault9" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -131,7 +127,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="selectDefault10" mnemonicParsing="false" onAction="#selectDefault10" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <Button fx:id="selectDefault10" mnemonicParsing="false" onAction="#selectDefault10" scaleX="0.9" scaleY="0.9" styleClass="UniversalButton" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <graphic>
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
