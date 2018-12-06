@@ -1,9 +1,6 @@
 package JavaFX;
 
-import Core.AccountManager;
-import Core.DatabaseManager;
-import Core.ResourceFlowManager;
-import Core.ResourceManager;
+import Core.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -40,6 +37,7 @@ public class SceneController {
     public static final String AVATAR_CHANGE_INTERFACE ="/View/ProfileImageSelector.fxml";
     public static final String DRAWING_INTERFACE = "/View/DrawingEnvironment.fxml";
     public static final String TRANSACTION_HISTORY_INTERFACE = "/View/TransactionHistoryPage.fxml";
+    public static final String LOAN_HISTORY_CONTROLLER = "/View/LoanHistory.fxml";
     public ArrayList<String> column = new ArrayList<>();
     public ArrayList<String> input = new ArrayList<>();
 
@@ -50,7 +48,7 @@ public class SceneController {
     private DatabaseManager db = new DatabaseManager("./TaweLibDB.db");
     private ResourceManager rm = new ResourceManager(db);
     private AccountManager am = new AccountManager(db);
-    private ResourceFlowManager rfm;
+    private ResourceFlowManager rfm = new ResourceFlowManager(db, am, rm, USER_ID);
 
     /**
      * Handles the action of clicking the button to login to the user or staff interface
@@ -119,6 +117,14 @@ public class SceneController {
      * 			the account manager
      */
     public AccountManager getAccountManager() { return am; }
+
+    /**
+     * Gets the resource flow manager instance.
+     * @return The resource flow manager instance.
+     */
+    public ResourceFlowManager getResurceFlowManager() {
+        return rfm;
+    }
 
     /**
      * Getter for resource manager

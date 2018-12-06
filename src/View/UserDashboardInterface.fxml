@@ -51,7 +51,7 @@
                      </graphic>
                   </Button>
                   <Button fx:id="itemDue" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="Items Due" />
-                  <Button fx:id="borrowedItem" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="Borrowed Items" />
+                  <Button fx:id="loanedItem" mnemonicParsing="false" onAction="#handleLoanAction" prefWidth="150.0" styleClass="UniversalButton" text="Loaned Items" />
                   <Button fx:id="requestedItem" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="Requested Items" />
                   <Button fx:id="reservedItem" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="Reserved Items" />
                   <Button fx:id="transactionHistory" mnemonicParsing="false" onAction="#handleTransactionHistoryAction" prefWidth="150.0" styleClass="UniversalButton" text="Transaction History" />
