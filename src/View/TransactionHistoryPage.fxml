@@ -7,21 +7,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="SubScene" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.TransactionHistoryPage">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="SubScene" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.TransactionHistoryController">
    <children>
-      <BorderPane layoutX="-2.0" prefHeight="400.0" prefWidth="600.0">
+      <BorderPane prefHeight="424.0" prefWidth="634.0">
          <center>
-            <ScrollPane hbarPolicy="NEVER" prefHeight="298.0" prefWidth="489.0" BorderPane.alignment="CENTER">
+            <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" prefHeight="341.0" prefWidth="600.0" BorderPane.alignment="CENTER">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="603.0" prefWidth="596.0">
-                     <children>
-                        <CheckBox layoutX="252.0" layoutY="51.0" mnemonicParsing="false" text="CheckBox" />
-                        <CheckBox layoutX="252.0" layoutY="162.0" mnemonicParsing="false" text="CheckBox" />
-                        <CheckBox layoutX="252.0" layoutY="456.0" mnemonicParsing="false" text="CheckBox" />
-                        <CheckBox layoutX="265.0" layoutY="528.0" mnemonicParsing="false" text="CheckBox" />
-                     </children>
-                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="596.0" stylesheets="@../Resources/CoreStyle.css" />
               </content>
             </ScrollPane>
          </center>

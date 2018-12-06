@@ -19,10 +19,30 @@
 }
 
 .UniversalButton {
-    -fx-background-color: #d7f3f5;
     -fx-background-color: rgba(215,243,245,0.5);
+}
+
+.UniversalButton:hover {
+    -fx-background-color: rgba(215,243,245,1);
 }
 
 .UniversalTextBox {
     -fx-background-color: White;
+}
+
+.ScrollPane {
+    -fx-background-color: rgb(226, 245, 243);
+    -fx-border-color: white;
+}
+
+.ScrollListItem {
+    -fx-background-color: rgba(215,243,245,0.5);
+    -fx-padding: 20px;
+    -fx-text-alignment: center;
+    -fx-min-width: 50px;
+
+}
+
+.ScrollListItem:hover {
+    -fx-background-color: rgba(215,243,245,1);
 }
