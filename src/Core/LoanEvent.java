@@ -105,4 +105,15 @@ public class LoanEvent {
         return timeIn;
     }
 
+    /**
+     * Summarizes the loan event.
+     * @return The summary of the loan event.
+     */
+    public String toString() {
+        String out = "Copy ID: " + copyID +
+                "\nBorrow date: " + dateOut + " " + timeOut +
+                "\nReturn date: " + dateIn + " " + timeIn;
+        return out;
+    }
+
 }
