@@ -346,6 +346,31 @@ public class ResourceFlowManager {
     }
 
     /**
+     * Gets all reserved copies of the user.
+     * @param userID The user id of the user.
+     * @return An array of reserved copies.
+     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     */
+    public Copy[] getReservedCopies(int userID) throws SQLException {
+
+        //An array of copy ids that have been reserved by the user.
+        String[][] copyIDs = dbManager.getTupleListByQuery("SELECT CID FROM ReservedResource WHERE UID = " +
+                Integer.toString(userID));
+
+        //An array of the reserved copies.
+        Copy[] copies = new Copy[copyIDs.length];
+
+        //For every copy id, construct the copy.
+        for (int iCount = 0; iCount < copyIDs.length; iCount++) {
+            copies[iCount] = rmManager.getCopy(Integer.parseInt(copyIDs[iCount][0]));
+        }
+
+        //Return the copies.
+        return copies;
+
+    }
+
+    /**
      * Requests a select resource for the logged user. If a copy is already available, it will be reserved.
      * @param resourceID The resource id of the resource.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.

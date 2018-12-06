@@ -26,4 +26,10 @@ public class UserDashboardInterfaceController extends SceneController {
     private void handleLoanAction(ActionEvent event) throws IOException {
         loadSubscene(SceneController.LOAN_HISTORY_CONTROLLER);
     }
+
+    @FXML
+    private void handleReservedAction(ActionEvent event) throws IOException {
+        loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
+    }
+
 }
