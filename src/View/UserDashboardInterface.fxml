@@ -45,7 +45,7 @@
                      <graphic>
                         <ImageView fitHeight="68.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Icons/ParticleDraw.png" />
+                              <Image url="@../Icons/ProfileImageSelector.png" />
                            </image>
                         </ImageView>
                      </graphic>
