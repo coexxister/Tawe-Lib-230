@@ -35,8 +35,8 @@ public class LoanHistoryController extends SceneController implements Initializa
             loanText[iCount] = new Label(loanHistory[iCount].toString());
             loanText[iCount].getStylesheets().add("/Resources/CoreStyle.css");
             loanText[iCount].getStyleClass().add("ScrollListItem");
-            loanText[iCount].setMinHeight(200);
-            loanText[iCount].setPrefWidth(400);
+            loanText[iCount].setMinHeight(100);
+            loanText[iCount].setPrefWidth(300);
             loanText[iCount].setAlignment(Pos.CENTER);
         }
 
