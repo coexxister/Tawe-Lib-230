@@ -39,6 +39,7 @@ public class SceneController {
     public static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountsCreatorInterface.fxml";
     public static final String AVATAR_CHANGE_INTERFACE ="/View/ProfileImageSelector.fxml";
     public static final String DRAWING_INTERFACE = "/View/DrawingEnvironment.fxml";
+    public static final String TRANSACTION_HISTORY_INTERFACE = "/View/TransactionHistoryPage.fxml";
     public ArrayList<String> column = new ArrayList<>();
     public ArrayList<String> input = new ArrayList<>();
 

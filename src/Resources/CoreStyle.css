@@ -17,3 +17,12 @@
 .HomeInterfaceFlow {
     -fx-background-color: lightblue;
 }
+
+.UniversalButton {
+    -fx-background-color: #d7f3f5;
+    -fx-background-color: rgba(215,243,245,0.5);
+}
+
+.UniversalTextBox {
+    -fx-background-color: White;
+}

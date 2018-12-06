@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,18 +16,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
    <bottom>
-      <HBox prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER" prefHeight="113.0" prefWidth="100.0" spacing="5.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="26.0" prefWidth="64.0" style="-fx-border-color: black; -fx-background-radius: 10; -fx-background-color: #f08080; -fx-border-radius: 10;" text="Fine Due" textAlignment="CENTER" />
-                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="64.0" style="-fx-border-radius: 10; -fx-background-radius: 10; -fx-background-color: #eee8aa; -fx-border-color: black;" text="Item Due" />
-               </children>
-            </VBox>
-         </children>
-      </HBox>
+      <HBox prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </bottom>
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
@@ -36,7 +32,7 @@
                </image>
             </ImageView>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1130.0" layoutY="14.0" prefHeight="26.0" prefWidth="64.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: #2db92d; -fx-background-radius: 10;" text="£0.00" textAlignment="CENTER" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="14.0" />
-            <Button fx:id="homeButton" layoutX="1205.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleHomeButtonAction" text="Home" textAlignment="CENTER" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
+            <Button fx:id="homeButton" layoutX="1205.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleHomeButtonAction" styleClass="UniversalButton" text="Home" textAlignment="CENTER" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
          </children>
       </AnchorPane>
    </top>
@@ -45,21 +41,21 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <Button fx:id="changeAvatar" mnemonicParsing="false" onAction="#handleAvatarChangeButtonAction" textAlignment="CENTER" wrapText="true">
+                  <Button fx:id="changeAvatar" mnemonicParsing="false" onAction="#handleAvatarChangeButtonAction" styleClass="UniversalButton" textAlignment="CENTER" wrapText="true">
                      <graphic>
                         <ImageView fitHeight="68.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Resources/dvdIcon.png" />
+                              <Image url="@../Icons/ParticleDraw.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="itemDue" mnemonicParsing="false" prefWidth="150.0" text="Items Due" />
-                  <Button fx:id="borrowedItem" mnemonicParsing="false" prefWidth="150.0" text="Borrowed Items" />
-                  <Button fx:id="requestedItem" mnemonicParsing="false" prefWidth="150.0" text="Requested Items" />
-                  <Button fx:id="reservedItem" mnemonicParsing="false" prefWidth="150.0" text="Reserved Items" />
-                  <Button fx:id="transactionHistory" mnemonicParsing="false" prefWidth="150.0" text="Transaction History" />
-                  <Button fx:id="userStatistics" mnemonicParsing="false" prefWidth="150.0" text="User Statistics" />
+                  <Button fx:id="itemDue" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="Items Due" />
+                  <Button fx:id="borrowedItem" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="Borrowed Items" />
+                  <Button fx:id="requestedItem" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="Requested Items" />
+                  <Button fx:id="reservedItem" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="Reserved Items" />
+                  <Button fx:id="transactionHistory" mnemonicParsing="false" onAction="#handleTransactionHistoryAction" prefWidth="150.0" styleClass="UniversalButton" text="Transaction History" />
+                  <Button fx:id="userStatistics" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="User Statistics" />
                </children>
             </VBox>
          </children>
