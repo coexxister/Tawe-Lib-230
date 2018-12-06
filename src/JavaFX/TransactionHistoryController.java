@@ -39,6 +39,12 @@ public class TransactionHistoryController extends SceneController implements Ini
             transactionText[iCount].setMinHeight(200);
             transactionText[iCount].setPrefWidth(400);
             transactionText[iCount].setAlignment(Pos.CENTER);
+
+            if (transactions[iCount].getChange() < 0) {
+                transactionText[iCount].setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
+            } else {
+                transactionText[iCount].setStyle("-fx-background-color: #2acb5a; -fx-text-fill: WHITE;");
+            }
         }
 
         root.getChildren().addAll(transactionText);

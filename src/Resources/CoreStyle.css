@@ -46,3 +46,7 @@
 .ScrollListItem:hover {
     -fx-background-color: rgba(215,243,245,1);
 }
+
+.ScrollContainer {
+    -fx-background-color: rgba(215,243,245,1);
+}
