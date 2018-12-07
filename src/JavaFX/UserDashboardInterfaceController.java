@@ -57,6 +57,15 @@ public class UserDashboardInterfaceController extends SceneController implements
     private void changeDashboardButton(){
         homeButton.setText("Dashboard");
     }
+    @FXML
+    private void handleRequestedResourceAction(ActionEvent event) throws IOException {
+        loadSubscene(SceneController.REQUESTED_RESOURCE);
+    }
+
+    @FXML
+    private void handleItemsDueAction(ActionEvent event) throws IOException {
+        loadSubscene(SceneController.ITEMS_DUE);
+    }
 
     private void updateBalanceLabel() {
 
@@ -82,4 +91,5 @@ public class UserDashboardInterfaceController extends SceneController implements
     public void initialize(URL location, ResourceBundle resources) {
         updateBalanceLabel();
     }
+
 }
