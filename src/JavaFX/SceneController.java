@@ -28,6 +28,7 @@ public class SceneController {
     public static final String MAIN_INTERFACE = "/View/LoginInterface.fxml";
     public static final String HOME_INTERFACE = "/View/HomeInterface.fxml";
     public static final String USER_DASHBOARD_INTERFACE = "/View/UserDashboardInterface.fxml";
+    public static final String POPULAR_LISTING = "/View/PopularListing.fxml";
 
     //File paths for staff interface FXML files
     public static final String STAFF_INTERFACE = "/View/StaffInterface.fxml";

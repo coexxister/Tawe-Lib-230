@@ -60,11 +60,13 @@ public class UserDashboardInterfaceController extends SceneController implements
     @FXML
     private void handleRequestedResourceAction(ActionEvent event) throws IOException {
         loadSubscene(SceneController.REQUESTED_RESOURCE);
+        changeDashboardButton();
     }
 
     @FXML
     private void handleItemsDueAction(ActionEvent event) throws IOException {
         loadSubscene(SceneController.ITEMS_DUE);
+        changeDashboardButton();
     }
 
     private void updateBalanceLabel() {

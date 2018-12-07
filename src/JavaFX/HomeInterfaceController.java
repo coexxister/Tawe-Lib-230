@@ -142,7 +142,6 @@ public class HomeInterfaceController extends SceneController implements Initiali
         usernameDisplay.setText("Welcome, " + getAccountManager().
                 getAccount(SceneController.USER_ID).getFirstName());
 
-        System.out.println(SceneController.USER_ID);
         try {
             avatarImage.setImage(new Image(getResourceManager().getImageURL(getAccountManager().getAccount(SceneController.USER_ID).getAvatarID())));
         } catch (SQLException e) {
