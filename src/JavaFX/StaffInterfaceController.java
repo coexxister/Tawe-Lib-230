@@ -3,6 +3,7 @@ package JavaFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.io.IOException;
@@ -17,6 +18,9 @@ import java.util.ResourceBundle;
 public class StaffInterfaceController extends SceneController implements Initializable {
 
     @FXML
+    private Button logoutButton;
+
+    @FXML
     private Label usernameDisplay;
 
     /**
@@ -26,7 +30,11 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) throws Exception {
-        handleSceneChangeButtonAction(event, SceneController.MAIN_INTERFACE);
+        if(logoutButton.getText().equals("Logout")) {
+            handleSceneChangeButtonAction(event, SceneController.MAIN_INTERFACE);
+        } else {
+            handleSceneChangeButtonAction(event, SceneController.STAFF_INTERFACE);
+        }
     }
     
     /**
@@ -36,7 +44,8 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleResourcesButtonAction(ActionEvent event) throws Exception {
-        handleSceneChangeButtonAction(event, SceneController.RESOURCE_INTERFACE);
+        loadSubscene(SceneController.RESOURCE_INTERFACE);
+        changeLogoutToHome(logoutButton);
     }
     
     /**
@@ -46,7 +55,8 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleAccountsButtonAction(ActionEvent event) throws Exception {
-//        handleSceneChangeButtonAction(event, SceneController.ACCOUNTS_PAGE_INTERFACE);
+        loadSubscene(SceneController.ACCOUNTS_SEARCH_INTERFACE);
+        changeLogoutToHome(logoutButton);
     }
     
     /**
@@ -56,7 +66,8 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleAccountCreatorButtonAction(ActionEvent event) throws Exception {
-        handleSceneChangeButtonAction(event, SceneController.ACCOUNT_CREATOR_INTERFACE);
+        loadSubscene(SceneController.ACCOUNT_CREATOR_INTERFACE);
+        changeLogoutToHome(logoutButton);
     }
     
     /**
@@ -66,7 +77,8 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleIssuesButtonAction(ActionEvent event) throws Exception {
-    	handleSceneChangeButtonAction(event, SceneController.ISSUES_INTERFACE);
+    	loadSubscene(SceneController.ISSUES_INTERFACE);
+        changeLogoutToHome(logoutButton);
     }
 
     /**

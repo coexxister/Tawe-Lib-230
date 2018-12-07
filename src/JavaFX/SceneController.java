@@ -32,8 +32,8 @@ public class SceneController {
     //File paths for staff interface FXML files
     public static final String STAFF_INTERFACE = "/View/StaffInterface.fxml";
     public static final String RESOURCE_INTERFACE = "/View/ResourceInterface.fxml";
-    public static final String ACCOUNTS_SEARCH_CONTROLLER = "";
-    public static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountsCreatorInterface.fxml";
+    public static final String ACCOUNTS_SEARCH_INTERFACE = "/View/AccountSearchInterface.fxml";
+    public static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountCreatorInterface.fxml";
     public static final String AVATAR_CHANGE_INTERFACE ="/View/ProfileImageSelector.fxml";
     public static final String DRAWING_INTERFACE = "/View/DrawingEnvironment.fxml";
     public static final String TRANSACTION_HISTORY_INTERFACE = "/View/TransactionHistoryPage.fxml";
@@ -51,24 +51,6 @@ public class SceneController {
     private ResourceManager rm = new ResourceManager(db);
     private AccountManager am = new AccountManager(db);
     private ResourceFlowManager rfm = new ResourceFlowManager(db, am, rm, USER_ID);
-
-    /**
-     * Handles the action of clicking the button to login to the user or staff interface
-     * @param event the event triggered by clicking the button
-     * @param fxml the fxml file corresponding to the new scene
-     * @param loginUsername the username entered at login
-     * @throws Exception thrown if the fxml file does not exist
-     */
-    public void handleLoginButtonAction(ActionEvent event, String fxml, String loginUsername) throws Exception {
-        Parent root = load(getClass().getResource(fxml));
-        Scene userScreen = new Scene(root);
-        mainPane = (BorderPane) root;
-
-        rfm = new ResourceFlowManager(db, am, rm, Integer.parseInt(loginUsername));
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(userScreen);
-        window.show();
-    }
 
     /**
      * Handles the action of clicking a button to change scenes
