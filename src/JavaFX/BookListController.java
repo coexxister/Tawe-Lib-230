@@ -29,19 +29,19 @@ public class BookListController extends SceneController implements Initializable
     private double elementsPerPage = 3;
     private Resource resourceList[] = null;
 
-    {
-        try {
-            resourceList = getResourceManager().searchResources(new String[] {"Title", "TID"}, new String[] {"M", "3", "2017"});
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Initialises
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        {
+            try {
+                resourceList = getResourceManager().getResourceList(getSqlQuery());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         bookView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
     }
 

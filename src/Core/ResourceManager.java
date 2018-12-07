@@ -31,6 +31,20 @@ public class ResourceManager {
 
     }
 
+    public String createQuery(String[] column, String[] attribute, String type){
+        String sqlQuery = "SELECT * FROM Resource, " + type + " WHERE Resource.RID = " + type +".RID AND ";
+        // for every column value in data except the last value, add to the sqlQuery
+        for (int iColumn = 0; iColumn < column.length - 1; iColumn++) {
+            sqlQuery += column[iColumn] + " LIKE " + attribute[iColumn] + " AND ";
+
+        }
+        // add the last column value to the sql query without a comma.
+        sqlQuery += column[column.length - 1] + " LIKE " + attribute[attribute.length - 1] + ";";
+
+        return sqlQuery;
+    }
+
+
     /**
      * Gets all resources found in the database.
      * @return All resources found in the database as Resource object.
