@@ -71,6 +71,15 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="accountCreatorButton1" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleAccountCreatorButtonAction" prefHeight="25.0" prefWidth="147.0" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="Statistics">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icons/Statistics.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </HBox>
    </center>
