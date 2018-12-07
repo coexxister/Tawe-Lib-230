@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class BookSearchMenuController extends SceneController{
 
@@ -21,19 +22,13 @@ public class BookSearchMenuController extends SceneController{
     private TextField author;
 
     @FXML
-    private TextField publisher;
-
-    @FXML
     private TextField year;
 
     @FXML
     private TextField genre;
 
-    @FXML
-    private TextField language;
-
     public void handleSearchByQueryButtonAction(ActionEvent event) throws IOException {
-        createQuery();
+        getInput();
         loadSubscene("/View/BookList.fxml");
     }
 
@@ -41,31 +36,27 @@ public class BookSearchMenuController extends SceneController{
         loadSubscene("/View/BookList.fxml");
     }
 
-    public void createQuery(){
-        if(title.getText() != null){
-            addColumn("Title");
-            addInput(title.getText());
+    public void getInput(){
+        ArrayList<String> column = new ArrayList<>();
+        ArrayList<String> input = new ArrayList<>();
+        if(!title.getText().isEmpty()){
+            column.add("Title");
+            input.add("'%" + title.getText() + "%'");
         }
-/*        if(author.getText() != null){
-            SceneController.columns += "Author";
-            SceneController.resource += author.getText();
+        if(!author.getText().isEmpty()){
+            column.add("Author");
+            input.add("'%" + author.getText() + "%'");
         }
-        if(publisher.getText() != null){
-            SceneController.columns += "Publisher";
-            SceneController.resource += publisher.getText();
+        if(!year.getText().isEmpty()){
+            column.add("RYear");
+            input.add(year.getText());
         }
-        if(year.getText() != null){
-            SceneController.columns += "RYear";
-            SceneController.resource += year.getText();
+        if(!genre.getText().isEmpty()){
+            column.add("Genre");
+            input.add("'%" + genre.getText() + "%'");
         }
-        if(genre.getText() != null){
-            SceneController.columns += "Genre";
-            SceneController.resource += genre.getText();
-        }
-        if(language.getText() != null){
-            SceneController.columns += "Language";
-            SceneController.resource += language.getText();
-        }
-*/
+
+        setSqlQuery(getResourceManager().createQuery(column.toArray(new String[column.size()]), input.toArray(new String[input.size()]), "Book"));
+        System.out.println(getSqlQuery());
     }
 }

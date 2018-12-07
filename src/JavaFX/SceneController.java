@@ -40,11 +40,7 @@ public class SceneController {
     public static final String LOAN_HISTORY_CONTROLLER = "/View/LoanHistory.fxml";
     public static final String RESERVE_HISTORY_CONTROLLER = "/View/ReservedInterface.fxml";
     public static final String ISSUES_INTERFACE = "/View/IssuesInterface.fxml";
-    public static final String ITEMS_DUE = "/View/ItemsDueInterface.fxml";
-    public static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
-
-    public ArrayList<String> column = new ArrayList<>();
-    public ArrayList<String> input = new ArrayList<>();
+    private static String sqlQuery;
 
     //Main BorderPane of the interface for changing scenes
     private static BorderPane mainPane = new BorderPane();
@@ -120,19 +116,11 @@ public class SceneController {
      */
     public ResourceManager getResourceManager(){ return rm;}
 
-    public String[] getColumn(){
-        return column.toArray(new String[column.size()]);
+    public String getSqlQuery(){
+        return sqlQuery;
     }
 
-    public String[] getInput(){
-        return input.toArray(new String[input.size()]);
-    }
-
-    public void addColumn(String columnInput){
-        column.add(columnInput);
-    }
-
-    public void addInput(String userInput){
-        input.add(userInput);
+    public void setSqlQuery(String sqlQuery){
+        this.sqlQuery = sqlQuery;
     }
 }
