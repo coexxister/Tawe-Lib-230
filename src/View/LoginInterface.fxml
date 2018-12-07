@@ -12,17 +12,28 @@
    <center>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-               <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="79.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/tawelibIcon.png" />
+               </image>
+            </ImageView>
+               <ImageView fitHeight="110.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
                   <image>
                      <Image url="@../Resources/laptopIcon.png" />
                   </image>
                </ImageView>
-            <TextField fx:id="loginUsername" maxWidth="500.0" styleClass="UniversalTextBox">
+            <TextField fx:id="loginUsername" alignment="CENTER" maxWidth="500.0" promptText="Enter your User ID" styleClass="UniversalTextBox">
                <VBox.margin>
                   <Insets left="150.0" right="150.0" />
                </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </TextField>
-               <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButtonAction" styleClass="UniversalButton" text="Login" />
+               <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButtonAction" styleClass="UniversalButton" text="Login">
+               <VBox.margin>
+                  <Insets bottom="70.0" />
+               </VBox.margin></Button>
          </children>
          <BorderPane.margin>
             <Insets />
