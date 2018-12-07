@@ -20,61 +20,62 @@ public class ProfileImageSelectorController extends SceneController {
 
     @FXML
     private void selectDefault1(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar1.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar1.png");
+        setAvatar(false);
     }
 
     @FXML
     private void selectDefault2(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar2.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar2.png");
+        setAvatar(false);
     }
 
     @FXML
     private void selectDefault3(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar3.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar3.png");
+        setAvatar(false);
     }
 
     @FXML
     private void selectDefault4(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar4.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar4.png");
+        setAvatar(false);
     }
 
     @FXML
     private void selectDefault5(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar5.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar5.png");
+        setAvatar(false);
     }
 
     @FXML
     private void selectDefault6(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar6.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar6.png");
+        setAvatar(false);
     }
 
     @FXML
     private void selectDefault7(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar7.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar7.png");
+        setAvatar(false);
     }
 
     @FXML
     private void selectDefault8(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar8.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar8.png");
+        setAvatar(false);
     }
 
     @FXML
     private void selectDefault9(ActionEvent event) {
-        selectedPath = Paths.get( "src/DefaultAvatars/Avatar9.png");
-        setAvatar();
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar9.png");
+        setAvatar(false);
     }
 
     @FXML
-    private void selectDefault10(ActionEvent event) { selectedPath = Paths.get( "src/DefaultAvatars/Avatar10.png");
-        setAvatar();
+    private void selectDefault10(ActionEvent event) {
+        selectedPath = Paths.get( "/DefaultAvatars/Avatar10.png");
+        setAvatar(false);
     }
 
     @FXML
@@ -83,25 +84,49 @@ public class ProfileImageSelectorController extends SceneController {
         Node node = (Node) event.getSource();
         File file  = avatarChooser.showOpenDialog(node.getScene().getWindow());
         selectedPath = Paths.get(file.getAbsolutePath());
-        System.out.println(selectedPath);
 
-        setAvatar();
+        setAvatar(true);
     }
 
-    private void setAvatar() {
+    private void setAvatar(boolean isCustom) {
         try {
+
+            //Get the user account
             User account = getAccountManager().getAccount(SceneController.USER_ID);
-            System.out.println(selectedPath.toString());
-            int avatarID = getResourceManager().getImageID(selectedPath.toString());
+
+            //Make sure the image path uses foreword slash
+            String path = selectedPath.toString();
+            System.out.println(path);
+            path = path.replace("\\","/");
+
+            //Create a relative path rather than absolute if custom image selected
+            if (isCustom) {
+                //the number of characters in 'src' to increase the index by.
+                final int LENGTH_OF_SRC = 3;
+                path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
+            }
+
+            int avatarID;
+
+            //Attempt to get the avatar image id, if does not exist then add the image.
+            try {
+                avatarID = getResourceManager().getImageID(path);
+            } catch (IllegalArgumentException e) {
+                avatarID = getResourceManager().addAvatarImage(path);
+            }
+
+            //Replace accounts imaege id.
             account.setAvatarID(avatarID);
+            //Parse in edited account.
             getAccountManager().editAccount(account);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void handleDrawingEnvironmentButtonAction(ActionEvent event) throws Exception{
+    private void handleDrawingEnvironmentButtonAction(ActionEvent event) throws Exception {
         loadSubscene(SceneController.DRAWING_INTERFACE);
     }
 }

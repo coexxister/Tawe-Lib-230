@@ -1,5 +1,7 @@
 package Core;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 public class rfmManager {
@@ -19,11 +21,17 @@ public class rfmManager {
         //rmManager.addBulkCopies(copy);
         //rfm.borrowCopy(38,1);
         //rfm.requestResource(9, 3);
-        rfm.returnCopy(35, 1);
+        //rfm.returnCopy(35, 1);
         //rfm.unreserveCopy(41,3);
         //rfm.returnCopy(21,1);
 
         //rmManager.addCopy(copy);
+
+        Path path = Paths.get("C:\\Users\\Noah\\Documents\\Tawe-Lib-230\\src\\Resources");
+        String sPath = path.toString().replace("\\","/");
+        sPath = sPath.substring(sPath.indexOf("src")+3);
+
+        System.out.print(sPath);
 
     }
 

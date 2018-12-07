@@ -451,7 +451,7 @@ public class ResourceManager {
         //if image exists then return image id.
         if (isImageExist(url)) {
             return Integer.parseInt(dbManager.getFirstTupleByQuery(
-                    "SELECT Image_Address FROM Image WHERE Image_Address = " + url)[0]);
+                    "SELECT ImageID FROM Image WHERE Image_Address = " + encase(url))[0]);
         } else {
             throw new IllegalArgumentException("Image with this dir does not exist");
         }
@@ -476,7 +476,7 @@ public class ResourceManager {
      */
     public boolean isImageExist(String url) throws SQLException {
         return dbManager.checkIfExist("Image", new String[] {"Image_Address"},
-                new String[] {url});
+                new String[] {encase(url)});
     }
 
     /**
