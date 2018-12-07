@@ -14,7 +14,6 @@ public class LoginInterfaceController extends SceneController {
 
     @FXML
     private TextField loginUsername;
-    private int username;
 
     /**
      * Handles the action of clicking the button to login to the user or staff interface
@@ -24,13 +23,11 @@ public class LoginInterfaceController extends SceneController {
     @FXML
     protected void handleLoginButtonAction(ActionEvent event) throws IllegalArgumentException, Exception {
         AuthenticationManager login = new AuthenticationManager(loginUsername.getText(), getDatabase());
-        username = Integer.parseInt(loginUsername.getText());
-
-        SceneController.USER_ID = username;
+        SceneController.USER_ID = Integer.parseInt(loginUsername.getText());
 
         if(login.authenticate()){
             if(login.isStaff()){
-                handleLoginButtonAction(event, SceneController.STAFF_INTERFACE, loginUsername.getText());
+                handleSceneChangeButtonAction(event, SceneController.STAFF_INTERFACE);
             } else {
                 handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
             }

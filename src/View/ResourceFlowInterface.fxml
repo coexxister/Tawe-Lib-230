@@ -10,17 +10,18 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="SubScene" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="SubScene" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="338.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="504.0" minWidth="10.0" prefWidth="395.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="338.0" minWidth="10.0" prefWidth="318.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="299.0" minHeight="10.0" prefHeight="283.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="366.0" minHeight="8.0" prefHeight="13.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="366.0" minHeight="10.0" prefHeight="304.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <opaqueInsets>
             <Insets />
@@ -29,12 +30,12 @@
             <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
          </BorderPane.margin>
          <children>
-            <TextField promptText="Serial Code" GridPane.columnIndex="1">
+            <TextField prefHeight="31.0" prefWidth="380.0" promptText="Serial Code" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets right="-50.0" />
+                  <Insets />
                </GridPane.margin>
             </TextField>
-            <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="25.0" />
                </GridPane.margin>
@@ -42,20 +43,23 @@
                   <Image url="@../DefaultAvatars/Avatar1.png" />
                </image>
             </ImageView>
-            <Button mnemonicParsing="false" text="Return" GridPane.columnIndex="2">
+            <Button mnemonicParsing="false" styleClass="UniversalButton" text="Return" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
-                  <Insets left="60.0" top="-40.0" />
+                  <Insets />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="Borrow" GridPane.columnIndex="2">
+            <Button mnemonicParsing="false" styleClass="UniversalButton" text="Borrow" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets left="60.0" top="40.0" />
+                  <Insets />
                </GridPane.margin>
             </Button>
-            <Button mnemonicParsing="false" text="View History &amp; Overdue Copies" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Button mnemonicParsing="false" text="View History &amp; Overdue Copies" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
-                  <Insets bottom="50.0" right="-100.0" />
+                  <Insets top="40.0" />
                </GridPane.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </Button>
          </children>
       </GridPane>
