@@ -3,14 +3,23 @@ package JavaFX;
 import Core.AuthenticationManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * Interface controller for the login screen
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
-public class LoginInterfaceController extends SceneController {
+public class LoginInterfaceController extends SceneController{
+
+    @FXML
+    private Button loginButton;
 
     @FXML
     private TextField loginUsername;
@@ -35,5 +44,10 @@ public class LoginInterfaceController extends SceneController {
         } else {
             throw new IllegalArgumentException("Invalid user id");
         }
+    }
+
+    @FXML
+    protected void onEnter(ActionEvent event) throws Exception {
+        handleLoginButtonAction(event);
     }
 }

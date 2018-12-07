@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -96,7 +97,7 @@ public class ProfileImageSelectorController extends SceneController {
 
             //Make sure the image path uses foreword slash
             String path = selectedPath.toString();
-            System.out.println(path);
+            JOptionPane.showMessageDialog(null, "Avatar Set", "Avatar Set", JOptionPane.INFORMATION_MESSAGE);
             path = path.replace("\\","/");
 
             //Create a relative path rather than absolute if custom image selected

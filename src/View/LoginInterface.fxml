@@ -22,7 +22,7 @@
                      <Image url="@../Resources/laptopIcon.png" />
                   </image>
                </ImageView>
-            <TextField fx:id="loginUsername" alignment="CENTER" maxWidth="250.0" promptText="Enter your User ID" styleClass="UniversalTextBox" stylesheets="@../Resources/CoreStyle.css" />
+            <TextField fx:id="loginUsername" alignment="CENTER" maxWidth="250.0" onAction="#onEnter" promptText="Enter your User ID" styleClass="UniversalTextBox" stylesheets="@../Resources/CoreStyle.css" />
                <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLoginButtonAction" styleClass="UniversalButton" text="Login">
                <VBox.margin>
                   <Insets bottom="70.0" />

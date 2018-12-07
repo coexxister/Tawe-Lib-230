@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -16,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
    <bottom>
       <HBox prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </bottom>
@@ -31,7 +26,7 @@
                   <Image url="@../Resources/tawelibIcon.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="1130.0" layoutY="14.0" prefHeight="26.0" prefWidth="64.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: #2db92d; -fx-background-radius: 10;" text="£0.00" textAlignment="CENTER" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="14.0" />
+            <Label fx:id="currentBalance" alignment="CENTER" contentDisplay="CENTER" layoutX="1130.0" layoutY="14.0" prefHeight="26.0" prefWidth="64.0" style="-fx-border-radius: 10; -fx-border-color: black; -fx-background-color: #2db92d; -fx-background-radius: 10;" text="£0.00" textAlignment="CENTER" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="14.0" />
             <Button fx:id="homeButton" layoutX="1205.0" layoutY="12.0" mnemonicParsing="false" onAction="#handleHomeButtonAction" styleClass="UniversalButton" text="Home" textAlignment="CENTER" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="12.0" />
          </children>
       </AnchorPane>
