@@ -83,6 +83,12 @@ public class ResourceManager {
 
     }
 
+    public Resource[] getResourceListByPopularity() throws SQLException {
+
+        //String query = "SELECT * FROM "
+        return null;
+    }
+
     /**
      * Gets all resource objects based upon a search on a column.
      * @param selectColumn The column to search upon.

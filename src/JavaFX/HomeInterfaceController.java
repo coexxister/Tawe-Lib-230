@@ -19,7 +19,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
- * Interface controller for the main user interface home scene
+ * Interface controller for the main user interface home scene.
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
@@ -38,9 +38,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     private Label currentBalance;
 
     /**
-     * Handles the action of clicking the button to open the user dashboard interface
-     * @param event the event triggered by clicking the button
-     * @throws IOException thrown when?
+     * Handles the action of clicking the button to open the user dashboard interface.
+     * @param event the event triggered by clicking the button.
+     * @throws IOException thrown when?.FWLABGALGFBWALFBWALKFNALKFNAWLKFBLAWFBLAWKFBAKWLBFKLAWBFLLABFLAWBFLAWBFWLAKBFWLKABFWALBFLAWK
      */
     @FXML
     protected void handleDashboardButtonAction(ActionEvent event) throws IOException {
@@ -48,9 +48,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Handles the action of clicking the button to logout of the user interface, or to return to the home scene if another scene is displayed 
-     * @param event the event triggered by clicking the button
-     * @throws Exception thrown if no such interface exists
+     * Handles the action of clicking the button to logout of the user interface, or to return to the home scene if another scene is displayed .
+     * @param event the event triggered by clicking the button.
+     * @throws Exception thrown if no such interface exists.
      */
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) throws Exception {
@@ -62,9 +62,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Handles the action of clicking the button to load the book menu
-     * @param event the event triggered by clicking the button
-     * @throws IOException thrown if the fxml file for the scene does not exist
+     * Handles the action of clicking the button to load the book menu.
+     * @param event the event triggered by clicking the button.
+     * @throws IOException thrown if the fxml file for the scene does not exist.
      */
     @FXML
     public void handleBookMenuButtonAction(ActionEvent event) throws IOException {
@@ -73,9 +73,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Handles the action of clicking the button to load the DVD menu
-     * @param event the event triggered by clicking the button
-     * @throws IOException thrown if the fxml file for the scene does not exist
+     * Handles the action of clicking the button to load the DVD menu.
+     * @param event the event triggered by clicking the button.
+     * @throws IOException thrown if the fxml file for the scene does not exist.
      */
     @FXML
     public void handleDVDMenuButtonAction(ActionEvent event) throws IOException {
@@ -84,9 +84,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Handles the action of clicking the button to load the laptop menu
-     * @param event the event triggered by clicking the button
-     * @throws IOException thrown if the fxml file for the scene does not exist
+     * Handles the action of clicking the button to load the laptop menu.
+     * @param event the event triggered by clicking the button.
+     * @throws IOException thrown if the fxml file for the scene does not exist.
      */
     @FXML
     public void handleLaptopMenuButtonAction(ActionEvent event) throws IOException {
@@ -95,13 +95,24 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Handles the action of clicking the button to list all resources
-     * @param event the event triggered by clicking the button
-     * @throws IOException thrown if the fxml file for the scene does not exist
+     * Handles the action of clicking the button to list all resources.
+     * @param event the event triggered by clicking the button.
+     * @throws IOException thrown if the fxml file for the scene does not exist.
      */
     @FXML
     public void handleListAllButtonAction(ActionEvent event) throws IOException{
         loadSubscene("/View/ListAll.fxml");
+        changeLogoutToHome(logoutButton);
+    }
+
+    /**
+     * Handles the action of clicking the popular button to get popular statistics.
+     * @param event the event triggered by clicking the button.
+     * @throws IOException Thrown if the fxml file for the scene does not exist.
+     */
+    @FXML
+    public void handlePopularListingAction(ActionEvent event) throws IOException{
+        loadSubscene("/View/PopularListing.fxml");
         changeLogoutToHome(logoutButton);
     }
 
@@ -135,7 +146,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Initialises the label in the interface to display the first name of the user based on the account currently logged in
+     * Initialises the label in the interface to display the first name of the user based on the account currently logged in.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -114,8 +114,7 @@ public class SceneController {
 
     /**
      * Getter for resource manager
-     * @return rm
-     * 			the resource manager
+     * @return rm the resource manager
      */
     public ResourceManager getResourceManager(){ return rm;}
 
