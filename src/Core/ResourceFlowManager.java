@@ -112,7 +112,7 @@ public class ResourceFlowManager {
         try {
             //Get array of borrowed copy ids.
             String[][] copyIDs = dbManager.getTupleListByQuery("SELECT CPID FROM Copy WHERE UID = " +
-                    Integer.toString(userID));
+                    Integer.toString(userID) + " AND StateID = 1");
 
             //Create array of copies
             Copy[] copies = new Copy[copyIDs.length];
@@ -127,6 +127,39 @@ public class ResourceFlowManager {
             return null;
         }
 
+    }
+
+    /**
+     * Gets all requested resources by a user.
+     * @param userID The user id of the user.
+     * @return The array of requested resources.
+     */
+    public Resource[] getRequestedResources(int userID) {
+
+        try {
+
+            //Get resource ids
+            String[][] resourceIDs = dbManager.getTupleListByQuery("SELECT Resource.RID From Resource, " +
+                    "ResourceRequestQueue WHERE ResourceRequestQueue.RID = Resource.RID AND " +
+                    "UID = " + Integer.toString(userID));
+
+            System.out.println(resourceIDs.length);
+
+            //Create array of resources.
+            Resource[] resources = new Resource[resourceIDs.length];
+
+            //For every resource id, construct a resource.
+            for (int iCount = 0; iCount < resourceIDs.length; iCount++) {
+                resources[iCount] = rmManager.getResourceList("SELECT * FROM Resource WHERE RID = " +
+                        resourceIDs[iCount][0])[0];
+            }
+
+            return resources;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
 
     }
 

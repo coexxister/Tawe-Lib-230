@@ -167,9 +167,14 @@ public class Copy {
             out+= "\nCopy is available.";
         } else if (stateID == 1) {
             out+= "\nCopy is current on loan";
-            out+= "\nIt is due on " + LocalDate.parse(dueDate).getDayOfMonth() + "/" +
-                    LocalDate.parse(dueDate).getMonthValue() + "/" +
-                    LocalDate.parse(dueDate).getYear();
+
+            if (dueDate != null) {
+                out+= "\nIt is due on " + LocalDate.parse(dueDate).getDayOfMonth() + "/" +
+                        LocalDate.parse(dueDate).getMonthValue() + "/" +
+                        LocalDate.parse(dueDate).getYear();
+            } else {
+                out+= "\nNo due date has been set";
+            }
         } else {
             out+= "\nCopy is currently reserved";
         }

@@ -40,6 +40,9 @@ public class SceneController {
     public static final String LOAN_HISTORY_CONTROLLER = "/View/LoanHistory.fxml";
     public static final String RESERVE_HISTORY_CONTROLLER = "/View/ReservedInterface.fxml";
     public static final String ISSUES_INTERFACE = "/View/IssuesInterface.fxml";
+    public static final String ITEMS_DUE = "/View/ItemsDueInterface.fxml";
+    public static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
+
     public ArrayList<String> column = new ArrayList<>();
     public ArrayList<String> input = new ArrayList<>();
 

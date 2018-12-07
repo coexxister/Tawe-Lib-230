@@ -32,4 +32,14 @@ public class UserDashboardInterfaceController extends SceneController {
         loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
     }
 
+    @FXML
+    private void handleRequestedResourceAction(ActionEvent event) throws IOException {
+        loadSubscene(SceneController.REQUESTED_RESOURCE);
+    }
+
+    @FXML
+    private void handleItemsDueAction(ActionEvent event) throws IOException {
+        loadSubscene(SceneController.ITEMS_DUE);
+    }
+
 }
