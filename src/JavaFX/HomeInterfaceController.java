@@ -90,7 +90,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
      */
     @FXML
     public void handleLaptopMenuButtonAction(ActionEvent event) throws IOException {
-        loadSubscene("/View/LaptopSearchMenu.fxml");
+        loadSubscene("/View/ComputerSearchMenu.fxml");
         changeLogoutToHome(logoutButton);
     }
 
