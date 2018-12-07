@@ -31,6 +31,13 @@ public class ResourceManager {
 
     }
 
+    /**
+     * Creates a query for a user-specified input for specific type.
+     * @param column An array of columns used for search.
+     * @param attribute An array of user input,
+     * @param type Type of resource.
+     * @return Query string for user-specified search
+     */
     public String createQuery(String[] column, String[] attribute, String type){
         String sqlQuery = "SELECT * FROM Resource, " + type + " WHERE Resource.RID = " + type +".RID AND ";
         // for every column value in data except the last value, add to the sqlQuery
