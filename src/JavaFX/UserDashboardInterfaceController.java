@@ -2,15 +2,23 @@ package JavaFX;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.chart.BubbleChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
-public class UserDashboardInterfaceController extends SceneController {
+public class UserDashboardInterfaceController extends SceneController implements Initializable {
 
     @FXML
     private Button homeButton;
+
+    @FXML
+    private Label currentBalance;
 
     @FXML
     private void handleHomeButtonAction(ActionEvent event) throws IOException {
@@ -48,5 +56,30 @@ public class UserDashboardInterfaceController extends SceneController {
     @FXML
     private void changeDashboardButton(){
         homeButton.setText("Dashboard");
+    }
+
+    private void updateBalanceLabel() {
+
+        float balance;
+        try {
+            //get balance and round to 2 decimal places.
+            balance = Math.round(getAccountManager().getAccountBalance(SceneController.USER_ID)*100)/100;
+        } catch (SQLException e) {
+            balance = 0.0F;
+        }
+
+        currentBalance.setText("£" + balance);
+
+        //if the balance is less than 0, then change background color to red. Otherwise change to green.
+        if (balance < 0) {
+            currentBalance.setStyle("-fx-background-color: #ff644e; -fx-text-fill: WHITE;");
+        } else {
+            currentBalance.setStyle("-fx-background-color: #228022; -fx-text-fill: WHITE;");
+        }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        updateBalanceLabel();
     }
 }
