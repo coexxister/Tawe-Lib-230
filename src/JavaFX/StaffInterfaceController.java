@@ -1,5 +1,6 @@
 package JavaFX;
 
+import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -26,10 +27,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     /**
      * Handles the action of clicking the button to return to the home interface
      * @param event the event triggered by clicking the button
-     * @throws Exception thrown if no such interface exists
      */
     @FXML
-    protected void handleLogoutButtonAction(ActionEvent event) throws Exception {
+    protected void handleLogoutButtonAction(ActionEvent event) {
         if(logoutButton.getText().equals("Logout")) {
             handleSceneChangeButtonAction(event, SceneController.MAIN_INTERFACE);
         } else {
@@ -40,10 +40,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     /**
      * Handles the action of clicking the button to change to the resources interface
      * @param event the event triggered by clicking the button
-     * @throws Exception thrown if no such interface exists
      */
     @FXML
-    protected void handleResourcesButtonAction(ActionEvent event) throws Exception {
+    protected void handleResourcesButtonAction(ActionEvent event) {
         loadSubscene(SceneController.RESOURCE_INTERFACE);
         changeLogoutToHome(logoutButton);
     }
@@ -51,10 +50,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     /**
      * Handles the action of clicking the button to change to the accounts interface
      * @param event the event triggered by clicking the button
-     * @throws Exception thrown if no such interface exists
      */
     @FXML
-    protected void handleAccountsButtonAction(ActionEvent event) throws Exception {
+    protected void handleAccountsButtonAction(ActionEvent event) {
         loadSubscene(SceneController.ACCOUNTS_SEARCH_INTERFACE);
         changeLogoutToHome(logoutButton);
     }
@@ -62,10 +60,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     /**
      * Handles the action of clicking the button to change to the account creator interface
      * @param event the event triggered by clicking the button
-     * @throws Exception thrown if no such interface exists
      */
     @FXML
-    protected void handleAccountCreatorButtonAction(ActionEvent event) throws Exception {
+    protected void handleAccountCreatorButtonAction(ActionEvent event) {
         loadSubscene(SceneController.ACCOUNT_CREATOR_INTERFACE);
         changeLogoutToHome(logoutButton);
     }
@@ -73,10 +70,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     /**
      * Handles the action of clicking the button to change to the issues interface
      * @param event the event triggered by clicking the button
-     * @throws Exception thrown if no such interface exists
      */
     @FXML
-    protected void handleIssuesButtonAction(ActionEvent event) throws Exception {
+    protected void handleIssuesButtonAction(ActionEvent event) {
     	loadSubscene(SceneController.ISSUES_INTERFACE);
         changeLogoutToHome(logoutButton);
     }

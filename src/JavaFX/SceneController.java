@@ -66,8 +66,13 @@ public class SceneController {
      * @param fxml the fxml file corresponding to the new scene
      * @throws IOException thrown if the fxml file does not exist
      */
-    public void handleSceneChangeButtonAction(ActionEvent event, String fxml) throws IOException {
-        Parent root = load(getClass().getResource(fxml));
+    public void handleSceneChangeButtonAction(ActionEvent event, String fxml) {
+        Parent root = null;
+        try {
+            root = load(getClass().getResource(fxml));
+        } catch (IOException e) {
+            System.out.println("Couldn't set scene.");
+        }
         Scene userScreen = new Scene(root);
         mainPane = (BorderPane) root;
 
@@ -81,8 +86,12 @@ public class SceneController {
      * @param fxml the fxml file corresponding to the new scene
      * @throws IOException thrown if the fxml file does not exist
      */
-    public void loadSubscene(String fxml) throws IOException {
-        mainPane.setCenter(load(getClass().getResource(fxml)));
+    public void loadSubscene(String fxml){
+        try {
+            mainPane.setCenter(load(getClass().getResource(fxml)));
+        } catch (IOException e) {
+            System.out.println("Couldn't load specified subscene.");
+        }
     }
 
     /**
@@ -157,12 +166,8 @@ public class SceneController {
         element.getStylesheets().add("/Resources/CoreStyle.css");
         element.getStyleClass().add("UniversalButton");
         element.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-            try {
-                setRequestResource(resourceList[Integer.parseInt(element.getId())]);
-                loadSubscene("/View/RequestResourceByUserInterface.fxml");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            setRequestResource(resourceList[Integer.parseInt(element.getId())]);
+            loadSubscene("/View/RequestResourceByUserInterface.fxml");
         });
     }
 }

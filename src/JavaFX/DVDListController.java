@@ -58,7 +58,8 @@ public class DVDListController extends SceneController implements Initializable 
 
                 Label text = new Label(resourceList[i].toString());
                 text.wrapTextProperty().setValue(true);
-                element.getChildren().addAll(image, text);
+                Label numberOfCopies = new Label (String.valueOf(getResourceManager().getCopies(resourceList[i].getResourceID()).length));
+                element.getChildren().addAll(image, text, numberOfCopies);
                 element.setAlignment(Pos.TOP_CENTER);
                 element.setSpacing(10);
                 element.setPadding(new Insets(100, 0, 0, 0));

@@ -64,7 +64,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TextField promptText="Serial Number" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <TextField fx:id="searchID" promptText="Serial Number" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="10.0" right="50.0" />
                </GridPane.margin>
@@ -74,7 +74,7 @@
                   <Insets right="10.0" top="5.0" />
                </GridPane.margin>
             </Text>
-            <SplitMenuButton contentDisplay="TOP" mnemonicParsing="false" popupSide="LEFT" styleClass="UniversalButton" text="SplitMenuButton" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
+            <SplitMenuButton fx:id="addResource" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleAddResourceButtonAction" popupSide="LEFT" styleClass="UniversalButton" text="SplitMenuButton" GridPane.halignment="RIGHT" GridPane.valignment="BOTTOM">
               <items>
                 <MenuItem mnemonicParsing="false" text="Action 1" />
                 <MenuItem mnemonicParsing="false" text="Action 2" />
