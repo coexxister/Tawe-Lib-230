@@ -113,11 +113,12 @@ public class TransactionManagerController extends SceneController implements Ini
         //for every transaction add to scroll pane
         for (int iCount = 0; iCount < transactions.length; iCount++) {
             Label textLabel = new Label(transactions[(transactions.length - 1) - iCount].toString());
+
             transacPanes[iCount] = new BorderPane();
             transacPanes[iCount].setCenter(textLabel);
             transacPanes[iCount].setPrefWidth(300);
 
-            if (transactions[iCount].getChange() < 0) {
+            if (transactions[(transactions.length - 1) - iCount].getChange() < 0) {
                 textLabel.setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE; -fx-padding: 20px;");
             } else {
                 textLabel.setStyle("-fx-background-color: #2acb5a; -fx-text-fill: WHITE; -fx-padding: 20px;");
