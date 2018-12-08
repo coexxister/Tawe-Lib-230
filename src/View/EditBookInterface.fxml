@@ -154,7 +154,7 @@
     <left>
         <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="UniversalButton" text="Set Thumbnail" BorderPane.alignment="CENTER">
             <graphic>
-                <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fx:id="thumbImage" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                     <image>
                         <Image url="@../Resources/bookIcon.png" />
                     </image></ImageView>

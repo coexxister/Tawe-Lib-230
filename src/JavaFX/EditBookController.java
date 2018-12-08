@@ -5,8 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class EditBookController extends SceneController implements Initializable {
@@ -37,6 +40,9 @@ public class EditBookController extends SceneController implements Initializable
     @FXML
     private TextField numOfCopies;
 
+    @FXML
+    private ImageView thumbImage;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if(!book.getTitle().isEmpty()){
@@ -64,6 +70,13 @@ public class EditBookController extends SceneController implements Initializable
             numOfCopies.setText(String.valueOf(getResourceManager().getCopies(book.getResourceID()).length));
         } else {
             numOfCopies.setText("0");
+        }
+        if(book.getThumbImage() != 0){
+            try {
+                thumbImage.setImage(new Image(getResourceManager().getImageURL(book.getThumbImage())));
+            } catch (SQLException e) {
+                System.out.println("Couldn't find image.");
+            }
         }
     }
 
