@@ -22,6 +22,10 @@
     -fx-background-color: rgba(215,243,245,0.5);
 }
 
+.scroll-pane > .viewport {
+    -fx-background-color: rgba(215,243,245,0.5);
+}
+
 .UniversalButton:hover {
     -fx-background-color: rgba(215,243,245,1);
 }

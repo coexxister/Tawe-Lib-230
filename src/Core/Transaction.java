@@ -95,12 +95,7 @@ public class Transaction {
                 "\nUser: " + userID +
                 "\nDate: " + date +
                 "\nTime: " + time +
-                "\nChange: ";
-        if (change >= 0) {
-            out+= "+ £" + change;
-        } else {
-            out+= "- £" + change;
-        }
+                "\nChange: £" + change;
 
         return out;
     }

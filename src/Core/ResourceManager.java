@@ -76,6 +76,28 @@ public class ResourceManager {
     }
 
     /**
+     * Get specific resource by resource id.
+     * @param resourceID The resource id of the resource.
+     * @return The specific resource.
+     * @throws IllegalArgumentException Thrown if resource specified does not exist.
+     * @throws SQLException Thrown if column specified is incorrect or connection to database couldn't be established.
+     */
+    public Resource getResource(int resourceID) throws IllegalArgumentException, SQLException {
+
+        //Get resource by rid
+        Resource resource = getResourceList("SELECT * FROM Resource WHERE RID = "
+                + Integer.toString(resourceID))[0];
+
+        //If no resource found by id, then throw illegal argument exception.
+        if (resource == null) {
+            throw new IllegalArgumentException("Resource specified does not exist");
+        }
+
+        return resource;
+
+    }
+
+    /**
      * Gets all resource objects based upon a sql query.
      * @param SQLQuery The SQL query to execute upon the database.
      * @return An array of resources.
