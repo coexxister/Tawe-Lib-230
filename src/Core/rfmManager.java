@@ -27,7 +27,7 @@ public class rfmManager {
 
         //rmManager.addCopy(copy);
 
-        rmManager.addBulkCopies(copy);
+        rfm.requestResource(2, 1);
 
     }
 

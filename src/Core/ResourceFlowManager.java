@@ -450,15 +450,16 @@ public class ResourceFlowManager {
      * @param resourceID The resource id of the resource.
      * @param userID The user id of the user.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws IllegalStateException Thrown if there are no copies that are available or borrowed.
      */
-    public void requestResource(int resourceID, int userID) throws SQLException {
+    public void requestResource(int resourceID, int userID) throws SQLException, IllegalStateException {
 
         //add request to history
         dbManager.addTuple("ResourceRequestHistory",
                 new String[] {Integer.toString(resourceID), Integer.toString(userID),
                         encase(DateManager.returnCurrentDate())});
 
-        //check if there is a copy available to reserve
+        //check if there is a copy available to reserve, else check if any borrowed
         if (dbManager.checkIfExist("Copy", new String[] {"RID", "StateID"},
                 new String[] {Integer.toString(resourceID), "0"})) {
             //there exists a copy that is available
@@ -471,7 +472,8 @@ public class ResourceFlowManager {
 
             //reserves copy.
             reserveCopy(copyID, userID);
-        } else {
+        } else if (dbManager.checkIfExist("Copy", new String[] {"RID", "StateID"},
+                new String[] {Integer.toString(resourceID), "1"})){
 
             //otherwise add user to request queue and set due date on a borrowed copy.
             dbManager.addTuple("ResourceRequestQueue",
@@ -513,6 +515,8 @@ public class ResourceFlowManager {
                 }
             } while (isNext && !isFound);
 
+        } else {
+            throw new IllegalStateException("No copies can be requested");
         }
 
     }
