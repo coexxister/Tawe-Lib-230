@@ -90,10 +90,23 @@ public class ResourceManager {
 
     }
 
-    public Resource[] getResourceListByPopularity() throws SQLException {
+    /**
+     * Gets an array of the resource title and their loan count.
+     * @return An array of the resource title and their loan count.
+     */
+    public String[][] getPopularityData() {
 
-        //String query = "SELECT * FROM "
-        return null;
+        try {
+            //create query to order by amount of borrow
+            String query = "SELECT Title, Count(CID) FROM Resource, BorrowHistory, Copy " +
+                    "WHERE Resource.RID = Copy.RID AND BorrowHistory.CID = Copy.CPID GROUP BY Copy.RID";
+            String[][] out = dbManager.getTupleListByQuery(query);
+
+            return out;
+
+        } catch (SQLException e) {
+            return null;
+        }
     }
 
     /**
