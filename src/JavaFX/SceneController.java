@@ -46,16 +46,9 @@ public class SceneController {
     public static final String ITEMS_DUE = "/View/ItemsDueInterface.fxml";
     public static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
     public static final String RESOURCE_FLOW_INTERFACE = "/View/ResourceFlowInterface.fxml";
+
+    //Query for requesting resource and the requested resource.
     private static String sqlQuery;
-
-    public Resource getRequestResource() {
-        return requestResource;
-    }
-
-    public void setRequestResource(Resource requestResource) {
-        this.requestResource = requestResource;
-    }
-
     private static Resource requestResource;
 
     //Main BorderPane of the interface for changing scenes
@@ -139,6 +132,27 @@ public class SceneController {
         this.sqlQuery = sqlQuery;
     }
 
+    /**
+     * Getter for searched reasource.
+     * @return Requested resource.
+     */
+    public Resource getRequestResource() {
+        return requestResource;
+    }
+
+    /**
+     * Setter of searched resource.
+     * @param requestResource Searched resource.
+     */
+    public void setRequestResource(Resource requestResource) {
+        this.requestResource = requestResource;
+    }
+
+    /**
+     * Method for calling the setter of searched resource when it is clicked on the screen and move to the requesting scene.
+     * @param resourceList List of resources.
+     * @param element Searched resource.
+     */
     public void getOnMouseClicked(Resource[] resourceList, HBox element){
         element.getStylesheets().add("/Resources/CoreStyle.css");
         element.getStyleClass().add("UniversalButton");
