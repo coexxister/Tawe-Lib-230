@@ -17,13 +17,12 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class EditBookController extends SceneController implements Initializable {
+public class EditBookController extends ResourceController implements Initializable {
 
     private Book book = (Book) getRequestResource();
-
-    FileChooser thumbnailChooser = new FileChooser();
-
-    Path selectedPath;
+    private FileChooser thumbnailChooser = new FileChooser();
+    private Path selectedPath;
+    private String path;
 
     @FXML
     private TextField title;
@@ -91,13 +90,23 @@ public class EditBookController extends SceneController implements Initializable
 
     @FXML
     public void handleSaveButtonAction(ActionEvent event){
-        getResourceManager().editResource(new Book(book.getResourceID(), title.getText(), Integer.parseInt(year.getText()),
-                book.getThumbImage(), author.getText(), publisher.getText(), genre.getText(), isbn.getText(), language.getText()));
+        if(!title.getText().isEmpty() && !year.getText().isEmpty() && !thumbImage.equals(null)
+                && !author.getText().isEmpty() && !publisher.getText().isEmpty()) {
+            try {
+                getResourceManager().editResource(new Book(book.getResourceID(), title.getText(),
+                        Integer.parseInt(year.getText()), getResourceManager().getImageID(path), author.getText(),
+                        publisher.getText(), genre.getText(), isbn.getText(), language.getText()));
+            } catch (SQLException e) {
+                System.out.println("Couldn't load an image.");
+            }
+        } else {
+            System.out.println("Not enough information.");
+        }
     }
 
     @FXML
     public void handleCancelButtonAction(ActionEvent event){
-        loadSubscene("/View/ResourceInterface.fxml");
+        cancel();
     }
 
     @FXML
@@ -106,7 +115,11 @@ public class EditBookController extends SceneController implements Initializable
         Node node = (Node) event.getSource();
         File file  = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
         selectedPath = Paths.get(file.getAbsolutePath());
+
+        path = selectedPath.toString();
+        path = path.replace("\\","/");
+        final int LENGTH_OF_SRC = 3;
+        path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
+        thumbImage.setImage(new Image(path));
     }
-
-
 }

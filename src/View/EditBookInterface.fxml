@@ -152,7 +152,7 @@
         </GridPane>
     </center>
     <left>
-        <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="UniversalButton" text="Set Thumbnail" BorderPane.alignment="CENTER">
+        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#handleSetThumbnailButtonAction" styleClass="UniversalButton" text="Set Thumbnail" BorderPane.alignment="CENTER">
             <graphic>
                 <ImageView fx:id="thumbImage" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
                     <image>
