@@ -40,20 +40,18 @@ public class HomeInterfaceController extends SceneController implements Initiali
     /**
      * Handles the action of clicking the button to open the user dashboard interface.
      * @param event the event triggered by clicking the button.
-     * @throws IOException thrown when?.FWLABGALGFBWALFBWALKFNALKFNAWLKFBLAWFBLAWKFBAKWLBFKLAWBFLLABFLAWBFLAWBFWLAKBFWLKABFWALBFLAWK
      */
     @FXML
-    protected void handleDashboardButtonAction(ActionEvent event) throws IOException {
+    protected void handleDashboardButtonAction(ActionEvent event) {
         handleSceneChangeButtonAction(event, SceneController.USER_DASHBOARD_INTERFACE);
     }
 
     /**
      * Handles the action of clicking the button to logout of the user interface, or to return to the home scene if another scene is displayed .
      * @param event the event triggered by clicking the button.
-     * @throws Exception thrown if no such interface exists.
      */
     @FXML
-    protected void handleLogoutButtonAction(ActionEvent event) throws Exception {
+    protected void handleLogoutButtonAction(ActionEvent event) {
         if(logoutButton.getText().equals("Logout")) {
             handleSceneChangeButtonAction(event, SceneController.MAIN_INTERFACE);
         } else {
@@ -64,10 +62,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     /**
      * Handles the action of clicking the button to load the book menu.
      * @param event the event triggered by clicking the button.
-     * @throws IOException thrown if the fxml file for the scene does not exist.
      */
     @FXML
-    public void handleBookMenuButtonAction(ActionEvent event) throws IOException {
+    public void handleBookMenuButtonAction(ActionEvent event) {
         loadSubscene("/View/BookSearchMenu.fxml");
         changeLogoutToHome(logoutButton);
     }
@@ -75,10 +72,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     /**
      * Handles the action of clicking the button to load the DVD menu.
      * @param event the event triggered by clicking the button.
-     * @throws IOException thrown if the fxml file for the scene does not exist.
      */
     @FXML
-    public void handleDVDMenuButtonAction(ActionEvent event) throws IOException {
+    public void handleDVDMenuButtonAction(ActionEvent event) {
         loadSubscene("/View/DVDSearchMenu.fxml");
         changeLogoutToHome(logoutButton);
     }
@@ -86,10 +82,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     /**
      * Handles the action of clicking the button to load the laptop menu.
      * @param event the event triggered by clicking the button.
-     * @throws IOException thrown if the fxml file for the scene does not exist.
      */
     @FXML
-    public void handleLaptopMenuButtonAction(ActionEvent event) throws IOException {
+    public void handleLaptopMenuButtonAction(ActionEvent event) {
         loadSubscene("/View/ComputerSearchMenu.fxml");
         changeLogoutToHome(logoutButton);
     }
@@ -97,10 +92,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     /**
      * Handles the action of clicking the button to list all resources.
      * @param event the event triggered by clicking the button.
-     * @throws IOException thrown if the fxml file for the scene does not exist.
      */
     @FXML
-    public void handleListAllButtonAction(ActionEvent event) throws IOException{
+    public void handleListAllButtonAction(ActionEvent event) {
         loadSubscene("/View/ListAll.fxml");
         changeLogoutToHome(logoutButton);
     }
@@ -108,10 +102,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     /**
      * Handles the action of clicking the popular button to get popular statistics.
      * @param event the event triggered by clicking the button.
-     * @throws IOException Thrown if the fxml file for the scene does not exist.
      */
     @FXML
-    public void handlePopularListingAction(ActionEvent event) throws IOException{
+    public void handlePopularListingAction(ActionEvent event) {
         loadSubscene("/View/PopularListing.fxml");
         changeLogoutToHome(logoutButton);
     }

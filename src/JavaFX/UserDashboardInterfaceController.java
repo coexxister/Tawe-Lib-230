@@ -21,7 +21,7 @@ public class UserDashboardInterfaceController extends SceneController implements
     private Label currentBalance;
 
     @FXML
-    private void handleHomeButtonAction(ActionEvent event) throws IOException {
+    private void handleHomeButtonAction(ActionEvent event) {
         if(homeButton.getText().contains("Home")) {
             handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
         } else {
@@ -30,25 +30,25 @@ public class UserDashboardInterfaceController extends SceneController implements
     }
 
     @FXML
-    private void handleAvatarChangeButtonAction(ActionEvent event) throws IOException {
+    private void handleAvatarChangeButtonAction(ActionEvent event) {
         loadSubscene(SceneController.AVATAR_CHANGE_INTERFACE);
         changeDashboardButton();
     }
 
     @FXML
-    private void handleTransactionHistoryAction(ActionEvent event) throws IOException {
+    private void handleTransactionHistoryAction(ActionEvent event) {
         loadSubscene(SceneController.TRANSACTION_HISTORY_INTERFACE);
         changeDashboardButton();
     }
 
     @FXML
-    private void handleLoanAction(ActionEvent event) throws IOException {
+    private void handleLoanAction(ActionEvent event) {
         loadSubscene(SceneController.LOAN_HISTORY_CONTROLLER);
         changeDashboardButton();
     }
 
     @FXML
-    private void handleReservedAction(ActionEvent event) throws IOException {
+    private void handleReservedAction(ActionEvent event) {
         loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
         changeDashboardButton();
     }
@@ -58,13 +58,13 @@ public class UserDashboardInterfaceController extends SceneController implements
         homeButton.setText("Dashboard");
     }
     @FXML
-    private void handleRequestedResourceAction(ActionEvent event) throws IOException {
+    private void handleRequestedResourceAction(ActionEvent event) {
         loadSubscene(SceneController.REQUESTED_RESOURCE);
         changeDashboardButton();
     }
 
     @FXML
-    private void handleItemsDueAction(ActionEvent event) throws IOException {
+    private void handleItemsDueAction(ActionEvent event) {
         loadSubscene(SceneController.ITEMS_DUE);
         changeDashboardButton();
     }

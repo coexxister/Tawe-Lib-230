@@ -47,7 +47,7 @@
                   </Button>
                   <Button fx:id="itemDue" mnemonicParsing="false" onAction="#handleItemsDueAction" prefWidth="162.0" styleClass="UniversalButton" text="Items Due" />
                   <Button fx:id="loanedItem" mnemonicParsing="false" onAction="#handleLoanAction" prefWidth="162.0" styleClass="UniversalButton" text="Loan History" />
-                  <Button fx:id="requestedResources" mnemonicParsing="false" onAction="#handleRequestedResourceAction" styleClass="UniversalButton" text="Requested Resources" />
+                  <Button fx:id="requestedResources" mnemonicParsing="false" onAction="#handleRequestedResourceAction" prefWidth="162.0" styleClass="UniversalButton" text="Requested Resources" />
                   <Button fx:id="reservedItem" mnemonicParsing="false" onAction="#handleReservedAction" prefWidth="162.0" styleClass="UniversalButton" text="Reserved Items" />
                   <Button fx:id="transactionHistory" mnemonicParsing="false" onAction="#handleTransactionHistoryAction" prefWidth="162.0" styleClass="UniversalButton" text="Transaction History" />
                   <Button fx:id="userStatistics" mnemonicParsing="false" prefWidth="162.0" styleClass="UniversalButton" text="User Statistics" />
