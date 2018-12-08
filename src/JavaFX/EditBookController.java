@@ -4,17 +4,26 @@ import Core.Book;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class EditBookController extends SceneController implements Initializable {
 
     private Book book = (Book) getRequestResource();
+
+    FileChooser thumbnailChooser = new FileChooser();
+
+    Path selectedPath;
 
     @FXML
     private TextField title;
@@ -90,4 +99,14 @@ public class EditBookController extends SceneController implements Initializable
     public void handleCancelButtonAction(ActionEvent event){
         loadSubscene("/View/ResourceInterface.fxml");
     }
+
+    @FXML
+    public void handleSetThumbnailButtonAction(ActionEvent event) {
+        thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
+        Node node = (Node) event.getSource();
+        File file  = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
+        selectedPath = Paths.get(file.getAbsolutePath());
+    }
+
+
 }
