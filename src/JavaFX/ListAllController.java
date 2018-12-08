@@ -1,5 +1,6 @@
 package JavaFX;
 
+import Core.Copy;
 import Core.Resource;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -81,7 +82,16 @@ public class ListAllController extends SceneController implements Initializable 
 
                 Label text = new Label(resourceList[i].toString());
                 text.wrapTextProperty().setValue(true);
-                element.getChildren().addAll(image, text);
+                Label availability = new Label();
+                availability.setDisable(true);
+                Copy[] copies = getResourceManager().getCopies(resourceList[i].getResourceID());
+                for(Copy copy: copies){
+                    if(copy.getStateID() == 0) {
+                        availability.setDisable(false);
+                        availability = new Label("Available");
+                    }
+                }
+                element.getChildren().addAll(image, text, availability);
                 element.setAlignment(Pos.TOP_CENTER);
                 element.setSpacing(10);
                 element.setPadding(new Insets(100, 0, 0, 0));
