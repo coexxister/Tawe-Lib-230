@@ -9,50 +9,45 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="LogIn" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.LoginInterfaceController">
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" BorderPane.alignment="CENTER">
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="529.0" minWidth="10.0" prefWidth="529.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="422.0" minWidth="10.0" prefWidth="222.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="546.0" minWidth="10.0" prefWidth="529.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="288.0" minHeight="10.0" prefHeight="288.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="192.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="349.0" minHeight="10.0" prefHeight="320.0" vgrow="SOMETIMES" />
+        </rowConstraints>
          <children>
-            <ImageView fitHeight="79.0" fitWidth="220.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="79.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                <image>
                   <Image url="@../Resources/tawelibIcon.png" />
                </image>
             </ImageView>
-               <ImageView fitHeight="110.0" fitWidth="123.0" pickOnBounds="true" preserveRatio="true">
+               <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                   <image>
                      <Image url="@../Resources/laptopIcon.png" />
                   </image>
                </ImageView>
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="769.0" minWidth="10.0" prefWidth="766.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.0" minWidth="10.0" prefWidth="514.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TextField fx:id="loginUsername" alignment="CENTER" maxWidth="250.0" onAction="#onEnter" prefHeight="31.0" prefWidth="315.0" promptText="Enter your User ID" styleClass="UniversalTextBox" stylesheets="@../Resources/CoreStyle.css" GridPane.halignment="RIGHT" GridPane.valignment="CENTER" />
-                     <Button fx:id="loginButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleLoginButtonAction" styleClass="UniversalButton" text="Login" GridPane.columnIndex="1">
-                     <graphic>
-                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Icons/LogIn.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <GridPane.margin>
-                        <Insets left="5.0" />
-                     </GridPane.margin>
-                  </Button>
-               </children>
-            </GridPane>
+            <TextField fx:id="loginUsername" alignment="CENTER" maxWidth="250.0" onAction="#onEnter" prefHeight="31.0" prefWidth="315.0" promptText="Enter your User ID" styleClass="UniversalTextBox" stylesheets="@../Resources/CoreStyle.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+               <Button fx:id="loginButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleLoginButtonAction" styleClass="UniversalButton" text="Login" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icons/LogIn.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <GridPane.margin>
+                  <Insets left="5.0" />
+               </GridPane.margin>
+            </Button>
          </children>
-         <BorderPane.margin>
-            <Insets />
-         </BorderPane.margin>
-      </VBox>
+      </GridPane>
    </center>
 </BorderPane>
