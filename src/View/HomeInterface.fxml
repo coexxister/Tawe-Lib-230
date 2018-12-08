@@ -82,7 +82,14 @@
                <bottom>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Button fx:id="searchAllButton" mnemonicParsing="false" onAction="#handleListAllButtonAction" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="List All" />
+                        <Button fx:id="searchAllButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleListAllButtonAction" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="List All">
+                           <graphic>
+                              <ImageView fitHeight="39.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Icons/ListAll.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </HBox>
                </bottom>
