@@ -132,6 +132,21 @@ public class AccountManager {
     }
 
     /**
+     * Determines if the user account exists.
+     * @param userID The user id of the user.
+     * @return True if exists. False if does not exists.
+     */
+    public boolean isExist(int userID) {
+
+        try {
+            //returns whether user exists or not.
+            return dbManager.checkIfExist("User", new String[]{"UID"}, new String[]{Integer.toString(userID)});
+        } catch (SQLException e) {
+            return false;
+        }
+    }
+
+    /**
      * Changes the balance of an account and records the transaction.
      * @param userID The user id of the account.
      * @param money The change in balance.

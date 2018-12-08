@@ -43,6 +43,7 @@ public class SceneController {
     public static final String ISSUES_INTERFACE = "/View/IssuesInterface.fxml";
     public static final String ITEMS_DUE = "/View/ItemsDueInterface.fxml";
     public static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
+    public static final String RESOURCE_FLOW_INTERFACE = "/View/ResourceFlowInterface.fxml";
     private static String sqlQuery;
 
     public Resource getRequestResource() {

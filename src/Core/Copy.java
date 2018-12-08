@@ -166,7 +166,7 @@ public class Copy {
         if (stateID == 0) {
             out+= "\nCopy is available.";
         } else if (stateID == 1) {
-            out+= "\nCopy is current on loan";
+            out+= "\nCopy is currently on loan";
 
             if (dueDate != null) {
                 out+= "\nIt is due on " + LocalDate.parse(dueDate).getDayOfMonth() + "/" +
