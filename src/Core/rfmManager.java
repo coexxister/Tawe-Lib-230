@@ -27,7 +27,9 @@ public class rfmManager {
 
         //rmManager.addCopy(copy);
 
-        rfm.requestResource(2, 1);
+        //rfm.requestResource(2, 1);
+
+        System.out.print(acManager.isExist(2));
 
     }
 
