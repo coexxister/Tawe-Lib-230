@@ -95,8 +95,11 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Copies" />
-                        <TextField promptText="Number of Copies" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Number of Copies" GridPane.valignment="BOTTOM" />
+                        <TextField promptText="Number of Copies" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                           <GridPane.margin>
+                              <Insets right="20.0" />
+                           </GridPane.margin></TextField>
                      </children>
                   </GridPane>
                   <Button mnemonicParsing="false" styleClass="UniversalButton" text="Create Resource" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
@@ -117,7 +120,10 @@
    <left>
       <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="UniversalButton" text="Set Thumbnail" BorderPane.alignment="CENTER">
          <graphic>
-            <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/bookIcon.png" />
+               </image></ImageView>
          </graphic>
          <BorderPane.margin>
             <Insets bottom="150.0" left="50.0" />
