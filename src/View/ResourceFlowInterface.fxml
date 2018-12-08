@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.text.Font?>
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900" styleClass="SubScene" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.ResourceFlowController">
    <center>
       <GridPane BorderPane.alignment="CENTER">
@@ -31,21 +32,31 @@
             <Insets bottom="100.0" left="100.0" right="100.0" top="100.0" />
          </BorderPane.margin>
          <children>
-            <TextField prefHeight="31.0" prefWidth="380.0" promptText="Serial Code" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+             <Text fx:id="textName" strokeType="OUTSIDE" strokeWidth="0.0" text="Name Name" BorderPane.alignment="CENTER" translateY="-10.0" translateX="30.0">
+                 <font>
+                     <Font name="System Bold" size="40.0"/>
+                 </font>
+             </Text>
+            <TextField fx:id="textIDField" prefHeight="31.0" prefWidth="380.0" promptText="Serial Code" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
             </TextField>
-            <Button fx:id="returnButton" mnemonicParsing="false" prefWidth="100.0" styleClass="UniversalButton" text="Return" translateY="20.0" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+            <Button onAction="#handleReturnCopyAction" fx:id="returnButton" mnemonicParsing="false" prefWidth="100.0" styleClass="UniversalButton" text="Return" translateY="20.0" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="unreserveButton" mnemonicParsing="false" prefWidth="100.0" styleClass="UniversalButton" text="Unreserve" translateY="51.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Button onAction="#handleUnReserveAction" fx:id="unreserveButton" mnemonicParsing="false" prefWidth="100.0" styleClass="UniversalButton" text="Unreserve" translateY="51.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
+             <Button onAction="#handleSelectIDAction" mnemonicParsing="false" prefWidth="100.0" styleClass="UniversalButton" text="Select" translateY="100" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                 <GridPane.margin>
+                     <Insets left="10.0" />
+                 </GridPane.margin>
+             </Button>
             <Button minWidth="280.0" mnemonicParsing="false" styleClass="UniversalButton" text="View Loan History" onAction="#handleViewLoanHistoryAction" translateY="16.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets />
@@ -62,7 +73,7 @@
                      <Insets />
                  </opaqueInsets>
              </Button>
-            <Button fx:id="borrowButton" mnemonicParsing="false" prefWidth="100.0" styleClass="UniversalButton" text="Borrow" translateY="35.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <Button onAction="#handleBorrowCopyAction" fx:id="borrowButton" mnemonicParsing="false" prefWidth="100.0" styleClass="UniversalButton" text="Borrow" translateY="35.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>

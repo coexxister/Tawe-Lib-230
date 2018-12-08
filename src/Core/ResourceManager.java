@@ -84,16 +84,23 @@ public class ResourceManager {
      */
     public Resource getResource(int resourceID) throws IllegalArgumentException, SQLException {
 
-        //Get resource by rid
-        Resource resource = getResourceList("SELECT * FROM Resource WHERE RID = "
-                + Integer.toString(resourceID))[0];
+        try {
 
-        //If no resource found by id, then throw illegal argument exception.
-        if (resource == null) {
-            throw new IllegalArgumentException("Resource specified does not exist");
+            //Get resource by rid
+            Resource resource = getResourceList("SELECT * FROM Resource WHERE RID = "
+                    + Integer.toString(resourceID))[0];
+
+            //If no resource found by id, then throw illegal argument exception.
+            if (resource == null) {
+                throw new IllegalArgumentException("Resource specified does not exist");
+            }
+
+            return resource;
+
+        } catch (ArrayIndexOutOfBoundsException a) {
+            //Caused by no data being returned from database.
+            return null;
         }
-
-        return resource;
 
     }
 

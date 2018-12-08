@@ -70,6 +70,28 @@ public class ResourceFlowManager {
     }
 
     /**
+     * Gets the borrow history of a copy.
+     * @param copy The copy id of the copy.
+     * @return The array of loan events.
+     */
+    public LoanEvent[] getBorrowHistoryByCopy(int copy) {
+
+        try {
+            //Get loan data.
+            String[][] loanData = dbManager.getTupleListByQuery("SELECT * FROM BorrowHistory WHERE CID = " +
+                    Integer.toString(copy));
+
+            //create array of LoanEvents
+            LoanEvent[] events = constructLoanEvents(loanData);
+
+            return events;
+        } catch (SQLException e) {
+            return null;
+        }
+
+    }
+
+    /**
      * Gets the borrow history of a user.
      * @return The array of loan events.
      */
