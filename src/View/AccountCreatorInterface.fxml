@@ -131,13 +131,13 @@
             </Button>
             <RadioButton contentDisplay="CENTER" mnemonicParsing="false" selected="true" text="User" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets left="97.0" />
+                  <Insets left="130.0" />
                </GridPane.margin>
                <toggleGroup>
                   <ToggleGroup fx:id="userGroup" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton contentDisplay="CENTER" mnemonicParsing="false" text="Staff User" toggleGroup="$userGroup" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+            <RadioButton contentDisplay="CENTER" mnemonicParsing="false" text="Staff" toggleGroup="$userGroup" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="130.0" />
                </GridPane.margin>
