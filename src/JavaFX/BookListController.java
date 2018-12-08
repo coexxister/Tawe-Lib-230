@@ -7,6 +7,7 @@
 package JavaFX;
 
 import Core.Resource;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -15,8 +16,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -28,6 +31,7 @@ public class BookListController extends SceneController implements Initializable
 
     private double elementsPerPage = 3;
     private Resource resourceList[] = null;
+    private int i;
 
 
     /**
@@ -49,10 +53,11 @@ public class BookListController extends SceneController implements Initializable
         HBox box = new HBox(elementsPerPage);
         bookView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
         int page = pageIndex * (int)elementsPerPage;
-        for (int i = page; i < page + elementsPerPage; i++) {
+        for (i = page; i < page + elementsPerPage; i++) {
             if(i < resourceList.length) {
 
                 HBox element = new HBox(elementsPerPage);
+                element.setId(String.valueOf(i));
                 ImageView image = new ImageView("/Resources/bookIcon.png");
 
                 image.setFitWidth(100);
@@ -67,6 +72,18 @@ public class BookListController extends SceneController implements Initializable
                 element.setSpacing(10);
                 element.setPadding(new Insets(100, 0, 0, 0));
                 box.getChildren().add(element);
+
+
+                element.getStylesheets().add("/Resources/CoreStyle.css");
+                element.getStyleClass().add("UniversalButton");
+                element.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+                    try {
+                        setRequestResource(resourceList[Integer.parseInt(element.getId())]);
+                        loadSubscene("/View/RequestResourceByUserInterface.fxml");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         }
         box.setAlignment(Pos.CENTER);
