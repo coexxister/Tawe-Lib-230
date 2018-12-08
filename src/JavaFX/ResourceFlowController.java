@@ -124,6 +124,13 @@ public class ResourceFlowController extends SceneController implements Initializ
             alert.setContentText("Borrow Failed: Error in the Database!");
             alert.showAndWait();
 
+        } catch (IllegalStateException e) {
+
+            textIDField.setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+
         }
     }
 
@@ -156,6 +163,13 @@ public class ResourceFlowController extends SceneController implements Initializ
             alert.setContentText("Return Failed: Error in the Database!");
             alert.showAndWait();
 
+        } catch (IllegalStateException e) {
+
+            textIDField.setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+
         }
     }
 
@@ -185,6 +199,13 @@ public class ResourceFlowController extends SceneController implements Initializ
             textIDField.setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setContentText("Unreserve Failed: Error in the Database!");
+            alert.showAndWait();
+
+        } catch (IllegalStateException e) {
+
+            textIDField.setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
             alert.showAndWait();
 
         }

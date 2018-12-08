@@ -71,15 +71,37 @@ public class ResourceFlowManager {
 
     /**
      * Gets the borrow history of a copy.
-     * @param copy The copy id of the copy.
+     * @param copyID The copy id of the copy.
      * @return The array of loan events.
      */
-    public LoanEvent[] getBorrowHistoryByCopy(int copy) {
+    public LoanEvent[] getBorrowHistoryByCopy(int copyID) {
 
         try {
             //Get loan data.
             String[][] loanData = dbManager.getTupleListByQuery("SELECT * FROM BorrowHistory WHERE CID = " +
-                    Integer.toString(copy));
+                    Integer.toString(copyID));
+
+            //create array of LoanEvents
+            LoanEvent[] events = constructLoanEvents(loanData);
+
+            return events;
+        } catch (SQLException e) {
+            return null;
+        }
+
+    }
+
+    /**
+     * Gets the borrow history of a copy.
+     * @param resourceID The copy id of the copy.
+     * @return The array of loan events.
+     */
+    public LoanEvent[] getBorrowHistoryByResource(int resourceID) {
+
+        try {
+            //Get loan data.
+            String[][] loanData = dbManager.getTupleListByQuery("SELECT * FROM BorrowHistory WHERE CID = " +
+                    Integer.toString(resourceID));
 
             //create array of LoanEvents
             LoanEvent[] events = constructLoanEvents(loanData);
@@ -280,37 +302,44 @@ public class ResourceFlowManager {
      * @param copyID The copy id of a copy.
      * @param userID The user id of a copy.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
-     * @throws IllegalStateException Thrown if specified copy or user does not exist.
+     * @throws IllegalStateException Thrown if specified copy or user does not exist. Or user balance is smaller than 0.
      */
     public void borrowCopy(int copyID, int userID) throws SQLException, IllegalStateException {
 
-        //check if copy is available, if so then borrow copy. Otherwise throw exception.
-        if (getCopyState(copyID) == 0) {
-            //Get the resource id.
-            int resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT RID FROM Copy WHERE CPID = " +
-                    Integer.toString(copyID))[0]);
+        //if user balance is greater or equal to 0, then continue to borrow. Otherwise throw exception.
+        if (acManager.getAccountBalance(userID) >= 0) {
 
-            //If the user exists then borrow the copy.
-            if (dbManager.checkIfExist("User", new String[] {"UID"},
-                    new String[] {Integer.toString(userID)})) {
+            //check if copy is available, if so then borrow copy. Otherwise throw exception.
+            if (getCopyState(copyID) == 0) {
+                //Get the resource id.
+                int resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT RID FROM Copy WHERE CPID = " +
+                        Integer.toString(copyID))[0]);
 
-                //remove copy from availability queue.
-                removeAvailable(copyID, resourceID);
-                //enqueue in borrowed queue.
-                enqueueBorrowed(copyID, resourceID, userID);
+                //If the user exists then borrow the copy.
+                if (dbManager.checkIfExist("User", new String[]{"UID"},
+                        new String[]{Integer.toString(userID)})) {
 
-                //adds to borrow history
-                dbManager.addTuple("BorrowHistory",
-                        new String[] {Integer.toString(userID), Integer.toString(copyID),
-                                encase(DateManager.returnCurrentDate()), "null",
-                                encase(DateManager.returnTime()),"null"});
+                    //remove copy from availability queue.
+                    removeAvailable(copyID, resourceID);
+                    //enqueue in borrowed queue.
+                    enqueueBorrowed(copyID, resourceID, userID);
+
+                    //adds to borrow history
+                    dbManager.addTuple("BorrowHistory",
+                            new String[]{Integer.toString(userID), Integer.toString(copyID),
+                                    encase(DateManager.returnCurrentDate()), "null",
+                                    encase(DateManager.returnTime()), "null"});
+
+                } else {
+                    throw new IllegalStateException("User does not exist");
+                }
 
             } else {
-                throw new IllegalStateException("User does not exist");
+                throw new IllegalStateException("Copy is not available");
             }
 
         } else {
-            throw new IllegalStateException("Copy is not available");
+            throw new IllegalStateException("Balance must be positive to borrow copies!");
         }
 
     }
