@@ -19,7 +19,7 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class EditDVDController extends SceneController implements Initializable {
+public class EditDVDController extends ResourceController implements Initializable {
 
     private Dvd dvd = (Dvd) getRequestResource();
     private FileChooser thumbnailChooser = new FileChooser();
@@ -103,7 +103,7 @@ public class EditDVDController extends SceneController implements Initializable 
 
     @FXML
     public void handleCancelButtonAction(ActionEvent event){
-        loadSubscene("/View/ResourceInterface.fxml");
+        cancel();
     }
 
     @FXML
