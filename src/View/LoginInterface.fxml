@@ -20,8 +20,9 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="288.0" minHeight="10.0" prefHeight="288.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="192.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="349.0" minHeight="10.0" prefHeight="320.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="261.0" minHeight="10.0" prefHeight="193.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="349.0" minHeight="0.0" prefHeight="37.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="403.0" minHeight="10.0" prefHeight="309.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <ImageView fitHeight="79.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
@@ -34,10 +35,10 @@
                      <Image url="@../Resources/laptopIcon.png" />
                   </image>
                </ImageView>
-            <TextField fx:id="loginUsername" alignment="CENTER" maxWidth="250.0" onAction="#onEnter" prefHeight="31.0" prefWidth="315.0" promptText="Enter your User ID" styleClass="UniversalTextBox" stylesheets="@../Resources/CoreStyle.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-               <Button fx:id="loginButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#handleLoginButtonAction" styleClass="UniversalButton" text="Login" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <TextField fx:id="loginUsername" alignment="CENTER" maxWidth="250.0" onAction="#onEnter" prefHeight="31.0" prefWidth="222.0" promptText="Enter your User ID" styleClass="UniversalTextBox" stylesheets="@../Resources/CoreStyle.css" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+               <Button fx:id="loginButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleLoginButtonAction" styleClass="UniversalButton" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icons/LogIn.png" />
                      </image>
