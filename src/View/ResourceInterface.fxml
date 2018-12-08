@@ -17,20 +17,21 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" styleClass="SubScene" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.ResourceController">
    <center>
-      <GridPane BorderPane.alignment="CENTER">
+      <GridPane prefHeight="438.0" prefWidth="700.0" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="27.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="132.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="181.0" minHeight="10.0" prefHeight="181.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="201.0" minHeight="0.0" prefHeight="131.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="407.0" minHeight="10.0" prefHeight="194.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="407.0" minHeight="10.0" prefHeight="206.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="editResource" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleEditResourceButtonAction" prefWidth="158.0" styleClass="UniversalButton" text="Edit Resource" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <Button fx:id="editResource" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleEditResourceButtonAction" prefWidth="158.0" styleClass="UniversalButton" text="Edit Resource" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets bottom="10.0" left="35.0" />
+                  <Insets />
                </GridPane.margin>
                <graphic>
                   <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
@@ -40,21 +41,9 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="deleteAction" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleDeleteResourceButtonAction" prefWidth="158.0" styleClass="UniversalButton" text="Delete Resource" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Button fx:id="resourceLog" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleResourceLogButtonAction" prefWidth="158.0" styleClass="UniversalButton" text="Resource Logs" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets right="35.0" top="10.0" />
-               </GridPane.margin>
-               <graphic>
-                  <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../Icons/DeleteResource.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Button fx:id="resourceLog" contentDisplay="TOP" mnemonicParsing="false" onAction="#handleResourceLogButtonAction" prefWidth="158.0" styleClass="UniversalButton" text="Resource Logs" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets left="35.0" top="10.0" />
+                  <Insets />
                </GridPane.margin>
                <graphic>
                   <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
@@ -64,17 +53,12 @@
                   </ImageView>
                </graphic>
             </Button>
-            <TextField fx:id="searchID" prefWidth="247.0" promptText="Resource ID" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-               <GridPane.margin>
-                  <Insets left="10.0" right="130.0" />
-               </GridPane.margin>
-            </TextField>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Resource ID" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Resource ID" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets right="10.0" top="5.0" />
                </GridPane.margin>
             </Text>
-            <MenuButton fx:id="addResource" contentDisplay="TOP" mnemonicParsing="false" popupSide="LEFT" styleClass="UniversalButton" text="Add Resource" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+            <MenuButton fx:id="addResource" contentDisplay="TOP" mnemonicParsing="false" popupSide="LEFT" styleClass="UniversalButton" text="Add Resource" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#handleAddBookButtonAction" text="Add Book">
                      <graphic>
@@ -112,9 +96,10 @@
                   </ImageView>
                </graphic>
                <GridPane.margin>
-                  <Insets bottom="10.0" right="35.0" />
+                  <Insets />
                </GridPane.margin>
             </MenuButton>
+            <TextField fx:id="searchID" promptText="Resource ID" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </center>
