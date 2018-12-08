@@ -1,5 +1,6 @@
 package JavaFX;
 
+import Core.Copy;
 import Core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,22 +58,27 @@ public class ResourceFlowController extends SceneController implements Initializ
     }
 
     @FXML
-    private void handleViewLoanHistoryAction(ActionEvent event) throws IOException {
+    private void handleViewLoanHistoryAction(ActionEvent event) {
         loadSubscene(SceneController.LOAN_HISTORY_CONTROLLER);
     }
 
     @FXML
-    private void handleDueItemsAction(ActionEvent event) throws IOException {
+    private void handleDueItemsAction(ActionEvent event) {
         loadSubscene(SceneController.ITEMS_DUE);
     }
 
     @FXML
-    private void handleReservedResourcesAction(ActionEvent event) throws IOException {
+    private void handleReservedResourcesAction(ActionEvent event) {
         loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
     }
 
+    /**
+     * Takes the entered user id, validates it and marks it as the selected id in which operation will be
+     * performed upon.
+     * @param event The action event.
+     */
     @FXML
-    public void handleSelectIDAction(ActionEvent event) throws IOException {
+    private void handleSelectIDAction(ActionEvent event) {
 
         try {
 
@@ -101,7 +107,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     }
 
     @FXML
-    public void handleBorrowCopyAction(ActionEvent event) throws IOException {
+    private void handleBorrowCopyAction(ActionEvent event) {
 
         try {
             if (selectedCopyID != -1) {
@@ -142,7 +148,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     }
 
     @FXML
-    public void handleReturnCopyAction(ActionEvent event) throws IOException {
+    private void handleReturnCopyAction(ActionEvent event) {
 
         try {
             if (selectedCopyID != -1) {
@@ -183,7 +189,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     }
 
     @FXML
-    public void handleUnReserveAction(ActionEvent event) throws IOException {
+    private void handleUnReserveAction(ActionEvent event) {
 
         try {
             if (selectedCopyID != -1) {
