@@ -45,6 +45,16 @@ public class SceneController {
     public static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
     private static String sqlQuery;
 
+    public Resource getRequestResource() {
+        return requestResource;
+    }
+
+    public void setRequestResource(Resource requestResource) {
+        this.requestResource = requestResource;
+    }
+
+    private static Resource requestResource;
+
     //Main BorderPane of the interface for changing scenes
     private static BorderPane mainPane = new BorderPane();
 
