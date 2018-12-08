@@ -30,7 +30,7 @@ public class RequestedResourcesInterfaceController extends SceneController imple
 
         VBox root = new VBox();
 
-        Resource[] requestedResources = getResurceFlowManager().
+        Resource[] requestedResources = getResourceFlowManager().
                 getRequestedResources(SceneController.USER_ID);
 
         Resource[] requestedHistory;

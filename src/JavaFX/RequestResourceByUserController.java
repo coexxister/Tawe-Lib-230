@@ -21,7 +21,7 @@ public class RequestResourceByUserController extends SceneController implements 
     @FXML
     public void handleRequestResourceButtonAction() {
         try {
-            getResurceFlowManager().requestResource(getRequestResource().getResourceID(), SceneController.USER_ID);
+            getResourceFlowManager().requestResource(getRequestResource().getResourceID(), SceneController.USER_ID);
             JOptionPane.showMessageDialog(null, "Requested Successfully!", "Resource Requested", JOptionPane.INFORMATION_MESSAGE);
         } catch (SQLException e) {
             System.out.println("Failed request.");

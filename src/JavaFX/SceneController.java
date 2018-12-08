@@ -62,10 +62,10 @@ public class SceneController {
     private static BorderPane mainPane = new BorderPane();
 
     //Instances of manager classes for use with staff interface
-    private DatabaseManager db = new DatabaseManager("./TaweLibDB.db");
-    private ResourceManager rm = new ResourceManager(db);
-    private AccountManager am = new AccountManager(db);
-    private ResourceFlowManager rfm = new ResourceFlowManager(db, am, rm, USER_ID);
+    private static DatabaseManager db = new DatabaseManager("./TaweLibDB.db");
+    private static ResourceManager rm = new ResourceManager(db);
+    private static AccountManager am = new AccountManager(db);
+    private static ResourceFlowManager rfm = new ResourceFlowManager(db, am, rm, USER_ID);
 
     /**
      * Handles the action of clicking a button to change scenes
@@ -106,7 +106,7 @@ public class SceneController {
      * @return db
      * 			the database
      */
-    public DatabaseManager getDatabase() {
+    public static DatabaseManager getDatabase() {
         return db;
     }
 
@@ -115,13 +115,13 @@ public class SceneController {
      * @return am
      * 			the account manager
      */
-    public AccountManager getAccountManager() { return am; }
+    public static AccountManager getAccountManager() { return am; }
 
     /**
      * Gets the resource flow manager instance.
      * @return The resource flow manager instance.
      */
-    public ResourceFlowManager getResurceFlowManager() {
+    public static ResourceFlowManager getResourceFlowManager() {
         return rfm;
     }
 
@@ -129,7 +129,7 @@ public class SceneController {
      * Getter for resource manager
      * @return rm the resource manager
      */
-    public ResourceManager getResourceManager(){ return rm;}
+    public static ResourceManager getResourceManager(){ return rm;}
 
     public String getSqlQuery(){
         return sqlQuery;

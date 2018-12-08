@@ -27,7 +27,7 @@ public class LoanHistoryController extends SceneController implements Initializa
 
         VBox root = new VBox();
 
-        LoanEvent[] loanHistory = getResurceFlowManager().getBorrowHistory(SceneController.USER_ID);
+        LoanEvent[] loanHistory = getResourceFlowManager().getBorrowHistory(SceneController.USER_ID);
 
         Label[] loanText = new Label[loanHistory.length];
 

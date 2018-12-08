@@ -30,7 +30,7 @@ public class ItemsDueInterfaceController extends SceneController implements Init
 
         VBox root = new VBox();
 
-        Copy[] copiesOnLoan = getResurceFlowManager().getBorrowedCopies(SceneController.USER_ID);
+        Copy[] copiesOnLoan = getResourceFlowManager().getBorrowedCopies(SceneController.USER_ID);
         GridPane[] copyContainer = new GridPane[copiesOnLoan.length];
 
         //For every copy create the grid pane and the labels inside it.

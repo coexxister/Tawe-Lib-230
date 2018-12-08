@@ -33,7 +33,7 @@ public class ReservedInterfaceController extends SceneController implements Init
         Copy[] reservedCopies;
 
         try {
-            reservedCopies = getResurceFlowManager().getReservedCopies(SceneController.USER_ID);
+            reservedCopies = getResourceFlowManager().getReservedCopies(SceneController.USER_ID);
         } catch (SQLException e) {
             reservedCopies = new Copy[0];
         }
