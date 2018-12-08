@@ -85,6 +85,7 @@ public class ListAllController extends SceneController implements Initializable 
                 element.setSpacing(10);
                 element.setPadding(new Insets(100, 0, 0, 0));
                 box.getChildren().add(element);
+                getOnMouseClicked(resourceList, element);
             }
         }
         box.setAlignment(Pos.CENTER);

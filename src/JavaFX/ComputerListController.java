@@ -60,6 +60,7 @@ public class ComputerListController extends SceneController implements Initializ
                 element.setSpacing(10);
                 element.setPadding(new Insets(100, 0, 0, 0));
                 box.getChildren().add(element);
+                getOnMouseClicked(resourceList, element);
             }
         }
         box.setAlignment(Pos.CENTER);

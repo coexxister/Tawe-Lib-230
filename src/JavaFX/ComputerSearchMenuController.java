@@ -42,19 +42,19 @@ public class ComputerSearchMenuController extends SceneController{
             input.add("'%" + computerTitle.getText() + "%'");
         }
         if(!computerYear.getText().isEmpty()){
-            column.add("Author");
+            column.add("RYear");
             input.add("'%" + computerYear.getText() + "%'");
         }
         if(!computerModel.getText().isEmpty()){
-            column.add("RYear");
-            input.add(computerModel.getText());
+            column.add("Model");
+            input.add("'%" + computerModel.getText() + "%'");
         }
         if(!computerManufacturer.getText().isEmpty()){
-            column.add("Genre");
+            column.add("Manufacturer");
             input.add("'%" + computerManufacturer.getText() + "%'");
         }
         if(!computerOS.getText().isEmpty()){
-            column.add("Genre");
+            column.add("Installed_OS");
             input.add("'%" + computerOS.getText() + "%'");
         }
 

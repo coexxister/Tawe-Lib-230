@@ -7,8 +7,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.FlowPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -22,56 +24,89 @@
                </image>
             </ImageView>
          </top>
-         <center>
-            <HBox alignment="CENTER" prefHeight="227.0" prefWidth="868.0" spacing="10.0" BorderPane.alignment="CENTER">
-               <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </BorderPane.margin>
-               <children>
-                  <VBox alignment="CENTER" prefHeight="405.0" prefWidth="214.0" spacing="20.0">
-                     <children>
-                        <Label text="Title">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Year">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" text="Model">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label contentDisplay="CENTER" text="Manufacturer">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                        <Label text="Installed Operating System" textOverrun="CLIP" wrapText="true">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="405.0" prefWidth="119.0" spacing="15.0">
-                     <children>
-                        <TextField fx:id="computerTitle" />
-                        <TextField fx:id="computerYear" />
-                        <TextField fx:id="computerModel" />
-                        <TextField fx:id="computerManufacturer" />
-                        <TextField fx:id="computerOS" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-         </center>
          <bottom>
-            <Button fx:id="searchComputerButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchComputerButtonAction" text="Search" textAlignment="CENTER" BorderPane.alignment="TOP_CENTER" />
+            <GridPane prefHeight="162.0" prefWidth="900.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button fx:id="searchComputerButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchComputerButtonAction" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="Search" textAlignment="CENTER" GridPane.halignment="CENTER" />
+               </children>
+            </GridPane>
          </bottom>
+         <center>
+            <GridPane BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="345.0" minWidth="10.0" prefWidth="273.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="427.0" minWidth="10.0" prefWidth="427.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Title" GridPane.halignment="RIGHT">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Year" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Model" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label contentDisplay="CENTER" text="Manufacturer" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <Label text="Installed Operating System" textOverrun="CLIP" wrapText="true" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets right="20.0" />
+                     </GridPane.margin>
+                  </Label>
+                  <TextField fx:id="computerTitle" promptText="Title" GridPane.columnIndex="1" />
+                  <TextField fx:id="computerYear" promptText="Year" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <TextField fx:id="computerModel" promptText="Model" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="computerManufacturer" promptText="Manufacturer" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <TextField fx:id="computerOS" promptText="Installed Operating System" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+         </center>
+         <right>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+         </right>
+         <left>
+            <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+         </left>
       </BorderPane>
    </children>
 </FlowPane>
