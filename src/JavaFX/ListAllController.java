@@ -49,6 +49,7 @@ public class ListAllController extends SceneController implements Initializable 
         for (int i = page; i < page + elementsPerPage; i++) {
             if(i < resourceList.length) {
                 HBox element = new HBox(elementsPerPage);
+                element.setId(String.valueOf(i));
                 ImageView image = new ImageView();
 
                 if (resourceList[i].toString().contains("Type - Book")) {
