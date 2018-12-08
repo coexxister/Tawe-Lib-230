@@ -145,7 +145,6 @@ public class HomeInterfaceController extends SceneController implements Initiali
     public void initialize(URL location, ResourceBundle resources) {
         usernameDisplay.setText("Welcome, " + getAccountManager().
                 getAccount(SceneController.USER_ID).getFirstName());
-
         try {
             avatarImage.setImage(new Image(getResourceManager().getImageURL(getAccountManager().getAccount(SceneController.USER_ID).getAvatarID())));
         } catch (SQLException e) {

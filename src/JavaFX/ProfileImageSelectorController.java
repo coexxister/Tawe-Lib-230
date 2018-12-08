@@ -95,7 +95,7 @@ public class ProfileImageSelectorController extends SceneController {
             //Get the user account
             User account = getAccountManager().getAccount(SceneController.USER_ID);
 
-            //Make sure the image path uses foreword slash
+            //Make sure the image path uses forward slash
             String path = selectedPath.toString();
             JOptionPane.showMessageDialog(null, "Avatar Set", "Avatar Set", JOptionPane.INFORMATION_MESSAGE);
             path = path.replace("\\","/");
@@ -116,7 +116,7 @@ public class ProfileImageSelectorController extends SceneController {
                 avatarID = getResourceManager().addAvatarImage(path);
             }
 
-            //Replace accounts imaege id.
+            //Replace accounts image id.
             account.setAvatarID(avatarID);
             //Parse in edited account.
             getAccountManager().editAccount(account);
