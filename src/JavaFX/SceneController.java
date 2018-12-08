@@ -13,7 +13,6 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import static javafx.fxml.FXMLLoader.load;
 
@@ -26,23 +25,21 @@ public class SceneController {
 
     public static int USER_ID;
 
-    //File paths for user interface FXML files
+    //File paths for interface FXML files
     public static final String MAIN_INTERFACE = "/View/LoginInterface.fxml";
     public static final String HOME_INTERFACE = "/View/HomeInterface.fxml";
     public static final String USER_DASHBOARD_INTERFACE = "/View/UserDashboardInterface.fxml";
     public static final String POPULAR_LISTING = "/View/PopularListing.fxml";
-
-    //File paths for staff interface FXML files
     public static final String STAFF_INTERFACE = "/View/StaffInterface.fxml";
     public static final String RESOURCE_INTERFACE = "/View/ResourceInterface.fxml";
     public static final String ACCOUNTS_SEARCH_INTERFACE = "/View/AccountSearchInterface.fxml";
     public static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountCreatorInterface.fxml";
+    public static final String ACCOUNT_EDITOR_INTERFACE = "/View/AccountEditorInterface.fxml";
     public static final String AVATAR_CHANGE_INTERFACE ="/View/ProfileImageSelector.fxml";
     public static final String DRAWING_INTERFACE = "/View/DrawingEnvironment.fxml";
     public static final String TRANSACTION_HISTORY_INTERFACE = "/View/TransactionHistoryPage.fxml";
     public static final String LOAN_HISTORY_CONTROLLER = "/View/LoanHistory.fxml";
     public static final String RESERVE_HISTORY_CONTROLLER = "/View/ReservedInterface.fxml";
-    public static final String ISSUES_INTERFACE = "/View/IssuesInterface.fxml";
     public static final String ITEMS_DUE = "/View/ItemsDueInterface.fxml";
     public static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
     public static final String RESOURCE_FLOW_INTERFACE = "/View/ResourceFlowInterface.fxml";
@@ -65,7 +62,6 @@ public class SceneController {
      * Handles the action of clicking a button to change scenes
      * @param event the event triggered by clicking the button
      * @param fxml the fxml file corresponding to the new scene
-     * @throws IOException thrown if the fxml file does not exist
      */
     public void handleSceneChangeButtonAction(ActionEvent event, String fxml) {
         Parent root = null;
@@ -85,7 +81,6 @@ public class SceneController {
     /**
      * Sets the mainPane to a different scene
      * @param fxml the fxml file corresponding to the new scene
-     * @throws IOException thrown if the fxml file does not exist
      */
     public void loadSubscene(String fxml){
         try {

@@ -53,7 +53,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     }
 
     @FXML
-    private void handleTransactionAction(ActionEvent event) throws IOException {
+    private void handleTransactionAction(ActionEvent event) {
         loadSubscene(SceneController.TRANSACTION_MANAGER_INTERFACE);
     }
 
@@ -70,6 +70,11 @@ public class ResourceFlowController extends SceneController implements Initializ
     @FXML
     private void handleReservedResourcesAction(ActionEvent event) {
         loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
+    }
+
+    @FXML
+    private void handleEditAccountAction(ActionEvent event) {
+        loadSubscene(SceneController.ACCOUNT_EDITOR_INTERFACE);
     }
 
     /**

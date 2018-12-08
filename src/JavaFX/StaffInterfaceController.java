@@ -66,17 +66,6 @@ public class StaffInterfaceController extends SceneController implements Initial
         loadSubscene(SceneController.ACCOUNT_CREATOR_INTERFACE);
         changeLogoutToHome(logoutButton);
     }
-    
-    /**
-     * Handles the action of clicking the button to change to the issues interface
-     * @param event the event triggered by clicking the button
-     */
-    @FXML
-    protected void handleIssuesButtonAction(ActionEvent event) {
-    	loadSubscene(SceneController.ISSUES_INTERFACE);
-        changeLogoutToHome(logoutButton);
-    }
-
     /**
      * Initialises the label in the interface to display the first name of the user based on the account currently logged in
      */

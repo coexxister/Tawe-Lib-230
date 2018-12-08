@@ -93,7 +93,7 @@
                <font>
                   <Font size="20.0" />
                </font></Text>
-            <Button contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="231.0" prefWidth="170.0" styleClass="UniversalButton" text="Edit Account" translateY="23.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Button fx:id="editAccount" contentDisplay="TOP" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleEditAccountAction" prefHeight="231.0" prefWidth="170.0" styleClass="UniversalButton" text="Edit Account" translateY="23.0" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fx:id="profileImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
