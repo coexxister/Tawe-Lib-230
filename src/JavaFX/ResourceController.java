@@ -49,6 +49,14 @@ public class ResourceController extends SceneController {
         loadSubscene(getResourceScene("Log"));
     }
 
+    /**
+     * returns from one of the ResourceInterface subscenes to the superscene
+     */
+    @FXML
+    public void cancel() {
+        loadSubscene("/View/ResourceInterface.fxml");
+    }
+
     public String getResourceScene(String action){
         Resource addResource[] = new Resource[1];
         try {
