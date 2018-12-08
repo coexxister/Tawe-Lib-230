@@ -36,8 +36,16 @@ public class PopularListingController extends SceneController implements Initial
 
         //for every resource in the popularity data, add to piechart with its borrow count.
         for (int iCount = 0; iCount < maxListing; iCount++) {
-            data[iCount] = new Data(popularityData[iCount][0],
-                    Integer.parseInt(popularityData[iCount][1]));
+
+            String title = popularityData[iCount][0];
+            int borrowCount = Integer.parseInt(popularityData[iCount][1]);
+
+            final int MAX_TITLE_LENGTH = 25;
+            //If the title is longer than max length, the cut end and add "..."
+            if (title.length() > MAX_TITLE_LENGTH) {
+                title = title.substring(0,MAX_TITLE_LENGTH-1) + "...";
+            }
+            data[iCount] = new Data(title, borrowCount);
         }
 
         popularPie.setData(FXCollections.observableArrayList(data));
