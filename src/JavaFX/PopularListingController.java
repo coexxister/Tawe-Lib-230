@@ -1,6 +1,5 @@
 package JavaFX;
 
-import Core.Resource;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
@@ -8,8 +7,8 @@ import javafx.scene.chart.PieChart.Data;
 import javafx.collections.FXCollections;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
+
 
 public class PopularListingController extends SceneController implements Initializable {
 

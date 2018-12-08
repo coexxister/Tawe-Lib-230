@@ -111,8 +111,13 @@ public class LoanEvent {
      */
     public String toString() {
         String out = "Copy ID: " + copyID +
-                "\nBorrow date: " + dateOut + " " + timeOut +
-                "\nReturn date: " + dateIn + " " + timeIn;
+                "\nBorrow date: " + dateOut + " " + timeOut;
+
+        if (dateIn == null) {
+            out+= "\nReturn date: Not set";
+        } else {
+            out+= "\nReturn date: " + dateIn + " " + timeIn;
+        }
         return out;
     }
 

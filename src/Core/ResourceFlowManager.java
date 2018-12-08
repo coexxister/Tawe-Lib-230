@@ -60,20 +60,53 @@ public class ResourceFlowManager {
                     Integer.toString(userID));
 
             //create array of LoanEvents
-            LoanEvent[] events = new LoanEvent[loanData.length];
-
-            //for every loan history, create a loan event.
-            for (int iCount = 0; iCount < loanData.length; iCount++) {
-                events[iCount] = new LoanEvent(Integer.parseInt(loanData[iCount][0]),
-                        Integer.parseInt(loanData[iCount][1]), loanData[iCount][2],
-                        loanData[iCount][3], loanData[iCount][4], loanData[iCount][5]);
-            }
+            LoanEvent[] events = constructLoanEvents(loanData);
 
             return events;
         } catch (SQLException e) {
             return null;
         }
 
+    }
+
+    /**
+     * Gets the borrow history of a user.
+     * @return The array of loan events.
+     */
+    public LoanEvent[] getBorrowHistory() {
+
+        try {
+            //Get loan data.
+            String[][] loanData = dbManager.getTupleListByQuery("SELECT * FROM BorrowHistory");
+
+            //create array of LoanEvents
+            LoanEvent[] events = constructLoanEvents(loanData);
+
+            return events;
+        } catch (SQLException e) {
+            return null;
+        }
+
+    }
+
+    /**
+     * Constructs an array of loan events with loan data.
+     * @param loanData The data from borrow history table.
+     * @return An array of LoanEvents.
+     */
+    private LoanEvent[] constructLoanEvents(String[][] loanData) {
+
+        //create array of LoanEvents
+        LoanEvent[] events = new LoanEvent[loanData.length];
+
+        //for every loan history, create a loan event.
+        for (int iCount = 0; iCount < loanData.length; iCount++) {
+            events[iCount] = new LoanEvent(Integer.parseInt(loanData[iCount][0]),
+                    Integer.parseInt(loanData[iCount][1]), loanData[iCount][2],
+                    loanData[iCount][3], loanData[iCount][4], loanData[iCount][5]);
+        }
+
+        return events;
     }
 
     /**
