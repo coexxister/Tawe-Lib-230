@@ -30,6 +30,16 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="405.0" prefWidth="214.0" spacing="20.0">
                      <children>
+                        <Label text="Title">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <Label text="Year">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
                         <Label alignment="CENTER" contentDisplay="CENTER" text="Model">
                            <font>
                               <Font size="18.0" />
@@ -47,18 +57,20 @@
                         </Label>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="405.0" prefWidth="119.0" spacing="20.0">
+                  <VBox alignment="CENTER" prefHeight="405.0" prefWidth="119.0" spacing="15.0">
                      <children>
-                        <TextField />
-                        <TextField />
-                        <TextField />
+                        <TextField fx:id="computerTitle" />
+                        <TextField fx:id="computerYear" />
+                        <TextField fx:id="computerModel" />
+                        <TextField fx:id="computerManufacturer" />
+                        <TextField fx:id="computerOS" />
                      </children>
                   </VBox>
                </children>
             </HBox>
          </center>
          <bottom>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Search" textAlignment="CENTER" BorderPane.alignment="CENTER" />
+            <Button fx:id="searchComputerButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSearchComputerButtonAction" text="Search" textAlignment="CENTER" BorderPane.alignment="TOP_CENTER" />
          </bottom>
       </BorderPane>
    </children>
