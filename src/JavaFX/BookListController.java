@@ -72,18 +72,7 @@ public class BookListController extends SceneController implements Initializable
                 element.setSpacing(10);
                 element.setPadding(new Insets(100, 0, 0, 0));
                 box.getChildren().add(element);
-
-
-                element.getStylesheets().add("/Resources/CoreStyle.css");
-                element.getStyleClass().add("UniversalButton");
-                element.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
-                    try {
-                        setRequestResource(resourceList[Integer.parseInt(element.getId())]);
-                        loadSubscene("/View/RequestResourceByUserInterface.fxml");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
+                getOnMouseClicked(resourceList, element);
             }
         }
         box.setAlignment(Pos.CENTER);

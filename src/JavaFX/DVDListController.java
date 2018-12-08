@@ -8,8 +8,10 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -60,6 +62,7 @@ public class DVDListController extends SceneController implements Initializable 
                 element.setSpacing(10);
                 element.setPadding(new Insets(100, 0, 0, 0));
                 box.getChildren().add(element);
+                getOnMouseClicked(resourceList, element);
             }
         }
         box.setAlignment(Pos.CENTER);

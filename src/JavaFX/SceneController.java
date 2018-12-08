@@ -7,7 +7,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -134,5 +136,18 @@ public class SceneController {
 
     public void setSqlQuery(String sqlQuery){
         this.sqlQuery = sqlQuery;
+    }
+
+    public void getOnMouseClicked(Resource[] resourceList, HBox element){
+        element.getStylesheets().add("/Resources/CoreStyle.css");
+        element.getStyleClass().add("UniversalButton");
+        element.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
+            try {
+                setRequestResource(resourceList[Integer.parseInt(element.getId())]);
+                loadSubscene("/View/RequestResourceByUserInterface.fxml");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
