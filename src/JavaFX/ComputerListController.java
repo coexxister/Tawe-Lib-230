@@ -46,6 +46,7 @@ public class ComputerListController extends SceneController implements Initializ
             if(i < resourceList.length) {
 
                 HBox element = new HBox(elementsPerPage);
+                element.setId(String.valueOf(i));
                 ImageView image = new ImageView("/Resources/laptopIcon.png");
 
                 image.setFitWidth(100);

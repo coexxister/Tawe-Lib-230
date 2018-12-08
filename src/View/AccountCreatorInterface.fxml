@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -115,7 +117,7 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="Set Avatar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9" GridPane.valignment="CENTER">
+            <Button contentDisplay="TOP" mnemonicParsing="false" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="Set Avatar" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="9" GridPane.valignment="CENTER">
                <graphic>
                   <ImageView fitHeight="100.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -123,7 +125,23 @@
                      </image>
                   </ImageView>
                </graphic>
+               <GridPane.margin>
+                  <Insets left="40.0" />
+               </GridPane.margin>
             </Button>
+            <RadioButton contentDisplay="CENTER" mnemonicParsing="false" prefHeight="21.0" prefWidth="91.0" selected="true" text="User" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets left="130.0" />
+               </GridPane.margin>
+               <toggleGroup>
+                  <ToggleGroup fx:id="userGroup" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton contentDisplay="CENTER" mnemonicParsing="false" text="Staff User" toggleGroup="$userGroup" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets left="130.0" />
+               </GridPane.margin>
+            </RadioButton>
          </children>
       </GridPane>
    </center>

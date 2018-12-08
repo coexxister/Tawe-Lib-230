@@ -48,6 +48,7 @@ public class DVDListController extends SceneController implements Initializable 
             if(i < resourceList.length) {
 
                 HBox element = new HBox(elementsPerPage);
+                element.setId(String.valueOf(i));
                 ImageView image = new ImageView("/Resources/dvdIcon.png");
 
                 image.setFitWidth(100);

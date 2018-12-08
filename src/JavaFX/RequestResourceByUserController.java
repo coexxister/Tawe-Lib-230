@@ -35,6 +35,7 @@ public class RequestResourceByUserController extends SceneController implements 
         } catch (SQLException e) {
             System.out.println("Couldn't find image");
         }
+        resourceDesc.setText(getRequestResource().toString());
         resourceDesc.wrapTextProperty().setValue(Boolean.TRUE);
     }
 }
