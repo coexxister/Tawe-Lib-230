@@ -25,12 +25,14 @@ public class ItemsDueInterfaceController extends SceneController implements Init
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        int userID = getResourceFlowManager().getUserID();
+
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
         VBox root = new VBox();
 
-        Copy[] copiesOnLoan = getResourceFlowManager().getBorrowedCopies(SceneController.USER_ID);
+        Copy[] copiesOnLoan = getResourceFlowManager().getBorrowedCopies(userID);
         GridPane[] copyContainer = new GridPane[copiesOnLoan.length];
 
         //For every copy create the grid pane and the labels inside it.

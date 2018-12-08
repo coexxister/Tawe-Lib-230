@@ -38,4 +38,16 @@ public class ResourceFlowController extends SceneController implements Initializ
         loadSubscene(SceneController.TRANSACTION_MANAGER_INTERFACE);
     }
 
+    @FXML
+    private void handleViewLoanHistoryAction(ActionEvent event) throws IOException {
+        loadSubscene(SceneController.LOAN_HISTORY_CONTROLLER);
+    }
+
+    @FXML
+    private void handleDueItemsAction(ActionEvent event) throws IOException {
+        loadSubscene(SceneController.ITEMS_DUE);
+    }
+
+
+
 }

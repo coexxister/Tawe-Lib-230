@@ -22,15 +22,18 @@ public class LoanHistoryController extends SceneController implements Initializa
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        int userID = getResourceFlowManager().getUserID();
+
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
         VBox root = new VBox();
 
-        LoanEvent[] loanHistory = getResourceFlowManager().getBorrowHistory(SceneController.USER_ID);
+        LoanEvent[] loanHistory = getResourceFlowManager().getBorrowHistory(userID);
 
         Label[] loanText = new Label[loanHistory.length];
 
+        //For every loan history event. Add to a label.
         for (int iCount = 0; iCount < loanHistory.length; iCount++) {
             loanText[iCount] = new Label(loanHistory[iCount].toString());
             loanText[iCount].getStylesheets().add("/Resources/CoreStyle.css");
@@ -40,9 +43,12 @@ public class LoanHistoryController extends SceneController implements Initializa
             loanText[iCount].setAlignment(Pos.CENTER);
         }
 
+        //Wrap all labels in a vBox
         root.getChildren().addAll(loanText);
         root.setSpacing(10);
         root.setPadding(new Insets(10));
+
+        //Set the content of the scroll pane to the vBox
         scrollPane.setContent(root);
 
     }

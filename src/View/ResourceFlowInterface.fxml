@@ -46,7 +46,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button minWidth="280.0" mnemonicParsing="false" styleClass="UniversalButton" text="View History &amp; Overdue Copies" translateY="16.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Button minWidth="280.0" mnemonicParsing="false" styleClass="UniversalButton" text="View Loan History" onAction="#handleViewLoanHistoryAction" translateY="16.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -54,6 +54,14 @@
                   <Insets />
                </opaqueInsets>
             </Button>
+             <Button minWidth="280.0" mnemonicParsing="false" styleClass="UniversalButton" text="Due Items" onAction="#handleDueItemsAction" translateY="88" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                 <GridPane.margin>
+                     <Insets />
+                 </GridPane.margin>
+                 <opaqueInsets>
+                     <Insets />
+                 </opaqueInsets>
+             </Button>
             <Button fx:id="borrowButton" mnemonicParsing="false" prefWidth="100.0" styleClass="UniversalButton" text="Borrow" translateY="35.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="10.0" />
