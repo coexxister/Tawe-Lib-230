@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
    <bottom>
       <HBox prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </bottom>
@@ -38,19 +38,19 @@
                <children>
                   <Button fx:id="changeAvatar" mnemonicParsing="false" onAction="#handleAvatarChangeButtonAction" styleClass="UniversalButton" textAlignment="CENTER" wrapText="true">
                      <graphic>
-                        <ImageView fitHeight="68.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../Icons/ProfileImageSelector.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="itemDue" mnemonicParsing="false" onAction="#handleItemsDueAction" prefWidth="150.0" styleClass="UniversalButton" text="Items Due" />
-                  <Button fx:id="loanedItem" mnemonicParsing="false" onAction="#handleLoanAction" prefWidth="150.0" styleClass="UniversalButton" text="Loan History" />
-                  <Button fx:id="requestedResources" mnemonicParsing="false" onAction="#handleRequestedResourceAction" prefWidth="150.0" styleClass="UniversalButton" text="Requested Resources" />
-                  <Button fx:id="reservedItem" mnemonicParsing="false" onAction="#handleReservedAction" prefWidth="150.0" styleClass="UniversalButton" text="Reserved Items" />
-                  <Button fx:id="transactionHistory" mnemonicParsing="false" onAction="#handleTransactionHistoryAction" prefWidth="150.0" styleClass="UniversalButton" text="Transaction History" />
-                  <Button fx:id="userStatistics" mnemonicParsing="false" prefWidth="150.0" styleClass="UniversalButton" text="User Statistics" />
+                  <Button fx:id="itemDue" mnemonicParsing="false" onAction="#handleItemsDueAction" prefWidth="162.0" styleClass="UniversalButton" text="Items Due" />
+                  <Button fx:id="loanedItem" mnemonicParsing="false" onAction="#handleLoanAction" prefWidth="162.0" styleClass="UniversalButton" text="Loan History" />
+                  <Button fx:id="requestedResources" mnemonicParsing="false" onAction="#handleRequestedResourceAction" styleClass="UniversalButton" text="Requested Resources" />
+                  <Button fx:id="reservedItem" mnemonicParsing="false" onAction="#handleReservedAction" prefWidth="162.0" styleClass="UniversalButton" text="Reserved Items" />
+                  <Button fx:id="transactionHistory" mnemonicParsing="false" onAction="#handleTransactionHistoryAction" prefWidth="162.0" styleClass="UniversalButton" text="Transaction History" />
+                  <Button fx:id="userStatistics" mnemonicParsing="false" prefWidth="162.0" styleClass="UniversalButton" text="User Statistics" />
                </children>
             </VBox>
          </children>
