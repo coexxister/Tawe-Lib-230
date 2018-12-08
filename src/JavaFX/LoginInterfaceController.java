@@ -33,6 +33,7 @@ public class LoginInterfaceController extends SceneController{
     protected void handleLoginButtonAction(ActionEvent event) throws IllegalArgumentException, Exception {
         AuthenticationManager login = new AuthenticationManager(loginUsername.getText(), getDatabase());
         SceneController.USER_ID = Integer.parseInt(loginUsername.getText());
+        getResourceFlowManager().setUserID(SceneController.USER_ID);
 
         if(login.authenticate()){
             if(login.isStaff()){

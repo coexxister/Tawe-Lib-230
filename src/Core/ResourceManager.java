@@ -205,7 +205,8 @@ public class ResourceManager {
             return copy;
 
         } catch(SQLException e) {
-            e.printStackTrace();
+            return null;
+        } catch(ArrayIndexOutOfBoundsException a) {
             return null;
         }
 

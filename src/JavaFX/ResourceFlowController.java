@@ -67,6 +67,11 @@ public class ResourceFlowController extends SceneController implements Initializ
     }
 
     @FXML
+    private void handleReservedResourcesAction(ActionEvent event) throws IOException {
+        loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
+    }
+
+    @FXML
     public void handleSelectIDAction(ActionEvent event) throws IOException {
 
         try {
@@ -83,7 +88,7 @@ public class ResourceFlowController extends SceneController implements Initializ
             } else {
                 textIDField.setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
                 Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("Specified resource does not exist!");
+                alert.setContentText("Specified copy does not exist!");
                 alert.showAndWait();
             }
 
@@ -131,6 +136,8 @@ public class ResourceFlowController extends SceneController implements Initializ
             alert.setContentText(e.getMessage());
             alert.showAndWait();
 
+        } finally {
+            textIDField.setText("");
         }
     }
 
@@ -170,6 +177,8 @@ public class ResourceFlowController extends SceneController implements Initializ
             alert.setContentText(e.getMessage());
             alert.showAndWait();
 
+        } finally {
+            textIDField.setText("");
         }
     }
 
@@ -208,6 +217,8 @@ public class ResourceFlowController extends SceneController implements Initializ
             alert.setContentText(e.getMessage());
             alert.showAndWait();
 
+        } finally {
+            textIDField.setText("");
         }
     }
 
