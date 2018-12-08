@@ -109,7 +109,8 @@ public class Resource {
 
         String out  =
                 "\nTitle - " + title +
-                "\nRelease Year - " + year;
+                        "\nRid - " + resourceID +
+                        "\nRelease Year - " + year;
         return out;
 
     }

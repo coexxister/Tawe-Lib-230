@@ -83,7 +83,7 @@
                </font>
             </Button>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Serial Code" translateY="-10.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
-            <Button layoutX="419.0" layoutY="331.0" minWidth="280.0" mnemonicParsing="false" styleClass="UniversalButton" text="Transaction Manager" translateY="52.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
+            <Button layoutX="419.0" layoutY="331.0" minWidth="280.0" mnemonicParsing="false" onAction="#handleTransactionAction" styleClass="UniversalButton" text="Transaction Manager" translateY="52.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="TOP">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

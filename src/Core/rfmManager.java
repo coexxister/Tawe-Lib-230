@@ -14,7 +14,7 @@ public class rfmManager {
 
         ResourceFlowManager rfm = new ResourceFlowManager(dbManager, acManager, rmManager, 1);
 
-        Copy copy = new Copy(1, 2, 14, "", 0, 0);
+        Copy copy = new Copy(1, 34, 14, "", 0, 0);
 
         //System.out.println(rfm.calculateFine(rmManager.getCopies(1)[0]));
 
@@ -29,7 +29,8 @@ public class rfmManager {
 
         //rfm.requestResource(2, 1);
 
-        System.out.print(acManager.isExist(2));
+        rmManager.addBulkCopies(copy);
+        //System.out.print(acManager.isExist(2));
 
     }
 
