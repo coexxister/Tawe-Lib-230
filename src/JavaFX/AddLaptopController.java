@@ -20,7 +20,17 @@ public class AddLaptopController extends ResourceController implements Initializ
     private String path;
 
     @FXML
-    private TextField title, manufacturer, year, model, installedOS, numOfCopies;
+    private TextField title;
+    @FXML
+    private TextField manufacturer;
+    @FXML
+    private TextField year;
+    @FXML
+    private TextField model;
+    @FXML
+    private TextField installedOS;
+    @FXML
+    private TextField numOfCopies;
 
     @FXML
     private ImageView thumbImage;

@@ -25,7 +25,19 @@ public class EditDVDController extends ResourceController implements Initializab
     private String path;
 
     @FXML
-    private TextField title, director, year, runtime, language, subtitle, numOfCopies;
+    private TextField title;
+    @FXML
+    private TextField director;
+    @FXML
+    private TextField year;
+    @FXML
+    private TextField runtime;
+    @FXML
+    private TextField language;
+    @FXML
+    private TextField subtitle;
+    @FXML
+    private TextField numOfCopies;
 
     @FXML
     private ImageView thumbImage;

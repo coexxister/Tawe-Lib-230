@@ -25,7 +25,6 @@ import java.sql.SQLException;
 public class ResourceController extends SceneController {
 
     private FileChooser thumbnailChooser = new FileChooser();
-    private Path selectedPath;
 
     @FXML
     private TextField searchID;
@@ -129,6 +128,7 @@ public class ResourceController extends SceneController {
     }
 
     public String setThumbnailImage(ActionEvent event){
+        Path selectedPath;
         thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
         Node node = (Node) event.getSource();
         File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());

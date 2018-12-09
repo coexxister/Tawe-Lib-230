@@ -25,7 +25,21 @@ public class EditBookController extends ResourceController implements Initializa
     private String path;
 
     @FXML
-    private TextField title, author, genre, publisher, year, isbn, language, numOfCopies;
+    private TextField title;
+    @FXML
+    private TextField author;
+    @FXML
+    private TextField genre;
+    @FXML
+    private TextField publisher;
+    @FXML
+    private TextField year;
+    @FXML
+    private TextField isbn;
+    @FXML
+    private TextField language;
+    @FXML
+    private TextField numOfCopies;
 
     @FXML
     private ImageView thumbImage;

@@ -100,7 +100,7 @@ public class ProfileImageSelectorController extends SceneController {
             //Make sure the image path uses forward slash
             String path = selectedPath.toString();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Avatar Set");
+            alert.setContentText("Avatar Set!");
             alert.showAndWait();
             path = path.replace("\\","/");
 
