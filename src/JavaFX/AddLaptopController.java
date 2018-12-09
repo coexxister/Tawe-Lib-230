@@ -38,13 +38,19 @@ public class AddLaptopController extends ResourceController implements Initializ
                 getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(), 14,
                         "", 0, 0), copies);
 
-                JOptionPane.showMessageDialog(null, "Resource Set.\nResource ID = "
-                                + getResourceManager().getLastAddedID(),
-                        "Resource Set", JOptionPane.INFORMATION_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Resource Created Successfully!\nResource ID = \"\n" +
+                        + getResourceManager().getLastAddedID());
+                alert.showAndWait();
             } catch (SQLException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Couldn't load an image.");
+                alert.showAndWait();
                 loadSubscene(getResourceInterface());
             }
-
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Not enough information.");
+            alert.showAndWait();
             loadSubscene(getResourceInterface());
         }
     }
