@@ -155,6 +155,11 @@ public class AccountEditorController extends SceneController implements Initiali
         loadSubscene(SceneController.getResourceFlowInterface());
     }
 
+    @FXML
+    public void setAvatar(){
+
+    }
+
     /**
      * Initialises the interface to display the current details of the user in the text fields
      *
