@@ -114,8 +114,5 @@ public class EditLaptopController extends ResourceController implements Initiali
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         path = setThumbnailImage(event);
         thumbnailImg.setImage(new Image(path));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Thumbnail Set");
-        alert.showAndWait();
     }
 }

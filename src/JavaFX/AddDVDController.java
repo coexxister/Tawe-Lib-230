@@ -78,9 +78,6 @@ public class AddDVDController extends ResourceController implements Initializabl
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         path = setThumbnailImage(event);
         thumbImage.setImage(new Image(path));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Thumbnail Set");
-        alert.showAndWait();
     }
 
     @Override
