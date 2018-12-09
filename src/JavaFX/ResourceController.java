@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
@@ -46,7 +47,15 @@ public class ResourceController extends SceneController {
 
     @FXML
     public void handleResourceLogButtonAction(ActionEvent event){
-        loadSubscene(getResourceScene("Log"));
+        Resource addResource[] = new Resource[1];
+        try {
+            setRequestResource(getResourceManager().getResource(Integer.parseInt(searchID.getText())));
+            loadSubscene("/View/ResourceLogInterface.fxml");
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Error in Database");
+            alert.showAndWait();
+        }
     }
 
     /**
