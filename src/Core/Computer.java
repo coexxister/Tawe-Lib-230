@@ -2,10 +2,11 @@ package Core;
 
 /**
  * This class represents a Computer.
+ *
  * @author Noah Lenagan, Paris Kelly Skopelitis
  * @version 1.0
  */
-public class Computer extends Resource{
+public class Computer extends Resource {
 
     /**
      * The manufacturer of the computer.
@@ -24,16 +25,17 @@ public class Computer extends Resource{
 
     /**
      * Creates a computer.
-     * @param resourceID Uniquely identifies the computer.
-     * @param title The name of the computer.
-     * @param year The release year of the computer.
+     *
+     * @param resourceID   Uniquely identifies the computer.
+     * @param title        The name of the computer.
+     * @param year         The release year of the computer.
      * @param thumbImageID Identifies the thumbnail image of the computer.
      * @param manufacturer The computer manufacturer.
-     * @param model The computer model.
-     * @param os The installed os.
+     * @param model        The computer model.
+     * @param os           The installed os.
      */
-    public Computer (int resourceID, String title, int year, int thumbImageID, String manufacturer, String model,
-                     String os) {
+    public Computer(int resourceID, String title, int year, int thumbImageID, String manufacturer, String model,
+                    String os) {
 
         super(resourceID, title, year, thumbImageID);
 
@@ -45,6 +47,7 @@ public class Computer extends Resource{
 
     /**
      * Gets the manufacturer of the computer.
+     *
      * @return The manufacturer of the computer.
      */
     public String getManufacturer() {
@@ -53,6 +56,7 @@ public class Computer extends Resource{
 
     /**
      * Gets the model of the computer.
+     *
      * @return The computer model.
      */
     public String getModel() {
@@ -61,6 +65,7 @@ public class Computer extends Resource{
 
     /**
      * Gets the installed os of the computer.
+     *
      * @return The installed os of the computer.
      */
     public String getOs() {
@@ -69,6 +74,7 @@ public class Computer extends Resource{
 
     /**
      * Sets the manufacturer of computer.
+     *
      * @param manufacturer The new manufacturer.
      */
     public void setManufacturer(String manufacturer) {
@@ -77,6 +83,7 @@ public class Computer extends Resource{
 
     /**
      * Sets the model of the computer.
+     *
      * @param model The new model.
      */
     public void setModel(String model) {
@@ -85,6 +92,7 @@ public class Computer extends Resource{
 
     /**
      * Sets the installed os.
+     *
      * @param os The new installed os.
      */
     public void setOs(String os) {
@@ -93,12 +101,13 @@ public class Computer extends Resource{
 
     /**
      * Creates a summary of information for the Computer.
+     *
      * @return Returns a summary of the Computer.
      */
     public String toString() {
 
         //create summary
-        String out  = super.toString() +
+        String out = super.toString() +
                 "\nType - Computer" +
                 "\nManufacturer - " + manufacturer +
                 "\nModel - " + model +

@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 /**
  * This class represents a copy of a resource.
+ *
  * @author Noah Lenagan
  * @version 1.0
  */
@@ -42,11 +43,12 @@ public class Copy {
 
     /**
      * Creates a copy
-     * @param copyID Uniquely identifies the copy.
-     * @param resourceID Uniquely identifies the resource.
-     * @param loanDuration The duration of the loan in days.
-     * @param dueDate The date the copy must be returned by.
-     * @param stateID The current state of the copy.
+     *
+     * @param copyID            Uniquely identifies the copy.
+     * @param resourceID        Uniquely identifies the resource.
+     * @param loanDuration      The duration of the loan in days.
+     * @param dueDate           The date the copy must be returned by.
+     * @param stateID           The current state of the copy.
      * @param currentBorrowerID The id of the user borrowing the copy.
      */
     public Copy(int copyID, int resourceID, int loanDuration, String dueDate,
@@ -61,6 +63,7 @@ public class Copy {
 
     /**
      * Gets the copy id.
+     *
      * @return The id of the copy.
      */
     public int getCopyID() {
@@ -69,6 +72,7 @@ public class Copy {
 
     /**
      * Gets the resource id of the copy.
+     *
      * @return The resource id of the copy.
      */
     public int getResourceID() {
@@ -77,6 +81,7 @@ public class Copy {
 
     /**
      * Gets the loan duration of the copy in days.
+     *
      * @return The loan duration.
      */
     public int getLoanDuration() {
@@ -85,6 +90,7 @@ public class Copy {
 
     /**
      * Gets the due date of the copy.
+     *
      * @return The due date of the copy (with YYYY-MM-DD format).
      */
     public String getDueDate() {
@@ -93,6 +99,7 @@ public class Copy {
 
     /**
      * Gets the state id of the copy.
+     *
      * @return The state id of the copy (where 0 - available, 1 - on loan, 2 - reserved).
      */
     public int getStateID() {
@@ -101,6 +108,7 @@ public class Copy {
 
     /**
      * Gets the id of the user borrowing the copy.
+     *
      * @return The borrowers user id.
      */
     public int getCurrentBorrowerID() {
@@ -109,6 +117,7 @@ public class Copy {
 
     /**
      * Returns the difference in days between current date and due date of the copy.
+     *
      * @param currentDate The current date (with YYYY-MM-DD format).
      * @return The difference in days between current date and due date of the copy.
      * @throws IllegalStateException Thrown if due date is not set.
@@ -124,6 +133,7 @@ public class Copy {
 
     /**
      * Set the loan duration of the copy.
+     *
      * @param loanDuration The loan duration of a copy in days.
      */
     public void setLoanDuration(int loanDuration) {
@@ -132,6 +142,7 @@ public class Copy {
 
     /**
      * Sets the due date of the copy.
+     *
      * @param dueDate The due date of a copy (with YYYY-MM-DD format).
      */
     public void setDueDate(String dueDate) {
@@ -140,6 +151,7 @@ public class Copy {
 
     /**
      * Sets the state id of the copy.
+     *
      * @param stateID The state id of the copy (where 0 - available, 1 - on loan, 2 - reserved).
      */
     public void setStateID(int stateID) {
@@ -148,6 +160,7 @@ public class Copy {
 
     /**
      * Sets the user id of the current borrower.
+     *
      * @param currentBorrowerID The user id of the current borrower.
      */
     public void setCurrentBorrowerID(int currentBorrowerID) {
@@ -156,27 +169,28 @@ public class Copy {
 
     /**
      * Creates a summary of information for the Copy.
+     *
      * @return Returns a summary of the Copy.
      */
     public String toString() {
         //create summary
-        String out  = "\nCopy ID - " + copyID +
+        String out = "\nCopy ID - " + copyID +
                 "\nResource ID - " + resourceID +
                 "\nLoan Duration - " + loanDuration;
         if (stateID == 0) {
-            out+= "\nCopy is available.";
+            out += "\nCopy is available.";
         } else if (stateID == 1) {
-            out+= "\nCopy is currently on loan";
+            out += "\nCopy is currently on loan";
 
             if (dueDate != null) {
-                out+= "\nIt is due on " + LocalDate.parse(dueDate).getDayOfMonth() + "/" +
+                out += "\nIt is due on " + LocalDate.parse(dueDate).getDayOfMonth() + "/" +
                         LocalDate.parse(dueDate).getMonthValue() + "/" +
                         LocalDate.parse(dueDate).getYear();
             } else {
-                out+= "\nNo due date has been set";
+                out += "\nNo due date has been set";
             }
         } else {
-            out+= "\nCopy is currently reserved";
+            out += "\nCopy is currently reserved";
         }
 
         return out;
