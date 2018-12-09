@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import javax.swing.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -26,7 +25,21 @@ public class AddBookController extends ResourceController implements Initializab
     private String path;
 
     @FXML
-    private TextField title, author, genre, publisher, year, isbn, language, numOfCopies;
+    private TextField title;
+    @FXML
+    private TextField author;
+    @FXML
+    private TextField genre;
+    @FXML
+    private TextField publisher;
+    @FXML
+    private TextField year;
+    @FXML
+    private TextField isbn;
+    @FXML
+    private TextField language;
+    @FXML
+    private TextField numOfCopies;
     @FXML
     private ImageView thumbnail;
 

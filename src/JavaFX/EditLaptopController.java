@@ -19,7 +19,17 @@ public class EditLaptopController extends ResourceController implements Initiali
     private String path;
 
     @FXML
-    private TextField title, manufacturer, year, model, os, numOfCopies;
+    private TextField title;
+    @FXML
+    private TextField manufacturer;
+    @FXML
+    private TextField year;
+    @FXML
+    private TextField model;
+    @FXML
+    private TextField os;
+    @FXML
+    private TextField numOfCopies;
 
     @FXML
     private ImageView thumbnailImg;

@@ -29,8 +29,23 @@ public class AccountEditorController extends SceneController implements Initiali
     private FileChooser avatarChooser = new FileChooser();
 
     @FXML
-    private TextField firstName, surname, streetName, streetNumber,
-            city, county, postCode, phoneNumber, balance;
+    private TextField firstName;
+    @FXML
+    private TextField surname;
+    @FXML
+    private TextField streetName;
+    @FXML
+    private TextField streetNumber;
+    @FXML
+    private TextField city;
+    @FXML
+    private TextField county;
+    @FXML
+    private TextField postCode;
+    @FXML
+    private TextField phoneNumber;
+    @FXML
+    private TextField balance;
 
     @FXML
     private ImageView avatar;

@@ -20,7 +20,19 @@ public class AddDVDController extends ResourceController implements Initializabl
     private String path;
 
     @FXML
-    private TextField title, director, year, language, subtitle, runtime, numOfCopies;
+    private TextField title;
+    @FXML
+    private TextField director;
+    @FXML
+    private TextField year;
+    @FXML
+    private TextField language;
+    @FXML
+    private TextField subtitle;
+    @FXML
+    private TextField runtime;
+    @FXML
+    private TextField numOfCopies;
 
     @FXML
     private ImageView thumbImage;
