@@ -20,17 +20,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.util.Pair;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 
 /**
  * Creates a Drawing Environment
@@ -252,7 +248,9 @@ public class DrawingEnvironment implements Initializable{
                         canvas.snapshot(null, writableImage);
                         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                         ImageIO.write(renderedImage, "png", file);
-                        JOptionPane.showMessageDialog(null, "Successfully saved as " + USER_ID + "(" + aNo + ").png", "Avatar Saved", JOptionPane.INFORMATION_MESSAGE);
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setContentText("Successfully saved as " + USER_ID + "(" + aNo + ").png");
+                        alert.showAndWait();
                     } catch (IOException ex) {
                         Logger.getLogger(DrawingEnvironment.class.getName()).log(Level.SEVERE, null, ex);
                     }

@@ -1,26 +1,22 @@
 package JavaFX;
 
 import Core.Computer;
+import Core.Copy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 
-import java.io.File;
+import javax.swing.*;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AddLaptopController extends ResourceController implements Initializable {
 
-    private FileChooser thumbnailChooser = new FileChooser();
-    private Path selectedPath;
     private String path;
 
     @FXML
@@ -37,12 +33,17 @@ public class AddLaptopController extends ResourceController implements Initializ
                 getResourceManager().addResource(new Computer(0, title.getText(),
                         Integer.parseInt(year.getText()), getResourceManager().getImageID(path),
                         manufacturer.getText(), model.getText(), installedOS.getText()));
+
+                int copies = Integer.parseInt(numOfCopies.getText());
+                getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(), 14,
+                        "", 0, 0), copies);
+
+                JOptionPane.showMessageDialog(null, "Resource Set.\nResource ID = "
+                                + getResourceManager().getLastAddedID(),
+                        "Resource Set", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException e) {
                 loadSubscene(getResourceInterface());
             }
-
-            int copies = Integer.parseInt(numOfCopies.getText());
-            //addCopies(copies);
 
             loadSubscene(getResourceInterface());
         }
@@ -55,7 +56,11 @@ public class AddLaptopController extends ResourceController implements Initializ
      */
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
-        thumbImage.setImage(new Image(setThumbnailImage(event, path)));
+        path = setThumbnailImage(event);
+        thumbImage.setImage(new Image(path));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Thumbnail Set");
+        alert.showAndWait();
     }
 
 

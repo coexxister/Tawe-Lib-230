@@ -1,10 +1,14 @@
 package JavaFX;
 
 import Core.AuthenticationManager;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+import java.sql.SQLException;
 
 /**
  * Interface controller for the login screen
@@ -20,35 +24,46 @@ public class LoginInterfaceController extends SceneController{
     private TextField loginUsername;
 
     /**
-     * Handles the action of clicking the button to login to the user or staff interface
-     * @param event the event triggered by clicking the button
-     * @throws Exception thrown if no such interface exists
+     * Handles the action of clicking the button to login to the user or staff interface.
+     * @param event the event triggered by clicking the button.
+     * @throws Exception thrown if no such interface exists.
      */
     @FXML
-    protected void handleLoginButtonAction(ActionEvent event) throws IllegalArgumentException, Exception {
+    protected void handleLoginButtonAction(ActionEvent event) {
         AuthenticationManager login = new AuthenticationManager(loginUsername.getText(), getDatabase());
         SceneController.USER_ID = Integer.parseInt(loginUsername.getText());
         getResourceFlowManager().setUserID(SceneController.USER_ID);
 
-        if(login.authenticate()){
-            if(login.isStaff()){
-                handleSceneChangeButtonAction(event, SceneController.getStaffInterface());
-            } else {
-                handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
-            }
+        try {
+            if (login.authenticate()) {
+                try {
+                    if (login.isStaff()) {
+                        handleSceneChangeButtonAction(event, SceneController.getStaffInterface());
+                    } else {
+                        handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
 
-        } else {
-            throw new IllegalArgumentException("Invalid user id");
+            } else {
+
+                throw new IllegalArgumentException("Invalid user id");
+            }
+        }catch (RuntimeException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Invalid User ID");
+            alert.showAndWait();
         }
     }
+
 
     /**
      * When 'Enter' button is pressed, executes the action of the Login Button.
      * @param event Represents the data of the button pressed.
-     * @throws Exception Thrown if input is null.
      */
     @FXML
-    protected void onEnter(ActionEvent event) throws Exception {
+    protected void onEnter(ActionEvent event) {
         handleLoginButtonAction(event);
     }
 }
