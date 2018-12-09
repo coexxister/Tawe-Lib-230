@@ -5,19 +5,22 @@ import Core.Staff;
 import Core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 /**
  * Interface controller for the account creator interface
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
-public class AccountCreatorController extends SceneController {
+public class AccountCreatorController extends SceneController implements Initializable {
     FileChooser avatarChooser = new FileChooser();
 
     @FXML
@@ -53,5 +56,9 @@ public class AccountCreatorController extends SceneController {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
 }
