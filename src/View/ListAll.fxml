@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Pagination?>
@@ -30,52 +29,40 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <buttons>
-                        <MenuButton alignment="CENTER" contentDisplay="BOTTOM" mnemonicParsing="false" styleClass="UniversalButton" text="Sort">
-                           <items>
-                              <MenuItem mnemonicParsing="false" text="Title [A-Z]" />
-                              <MenuItem mnemonicParsing="false" text="Title [Z-A]" />
-                              <MenuItem mnemonicParsing="false" text="Year [Increasing]" />
-                              <MenuItem mnemonicParsing="false" text="Year [Decreasing]" />
-                           </items>
-                        </MenuButton>
-                        <MenuButton alignment="CENTER" mnemonicParsing="false" styleClass="UniversalButton" text="Show Only">
-                          <items>
-                              <MenuItem mnemonicParsing="false" text="Books">
-                                 <graphic>
-                                    <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Resources/bookIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem mnemonicParsing="false" text="DVDs">
-                                 <graphic>
-                                    <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Resources/dvdIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                              <MenuItem mnemonicParsing="false" text="Laptops">
-                                 <graphic>
-                                    <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Resources/laptopIcon.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </MenuItem>
-                          </items>
-                        </MenuButton>
-                    </buttons>
+                  <MenuButton alignment="CENTER" mnemonicParsing="false" styleClass="UniversalButton" text="Show Only" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#handleSortByBookButtonAction" text="Books">
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/bookIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#handleSortByDVDButtonAction" text="DVDs">
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/dvdIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                        <MenuItem mnemonicParsing="false" onAction="#handleSortByComputerButtonAction" text="Laptops">
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/laptopIcon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </MenuItem>
+                    </items>
                      <GridPane.margin>
-                        <Insets />
+                        <Insets right="30.0" />
                      </GridPane.margin>
-                  </ButtonBar>
+                  </MenuButton>
                </children>
             </GridPane>
          </top>

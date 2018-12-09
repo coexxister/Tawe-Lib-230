@@ -7,12 +7,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -59,19 +58,26 @@ public class DVDListController extends SceneController implements Initializable 
 
                 VBox element = new VBox(elementsPerPage);
                 element.setId(String.valueOf(i));
-                ImageView image = new ImageView("/Resources/dvdIcon.png");
+                ImageView image = new ImageView();
+                try {
+                    image.setImage(new Image(getResourceManager().
+                            getImageURL(resourceList[i].getThumbImage())));
+                } catch (SQLException e) {
+                    image.setImage(new Image("/Resources/dvdIcon.png"));
+                }
 
                 image.setFitWidth(100);
                 image.setPreserveRatio(true);
                 image.setSmooth(true);
                 image.setCache(true);
 
-                Label text = new Label(resourceList[i].toString());
+                Label text = new Label(resourceList[i].getTitle());
                 text.wrapTextProperty().setValue(true);
-                Label numberOfCopies = new Label (String.valueOf(getResourceManager().getCopies(resourceList[i].getResourceID()).length));
-                element.getChildren().addAll(image, text, numberOfCopies);
+                Label availability = new Label(getAvailableNumberOfCopies(resourceList[i]));
+                element.getChildren().addAll(availability, image, text);
                 element.setAlignment(Pos.TOP_CENTER);
                 element.setSpacing(10);
+                element.setPrefWidth(200);
                 element.setPadding(new Insets(100, 0, 0, 0));
                 box.getChildren().add(element);
                 getOnMouseClicked(resourceList, element);

@@ -1,11 +1,11 @@
 package JavaFX;
 
-import Core.Copy;
 import Core.Resource;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.image.Image;
@@ -83,15 +83,7 @@ public class ListAllController extends SceneController implements Initializable 
 
                 Label text = new Label(resourceList[i].getTitle());
                 text.wrapTextProperty().setValue(true);
-                Label availability = new Label();
-                availability.setDisable(true);
-                Copy[] copies = getResourceManager().getCopies(resourceList[i].getResourceID());
-                for(Copy copy: copies){
-                    if(copy.getStateID() == 0) {
-                        availability.setDisable(false);
-                        availability = new Label("Available");
-                    }
-                }
+                Label availability = new Label(getAvailableNumberOfCopies(resourceList[i]));
                 element.getChildren().addAll(availability, image, text);
                 element.setAlignment(Pos.TOP_CENTER);
                 element.setSpacing(10);
@@ -103,5 +95,41 @@ public class ListAllController extends SceneController implements Initializable 
         }
         box.setAlignment(Pos.CENTER);
         return box;
+    }
+
+    @FXML
+    public void handleSortByBookButtonAction(){
+        try {
+            resourceList = getResourceManager().searchResources("TID", "1");
+            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Couldn't set type as book.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void handleSortByDVDButtonAction(){
+        try {
+            resourceList = getResourceManager().searchResources("TID", "2");
+            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Couldn't set type as DVD.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void handleSortByComputerButtonAction(){
+        try {
+            resourceList = getResourceManager().searchResources("TID", "3");
+            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Couldn't set type as Computer.");
+            alert.showAndWait();
+        }
     }
 }

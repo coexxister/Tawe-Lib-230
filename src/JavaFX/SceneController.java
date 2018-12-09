@@ -392,4 +392,17 @@ public class SceneController {
             loadSubscene("/View/RequestResourceByUserInterface.fxml");
         });
     }
+
+    public String getAvailableNumberOfCopies(Resource resourceNumber){
+        String availability = "Available copies: ";
+        int availabilityCounter = 0;
+        Copy[] copies = getResourceManager().getCopies(resourceNumber.getResourceID());
+        for(Copy copy: copies){
+            if(copy.getStateID() == 0) {
+                availabilityCounter++;
+            }
+        }
+        availability += availabilityCounter;
+        return availability;
+    }
 }
