@@ -77,7 +77,7 @@ public class ResourceController extends SceneController {
      */
     @FXML
     public void handleResourceLogButtonAction(ActionEvent event) {
-        Resource addResource[] = new Resource[1];
+        Resource addResource;
         try {
             setRequestResource(getResourceManager().getResource(Integer.parseInt(searchID.getText())));
             loadSubscene(getResourceLogInterface());
@@ -103,20 +103,20 @@ public class ResourceController extends SceneController {
      * @return Subscene depending on resource type.
      */
     public String getResourceScene(String action) {
-        Resource addResource[] = new Resource[1];
+        Resource addResource;
         try {
             if (!searchID.getText().isEmpty()) {
-                addResource[0] = getResourceManager().getResource(Integer.parseInt(searchID.getText()));
-                if (addResource[0] instanceof Book) {
-                    setRequestResource(addResource[0]);
+                addResource = getResourceManager().getResource(Integer.parseInt(searchID.getText()));
+                if (addResource instanceof Book) {
+                    setRequestResource(addResource);
                     return "/View/" + action + "BookInterface.fxml";
                 }
-                if (addResource[0] instanceof Dvd) {
-                    setRequestResource(addResource[0]);
+                if (addResource instanceof Dvd) {
+                    setRequestResource(addResource);
                     return "/View/" + action + "DVDInterface.fxml";
                 }
-                if (addResource[0] instanceof Computer) {
-                    setRequestResource(addResource[0]);
+                if (addResource instanceof Computer) {
+                    setRequestResource(addResource);
                     return "/View/" + action + "LaptopInterface.fxml";
                 }
             } else {

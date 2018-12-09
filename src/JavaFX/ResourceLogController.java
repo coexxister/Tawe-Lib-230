@@ -1,55 +1,161 @@
 package JavaFX;
 
+import Core.Copy;
 import Core.LoanEvent;
-import Core.Resource;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
+import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.Separator;
+import javafx.scene.control.*;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
-import java.sql.SQLException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ResourceLogController extends SceneController {
+public class ResourceLogController extends SceneController implements Initializable {
 
     @FXML
-    ScrollPane scrollPane = new ScrollPane();
+    private ScrollPane scrollPane;
 
+    @FXML
+    private TextField textResourceID;
 
-    public void setReservedListing() {
+    @FXML
+    private RadioButton allCopiesRadio;
 
-        FlowPane root = new FlowPane();
+    @FXML
+    private RadioButton loanHistoryRadio;
 
-        //array of resource log
-        LoanEvent[] resourceLog;
+    @FXML
+    private RadioButton overdueCopies;
 
-        //try to get all reserved copies
-        System.out.println(getResourceFlowManager().getUserID());
-        resourceLog = getResourceFlowManager().getBorrowHistoryByResource(getRequestResource().getResourceID());
+    private ToggleGroup radioGroup;
 
-        Label[] resourceLogLabel = new Label[resourceLog.length];
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //Add radio buttons to group.
+        radioGroup = new ToggleGroup();
 
-        //for every reserved copy. Add the copy to the scroll pane.
-        for (int iCount = 0; iCount < resourceLog.length; iCount++) {
+        allCopiesRadio.setToggleGroup(radioGroup);
+        loanHistoryRadio.setToggleGroup(radioGroup);
+        overdueCopies.setToggleGroup(radioGroup);
 
-            resourceLogLabel[iCount] = new Label(resourceLog.toString());
+        radioGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> System.out.println(newVal
+                + " was selected"));
+    }
 
-            //The styling of the label
-            resourceLogLabel[iCount].getStylesheets().add("/Resources/CoreStyle.css");
-            resourceLogLabel[iCount].getStyleClass().add("ScrollListItem");
-            /*label.setMinHeight(300);*/
-            resourceLogLabel[iCount].setPrefWidth(380);
-            resourceLogLabel[iCount].setAlignment(Pos.CENTER);
+    @FXML
+    private void handleSearchAction(ActionEvent event) {
+
+        try {
+
+            int resourceID = Integer.parseInt(textResourceID.getText());
+
+            //if the get all copies radio button has been selected then list all copies.
+            if (radioGroup.getSelectedToggle() == allCopiesRadio) {
+                listAllCopies(resourceID);
+
+            } else if (radioGroup.getSelectedToggle() == loanHistoryRadio) {
+                //if all loan history selected then list all loan history.
+                listloanHistoryRadio(resourceID);
+
+            } else if (overdueCopies.getToggleGroup() == radioGroup) {
+                //if all loan history selected then list all loan history.
+                listOverdueCopies(resourceID);
+            } else {
+                //no radio button selected!
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setContentText("Please select an option!");
+                alert.showAndWait();
+            }
+
+        } catch (NumberFormatException n) {
+
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Please enter a numerical resource identifier.");
+            alert.showAndWait();
 
         }
 
-        //add the labels to the scroll pane.
-        root.getChildren().addAll(resourceLogLabel);
-        //root.setSpacing(10);
-        scrollPane.setContent(root);
+    }
+
+    private void listAllCopies(int resourceID) {
+
+        //the copies to list
+        Copy[] resourceCopies = getResourceManager().getCopies(resourceID);
+
+        //wraps labels in a vbox
+        VBox vBox = new VBox();
+
+        //for every copy, add the toString to the label.
+        for (int iCount = 0; iCount < resourceCopies.length; iCount++) {
+            //create label and style
+            Label copyLabel = new Label(resourceCopies[iCount].toString());
+            copyLabel.setMinWidth(300);
+            copyLabel.getStylesheets().add("/Resources/CoreStyle.css");
+            copyLabel.getStyleClass().add("UniversalButton");
+
+            vBox.getChildren().add(copyLabel);
+        }
+
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(10);
+        scrollPane.setContent(vBox);
 
     }
+
+    private void listloanHistoryRadio(int resourceID) {
+
+        //the copies to list
+        LoanEvent[] loanHistory = getResourceFlowManager().
+                getBorrowHistoryByResource(resourceID);
+
+        //wraps labels in a vbox
+        VBox vBox = new VBox();
+
+        //for every loan history, add to label.
+        for (int iCount = 0; iCount < loanHistory.length; iCount++) {
+            //create label and style
+            Label copyLabel = new Label(loanHistory[iCount].toString());
+            copyLabel.setMinWidth(300);
+            copyLabel.getStylesheets().add("/Resources/CoreStyle.css");
+            copyLabel.getStyleClass().add("UniversalButton");
+
+            //add label to vbox.
+            vBox.getChildren().add(copyLabel);
+        }
+
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(10);
+        scrollPane.setContent(vBox);
+
+    }
+
+    private void listOverdueCopies(int resourceID) {
+
+        //the copies to list
+        Copy[] resourceCopies = getResourceFlowManager().showOverdueCopies(resourceID);
+
+        //wraps labels in a vbox
+        VBox vBox = new VBox();
+
+        //for every copy, add the toString to the label.
+        for (int iCount = 0; iCount < resourceCopies.length; iCount++) {
+            //create label and style
+            Label copyLabel = new Label(resourceCopies[iCount].toString());
+            copyLabel.setMinWidth(300);
+            copyLabel.getStylesheets().add("/Resources/CoreStyle.css");
+            copyLabel.getStyleClass().add("UniversalButton");
+
+            vBox.getChildren().add(copyLabel);
+        }
+
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(10);
+        scrollPane.setContent(vBox);
+
+    }
+
 }

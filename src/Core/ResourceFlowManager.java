@@ -100,8 +100,8 @@ public class ResourceFlowManager {
 
         try {
             //Get loan data.
-            String[][] loanData = dbManager.getTupleListByQuery("SELECT * FROM BorrowHistory WHERE CID = " +
-                    Integer.toString(resourceID));
+            String[][] loanData = dbManager.getTupleListByQuery("SELECT * FROM BorrowHistory WHERE BorrowHistory.CID " +
+                    "in (SELECT CPID FROM Copy WHERE RID = " + Integer.toString(resourceID) + ")");
 
             //create array of LoanEvents
             LoanEvent[] events = constructLoanEvents(loanData);
@@ -161,6 +161,38 @@ public class ResourceFlowManager {
 
         //Get all copies
         Copy[] copies = rmManager.getCopies();
+
+        return filterByOverdueCopies(copies);
+
+    }
+
+    /**
+     * Gets all overdue copies by resource ID.
+     * @param resourceID The resource id of the resource.
+     * @return An array of copies that are overdue of a resource ID.
+     */
+    public Copy[] showOverdueCopies(int resourceID) {
+
+        //Get all copies
+        Copy[] copies = rmManager.getCopies(resourceID);
+
+        return filterByOverdueCopies(copies);
+
+    }
+
+
+    /**
+     * Filters copies by if they are overdue.
+     * @param copies An array of copies to filter.
+     * @return An array of copies that are only overdue.
+     */
+    private Copy[] filterByOverdueCopies(Copy[] copies) {
+
+        //if null then become a empty array of copies.
+        if (copies == null) {
+            copies = new Copy[0];
+        }
+
         ArrayList<Copy> overdueCopies = new ArrayList<>();
 
         //Get current date
@@ -169,7 +201,16 @@ public class ResourceFlowManager {
         //For every copy, check if overdue. If so, then add overdueCopies.
         for (Copy currentCopy : copies) {
             //If overdue, then add overdueCopies.
-            if (currentCopy.calculateDaysOffset(currentDate) < -1) {
+
+            int daysOffset;
+            try {
+                daysOffset = currentCopy.calculateDaysOffset(currentDate);
+            } catch (IllegalStateException e) {
+                //copy has no due date set.
+                daysOffset = 0;
+            }
+
+            if (daysOffset < -1) {
                 overdueCopies.add(currentCopy);
             }
         }
