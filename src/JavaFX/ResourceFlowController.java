@@ -14,6 +14,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Handles user specific operations regarding resources.
+ */
 public class ResourceFlowController extends SceneController implements Initializable {
 
     @FXML
@@ -50,26 +53,46 @@ public class ResourceFlowController extends SceneController implements Initializ
         }
     }
 
+    /**
+     * Displays Transaction Manager subscene.
+     * @param event
+     */
     @FXML
     private void handleTransactionAction(ActionEvent event) {
         loadSubscene(SceneController.TRANSACTION_MANAGER_INTERFACE);
     }
 
+    /**
+     * Displays Loan History subscene.
+     * @param event
+     */
     @FXML
     private void handleViewLoanHistoryAction(ActionEvent event) {
         loadSubscene(SceneController.LOAN_HISTORY_CONTROLLER);
     }
 
+    /**
+     * Displays Items Due subscene.
+     * @param event
+     */
     @FXML
     private void handleDueItemsAction(ActionEvent event) {
         loadSubscene(SceneController.ITEMS_DUE);
     }
 
+    /**
+     * Displays Reserve History subscene.
+     * @param event
+     */
     @FXML
     private void handleReservedResourcesAction(ActionEvent event) {
         loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
     }
 
+    /**
+     * Displays Account Editor subscene.
+     * @param event
+     */
     @FXML
     private void handleEditAccountAction(ActionEvent event) {
         loadSubscene(SceneController.ACCOUNT_EDITOR_INTERFACE);
@@ -109,6 +132,10 @@ public class ResourceFlowController extends SceneController implements Initializ
         }
     }
 
+    /**
+     * Borrows a copy of specified resource to selected user.
+     * @param event The action event.
+     */
     @FXML
     private void handleBorrowCopyAction(ActionEvent event) {
 
@@ -150,6 +177,10 @@ public class ResourceFlowController extends SceneController implements Initializ
         }
     }
 
+    /**
+     * Returns a copy for the specific user.
+     * @param event The action event.
+     */
     @FXML
     private void handleReturnCopyAction(ActionEvent event) {
 
@@ -191,6 +222,10 @@ public class ResourceFlowController extends SceneController implements Initializ
         }
     }
 
+    /**
+     * Unreserves a resource for the specified user.
+     * @param event The action event.
+     */
     @FXML
     private void handleUnReserveAction(ActionEvent event) {
 

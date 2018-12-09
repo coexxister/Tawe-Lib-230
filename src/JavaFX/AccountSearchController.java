@@ -7,12 +7,21 @@ import javafx.scene.control.TextField;
 
 import java.io.IOException;
 
+/**
+ * Performs User search by User ID.
+ */
 public class AccountSearchController extends SceneController {
 
     @FXML
     private TextField accountName;
     public static int userID;
 
+    /**
+     * Takes in a User ID and loads the Resource Flow Interface for the specific User.
+     *
+     * @param event Represents the data of the button pressed.
+     * @throws IOException Thrown if a non-numeric value is inputted.
+     */
     @FXML
     private void handleAccountSearchButtonAction(ActionEvent event) throws IOException {
 

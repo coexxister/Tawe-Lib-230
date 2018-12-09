@@ -15,6 +15,9 @@ import javafx.scene.control.Button;
 import javafx.geometry.Insets;
 import javafx.scene.text.Text;
 
+/**
+ * Displays the transaction history of the user.
+ */
 public class TransactionHistoryController extends SceneController implements Initializable {
 
     @FXML

@@ -17,42 +17,57 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Handles editing data of an existing user in the database.
+ */
 public class AccountEditorController extends SceneController implements Initializable {
 
-    int id = getResourceFlowManager().getUserID();
+    private int id = getResourceFlowManager().getUserID();
 
     private Path selectedPath;
 
     private FileChooser avatarChooser = new FileChooser();
 
     @FXML
-    private TextField firstName, surname, streetName, streetNumber, city, county, postCode, phoneNumber, balance;
+    private TextField firstName, surname, streetName, streetNumber,
+            city, county, postCode, phoneNumber, balance;
 
     @FXML
     private ImageView avatar;
 
+    /**
+     * Prompts with dialog to select and set a custom avatar.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     private void selectCustomAvatar(ActionEvent event) {
         avatarChooser.setInitialDirectory(new File("src/DefaultAvatars"));
         Node node = (Node) event.getSource();
-        File file  = avatarChooser.showOpenDialog(node.getScene().getWindow());
+        File file = avatarChooser.showOpenDialog(node.getScene().getWindow());
         selectedPath = Paths.get(file.getAbsolutePath());
 
         setAvatar(true);
     }
 
-    private void setAvatar(boolean isCustom) {
+    /**
+     * Assigns the avatar selected to a specific user.
+     *
+     * @param isCustom Boolean that's true if it's image is custom.
+     */
+    private void setAvatar(final boolean isCustom) {
         try {
 
-            //Get the user account
+            //Get the user account.
             User account = getAccountManager().getAccount(id);
 
-            //Make sure the image path uses forward slash
+            //Make sure the image path uses forward slash.
             String path = selectedPath.toString();
-            JOptionPane.showMessageDialog(null, "Avatar Set", "Avatar Set", JOptionPane.INFORMATION_MESSAGE);
-            path = path.replace("\\","/");
+            JOptionPane.showMessageDialog(null, "Avatar Set", "Avatar Set",
+                    JOptionPane.INFORMATION_MESSAGE);
+            path = path.replace("\\", "/");
 
-            //Create a relative path rather than absolute if custom image selected
+            //Create a relative path rather than absolute if custom image selected.
             if (isCustom) {
                 //the number of characters in 'src' to increase the index by.
                 final int LENGTH_OF_SRC = 3;
@@ -78,6 +93,12 @@ public class AccountEditorController extends SceneController implements Initiali
         }
     }
 
+    /**
+     * Saves all details set in text fields to respective variables,
+     * to change the values in the database.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleSaveAction(ActionEvent event) {
         try {
@@ -119,11 +140,16 @@ public class AccountEditorController extends SceneController implements Initiali
             if (isEdited) {
                 getAccountManager().editAccount(account);
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Cancels all changes and returns back to Resource Flow Interface.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleCancelAction(ActionEvent event) {
         loadSubscene(SceneController.RESOURCE_FLOW_INTERFACE);
@@ -131,6 +157,7 @@ public class AccountEditorController extends SceneController implements Initiali
 
     /**
      * Initialises the interface to display the current details of the user in the text fields
+     *
      * @param location
      * @param resources
      */
@@ -147,7 +174,7 @@ public class AccountEditorController extends SceneController implements Initiali
             postCode.setText(account.getPostCode());
             phoneNumber.setText(account.getTelNum());
 //    avatar.setImage();
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             e.printStackTrace();
         }
     }

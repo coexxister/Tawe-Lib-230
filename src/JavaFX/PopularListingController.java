@@ -9,12 +9,15 @@ import javafx.collections.FXCollections;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+/**
+ * Displays most popular resources currently.
+ */
 public class PopularListingController extends SceneController implements Initializable {
 
     @FXML
     private PieChart popularPie;
 
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         //The max number of resources listed.

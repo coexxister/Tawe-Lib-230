@@ -47,6 +47,11 @@ public class LoginInterfaceController extends SceneController{
         }
     }
 
+    /**
+     * When 'Enter' button is pressed, executes the action of the Login Button.
+     * @param event Represents the data of the button pressed.
+     * @throws Exception Thrown if input is null.
+     */
     @FXML
     protected void onEnter(ActionEvent event) throws Exception {
         handleLoginButtonAction(event);

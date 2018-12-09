@@ -16,6 +16,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Displays resources reserved by a user.
+ */
 public class ReservedInterfaceController extends SceneController implements Initializable {
 
     @FXML
@@ -86,6 +89,9 @@ public class ReservedInterfaceController extends SceneController implements Init
 
     }
 
+    /**
+     * Lists all resources reserved by the user.
+     */
     public void setReservedListing() {
 
         FlowPane root = new FlowPane();

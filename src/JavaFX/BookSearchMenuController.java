@@ -13,6 +13,11 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Interface controller for the book search menu
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
 public class BookSearchMenuController extends SceneController{
 
     @FXML
@@ -27,15 +32,28 @@ public class BookSearchMenuController extends SceneController{
     @FXML
     private TextField genre;
 
+    /**
+     * Executes a search from information specified.
+     * @param event Represents the data of the button pressed.
+     * @throws IOException Thrown if input is null.
+     */
     public void handleSearchByQueryButtonAction(ActionEvent event) throws IOException {
         getInput();
         loadSubscene("/View/BookList.fxml");
     }
 
+    /**
+     * Executes a search by ISBN specified.
+     * @param event Represents the data of the button pressed.
+     * @throws IOException Thrown if input is null.
+     */
     public void handleSearchByISBNButtonAction(ActionEvent event) throws IOException {
         loadSubscene("/View/BookList.fxml");
     }
 
+    /**
+     * Reads the input for the query from text fields.
+     */
     public void getInput(){
         ArrayList<String> column = new ArrayList<>();
         ArrayList<String> input = new ArrayList<>();

@@ -13,6 +13,9 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Displays all resources requested by a user.
+ */
 public class RequestedResourcesInterfaceController extends SceneController implements Initializable {
 
     @FXML

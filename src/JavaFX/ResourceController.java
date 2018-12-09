@@ -15,36 +15,63 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Interface for resource management.
+ */
 public class ResourceController extends SceneController {
 
     @FXML
     private TextField searchID;
 
+    /**
+     * Loads subscene to Add Book.
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleAddBookButtonAction(ActionEvent event){
         loadSubscene("/View/AddBookInterface.fxml");
     }
 
+    /**
+     * Loads subscene to Add DVD.
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleAddDVDButtonAction(ActionEvent event){
         loadSubscene("/View/AddDVDInterface.fxml");
     }
 
+    /**
+     * Loads subscene to Add Computer.
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleAddComputerButtonAction(ActionEvent event){
         loadSubscene("/View/AddLaptopInterface.fxml");
     }
 
+    /**
+     * Loads subscene to Edit a resource.
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleEditResourceButtonAction(ActionEvent event){
         loadSubscene(getResourceScene("Edit"));
     }
 
+    /**
+     * Loads subscene to Delete a resource.
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleDeleteResourceButtonAction(ActionEvent event){
         loadSubscene(getResourceScene("Delete"));
     }
 
+    /**
+     * Loads subscene to display log for specified resource.
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleResourceLogButtonAction(ActionEvent event){
         Resource addResource[] = new Resource[1];
@@ -59,13 +86,18 @@ public class ResourceController extends SceneController {
     }
 
     /**
-     * returns from one of the ResourceInterface subscenes to the superscene
+     * Returns from one of the ResourceInterface subscenes to the superscene
      */
     @FXML
     public void cancel() {
         loadSubscene("/View/ResourceInterface.fxml");
     }
 
+    /**
+     * Displays the Add Resource subscene depending on the resource type.
+     * @param action Represents the data of the button pressed.
+     * @return Subscene depending on resource type.
+     */
     public String getResourceScene(String action){
         Resource addResource[] = new Resource[1];
         try {
