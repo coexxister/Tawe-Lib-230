@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
-import javax.swing.*;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
@@ -30,20 +29,28 @@ public class AccountEditorController extends ResourceController implements Initi
 
     @FXML
     private TextField firstName;
+
     @FXML
     private TextField surname;
+
     @FXML
     private TextField streetName;
+
     @FXML
     private TextField streetNumber;
+
     @FXML
     private TextField city;
+
     @FXML
     private TextField county;
+
     @FXML
     private TextField postCode;
+
     @FXML
     private TextField phoneNumber;
+
     @FXML
     private TextField balance;
 
@@ -65,6 +72,7 @@ public class AccountEditorController extends ResourceController implements Initi
     @FXML
     public void handleSaveAction(ActionEvent event) {
         try {
+            //get the account
             User account = getAccountManager().getAccount(id);
             Boolean isEdited = false;
             if (!(firstName.getText().isEmpty())) {
@@ -105,24 +113,46 @@ public class AccountEditorController extends ResourceController implements Initi
             if (isEdited) {
                 getAccountManager().editAccount(account);
             }
+            //edit the account
+            getAccountManager().editAccount(account);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Save success.");
+            alert.showAndWait();
+
+            goBack();
+
         } catch (SQLException e) {
-            e.printStackTrace();
+            //sql error in database.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error in database!");
+            alert.showAndWait();
+        } catch (IllegalArgumentException e) {
+            //image specified does not exist.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Image specified must already exist!");
+            alert.showAndWait();
         }
     }
 
     /**
      * Cancels all changes and returns back to Resource Flow Interface.
-     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
     public void handleCancelAction(ActionEvent event) {
+        goBack();
+    }
+
+    /**
+     * Changes the scene to the resource flow interface.
+     */
+    private void goBack() {
         loadSubscene(SceneController.getResourceFlowInterface());
     }
 
     /**
      * Initialises the interface to display the current details of the user in the text fields
-     *
      * @param location
      * @param resources
      */

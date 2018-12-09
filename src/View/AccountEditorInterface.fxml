@@ -40,7 +40,7 @@
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Street Number" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="City" GridPane.rowIndex="4" />
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="County" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <TextField fx:id="firstName" promptText="First Name" GridPane.rowIndex="1">
+                <TextField fx:id="firstName" promptText="First Name" styleClass="UniversalButton" GridPane.rowIndex="1">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -48,7 +48,7 @@
                         <Insets right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <TextField fx:id="surname" promptText="Surname" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="surname" promptText="Surname" styleClass="UniversalButton" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -56,7 +56,7 @@
                         <Insets right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <TextField fx:id="streetName" promptText="Street Name" GridPane.rowIndex="3">
+                <TextField fx:id="streetName" promptText="Street Name" styleClass="UniversalButton" GridPane.rowIndex="3">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -64,7 +64,7 @@
                         <Insets right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <TextField fx:id="streetNumber" promptText="Street Number" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                <TextField fx:id="streetNumber" promptText="Street Number" styleClass="UniversalButton" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -72,7 +72,7 @@
                         <Insets right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <TextField fx:id="city" promptText="City" GridPane.rowIndex="5">
+                <TextField fx:id="city" promptText="City" styleClass="UniversalButton" GridPane.rowIndex="5">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -80,7 +80,7 @@
                         <Insets right="10.0" />
                     </GridPane.margin>
                 </TextField>
-                <TextField fx:id="county" promptText="County" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <TextField fx:id="county" promptText="County" styleClass="UniversalButton" GridPane.columnIndex="1" GridPane.rowIndex="5">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -89,7 +89,7 @@
                     </GridPane.margin>
                 </TextField>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Post Code" GridPane.rowIndex="6" />
-                <TextField fx:id="postCode" promptText="Post Code" GridPane.rowIndex="7">
+                <TextField fx:id="postCode" promptText="Post Code" styleClass="UniversalButton" GridPane.rowIndex="7">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
@@ -98,7 +98,7 @@
                     </GridPane.margin>
                 </TextField>
                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Phone Number" GridPane.rowIndex="8" />
-                <TextField fx:id="phoneNumber" promptText="Phone Number" GridPane.rowIndex="9">
+                <TextField fx:id="phoneNumber" promptText="Phone Number" styleClass="UniversalButton" GridPane.rowIndex="9">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets>
