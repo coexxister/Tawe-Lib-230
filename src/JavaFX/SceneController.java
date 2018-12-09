@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -303,7 +304,7 @@ public class SceneController {
      * @param resourceList List of resources.
      * @param element Searched resource.
      */
-    public void getOnMouseClicked(Resource[] resourceList, HBox element){
+    public void getOnMouseClicked(Resource[] resourceList, VBox element){
         element.getStylesheets().add("/Resources/CoreStyle.css");
         element.getStyleClass().add("UniversalButton");
         element.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {

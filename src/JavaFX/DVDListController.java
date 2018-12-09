@@ -10,6 +10,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +57,7 @@ public class DVDListController extends SceneController implements Initializable 
         for (int i = page; i < page + elementsPerPage; i++) {
             if(i < resourceList.length) {
 
-                HBox element = new HBox(elementsPerPage);
+                VBox element = new VBox(elementsPerPage);
                 element.setId(String.valueOf(i));
                 ImageView image = new ImageView("/Resources/dvdIcon.png");
 
