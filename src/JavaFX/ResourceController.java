@@ -24,7 +24,7 @@ import java.sql.SQLException;
  */
 public class ResourceController extends SceneController {
 
-    private FileChooser thumbnailChooser = new FileChooser();
+    private FileChooser imageChooser = new FileChooser();
 
     @FXML
     private TextField searchID;
@@ -127,12 +127,24 @@ public class ResourceController extends SceneController {
         return null;
     }
 
-    public String setThumbnailImage(ActionEvent event){
-        Path selectedPath;
-        thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
+    public String setThumbnailImage(ActionEvent event) {
+        imageChooser.setInitialDirectory(new File("src/ResourceImages"));
         Node node = (Node) event.getSource();
-        File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
-        selectedPath = Paths.get(file.getAbsolutePath());
+        File file = imageChooser.showOpenDialog(node.getScene().getWindow());
+        Path selectedPath = Paths.get(file.getAbsolutePath());
+
+        String path = selectedPath.toString();
+        path = path.replace("\\", "/");
+        final int LENGTH_OF_SRC = 3;
+        path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
+        return path;
+    }
+
+    public String setAvatar(ActionEvent event) {
+        imageChooser.setInitialDirectory(new File("src/DefaultAvatars"));
+        Node node = (Node) event.getSource();
+        File file = imageChooser.showOpenDialog(node.getScene().getWindow());
+        Path selectedPath = Paths.get(file.getAbsolutePath());
 
         String path = selectedPath.toString();
         path = path.replace("\\", "/");

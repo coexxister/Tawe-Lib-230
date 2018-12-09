@@ -6,14 +6,12 @@ import Core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 
 import java.net.URL;
-import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -23,10 +21,9 @@ import java.util.ResourceBundle;
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
-public class AccountCreatorController extends SceneController implements Initializable {
-    FileChooser avatarChooser = new FileChooser();
-    private Path selectedPath;
+public class AccountCreatorController extends ResourceController implements Initializable {
 
+    private String path;
 
 
     @FXML
@@ -71,6 +68,7 @@ public class AccountCreatorController extends SceneController implements Initial
                     streetNumber.getText(), streetName.getText(), county.getText(), city.getText(), postCode.getText(),
                     avatarID);
             try {
+                newAccount.setAvatarID(getResourceManager().getImageID(path));
                 userID = getAccountManager().addAccount(newAccount);
                 getAccountManager().changeBalance(userID, Float.parseFloat(balance.getText()));
             } catch (SQLException e) {
@@ -81,6 +79,7 @@ public class AccountCreatorController extends SceneController implements Initial
                     streetNumber.getText(), streetName.getText(), county.getText(), city.getText(), postCode.getText(),
                     DateManager.returnCurrentDate(), 0, avatarID);
             try {
+                newAccount.setAvatarID(getResourceManager().getImageID(path));
                 userID = getAccountManager().addAccount(newAccount)[0];
                 getAccountManager().changeBalance(userID, Float.parseFloat(balance.getText()));
             } catch (SQLException e) {
@@ -95,43 +94,20 @@ public class AccountCreatorController extends SceneController implements Initial
      * @param event the event triggered by clicking the button
      */
     public void handleSetAvatarButtonAction(ActionEvent event) {
-        avatarID = setAvatar();
-    }
-
-    private int setAvatar() {
-        try {
-            //Make sure the image path uses forward slash
-            String path = selectedPath.toString();
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Avatar Set");
-            alert.showAndWait();
-            path = path.replace("\\", "/");
-
-            int avatarID;
-
-            //Attempt to get the avatar image id
-            try {
-                avatarID = getResourceManager().getImageID(path);
-            } catch (IllegalArgumentException e) {
-                System.out.println("No avatar exists at that path.");
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return avatarID;
+        path = setAvatar(event);
+        avatar.setImage(new Image(path));
     }
 
     /**
-     *
-     * @param location
-     * @param resources
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             avatarID = getResourceManager().getImageID(DEFAULT_URL);
-        } catch(SQLException e) {
+            avatar.setImage(new Image(getResourceManager().getImageURL(avatarID)));
+        } catch (SQLException e) {
             System.out.println("Default avatarID is invalid.");
         }
     }

@@ -9,13 +9,14 @@ import javafx.stage.Stage;
 
 /**
  * Extends Application to launch the user interface.
+ *
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
 public class Main extends Application {
-	/**
-	 * Main method to launch the program.
-	 */
+    /**
+     * Main method to launch the program.
+     */
     public static void main(String[] args) {
         launch(args);
     }
@@ -25,7 +26,7 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
-    	//Tries to load the main interface screen and show it to the user
+        //Tries to load the main interface screen and show it to the user
         try {
             Parent stage = FXMLLoader.load(getClass().getResource(SceneController.getMainInterface()));
             Scene scene = new Scene(stage);
@@ -35,7 +36,7 @@ public class Main extends Application {
             primaryStage.getIcons().add(new Image("/Resources/bookIcon.png"));
             primaryStage.show();
 
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

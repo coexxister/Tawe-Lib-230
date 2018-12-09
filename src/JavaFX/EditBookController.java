@@ -44,6 +44,10 @@ public class EditBookController extends ResourceController implements Initializa
     @FXML
     private ImageView thumbImage;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!book.getTitle().isEmpty()) {
@@ -130,8 +134,5 @@ public class EditBookController extends ResourceController implements Initializa
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         path = setThumbnailImage(event);
         thumbImage.setImage(new Image(path));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Thumbnail Set");
-        alert.showAndWait();
     }
 }

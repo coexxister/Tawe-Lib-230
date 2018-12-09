@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -28,8 +27,13 @@ public class TransactionManagerController extends SceneController implements Ini
     @FXML
     private TextField balanceChangeText;
 
-    @FXML Label currentBalance;
+    @FXML
+    Label currentBalance;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     public void initialize(URL location, ResourceBundle resources) {
 
         //get user id
@@ -43,6 +47,7 @@ public class TransactionManagerController extends SceneController implements Ini
 
     /**
      * Performs calculations and sets the balance for the user.
+     *
      * @param event Represents the data of the button pressed.
      * @throws IOException Thrown when input is null.
      */
@@ -80,7 +85,7 @@ public class TransactionManagerController extends SceneController implements Ini
         try {
             //get balance and round to 2 decimal places.
             balance = Math.round(getAccountManager().getAccountBalance(getResourceFlowManager().getUserID()) *
-                    100.0F)/100.0F;
+                    100.0F) / 100.0F;
         } catch (SQLException e) {
             balance = 0.0F;
         }
@@ -98,6 +103,7 @@ public class TransactionManagerController extends SceneController implements Ini
 
     /**
      * Constructs a scroll pane of transaction history for the user.
+     *
      * @param userID The user id of the user.
      * @return The scroll pane containing transaction history.
      */

@@ -2,14 +2,12 @@ package JavaFX;
 
 import Core.Copy;
 import Core.DateManager;
-import Core.LoanEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
@@ -25,6 +23,10 @@ public class ItemsDueInterfaceController extends SceneController implements Init
     @FXML
     private ScrollPane scrollPane;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -68,8 +70,8 @@ public class ItemsDueInterfaceController extends SceneController implements Init
             try {
                 titleLabel.setText("\n" + getResourceManager().
                         getResourceList("SELECT * FROM Resource WHERE RID = " +
-                        Integer.toString(copiesOnLoan[iCount].getResourceID()))[0].getTitle());
-            } catch (SQLException e){
+                                Integer.toString(copiesOnLoan[iCount].getResourceID()))[0].getTitle());
+            } catch (SQLException e) {
                 titleLabel.setText("");
             }
 
@@ -83,7 +85,7 @@ public class ItemsDueInterfaceController extends SceneController implements Init
 
                 copyContainer[iCount].setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
 
-                contentText+= "\nCopy overdue by " +
+                contentText += "\nCopy overdue by " +
                         copiesOnLoan[iCount].calculateDaysOffset(DateManager.returnCurrentDate()) +
                         " days!";
 

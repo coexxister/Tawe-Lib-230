@@ -1,34 +1,25 @@
-/**
- * Interface controller for the book list scene
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
- * @version 1.0
- */
-
 package JavaFX;
 
-import Core.Copy;
 import Core.Resource;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
  * Creates a list of books from a query.
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class BookListController extends SceneController implements Initializable {
 
@@ -42,6 +33,8 @@ public class BookListController extends SceneController implements Initializable
 
     /**
      * Initialises Book List.
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

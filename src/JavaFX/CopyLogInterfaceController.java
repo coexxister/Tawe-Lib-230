@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 /**
  * This class is responsible for listing all borrow history for a select copy id.
+ *
  * @author Noah Lenagan
  * @version 1.0
  */
@@ -41,6 +42,7 @@ public class CopyLogInterfaceController extends SceneController implements Initi
 
     /**
      * Handles the click of the search button by constructed a scroll pane of borrow history.
+     *
      * @param event The event of the click.
      */
     @FXML
@@ -66,6 +68,7 @@ public class CopyLogInterfaceController extends SceneController implements Initi
 
     /**
      * Sets the scroll pane with the content of the resource history of the specific copy.
+     *
      * @param copyID The copy id of the copy.
      */
     private void setScrollPane(int copyID) {
@@ -91,7 +94,7 @@ public class CopyLogInterfaceController extends SceneController implements Initi
             vbox.getChildren().add(label);
 
         }
-        
+
         vbox.setSpacing(10);
         vbox.setPadding(new Insets(10));
 

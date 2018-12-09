@@ -34,6 +34,10 @@ public class EditLaptopController extends ResourceController implements Initiali
     @FXML
     private ImageView thumbnailImg;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!computer.getTitle().isEmpty()) {
@@ -114,8 +118,5 @@ public class EditLaptopController extends ResourceController implements Initiali
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         path = setThumbnailImage(event);
         thumbnailImg.setImage(new Image(path));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Thumbnail Set");
-        alert.showAndWait();
     }
 }

@@ -30,6 +30,9 @@ public class ComputerListController extends SceneController implements Initializ
 
     /**
      * Initialises Computer List.
+     *
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -52,9 +55,9 @@ public class ComputerListController extends SceneController implements Initializ
     public HBox createPage(int pageIndex) {
         HBox box = new HBox(elementsPerPage);
         computerView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
-        int page = pageIndex * (int)elementsPerPage;
+        int page = pageIndex * (int) elementsPerPage;
         for (int i = page; i < page + elementsPerPage; i++) {
-            if(i < resourceList.length) {
+            if (i < resourceList.length) {
 
                 VBox element = new VBox(elementsPerPage);
                 element.setId(String.valueOf(i));

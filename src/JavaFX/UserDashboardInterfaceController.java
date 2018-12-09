@@ -23,11 +23,12 @@ public class UserDashboardInterfaceController extends SceneController implements
 
     /**
      * Returns user to the home scene.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
     private void handleHomeButtonAction(ActionEvent event) {
-        if(homeButton.getText().contains("Home")) {
+        if (homeButton.getText().contains("Home")) {
             handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
         } else {
             handleSceneChangeButtonAction(event, SceneController.getUserDashboardInterface());
@@ -36,6 +37,7 @@ public class UserDashboardInterfaceController extends SceneController implements
 
     /**
      * Displays Profile Image Selector subscene.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
@@ -46,6 +48,7 @@ public class UserDashboardInterfaceController extends SceneController implements
 
     /**
      * Displays Transaction History subscene.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
@@ -56,6 +59,7 @@ public class UserDashboardInterfaceController extends SceneController implements
 
     /**
      * Displays Loan History subscene.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
@@ -66,6 +70,7 @@ public class UserDashboardInterfaceController extends SceneController implements
 
     /**
      * Displays Reserve History subscene.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
@@ -78,12 +83,13 @@ public class UserDashboardInterfaceController extends SceneController implements
      * Changes home button text to 'Dashboard'.
      */
     @FXML
-    private void changeDashboardButton(){
+    private void changeDashboardButton() {
         homeButton.setText("Dashboard");
     }
 
     /**
      * Displays Requested Resources subscene.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
@@ -94,6 +100,7 @@ public class UserDashboardInterfaceController extends SceneController implements
 
     /**
      * Displays Items Due subscene.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
@@ -110,7 +117,7 @@ public class UserDashboardInterfaceController extends SceneController implements
         float balance;
         try {
             //get balance and round to 2 decimal places.
-            balance = Math.round(getAccountManager().getAccountBalance(SceneController.USER_ID)*100)/100;
+            balance = Math.round(getAccountManager().getAccountBalance(SceneController.USER_ID) * 100) / 100;
         } catch (SQLException e) {
             balance = 0.0F;
         }
@@ -125,6 +132,10 @@ public class UserDashboardInterfaceController extends SceneController implements
         }
     }
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateBalanceLabel();

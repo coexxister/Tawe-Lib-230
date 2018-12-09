@@ -59,7 +59,7 @@ public class AddBookController extends ResourceController implements Initializab
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Resource Created Successfully!\nResource ID = \"\n" +
-                        + getResourceManager().getLastAddedID());
+                        +getResourceManager().getLastAddedID());
                 alert.showAndWait();
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -79,11 +79,12 @@ public class AddBookController extends ResourceController implements Initializab
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         path = setThumbnailImage(event);
         thumbnail.setImage(new Image(path));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("Thumbnail Set");
-        alert.showAndWait();
     }
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
