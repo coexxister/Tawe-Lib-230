@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -67,9 +68,18 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#handleCopiesAction" prefHeight="25.0" prefWidth="148.0" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="Copies">
+            <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#handleCopiesAction" prefHeight="25.0" prefWidth="148.0" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="Borrow History" wrapText="true">
                <graphic>
                   <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Icons/Copies.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button contentDisplay="TOP" layoutX="821.0" layoutY="235.0" mnemonicParsing="false" onAction="#handleAllOverdueCopies" prefHeight="25.0" prefWidth="148.0" styleClass="UniversalButton" stylesheets="@../Resources/CoreStyle.css" text="All Overdue Copies">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" onDragDetected="#handleAllOverdueCopies" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Icons/Copies.png" />
                      </image>

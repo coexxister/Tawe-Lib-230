@@ -38,7 +38,6 @@ public class SceneController {
     private static final String ADD_DVD_INTERFACE = "/View/AddDVDInterface.fxml";
     private static final String ADD_LAPTOP_INTERFACE = "/View/AddLaptopInterface.fxml";
     private static final String RESOURCE_LOG_INTERFACE = "/View/ResourceLogInterface.fxml";
-
     private static final String ACCOUNTS_SEARCH_INTERFACE = "/View/AccountSearchInterface.fxml";
     private static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountCreatorInterface.fxml";
     private static final String ACCOUNT_EDITOR_INTERFACE = "/View/AccountEditorInterface.fxml";
@@ -52,6 +51,7 @@ public class SceneController {
     private static final String RESOURCE_FLOW_INTERFACE = "/View/ResourceFlowInterface.fxml";
     private static final String TRANSACTION_MANAGER_INTERFACE = "/View/TransactionManager.fxml";
     private static final String COPY_LOG_INTERFACE = "/View/CopyLogInterface.fxml";
+    private static final String LIST_OVER_DUE_COPIES = "/View/ListAllOverdueCopiesInterface.fxml";
 
     //Query for requesting resource and the requested resource.
     private static String sqlQuery;
@@ -265,18 +265,26 @@ public class SceneController {
     }
 
     /**
-     * Getter for resource log interface FXML path
-     * @return RESOURCE_LOG_INTERFACE the FXML path
+     * Getter for list over due copies interface FXML path.
+     * @return The fxml path for list over due copies interface.
+     */
+    public static String getListOverDueCopies() {
+        return LIST_OVER_DUE_COPIES;
+    }
+
+    /**
+     * Getter for resource log interface FXML path.
+     * @return RESOURCE_LOG_INTERFACE the FXML path.
      */
     public static String getResourceLogInterface() {
         return RESOURCE_LOG_INTERFACE;
     }
 
     /**
-     * Handles the action of clicking a button to change scenes
+     * Handles the action of clicking a button to change scenes.
      *
-     * @param event the event triggered by clicking the button
-     * @param fxml  the fxml file corresponding to the new scene
+     * @param event the event triggered by clicking the button.
+     * @param fxml  the fxml file corresponding to the new scene.
      */
     public void handleSceneChangeButtonAction(ActionEvent event, String fxml) {
         Parent root = null;
@@ -294,9 +302,9 @@ public class SceneController {
     }
 
     /**
-     * Sets the mainPane to a different scene
+     * Sets the mainPane to a different scene.
      *
-     * @param fxml the fxml file corresponding to the new scene
+     * @param fxml the fxml file corresponding to the new scene.
      */
     public void loadSubscene(String fxml) {
         try {
@@ -307,9 +315,9 @@ public class SceneController {
     }
 
     /**
-     * Changes the text of the button to logout to say "Home"
+     * Changes the text of the button to logout to say "Home".
      *
-     * @param logoutButton the button to logout
+     * @param logoutButton the button to logout.
      */
     @FXML
     public void changeLogoutToHome(Button logoutButton) {
@@ -317,18 +325,18 @@ public class SceneController {
     }
 
     /**
-     * Getter for resource database
+     * Getter for resource database.
      *
-     * @return db the database
+     * @return db the database.
      */
     public static DatabaseManager getDatabase() {
         return db;
     }
 
     /**
-     * Getter for account manager
+     * Getter for account manager.
      *
-     * @return am the account manager
+     * @return am the account manager.
      */
     public static AccountManager getAccountManager() {
         return am;

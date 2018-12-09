@@ -77,4 +77,10 @@ public class StaffInterfaceController extends SceneController implements Initial
         loadSubscene(SceneController.getCopyLogInterface());
         changeLogoutToHome(logoutButton);
     }
+
+    @FXML
+    public void handleAllOverdueCopies(ActionEvent event) {
+        loadSubscene(SceneController.getListOverDueCopies());
+        changeLogoutToHome(logoutButton);
+    }
 }
