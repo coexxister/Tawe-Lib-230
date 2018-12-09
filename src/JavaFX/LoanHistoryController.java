@@ -9,6 +9,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
@@ -30,8 +31,6 @@ public class LoanHistoryController extends SceneController implements Initializa
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
-        VBox root = new VBox();
-
         LoanEvent[] loanHistory = getResourceFlowManager().getBorrowHistory(userID);
 
         Label[] loanText = new Label[loanHistory.length];
@@ -47,12 +46,16 @@ public class LoanHistoryController extends SceneController implements Initializa
         }
 
         //Wrap all labels in a vBox
-        root.getChildren().addAll(loanText);
-        root.setSpacing(10);
-        root.setPadding(new Insets(10));
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(loanText);
+
+        //Make listing center.
+        HBox hBox = new HBox(vBox);
+        hBox.setAlignment(Pos.CENTER);
+
 
         //Set the content of the scroll pane to the vBox
-        scrollPane.setContent(root);
+        scrollPane.setContent(hBox);
 
     }
 

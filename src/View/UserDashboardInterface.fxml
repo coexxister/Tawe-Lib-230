@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -11,7 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.UserDashboardInterfaceController">
    <bottom>
       <HBox prefHeight="82.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
    </bottom>
@@ -50,7 +55,6 @@
                   <Button fx:id="requestedResources" mnemonicParsing="false" onAction="#handleRequestedResourceAction" prefWidth="162.0" styleClass="UniversalButton" text="Requested Resources" />
                   <Button fx:id="reservedItem" mnemonicParsing="false" onAction="#handleReservedAction" prefWidth="162.0" styleClass="UniversalButton" text="Reserved Items" />
                   <Button fx:id="transactionHistory" mnemonicParsing="false" onAction="#handleTransactionHistoryAction" prefWidth="162.0" styleClass="UniversalButton" text="Transaction History" />
-                  <Button fx:id="userStatistics" mnemonicParsing="false" prefWidth="162.0" styleClass="UniversalButton" text="User Statistics" />
                </children>
             </VBox>
          </children>

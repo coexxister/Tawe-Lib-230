@@ -4,45 +4,58 @@ import Core.Transaction;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 import javafx.geometry.Insets;
-import javafx.scene.text.Text;
 
 /**
  * Displays the transaction history of the user.
+ * @author Noah Lenagan
+ * @version 1.0
  */
 public class TransactionHistoryController extends SceneController implements Initializable {
 
+    /**
+     * The scroll pane which lists transactions.
+     */
     @FXML
     private ScrollPane scrollPane;
 
+    /**
+     * Sets the transaction history in the scroll pane.
+     * @param location The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         scrollPane.setFitToHeight(true);
         scrollPane.setFitToWidth(true);
 
-        VBox root = new VBox();
-
+        //get all transactions of a user
         Transaction[] transactions = getAccountManager().
-                    getTransactionHistory(SceneController.USER_ID);
+                getTransactionHistory(SceneController.USER_ID);
 
+        //create transactions
         Label[] transactionText = new Label[transactions.length];
 
+        //for every transaction, add transaction to a label.
         for (int iCount = 0; iCount < transactions.length; iCount++) {
             transactionText[iCount] = new Label(transactions[iCount].toString());
+
+            //Styling of label.
             transactionText[iCount].getStylesheets().add("/Resources/CoreStyle.css");
             transactionText[iCount].getStyleClass().add("ScrollListItem");
             transactionText[iCount].setMinHeight(200);
             transactionText[iCount].setPrefWidth(400);
             transactionText[iCount].setAlignment(Pos.CENTER);
 
+            //if negative change in transaction, change colour to red. Otherwise change to green.
             if (transactions[iCount].getChange() < 0) {
                 transactionText[iCount].setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
             } else {
@@ -50,10 +63,16 @@ public class TransactionHistoryController extends SceneController implements Ini
             }
         }
 
-        root.getChildren().addAll(transactionText);
-        root.setSpacing(10);
-        root.setPadding(new Insets(10));
-        scrollPane.setContent(root);
+        VBox vBox = new VBox();
+        vBox.getChildren().addAll(transactionText);
+        vBox.setSpacing(10);
+        vBox.setPadding(new Insets(10));
+
+        //center align listing
+        HBox hBox = new HBox(vBox);
+        hBox.setAlignment(Pos.CENTER);
+
+        scrollPane.setContent(hBox);
     }
 
 }
