@@ -26,8 +26,6 @@ import java.util.ResourceBundle;
 public class EditDVDController extends ResourceController implements Initializable {
 
     private Dvd dvd = (Dvd) getRequestResource();
-    private FileChooser thumbnailChooser = new FileChooser();
-    private Path selectedPath;
     private String path;
 
     @FXML
@@ -45,7 +43,12 @@ public class EditDVDController extends ResourceController implements Initializab
             director.setText(dvd.getDirector());
         }
         if (dvd.getSubLang().length != 0) {
-            subtitle.setText(dvd.getSubLang().toString());
+            String subtitleLang = "";
+            for(int i = 0; i < dvd.getSubLang().length-1; i++) {
+                subtitleLang += dvd.getSubLang()[i] + ", ";
+            }
+            subtitleLang += dvd.getSubLang()[dvd.getSubLang().length-1];
+            subtitle.setText(subtitleLang);
         }
         if (dvd.getRunTime() != 0) {
             runtime.setText(String.valueOf(dvd.getRunTime()));
@@ -64,6 +67,7 @@ public class EditDVDController extends ResourceController implements Initializab
         if (dvd.getThumbImage() != 0) {
             try {
                 thumbImage.setImage(new Image(getResourceManager().getImageURL(dvd.getThumbImage())));
+                path = getResourceManager().getImageURL(dvd.getThumbImage());
             } catch (SQLException e) {
                 System.out.println("Couldn't find image.");
             }
@@ -110,15 +114,6 @@ public class EditDVDController extends ResourceController implements Initializab
      */
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
-        thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
-        Node node = (Node) event.getSource();
-        File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
-        selectedPath = Paths.get(file.getAbsolutePath());
-
-        path = selectedPath.toString();
-        path = path.replace("\\", "/");
-        final int LENGTH_OF_SRC = 3;
-        path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
-        thumbImage.setImage(new Image(path));
+        thumbImage.setImage(new Image(setThumbnailImage(event, path)));
     }
 }

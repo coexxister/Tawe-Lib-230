@@ -8,10 +8,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -19,6 +25,9 @@ import java.util.ResourceBundle;
  * Interface for resource management.
  */
 public class ResourceController extends SceneController {
+
+    private FileChooser thumbnailChooser = new FileChooser();
+    private Path selectedPath;
 
     @FXML
     private TextField searchID;
@@ -113,5 +122,18 @@ public class ResourceController extends SceneController {
             System.out.println("Couldn't find specific resource.");
         }
         return null;
+    }
+
+    public String setThumbnailImage(ActionEvent event, String path){
+        thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
+        Node node = (Node) event.getSource();
+        File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
+        selectedPath = Paths.get(file.getAbsolutePath());
+
+        path = selectedPath.toString();
+        path = path.replace("\\", "/");
+        final int LENGTH_OF_SRC = 3;
+        path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
+        return path;
     }
 }

@@ -26,8 +26,6 @@ import java.util.ResourceBundle;
 public class EditBookController extends ResourceController implements Initializable {
 
     private Book book = (Book) getRequestResource();
-    private FileChooser thumbnailChooser = new FileChooser();
-    private Path selectedPath;
     private String path;
 
     @FXML
@@ -113,15 +111,6 @@ public class EditBookController extends ResourceController implements Initializa
      */
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
-        thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
-        Node node = (Node) event.getSource();
-        File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
-        selectedPath = Paths.get(file.getAbsolutePath());
-
-        path = selectedPath.toString();
-        path = path.replace("\\", "/");
-        final int LENGTH_OF_SRC = 3;
-        path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
-        thumbImage.setImage(new Image(path));
+        thumbImage.setImage(new Image(setThumbnailImage(event, path)));
     }
 }
