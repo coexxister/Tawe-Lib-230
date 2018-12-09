@@ -5,11 +5,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
-import javax.swing.*;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
@@ -25,12 +25,36 @@ public class AccountEditorController extends SceneController implements Initiali
     private int id = getResourceFlowManager().getUserID();
 
     private Path selectedPath;
+    private int selectImageID;
 
     private FileChooser avatarChooser = new FileChooser();
 
     @FXML
-    private TextField firstName, surname, streetName, streetNumber,
-            city, county, postCode, phoneNumber, balance;
+    private TextField firstName;
+
+    @FXML
+    private TextField surname;
+
+    @FXML
+    private TextField streetName;
+
+    @FXML
+    private TextField streetNumber;
+
+    @FXML
+    private TextField city;
+
+    @FXML
+    private TextField county;
+
+    @FXML
+    private TextField postCode;
+
+    @FXML
+    private TextField phoneNumber;
+
+    @FXML
+    private TextField balance;
 
     @FXML
     private ImageView avatar;
@@ -42,54 +66,36 @@ public class AccountEditorController extends SceneController implements Initiali
      */
     @FXML
     private void selectCustomAvatar(ActionEvent event) {
+
         avatarChooser.setInitialDirectory(new File("src/DefaultAvatars"));
         Node node = (Node) event.getSource();
         File file = avatarChooser.showOpenDialog(node.getScene().getWindow());
         selectedPath = Paths.get(file.getAbsolutePath());
 
-        setAvatar(true);
+        setAvatar();
     }
 
     /**
      * Assigns the avatar selected to a specific user.
-     *
-     * @param isCustom Boolean that's true if it's image is custom.
      */
-    private void setAvatar(final boolean isCustom) {
+    private void setAvatar() {
         try {
-
-            //Get the user account.
-            User account = getAccountManager().getAccount(id);
 
             //Make sure the image path uses forward slash.
             String path = selectedPath.toString();
-            JOptionPane.showMessageDialog(null, "Avatar Set", "Avatar Set",
-                    JOptionPane.INFORMATION_MESSAGE);
             path = path.replace("\\", "/");
 
-            //Create a relative path rather than absolute if custom image selected.
-            if (isCustom) {
                 //the number of characters in 'src' to increase the index by.
                 final int LENGTH_OF_SRC = 3;
                 path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
-            }
-
-            int avatarID;
 
             //Attempt to get the avatar image id, if does not exist then add the image.
-            try {
-                avatarID = getResourceManager().getImageID(path);
-            } catch (IllegalArgumentException e) {
-                avatarID = getResourceManager().addAvatarImage(path);
-            }
-
-            //Replace accounts image id.
-            account.setAvatarID(avatarID);
-            //Parse in edited account.
-            getAccountManager().editAccount(account);
+            selectImageID = getResourceManager().getImageID(path);
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Error in database!");
+            alert.showAndWait();
         }
     }
 
@@ -102,74 +108,70 @@ public class AccountEditorController extends SceneController implements Initiali
     @FXML
     public void handleSaveAction(ActionEvent event) {
         try {
+            //get the account
             User account = getAccountManager().getAccount(id);
-            Boolean isEdited = false;
-            if (!(firstName.getLength() == 0)) {
-                account.setFirstName(firstName.getText());
-                isEdited = true;
-            }
-            if (!(surname.getLength() == 0)) {
-                account.setLastName(surname.getText());
-                isEdited = true;
-            }
-            if (!(streetName.getLength() == 0)) {
-                account.setStreetName(streetName.getText());
-                isEdited = true;
-            }
-            if (!(streetNumber.getLength() == 0)) {
-                account.setStreetNum(streetNumber.getText());
-                isEdited = true;
-            }
-            if (!(city.getLength() == 0)) {
-                account.setCity(city.getText());
-                isEdited = true;
-            }
-            if (!(county.getLength() == 0)) {
-                account.setCounty(county.getText());
-                isEdited = true;
-            }
-            if (!(postCode.getLength() == 0)) {
-                account.setPostCode(postCode.getText());
-                isEdited = true;
-            }
-            if (!(phoneNumber.getLength() == 0)) {
-                account.setTelNum(phoneNumber.getText());
-                isEdited = true;
-            }
 
-            if (isEdited) {
-                getAccountManager().editAccount(account);
-            }
+            //set the new values
+            account.setFirstName(firstName.getText());
+            account.setLastName(surname.getText());
+            account.setStreetName(streetName.getText());
+            account.setStreetNum(streetNumber.getText());
+            account.setCity(city.getText());
+            account.setCounty(county.getText());
+            account.setPostCode(postCode.getText());
+            account.setTelNum(phoneNumber.getText());
+            account.setAvatarID(selectImageID);
+
+            //edit the account
+            getAccountManager().editAccount(account);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Save success.");
+            alert.showAndWait();
+
+            goBack();
+            
         } catch (SQLException e) {
-            e.printStackTrace();
+            //sql error in database.
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error in database!");
+            alert.showAndWait();
+        } catch (IllegalArgumentException e) {
+            //image specified does not exist.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Image specified must already exist!");
+            alert.showAndWait();
         }
     }
 
     /**
      * Cancels all changes and returns back to Resource Flow Interface.
-     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
     public void handleCancelAction(ActionEvent event) {
-        loadSubscene(SceneController.getResourceFlowInterface());
+        goBack();
     }
 
-    @FXML
-    public void setAvatar(){
-
+    /**
+     * Changes the scene to the resource flow interface.
+     */
+    private void goBack() {
+        loadSubscene(SceneController.getResourceFlowInterface());
     }
 
     /**
      * Initialises the interface to display the current details of the user in the text fields
-     *
      * @param location
      * @param resources
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
+            //get account
             User account = getAccountManager().getAccount(id);
+
+            //populate variables
             firstName.setText(account.getFirstName());
             surname.setText(account.getLastName());
             streetName.setText(account.getStreetName());
@@ -178,9 +180,14 @@ public class AccountEditorController extends SceneController implements Initiali
             county.setText(account.getCounty());
             postCode.setText(account.getPostCode());
             phoneNumber.setText(account.getTelNum());
-//    avatar.setImage();
+            selectImageID = account.getAvatarID();
+
         } catch (IllegalArgumentException e) {
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error resource identifier specified doesn't exist!");
+            alert.showAndWait();
+
+            goBack();
         }
     }
 }
