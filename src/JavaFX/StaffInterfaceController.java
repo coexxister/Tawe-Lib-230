@@ -71,4 +71,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     public void initialize(URL location, ResourceBundle resources) {
         usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(SceneController.USER_ID).getFirstName());
     }
+
+    @FXML
+    public void handleCopiesAction(ActionEvent event) {
+        loadSubscene(SceneController.COPY_LOG_INTERFACE);
+    }
 }

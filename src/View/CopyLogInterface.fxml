@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.CopyLogInterfaceController">
+<BorderPane fx:id="borderPane" maxHeight="400.0" maxWidth="600.0" styleClass="UserDashboard" stylesheets="@../Resources/CoreStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="JavaFX.CopyLogInterfaceController">
    <left>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>

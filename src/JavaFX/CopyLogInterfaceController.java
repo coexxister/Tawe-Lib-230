@@ -15,21 +15,35 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- *
+ * This class is responsible for listing all borrow history for a select copy id.
+ * @author Noah Lenagan
+ * @version 1.0
  */
 public class CopyLogInterfaceController extends SceneController implements Initializable {
 
+    /**
+     * The border pane which contains all the content.
+     */
     @FXML
     private BorderPane borderPane;
 
+    /**
+     * The text field where the copy id is entered.
+     */
     @FXML
     private TextField textCopy;
 
     public void initialize(URL location, ResourceBundle resources) {
-
+        //Create a blank scroll pane.
+        setScrollPane(-1);
     }
 
-    public void handleSearchAction(ActionEvent event) {
+    /**
+     * Handles the click of the search button by constructed a scroll pane of borrow history.
+     * @param event The event of the click.
+     */
+    @FXML
+    private void handleSearchAction(ActionEvent event) {
 
         try {
 
@@ -49,10 +63,20 @@ public class CopyLogInterfaceController extends SceneController implements Initi
 
     }
 
+    /**
+     * Sets the scroll pane with the content of the resource history of the specific copy.
+     * @param copyID The copy id of the copy.
+     */
     private void setScrollPane(int copyID) {
 
         //Get loan events.
         LoanEvent[] loanEvents = getResourceFlowManager().getBorrowHistoryByCopy(copyID);
+
+        System.out.println(copyID + " " + loanEvents.length);
+
+        if (loanEvents == null) {
+            loanEvents = new LoanEvent[0];
+        }
 
         //Create a container for the labels,
         VBox vbox = new VBox();
