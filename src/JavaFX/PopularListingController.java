@@ -17,6 +17,10 @@ public class PopularListingController extends SceneController implements Initial
     @FXML
     private PieChart popularPie;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -45,7 +49,7 @@ public class PopularListingController extends SceneController implements Initial
             final int MAX_TITLE_LENGTH = 25;
             //If the title is longer than max length, the cut end and add "..."
             if (title.length() > MAX_TITLE_LENGTH) {
-                title = title.substring(0,MAX_TITLE_LENGTH-1) + "...";
+                title = title.substring(0, MAX_TITLE_LENGTH - 1) + "...";
             }
             data[iCount] = new Data(title, borrowCount);
         }

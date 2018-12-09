@@ -9,7 +9,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -266,6 +265,7 @@ public class SceneController {
 
     /**
      * Getter for resource log interface FXML path
+     *
      * @return RESOURCE_LOG_INTERFACE the FXML path
      */
     public static String getResourceLogInterface() {
@@ -393,12 +393,12 @@ public class SceneController {
         });
     }
 
-    public String getAvailableNumberOfCopies(Resource resourceNumber){
+    public String getAvailableNumberOfCopies(Resource resourceNumber) {
         String availability = "Available copies: ";
         int availabilityCounter = 0;
         Copy[] copies = getResourceManager().getCopies(resourceNumber.getResourceID());
-        for(Copy copy: copies){
-            if(copy.getStateID() == 0) {
+        for (Copy copy : copies) {
+            if (copy.getStateID() == 0) {
                 availabilityCounter++;
             }
         }

@@ -4,17 +4,12 @@ import Core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 
-import java.io.File;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -137,6 +132,7 @@ public class AccountEditorController extends ResourceController implements Initi
 
     /**
      * Cancels all changes and returns back to Resource Flow Interface.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
@@ -153,8 +149,9 @@ public class AccountEditorController extends ResourceController implements Initi
 
     /**
      * Initialises the interface to display the current details of the user in the text fields
-     * @param location
-     * @param resources
+     *
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

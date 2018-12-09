@@ -10,10 +10,11 @@ import java.util.ArrayList;
 
 /**
  * Interface controller for the DVD search menu
+ *
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
-public class DVDSearchMenuController extends SceneController{
+public class DVDSearchMenuController extends SceneController {
     @FXML
     private TextField dvdTitle;
 
@@ -25,6 +26,7 @@ public class DVDSearchMenuController extends SceneController{
 
     /**
      * Executes a search from information specified.
+     *
      * @param event Represents the data of the button pressed.
      * @throws IOException Thrown if input is null.
      */
@@ -36,23 +38,23 @@ public class DVDSearchMenuController extends SceneController{
     /**
      * Reads the input for the query from text fields.
      */
-    public void getInput(){
+    public void getInput() {
         ArrayList<String> column = new ArrayList<>();
         ArrayList<String> input = new ArrayList<>();
-        if(!dvdTitle.getText().isEmpty()){
+        if (!dvdTitle.getText().isEmpty()) {
             column.add("Title");
             input.add("'%" + dvdTitle.getText() + "%'");
         }
-        if(!dvdDirector.getText().isEmpty()){
+        if (!dvdDirector.getText().isEmpty()) {
             column.add("Director");
             input.add("'%" + dvdDirector.getText() + "%'");
         }
-        if(!dvdYear.getText().isEmpty()){
+        if (!dvdYear.getText().isEmpty()) {
             column.add("RYear");
             input.add(dvdYear.getText());
         }
 
-        if(!input.isEmpty()) {
+        if (!input.isEmpty()) {
             setSqlQuery(getResourceManager().createQuery(column.toArray(new String[column.size()]),
                     input.toArray(new String[input.size()]), "Dvd"));
         } else {

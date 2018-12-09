@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 
 /**
  * Interface controller for the main user interface home scene.
+ *
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
@@ -34,6 +35,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
 
     /**
      * Handles the action of clicking the button to open the user dashboard interface.
+     *
      * @param event the event triggered by clicking the button.
      */
     @FXML
@@ -44,11 +46,12 @@ public class HomeInterfaceController extends SceneController implements Initiali
     /**
      * Handles the action of clicking the button to logout of the user interface,
      * or to return to the home scene if another scene is displayed.
+     *
      * @param event the event triggered by clicking the button.
      */
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) {
-        if(logoutButton.getText().equals("Logout")) {
+        if (logoutButton.getText().equals("Logout")) {
             handleSceneChangeButtonAction(event, SceneController.getMainInterface());
         } else {
             handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
@@ -57,6 +60,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
 
     /**
      * Handles the action of clicking the button to load the book menu.
+     *
      * @param event the event triggered by clicking the button.
      */
     @FXML
@@ -67,6 +71,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
 
     /**
      * Handles the action of clicking the button to load the DVD menu.
+     *
      * @param event the event triggered by clicking the button.
      */
     @FXML
@@ -77,6 +82,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
 
     /**
      * Handles the action of clicking the button to load the laptop menu.
+     *
      * @param event the event triggered by clicking the button.
      */
     @FXML
@@ -87,6 +93,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
 
     /**
      * Handles the action of clicking the button to list all resources.
+     *
      * @param event the event triggered by clicking the button.
      */
     @FXML
@@ -97,6 +104,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
 
     /**
      * Handles the action of clicking the popular button to get popular statistics.
+     *
      * @param event the event triggered by clicking the button.
      */
     @FXML
@@ -107,10 +115,11 @@ public class HomeInterfaceController extends SceneController implements Initiali
 
     /**
      * Changes the text of the button to logout to say "Home"
+     *
      * @param logoutButton the button to logout
      */
     @FXML
-    public void changeLogoutToHome(Button logoutButton){
+    public void changeLogoutToHome(Button logoutButton) {
         logoutButton.setText("Home");
     }
 
@@ -119,7 +128,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
         float balance;
         try {
             //get balance and round to 2 decimal places.
-            balance = Math.round(getAccountManager().getAccountBalance(SceneController.USER_ID)*100)/100;
+            balance = Math.round(getAccountManager().getAccountBalance(SceneController.USER_ID) * 100) / 100;
         } catch (SQLException e) {
             balance = 0.0F;
         }
@@ -137,6 +146,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     /**
      * Initialises the label in the interface to display the
      * first name of the user based on the account currently logged in.
+     *
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

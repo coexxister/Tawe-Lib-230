@@ -16,6 +16,7 @@ import javafx.geometry.Insets;
 
 /**
  * Displays the transaction history of the user.
+ *
  * @author Noah Lenagan
  * @version 1.0
  */
@@ -29,7 +30,8 @@ public class TransactionHistoryController extends SceneController implements Ini
 
     /**
      * Sets the transaction history in the scroll pane.
-     * @param location The location used to resolve relative paths for the root object.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
      * @param resources The resources used to localize the root object.
      */
     @Override

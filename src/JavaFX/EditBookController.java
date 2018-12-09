@@ -44,6 +44,10 @@ public class EditBookController extends ResourceController implements Initializa
     @FXML
     private ImageView thumbImage;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!book.getTitle().isEmpty()) {

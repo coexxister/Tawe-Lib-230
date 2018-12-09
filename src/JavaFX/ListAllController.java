@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 
 /**
  * Interface controller for the list all subscene of the staff interface
+ *
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
@@ -33,6 +34,9 @@ public class ListAllController extends SceneController implements Initializable 
 
     /**
      * Initialises the paginated list of resources
+     *
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
      */
     public void initialize(URL location, ResourceBundle resources) {
         resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
@@ -40,16 +44,17 @@ public class ListAllController extends SceneController implements Initializable 
 
     /**
      * Generates a list of pages as a horizontal box in the interface
+     *
      * @param pageIndex ?
      * @return box
-     * 			The generated horizontal box, containing the pages of the list
+     * The generated horizontal box, containing the pages of the list
      */
     public HBox createPage(int pageIndex) {
         HBox box = new HBox(elementsPerPage);
         resourceView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
-        int page = pageIndex * (int)elementsPerPage;
+        int page = pageIndex * (int) elementsPerPage;
         for (int i = page; i < page + elementsPerPage; i++) {
-            if(i < resourceList.length) {
+            if (i < resourceList.length) {
                 VBox element = new VBox(elementsPerPage);
                 element.setId(String.valueOf(i));
                 ImageView image = new ImageView();
@@ -98,7 +103,7 @@ public class ListAllController extends SceneController implements Initializable 
     }
 
     @FXML
-    public void handleSortByBookButtonAction(){
+    public void handleSortByBookButtonAction() {
         try {
             resourceList = getResourceManager().searchResources("TID", "1");
             resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
@@ -110,7 +115,7 @@ public class ListAllController extends SceneController implements Initializable 
     }
 
     @FXML
-    public void handleSortByDVDButtonAction(){
+    public void handleSortByDVDButtonAction() {
         try {
             resourceList = getResourceManager().searchResources("TID", "2");
             resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
@@ -122,7 +127,7 @@ public class ListAllController extends SceneController implements Initializable 
     }
 
     @FXML
-    public void handleSortByComputerButtonAction(){
+    public void handleSortByComputerButtonAction() {
         try {
             resourceList = getResourceManager().searchResources("TID", "3");
             resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));

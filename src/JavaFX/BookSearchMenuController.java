@@ -1,9 +1,3 @@
-/**
- * Interface controller for the book search menu
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
- * @version 1.0
- */
-
 package JavaFX;
 
 import javafx.event.ActionEvent;

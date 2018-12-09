@@ -42,6 +42,10 @@ public class EditDVDController extends ResourceController implements Initializab
     @FXML
     private ImageView thumbImage;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (!dvd.getTitle().isEmpty()) {
@@ -52,10 +56,10 @@ public class EditDVDController extends ResourceController implements Initializab
         }
         if (dvd.getSubLang().length != 0) {
             String subtitleLang = "";
-            for(int i = 0; i < dvd.getSubLang().length-1; i++) {
+            for (int i = 0; i < dvd.getSubLang().length - 1; i++) {
                 subtitleLang += dvd.getSubLang()[i] + ", ";
             }
-            subtitleLang += dvd.getSubLang()[dvd.getSubLang().length-1];
+            subtitleLang += dvd.getSubLang()[dvd.getSubLang().length - 1];
             subtitle.setText(subtitleLang);
         }
         if (dvd.getRunTime() != 0) {
@@ -93,7 +97,7 @@ public class EditDVDController extends ResourceController implements Initializab
         if (!title.getText().isEmpty() && !year.getText().isEmpty() && !thumbImage.equals(null)
                 && !director.getText().isEmpty() && !runtime.getText().isEmpty()) {
             try {
-                String[] subLang = subtitle.getText().replaceAll(" ","").split(",");
+                String[] subLang = subtitle.getText().replaceAll(" ", "").split(",");
                 getResourceManager().editResource(new Dvd(dvd.getResourceID(), title.getText(),
                         Integer.parseInt(year.getText()), getResourceManager().getImageID(path), director.getText(),
                         Integer.parseInt(runtime.getText()), language.getText(), subLang));

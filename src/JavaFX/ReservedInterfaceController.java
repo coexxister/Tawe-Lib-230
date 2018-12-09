@@ -1,17 +1,13 @@
 package JavaFX;
 
 import Core.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -24,6 +20,10 @@ public class ReservedInterfaceController extends SceneController implements Init
     @FXML
     private ScrollPane scrollPane;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         scrollPane.setFitToHeight(true);
@@ -34,6 +34,7 @@ public class ReservedInterfaceController extends SceneController implements Init
 
     /**
      * Unreserves a copy and gives an alert of the completion status.
+     *
      * @param copyID The copy id of the copy.
      */
     private void unReserve(int copyID) {
@@ -63,6 +64,7 @@ public class ReservedInterfaceController extends SceneController implements Init
 
     /**
      * Borrows a copy and gives an alert of the completion status.
+     *
      * @param copyID The copy id of the copy.
      */
     private void borrow(int copyID) {
@@ -177,8 +179,8 @@ public class ReservedInterfaceController extends SceneController implements Init
             //create separators and add padding.
             Separator separator = new Separator();
             Separator separator2 = new Separator();
-            separator.setPadding(new Insets(20,0,20,0));
-            separator2.setPadding(new Insets(20,0,20,0));
+            separator.setPadding(new Insets(20, 0, 20, 0));
+            separator2.setPadding(new Insets(20, 0, 20, 0));
 
             //add separators to new row.
             reservedPanes[iCount].add(separator, 0, 2);

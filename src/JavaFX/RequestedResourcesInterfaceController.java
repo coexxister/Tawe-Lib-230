@@ -21,6 +21,10 @@ public class RequestedResourcesInterfaceController extends SceneController imple
     @FXML
     private ScrollPane scrollPane;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

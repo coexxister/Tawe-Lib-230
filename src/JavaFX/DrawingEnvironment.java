@@ -34,7 +34,7 @@ import javax.imageio.ImageIO;
  * @author Marcos Pallikaras
  * @version 1.1
  */
-public class DrawingEnvironment implements Initializable{
+public class DrawingEnvironment implements Initializable {
     //The ID of the current user
     private static final String USER_ID = String.valueOf(SceneController.USER_ID);
     //The number of avatars in user's folder
@@ -74,8 +74,8 @@ public class DrawingEnvironment implements Initializable{
 
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
         graphicsContext.setFill(Color.WHITE);
-        graphicsContext.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
-        BufferedImage image = new BufferedImage((int)canvas.getWidth(), (int)canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
+        graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        BufferedImage image = new BufferedImage((int) canvas.getWidth(), (int) canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         final ToggleGroup group = new ToggleGroup();
         penButton.setToggleGroup(group);
@@ -231,7 +231,7 @@ public class DrawingEnvironment implements Initializable{
             @Override
             public void handle(ActionEvent t) {
                 //Gets path of CustomAvatars folder
-                Path pathCA = Paths.get( "src/CustomAvatars");
+                Path pathCA = Paths.get("src/CustomAvatars");
                 //Counts number of avatars in user's folder and adds 1 to aNo
                 try (Stream<Path> files = Files.list(Paths.get(String.valueOf(pathCA)))) {
                     aNo = files.count() + 1;
@@ -244,7 +244,7 @@ public class DrawingEnvironment implements Initializable{
 
                 if (file != null) {
                     try {
-                        WritableImage writableImage = new WritableImage((int)canvas.getWidth(), (int)canvas.getHeight());
+                        WritableImage writableImage = new WritableImage((int) canvas.getWidth(), (int) canvas.getHeight());
                         canvas.snapshot(null, writableImage);
                         RenderedImage renderedImage = SwingFXUtils.fromFXImage(writableImage, null);
                         ImageIO.write(renderedImage, "png", file);
@@ -259,6 +259,10 @@ public class DrawingEnvironment implements Initializable{
         });
     }
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         buildGUI();

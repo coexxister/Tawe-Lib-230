@@ -1,12 +1,9 @@
 package JavaFX;
 
 import Core.LoanEvent;
-import Core.Transaction;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.HBox;
@@ -23,6 +20,10 @@ public class LoanHistoryController extends SceneController implements Initializa
     @FXML
     private ScrollPane scrollPane;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

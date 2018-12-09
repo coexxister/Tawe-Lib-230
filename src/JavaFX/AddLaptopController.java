@@ -10,7 +10,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import javax.swing.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -50,7 +49,7 @@ public class AddLaptopController extends ResourceController implements Initializ
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setContentText("Resource Created Successfully!\nResource ID = \"\n" +
-                        + getResourceManager().getLastAddedID());
+                        +getResourceManager().getLastAddedID());
                 alert.showAndWait();
             } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -76,7 +75,10 @@ public class AddLaptopController extends ResourceController implements Initializ
         thumbImage.setImage(new Image(path));
     }
 
-
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

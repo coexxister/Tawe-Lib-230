@@ -6,18 +6,12 @@ import Core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 
-import java.io.File;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -105,16 +99,15 @@ public class AccountCreatorController extends ResourceController implements Init
     }
 
     /**
-     *
-     * @param location
-     * @param resources
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             avatarID = getResourceManager().getImageID(DEFAULT_URL);
             avatar.setImage(new Image(getResourceManager().getImageURL(avatarID)));
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Default avatarID is invalid.");
         }
     }

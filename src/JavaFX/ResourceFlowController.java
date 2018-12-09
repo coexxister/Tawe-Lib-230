@@ -30,6 +30,11 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     private int selectedCopyID = -1;
 
+    /**
+     * @param location  The location used to resolve relative paths for the root object
+     * @param resources The resources used to localize the root object
+     */
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
             //Set the users profile image.
@@ -55,6 +60,7 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     /**
      * Displays Transaction Manager subscene.
+     *
      * @param event
      */
     @FXML
@@ -64,6 +70,7 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     /**
      * Displays Loan History subscene.
+     *
      * @param event
      */
     @FXML
@@ -73,6 +80,7 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     /**
      * Displays Items Due subscene.
+     *
      * @param event
      */
     @FXML
@@ -82,6 +90,7 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     /**
      * Displays Reserve History subscene.
+     *
      * @param event
      */
     @FXML
@@ -91,6 +100,7 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     /**
      * Displays Account Editor subscene.
+     *
      * @param event
      */
     @FXML
@@ -101,6 +111,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     /**
      * Takes the entered user id, validates it and marks it as the selected id in which operation will be
      * performed upon.
+     *
      * @param event The action event.
      */
     @FXML
@@ -134,6 +145,7 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     /**
      * Borrows a copy of specified resource to selected user.
+     *
      * @param event The action event.
      */
     @FXML
@@ -179,6 +191,7 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     /**
      * Returns a copy for the specific user.
+     *
      * @param event The action event.
      */
     @FXML
@@ -224,6 +237,7 @@ public class ResourceFlowController extends SceneController implements Initializ
 
     /**
      * Unreserves a resource for the specified user.
+     *
      * @param event The action event.
      */
     @FXML

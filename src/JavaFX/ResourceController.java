@@ -127,7 +127,7 @@ public class ResourceController extends SceneController {
         return null;
     }
 
-    public String setThumbnailImage(ActionEvent event){
+    public String setThumbnailImage(ActionEvent event) {
         imageChooser.setInitialDirectory(new File("src/ResourceImages"));
         Node node = (Node) event.getSource();
         File file = imageChooser.showOpenDialog(node.getScene().getWindow());
