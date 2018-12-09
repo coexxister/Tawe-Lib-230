@@ -222,3 +222,6 @@ out/production/Tawe-Lib-230/.idea/dataSources.local.xml
 out/production/Tawe-Lib-230/.idea/checkstyleidea-libs/readme.txt
 out/production/Tawe-Lib-230/.idea/checkstyle-idea.xml
 out/production/Tawe-Lib-230/.gitignore
+.idea/uiDesigner.xml
+.idea/dataSources.xml
+.idea/dataSources.local.xml
