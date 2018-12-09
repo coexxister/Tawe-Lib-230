@@ -5,7 +5,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.io.File;
@@ -131,6 +130,6 @@ public class ProfileImageSelectorController extends SceneController {
 
     @FXML
     private void handleDrawingEnvironmentButtonAction(ActionEvent event) throws Exception {
-        loadSubscene(SceneController.DRAWING_INTERFACE);
+        loadSubscene(SceneController.getDrawingInterface());
     }
 }

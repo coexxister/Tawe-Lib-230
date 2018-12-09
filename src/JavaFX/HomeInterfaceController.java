@@ -3,17 +3,12 @@ package JavaFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -43,7 +38,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
      */
     @FXML
     protected void handleDashboardButtonAction(ActionEvent event) {
-        handleSceneChangeButtonAction(event, SceneController.USER_DASHBOARD_INTERFACE);
+        handleSceneChangeButtonAction(event, SceneController.getUserDashboardInterface());
     }
 
     /**
@@ -54,9 +49,9 @@ public class HomeInterfaceController extends SceneController implements Initiali
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) {
         if(logoutButton.getText().equals("Logout")) {
-            handleSceneChangeButtonAction(event, SceneController.MAIN_INTERFACE);
+            handleSceneChangeButtonAction(event, SceneController.getMainInterface());
         } else {
-            handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
+            handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
         }
     }
 

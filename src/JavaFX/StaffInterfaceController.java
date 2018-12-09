@@ -29,9 +29,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) {
         if(logoutButton.getText().equals("Logout")) {
-            handleSceneChangeButtonAction(event, SceneController.MAIN_INTERFACE);
+            handleSceneChangeButtonAction(event, SceneController.getMainInterface());
         } else {
-            handleSceneChangeButtonAction(event, SceneController.STAFF_INTERFACE);
+            handleSceneChangeButtonAction(event, SceneController.getStaffInterface());
         }
     }
     
@@ -41,7 +41,7 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleResourcesButtonAction(ActionEvent event) {
-        loadSubscene(SceneController.RESOURCE_INTERFACE);
+        loadSubscene(SceneController.getResourceInterface());
         changeLogoutToHome(logoutButton);
     }
     
@@ -51,7 +51,7 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleAccountsButtonAction(ActionEvent event) {
-        loadSubscene(SceneController.ACCOUNTS_SEARCH_INTERFACE);
+        loadSubscene(SceneController.getAccountsSearchInterface());
         changeLogoutToHome(logoutButton);
     }
     
@@ -61,7 +61,7 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleAccountCreatorButtonAction(ActionEvent event) {
-        loadSubscene(SceneController.ACCOUNT_CREATOR_INTERFACE);
+        loadSubscene(SceneController.getAccountCreatorInterface());
         changeLogoutToHome(logoutButton);
     }
     /**

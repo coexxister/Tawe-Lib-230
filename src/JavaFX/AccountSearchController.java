@@ -33,7 +33,7 @@ public class AccountSearchController extends SceneController {
             if (getAccountManager().isExist(userID)) {
                 //set the user id in resourceflowmanager to select a user for operations.
                 getResourceFlowManager().setUserID(userID);
-                loadSubscene(SceneController.RESOURCE_FLOW_INTERFACE);
+                loadSubscene(SceneController.getResourceFlowInterface());
             } else {
                 //create alert that user does not exist.
                 Alert alert = new Alert(Alert.AlertType.WARNING);

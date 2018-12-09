@@ -152,7 +152,7 @@ public class AccountEditorController extends SceneController implements Initiali
      */
     @FXML
     public void handleCancelAction(ActionEvent event) {
-        loadSubscene(SceneController.RESOURCE_FLOW_INTERFACE);
+        loadSubscene(SceneController.getResourceFlowInterface());
     }
 
     /**

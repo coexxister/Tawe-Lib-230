@@ -27,7 +27,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
     	//Tries to load the main interface screen and show it to the user
         try {
-            Parent stage = FXMLLoader.load(getClass().getResource(SceneController.MAIN_INTERFACE));
+            Parent stage = FXMLLoader.load(getClass().getResource(SceneController.getMainInterface()));
             Scene scene = new Scene(stage);
 
             primaryStage.setScene(scene);

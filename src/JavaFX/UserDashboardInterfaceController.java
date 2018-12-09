@@ -3,11 +3,9 @@ package JavaFX;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.BubbleChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -30,9 +28,9 @@ public class UserDashboardInterfaceController extends SceneController implements
     @FXML
     private void handleHomeButtonAction(ActionEvent event) {
         if(homeButton.getText().contains("Home")) {
-            handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
+            handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
         } else {
-            handleSceneChangeButtonAction(event, SceneController.USER_DASHBOARD_INTERFACE);
+            handleSceneChangeButtonAction(event, SceneController.getUserDashboardInterface());
         }
     }
 
@@ -42,7 +40,7 @@ public class UserDashboardInterfaceController extends SceneController implements
      */
     @FXML
     private void handleAvatarChangeButtonAction(ActionEvent event) {
-        loadSubscene(SceneController.AVATAR_CHANGE_INTERFACE);
+        loadSubscene(SceneController.getAvatarChangeInterface());
         changeDashboardButton();
     }
 
@@ -52,7 +50,7 @@ public class UserDashboardInterfaceController extends SceneController implements
      */
     @FXML
     private void handleTransactionHistoryAction(ActionEvent event) {
-        loadSubscene(SceneController.TRANSACTION_HISTORY_INTERFACE);
+        loadSubscene(SceneController.getTransactionHistoryInterface());
         changeDashboardButton();
     }
 
@@ -62,7 +60,7 @@ public class UserDashboardInterfaceController extends SceneController implements
      */
     @FXML
     private void handleLoanAction(ActionEvent event) {
-        loadSubscene(SceneController.LOAN_HISTORY_CONTROLLER);
+        loadSubscene(SceneController.getLoanHistoryController());
         changeDashboardButton();
     }
 
@@ -72,7 +70,7 @@ public class UserDashboardInterfaceController extends SceneController implements
      */
     @FXML
     private void handleReservedAction(ActionEvent event) {
-        loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
+        loadSubscene(SceneController.getReserveHistoryController());
         changeDashboardButton();
     }
 
@@ -90,7 +88,7 @@ public class UserDashboardInterfaceController extends SceneController implements
      */
     @FXML
     private void handleRequestedResourceAction(ActionEvent event) {
-        loadSubscene(SceneController.REQUESTED_RESOURCE);
+        loadSubscene(SceneController.getRequestedResource());
         changeDashboardButton();
     }
 
@@ -100,7 +98,7 @@ public class UserDashboardInterfaceController extends SceneController implements
      */
     @FXML
     private void handleItemsDueAction(ActionEvent event) {
-        loadSubscene(SceneController.ITEMS_DUE);
+        loadSubscene(SceneController.getItemsDue());
         changeDashboardButton();
     }
 

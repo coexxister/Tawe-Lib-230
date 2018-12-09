@@ -3,13 +3,8 @@ package JavaFX;
 import Core.AuthenticationManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 /**
  * Interface controller for the login screen
@@ -37,9 +32,9 @@ public class LoginInterfaceController extends SceneController{
 
         if(login.authenticate()){
             if(login.isStaff()){
-                handleSceneChangeButtonAction(event, SceneController.STAFF_INTERFACE);
+                handleSceneChangeButtonAction(event, SceneController.getStaffInterface());
             } else {
-                handleSceneChangeButtonAction(event, SceneController.HOME_INTERFACE);
+                handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
             }
 
         } else {

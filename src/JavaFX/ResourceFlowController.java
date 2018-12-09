@@ -59,7 +59,7 @@ public class ResourceFlowController extends SceneController implements Initializ
      */
     @FXML
     private void handleTransactionAction(ActionEvent event) {
-        loadSubscene(SceneController.TRANSACTION_MANAGER_INTERFACE);
+        loadSubscene(SceneController.getTransactionManagerInterface());
     }
 
     /**
@@ -68,7 +68,7 @@ public class ResourceFlowController extends SceneController implements Initializ
      */
     @FXML
     private void handleViewLoanHistoryAction(ActionEvent event) {
-        loadSubscene(SceneController.LOAN_HISTORY_CONTROLLER);
+        loadSubscene(SceneController.getLoanHistoryController());
     }
 
     /**
@@ -77,7 +77,7 @@ public class ResourceFlowController extends SceneController implements Initializ
      */
     @FXML
     private void handleDueItemsAction(ActionEvent event) {
-        loadSubscene(SceneController.ITEMS_DUE);
+        loadSubscene(SceneController.getItemsDue());
     }
 
     /**
@@ -86,7 +86,7 @@ public class ResourceFlowController extends SceneController implements Initializ
      */
     @FXML
     private void handleReservedResourcesAction(ActionEvent event) {
-        loadSubscene(SceneController.RESERVE_HISTORY_CONTROLLER);
+        loadSubscene(SceneController.getReserveHistoryController());
     }
 
     /**
@@ -95,7 +95,7 @@ public class ResourceFlowController extends SceneController implements Initializ
      */
     @FXML
     private void handleEditAccountAction(ActionEvent event) {
-        loadSubscene(SceneController.ACCOUNT_EDITOR_INTERFACE);
+        loadSubscene(SceneController.getAccountEditorInterface());
     }
 
     /**
