@@ -2,10 +2,11 @@ package Core;
 
 /**
  * This class represents a book.
+ *
  * @author Noah Lenagan, Paris Kelly Skopelitis
  * @version 1.0
  */
-public class Book extends  Resource {
+public class Book extends Resource {
 
     /**
      * The author of the book.
@@ -34,15 +35,16 @@ public class Book extends  Resource {
 
     /**
      * Creates a book.
-     * @param resourceID Uniquely identifies the book.
-     * @param title The title of the book.
-     * @param year The release date of the book.
+     *
+     * @param resourceID   Uniquely identifies the book.
+     * @param title        The title of the book.
+     * @param year         The release date of the book.
      * @param thumbImageID Identifies the thumbnail image.
-     * @param author The author of the book.
-     * @param publisher The publisher of the book.
-     * @param genre The genre of the book.
-     * @param isbn The isbn of the book.
-     * @param lang The language of the book.
+     * @param author       The author of the book.
+     * @param publisher    The publisher of the book.
+     * @param genre        The genre of the book.
+     * @param isbn         The isbn of the book.
+     * @param lang         The language of the book.
      */
     public Book(int resourceID, String title, int year, int thumbImageID, String author, String publisher, String genre,
                 String isbn, String lang) {
@@ -59,6 +61,7 @@ public class Book extends  Resource {
 
     /**
      * Gets the author.
+     *
      * @return The author.
      */
     public String getAuthor() {
@@ -67,6 +70,7 @@ public class Book extends  Resource {
 
     /**
      * Gets the publisher.
+     *
      * @return The publisher.
      */
     public String getPublisher() {
@@ -75,6 +79,7 @@ public class Book extends  Resource {
 
     /**
      * Gets the genre.
+     *
      * @return The genre.
      */
     public String getGenre() {
@@ -83,6 +88,7 @@ public class Book extends  Resource {
 
     /**
      * Gets the isbn.
+     *
      * @return The isbn.
      */
     public String getIsbn() {
@@ -91,6 +97,7 @@ public class Book extends  Resource {
 
     /**
      * Gets the language.
+     *
      * @return The language.
      */
     public String getLang() {
@@ -99,6 +106,7 @@ public class Book extends  Resource {
 
     /**
      * Set the author of the book.
+     *
      * @param author The new author.
      */
     public void setAuthor(String author) {
@@ -107,6 +115,7 @@ public class Book extends  Resource {
 
     /**
      * Sets the publisher of the book.
+     *
      * @param publisher The new publisher.
      */
     public void setPublisher(String publisher) {
@@ -115,6 +124,7 @@ public class Book extends  Resource {
 
     /**
      * Sets the genre of the book.
+     *
      * @param genre The new genre.
      */
     public void setGenre(String genre) {
@@ -123,6 +133,7 @@ public class Book extends  Resource {
 
     /**
      * Sets the isbn of the book.
+     *
      * @param isbn The new isbn.
      */
     public void setIsbn(String isbn) {
@@ -131,6 +142,7 @@ public class Book extends  Resource {
 
     /**
      * Sets the language of the book.
+     *
      * @param lang The new language.
      */
     public void setLang(String lang) {
@@ -139,12 +151,13 @@ public class Book extends  Resource {
 
     /**
      * Creates a summary of information for the Book.
+     *
      * @return Returns a summary of the Book.
      */
     public String toString() {
 
         //create summary
-        String out  = super.toString() +
+        String out = super.toString() +
                 "\nType - Book" +
                 "\nAuthor - " + author +
                 "\nPublisher - " + publisher +
