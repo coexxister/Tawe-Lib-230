@@ -8,6 +8,7 @@ package JavaFX;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -39,8 +40,14 @@ public class BookSearchMenuController extends SceneController{
      * @throws IOException Thrown if input is null.
      */
     public void handleSearchByISBNButtonAction(ActionEvent event) {
-        setSqlQuery(getResourceManager().createQuery(new String[]{"ISBN"}, new String[]{isbn.getText()}, "Book"));
-        loadSubscene("/View/BookList.fxml");
+        if(!isbn.getText().isEmpty()) {
+            setSqlQuery(getResourceManager().createQuery(new String[]{"ISBN"}, new String[]{isbn.getText()}, "Book"));
+            loadSubscene("/View/BookList.fxml");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Invalid ISBN.");
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -66,7 +73,13 @@ public class BookSearchMenuController extends SceneController{
             input.add("'%" + genre.getText() + "%'");
         }
 
-        setSqlQuery(getResourceManager().createQuery(column.toArray(new String[column.size()]),
-                input.toArray(new String[input.size()]), "Book"));
+        if(!input.isEmpty()) {
+            setSqlQuery(getResourceManager().createQuery(column.toArray(new String[column.size()]),
+                    input.toArray(new String[input.size()]), "Book"));
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Invalid input.");
+            alert.showAndWait();
+        }
     }
 }
