@@ -62,6 +62,7 @@ public class AccountCreatorController extends ResourceController implements Init
      * @param event the event triggered by clicking the button
      */
     public void handleCreateUserButtonAction(ActionEvent event) {
+        consentPopUp(event);
         int userID;
         if (user.isSelected()) {
             User newAccount = new User(0, firstName.getText(), surname.getText(), phoneNumber.getText(),
@@ -106,6 +107,7 @@ public class AccountCreatorController extends ResourceController implements Init
     public void initialize(URL location, ResourceBundle resources) {
         try {
             avatarID = getResourceManager().getImageID(DEFAULT_URL);
+            path = getResourceManager().getImageURL(avatarID);
             avatar.setImage(new Image(getResourceManager().getImageURL(avatarID)));
         } catch (SQLException e) {
             System.out.println("Default avatarID is invalid.");
