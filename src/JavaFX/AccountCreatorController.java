@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
-public class AccountCreatorController extends SceneController implements Initializable {
+public class AccountCreatorController extends SceneController {
     FileChooser avatarChooser = new FileChooser();
 
     @FXML
@@ -58,7 +58,8 @@ public class AccountCreatorController extends SceneController implements Initial
         }
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    //not specified method, should set avatar, is here only to make the scene work
+    public void setAvatar(){
+
     }
 }
