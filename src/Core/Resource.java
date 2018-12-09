@@ -2,6 +2,7 @@ package Core;
 
 /**
  * This class represents a resource and its information.
+ *
  * @author Noah Lenagan, Paris Kelly Skopelitis
  * @version 1.0
  */
@@ -29,9 +30,10 @@ public class Resource {
 
     /**
      * Creates a resource with specified id, title, release year and image id.
-     * @param resourceID A unique identifier for the resource.
-     * @param title The resource title/name.
-     * @param year The release year.
+     *
+     * @param resourceID   A unique identifier for the resource.
+     * @param title        The resource title/name.
+     * @param year         The release year.
      * @param thumbImageID The thumbnail image id which identifies a certain image.
      */
     public Resource(int resourceID, String title, int year, int thumbImageID) {
@@ -45,6 +47,7 @@ public class Resource {
 
     /**
      * Get the resource id.
+     *
      * @return The resource id.
      */
     public int getResourceID() {
@@ -53,6 +56,7 @@ public class Resource {
 
     /**
      * Get the resource title.
+     *
      * @return The resource title.
      */
     public String getTitle() {
@@ -61,6 +65,7 @@ public class Resource {
 
     /**
      * Get the release year.
+     *
      * @return The release year.
      */
     public int getYear() {
@@ -69,6 +74,7 @@ public class Resource {
 
     /**
      * Get the thumbnail image id.
+     *
      * @return The thumbnail image id.
      */
     public int getThumbImage() {
@@ -77,6 +83,7 @@ public class Resource {
 
     /**
      * Set the resource title.
+     *
      * @param title The new resource title.
      */
     public void setTitle(String title) {
@@ -85,6 +92,7 @@ public class Resource {
 
     /**
      * Set the release year.
+     *
      * @param year The new release year.
      */
     public void setYear(int year) {
@@ -93,6 +101,7 @@ public class Resource {
 
     /**
      * Set the thumbnail image id.
+     *
      * @param thumbImage The new thumbnail image id.
      */
     public void setThumbImage(int thumbImage) {
@@ -101,11 +110,12 @@ public class Resource {
 
     /**
      * Creates a summary of information for the resource.
+     *
      * @return Returns a summary of the resource.
      */
     public String toString() {
 
-        String out  =
+        String out =
                 "\nTitle - " + title +
                         "\nRid - " + resourceID +
                         "\nRelease Year - " + year;

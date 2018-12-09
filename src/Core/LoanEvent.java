@@ -2,6 +2,7 @@ package Core;
 
 /**
  * Contains the data regarding the borrow and return of a specific copy by a user.
+ *
  * @author Noah Lenagam.
  * @version 1.0
  */
@@ -39,11 +40,12 @@ public class LoanEvent {
 
     /**
      * Constructs the BorrowEvent.
-     * @param userID The user id of a user.
-     * @param copyID The copy id of a copy.
+     *
+     * @param userID  The user id of a user.
+     * @param copyID  The copy id of a copy.
      * @param dateOut The date of the borrow of the copy.
-     * @param dateIn The date of the return of the copy.
-     * @param timeIn The time of the borrow of the copy.
+     * @param dateIn  The date of the return of the copy.
+     * @param timeIn  The time of the borrow of the copy.
      * @param timeOut The time of the return of the copy.
      */
     public LoanEvent(int userID, int copyID, String dateOut, String dateIn, String timeOut, String timeIn) {
@@ -59,6 +61,7 @@ public class LoanEvent {
 
     /**
      * Gets the user id of a user.
+     *
      * @return The user id of a user.
      */
     public int getUserID() {
@@ -67,6 +70,7 @@ public class LoanEvent {
 
     /**
      * Gets the copy id of a copy.
+     *
      * @return The copy id of a copy.
      */
     public int getCopyID() {
@@ -75,6 +79,7 @@ public class LoanEvent {
 
     /**
      * Gets the date of borrowing the copy.
+     *
      * @return The date of the borrowing.
      */
     public String getDateOut() {
@@ -83,6 +88,7 @@ public class LoanEvent {
 
     /**
      * Gets the date of returning the copy.
+     *
      * @return The date of return.
      */
     public String getDateIn() {
@@ -91,6 +97,7 @@ public class LoanEvent {
 
     /**
      * Gets the time of the borrow of the copy.
+     *
      * @return The time of the borrow of the copy.
      */
     public String getTimeOut() {
@@ -99,6 +106,7 @@ public class LoanEvent {
 
     /**
      * Gets the time of the return of the copy.
+     *
      * @return The time of the return of the copy.
      */
     public String getTimeIn() {
@@ -107,6 +115,7 @@ public class LoanEvent {
 
     /**
      * Summarizes the loan event.
+     *
      * @return The summary of the loan event.
      */
     public String toString() {
@@ -114,9 +123,9 @@ public class LoanEvent {
                 "\nBorrow date: " + dateOut + " " + timeOut;
 
         if (dateIn == null) {
-            out+= "\nReturn date: Not set";
+            out += "\nReturn date: Not set";
         } else {
-            out+= "\nReturn date: " + dateIn + " " + timeIn;
+            out += "\nReturn date: " + dateIn + " " + timeIn;
         }
         return out;
     }

@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Manages operations that relate resources and users.
+ *
  * @author Noah Lenagan, Paris Kelly Skopelitis
  * @version 1.0
  */
@@ -33,6 +34,7 @@ public class ResourceFlowManager {
 
     /**
      * Creates the ResourceFlowManager
+     *
      * @param dbManager The database manager instance.
      * @param acManager The account manager instance.
      * @param rmManager The resource manager instance.
@@ -49,6 +51,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets the borrow history of a user.
+     *
      * @param userID The user id of the user.
      * @return The array of loan events.
      */
@@ -71,6 +74,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets the borrow history of a copy.
+     *
      * @param copyID The copy id of the copy.
      * @return The array of loan events.
      */
@@ -93,6 +97,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets the borrow history of a resource
+     *
      * @param resourceID The resource id of the resource.
      * @return The array of loan events.
      */
@@ -115,6 +120,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets the borrow history of a user.
+     *
      * @return The array of loan events.
      */
     public LoanEvent[] getBorrowHistory() {
@@ -135,6 +141,7 @@ public class ResourceFlowManager {
 
     /**
      * Constructs an array of loan events with loan data.
+     *
      * @param loanData The data from borrow history table.
      * @return An array of LoanEvents.
      */
@@ -155,6 +162,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets all overdue copies.
+     *
      * @return An array of copies that are overdue.
      */
     public Copy[] showOverdueCopies() {
@@ -168,6 +176,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets all overdue copies by resource ID.
+     *
      * @param resourceID The resource id of the resource.
      * @return An array of copies that are overdue of a resource ID.
      */
@@ -183,6 +192,7 @@ public class ResourceFlowManager {
 
     /**
      * Filters copies by if they are overdue.
+     *
      * @param copies An array of copies to filter.
      * @return An array of copies that are only overdue.
      */
@@ -222,6 +232,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets all borrowed copies of a user.
+     *
      * @param userID The user id of the user.
      * @return The array of borrowed copies.
      */
@@ -249,6 +260,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets all requested resources by a user.
+     *
      * @param userID The user id of the user.
      * @return The array of requested resources.
      */
@@ -283,9 +295,10 @@ public class ResourceFlowManager {
 
     /**
      * Calculates the fine of a copy.
+     *
      * @param copy The copy to calculate the fine of.
      * @return The calculated fine amount.
-     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws SQLException          Thrown if connection to database failed or tables do not exist.
      * @throws IllegalStateException Thrown if the copy is not on loan.
      */
     private float calculateFine(Copy copy) throws SQLException, IllegalStateException {
@@ -328,6 +341,7 @@ public class ResourceFlowManager {
 
     /**
      * Un-reserves a copy and puts it on loan for the user.
+     *
      * @param copyID The copy id of the copy.
      * @param userID THe user id of the copy.
      */
@@ -340,9 +354,10 @@ public class ResourceFlowManager {
 
     /**
      * Borrows a specified copy for a user.
+     *
      * @param copyID The copy id of a copy.
      * @param userID The user id of a copy.
-     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws SQLException          Thrown if connection to database failed or tables do not exist.
      * @throws IllegalStateException Thrown if specified copy or user does not exist. Or user balance is smaller than 0.
      */
     public void borrowCopy(int copyID, int userID) throws SQLException, IllegalStateException {
@@ -387,9 +402,10 @@ public class ResourceFlowManager {
 
     /**
      * Returns a specified copy from a user.
+     *
      * @param copyID The copy id of a copy.
      * @param userID The user id of a copy.
-     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws SQLException          Thrown if connection to database failed or tables do not exist.
      * @throws IllegalStateException Thrown if specified copy or user does not exist. Or the wrong user is passed.
      */
     public void returnCopy(int copyID, int userID) throws SQLException, IllegalStateException {
@@ -422,7 +438,8 @@ public class ResourceFlowManager {
 
                     //If there is a fine then take from balance.
                     if (fine < 0) {
-                        acManager.addFine(userID, fine, copyID, copy.calculateDaysOffset(DateManager.returnCurrentDate()));
+                        acManager.addFine(userID, fine, copyID, copy.
+                                calculateDaysOffset(DateManager.returnCurrentDate()));
                     }
 
                     //check request queue. If there is a request then reserve copy. Otherwise make copy available.
@@ -431,8 +448,8 @@ public class ResourceFlowManager {
 
                         //get the request data.
                         String[] data = dbManager.getFirstTupleByQuery("SELECT min(Position), UID FROM ( " +
-                                "SELECT Position, UID FROM ResourceRequestQueue WHERE RID = " + Integer.toString(resourceID) +
-                                " )");
+                                "SELECT Position, UID FROM ResourceRequestQueue WHERE RID = " +
+                                Integer.toString(resourceID) + " )");
 
                         int pos = Integer.parseInt(data[0]);
                         int firstUser = Integer.parseInt(data[1]);
@@ -472,6 +489,7 @@ public class ResourceFlowManager {
 
     /**
      * Reserves a copy for a user.
+     *
      * @param copyID The copy id of a copy.
      * @param userID The user id of a user.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
@@ -489,6 +507,7 @@ public class ResourceFlowManager {
 
     /**
      * Un-reserves a copy for a user.
+     *
      * @param copyID The copy id of a copy.
      * @param userID The user id of a user.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
@@ -499,7 +518,7 @@ public class ResourceFlowManager {
                     new String[]{"CID", "UID"},
                     new String[]{Integer.toString(copyID), Integer.toString(userID)});
 
-            setCopyState(copyID,-1);
+            setCopyState(copyID, -1);
 
             //get resource id of copy.
             int resourceID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT RID FROM Copy WHERE CPID = " +
@@ -513,6 +532,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets all reserved copies of the user.
+     *
      * @param userID The user id of the user.
      * @return An array of reserved copies.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
@@ -538,6 +558,7 @@ public class ResourceFlowManager {
 
     /**
      * Requests a select resource for the logged user. If a copy is already available, it will be reserved.
+     *
      * @param resourceID The resource id of the resource.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
@@ -547,21 +568,22 @@ public class ResourceFlowManager {
 
     /**
      * Requests a select resource for a user. If a copy is already available, it will be reserved.
+     *
      * @param resourceID The resource id of the resource.
-     * @param userID The user id of the user.
-     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @param userID     The user id of the user.
+     * @throws SQLException          Thrown if connection to database failed or tables do not exist.
      * @throws IllegalStateException Thrown if there are no copies that are available or borrowed.
      */
     public void requestResource(int resourceID, int userID) throws SQLException, IllegalStateException {
 
         //add request to history
         dbManager.addTuple("ResourceRequestHistory",
-                new String[] {Integer.toString(resourceID), Integer.toString(userID),
+                new String[]{Integer.toString(resourceID), Integer.toString(userID),
                         encase(DateManager.returnCurrentDate())});
 
         //check if there is a copy available to reserve, else check if any borrowed
-        if (dbManager.checkIfExist("Copy", new String[] {"RID", "StateID"},
-                new String[] {Integer.toString(resourceID), "0"})) {
+        if (dbManager.checkIfExist("Copy", new String[]{"RID", "StateID"},
+                new String[]{Integer.toString(resourceID), "0"})) {
             //there exists a copy that is available
             //get the copy id
             int copyID = Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT CPID FROM Copy WHERE RID = " +
@@ -572,8 +594,8 @@ public class ResourceFlowManager {
 
             //reserves copy.
             reserveCopy(copyID, userID);
-        } else if (dbManager.checkIfExist("Copy", new String[] {"RID", "StateID"},
-                new String[] {Integer.toString(resourceID), "1"})){
+        } else if (dbManager.checkIfExist("Copy", new String[]{"RID", "StateID"},
+                new String[]{Integer.toString(resourceID), "1"})) {
 
             //otherwise add user to request queue and set due date on a borrowed copy.
             dbManager.addTuple("ResourceRequestQueue",
@@ -597,11 +619,11 @@ public class ResourceFlowManager {
                     //get the loan duration.
                     int loanDuration = Integer.parseInt(
                             dbManager.getFirstTupleByQuery("SELECT Loan_Duration FROM Copy " +
-                            "WHERE CPID = " + Integer.toString(currentCopy))[0]);
+                                    "WHERE CPID = " + Integer.toString(currentCopy))[0]);
 
                     //set due date
-                    dbManager.editTuple("Copy", new String[] {"Due_Date"},
-                            new String[] {encase(DateManager.returnDueDate(loanDuration))},
+                    dbManager.editTuple("Copy", new String[]{"Due_Date"},
+                            new String[]{encase(DateManager.returnDueDate(loanDuration))},
                             "CPID", Integer.toString(currentCopy));
 
                     isFound = true;
@@ -623,36 +645,39 @@ public class ResourceFlowManager {
 
     /**
      * Deletes a request for a resource.
+     *
      * @param resourceID The resource id of the resource.
-     * @param userID The user id of the resource.
+     * @param userID     The user id of the resource.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
     public void deleteRequest(int resourceID, int userID) throws SQLException {
 
-        dbManager.deleteTuple("ResourceRequestQueue", new String[] {"RID", "UID"},
-                new String[] {Integer.toString(resourceID), Integer.toString(userID)});
+        dbManager.deleteTuple("ResourceRequestQueue", new String[]{"RID", "UID"},
+                new String[]{Integer.toString(resourceID), Integer.toString(userID)});
 
     }
 
     /**
      * Deletes all requests from a user.
+     *
      * @param userID The user id of a user.
      * @throws SQLException Thrown if connection to database failed or tables do not exist.
      */
-    public  void deleteAllRequests(int userID) throws SQLException {
+    public void deleteAllRequests(int userID) throws SQLException {
 
-        dbManager.deleteTuple("ResourceRequestQueue", new String[] {"UID"},
-                new String[] {Integer.toString(userID)});
+        dbManager.deleteTuple("ResourceRequestQueue", new String[]{"UID"},
+                new String[]{Integer.toString(userID)});
 
     }
 
     /**
      * Makes the copy borrowed. The copy must not already be available, on loan or reserved.
-     * @param copyID The copy id of the copy.
+     *
+     * @param copyID     The copy id of the copy.
      * @param resourceID The resource id of the resource.
-     * @param userID The user id of the user.
+     * @param userID     The user id of the user.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
-     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws SQLException          Thrown if connection to database failed or tables do not exist.
      */
     private void enqueueBorrowed(int copyID, int resourceID, int userID) throws IllegalStateException, SQLException {
 
@@ -697,10 +722,11 @@ public class ResourceFlowManager {
 
     /**
      * Makes a copy unavailable. The copy must not already be available, on loan or reserved.
-     * @param copyID The copy id of the copy.
+     *
+     * @param copyID     The copy id of the copy.
      * @param resourceID The resource id of the resource.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
-     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws SQLException          Thrown if connection to database failed or tables do not exist.
      */
     private void removeBorrowedCopy(int copyID, int resourceID) throws IllegalStateException, SQLException {
 
@@ -783,10 +809,11 @@ public class ResourceFlowManager {
 
     /**
      * Makes a copy available. The copy must not already be available, on loan or reserved.
-     * @param copyID The copy id of the copy.
+     *
+     * @param copyID     The copy id of the copy.
      * @param resourceID The resource id of the resource.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
-     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws SQLException          Thrown if connection to database failed or tables do not exist.
      */
     private void enqueueAvailable(int copyID, int resourceID) throws IllegalStateException, SQLException {
 
@@ -831,10 +858,11 @@ public class ResourceFlowManager {
 
     /**
      * Makes a copy unavailable. The copy must not already be available, on loan or reserved.
-     * @param copyID The copy id of the copy.
+     *
+     * @param copyID     The copy id of the copy.
      * @param resourceID The resource id of the resource.
      * @throws IllegalStateException Thrown if copy is available, on loan or reserved.
-     * @throws SQLException Thrown if connection to database failed or tables do not exist.
+     * @throws SQLException          Thrown if connection to database failed or tables do not exist.
      */
     private void removeAvailable(int copyID, int resourceID) throws IllegalStateException, SQLException {
 
@@ -917,10 +945,11 @@ public class ResourceFlowManager {
 
     /**
      * Sets the next copy of the copy.
+     *
      * @param copyID The copy id of the Copy.
      * @param nextID The copy id of the next Copy.
      * @throws IllegalStateException Thrown if the copy does not exist.
-     * @throws SQLException Thrown if table does not exist or connection to database failed.
+     * @throws SQLException          Thrown if table does not exist or connection to database failed.
      */
     private void setNextCopy(int copyID, String nextID) throws IllegalStateException, SQLException {
         //If the copy exists then check if the next copy exists. Otherwise thrown exception.
@@ -937,10 +966,11 @@ public class ResourceFlowManager {
 
     /**
      * Sets the next copy of the copy.
+     *
      * @param copyID The copy id of the Copy.
      * @param nextID The copy id of the next Copy.
      * @throws IllegalStateException Thrown if the copy does not exist.
-     * @throws SQLException Thrown if table does not exist or connection to database failed.
+     * @throws SQLException          Thrown if table does not exist or connection to database failed.
      */
     private void setNextCopy(int copyID, int nextID) throws IllegalStateException, SQLException {
         setNextCopy(copyID, Integer.toString(nextID));
@@ -948,10 +978,11 @@ public class ResourceFlowManager {
 
     /**
      * Sets the previous copy of the copy.
+     *
      * @param copyID The copy id of the Copy.
      * @param prevID The copy id of the prev Copy.
      * @throws IllegalStateException Thrown if the copy does not exist.
-     * @throws SQLException Thrown if table does not exist or connection to database failed.
+     * @throws SQLException          Thrown if table does not exist or connection to database failed.
      */
     private void setPrevCopy(int copyID, String prevID) throws IllegalStateException, SQLException {
         //If the copy exists then check if the next copy exists. Otherwise thrown exception.
@@ -969,10 +1000,11 @@ public class ResourceFlowManager {
 
     /**
      * Sets the previous copy of the copy.
+     *
      * @param copyID The copy id of the Copy.
      * @param prevID The copy id of the prev Copy.
      * @throws IllegalStateException Thrown if the copy does not exist.
-     * @throws SQLException Thrown if table does not exist or connection to database failed.
+     * @throws SQLException          Thrown if table does not exist or connection to database failed.
      */
     private void setPrevCopy(int copyID, int prevID) throws IllegalStateException, SQLException {
         setPrevCopy(copyID, Integer.toString(prevID));
@@ -980,9 +1012,10 @@ public class ResourceFlowManager {
 
     /**
      * Gets the previous copy id of the copy.
+     *
      * @param copyID The copy id of the copy.
      * @return The copy id of the previous copy.
-     * @throws SQLException Thrown if connection to database failed or table does not exist.
+     * @throws SQLException          Thrown if connection to database failed or table does not exist.
      * @throws IllegalStateException Thrown if the copy or previous copy does not exist.
      */
     private int getPrev(int copyID) throws SQLException, IllegalStateException {
@@ -1005,9 +1038,10 @@ public class ResourceFlowManager {
 
     /**
      * Gets the next copy id of the copy.
+     *
      * @param copyID The copy id of the copy.
      * @return The copy id of the next copy.
-     * @throws SQLException Thrown if connection to database failed or table does not exist.
+     * @throws SQLException          Thrown if connection to database failed or table does not exist.
      * @throws IllegalStateException Thrown if the copy or next copy does not exist.
      */
     private int getNext(int copyID) throws SQLException, IllegalStateException {
@@ -1030,9 +1064,10 @@ public class ResourceFlowManager {
 
     /**
      * Determines if there is a previous copy in the queue.
+     *
      * @param copyID The copy id of the copy.
      * @return Returns true, if previous copy exists. False is does not exist.
-     * @throws SQLException Thrown if connection to database failed or table does not exist.
+     * @throws SQLException          Thrown if connection to database failed or table does not exist.
      * @throws IllegalStateException Thrown if the copy specified does not exist.
      */
     private boolean isPrev(int copyID) throws SQLException, IllegalStateException {
@@ -1056,9 +1091,10 @@ public class ResourceFlowManager {
 
     /**
      * Determines if there is a next copy in the queue.
+     *
      * @param copyID The copy id of the copy.
      * @return Returns true, if next copy exists. False is does not exist.
-     * @throws SQLException Thrown if connection to database failed or table does not exist.
+     * @throws SQLException          Thrown if connection to database failed or table does not exist.
      * @throws IllegalStateException Thrown if the copy specified does not exist.
      */
     private boolean isNext(int copyID) throws SQLException, IllegalStateException {
@@ -1082,16 +1118,17 @@ public class ResourceFlowManager {
 
     /**
      * Sets the state of the Copy.
+     *
      * @param copyID The copy id of the copy.
-     * @param state The state of the copy where -1 is undefined, 0 is available, 1 is on loan and 2 is reserved.
-     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     * @param state  The state of the copy where -1 is undefined, 0 is available, 1 is on loan and 2 is reserved.
+     * @throws SQLException             Thrown if connection to database fails or table does not exist.
      * @throws IllegalArgumentException Thrown if state argument is invalid.
      */
     private void setCopyState(int copyID, int state) throws SQLException, IllegalArgumentException {
         //If the state specified is valid then change the state.
         if (state >= -1 && state <= 2) {
-            dbManager.editTuple("Copy", new String[] {"StateID"},
-                    new String[] {Integer.toString(state)}, "CPID",
+            dbManager.editTuple("Copy", new String[]{"StateID"},
+                    new String[]{Integer.toString(state)}, "CPID",
                     Integer.toString(copyID));
         } else {
             throw new IllegalArgumentException("State specified is invalid");
@@ -1100,9 +1137,10 @@ public class ResourceFlowManager {
 
     /**
      * Gets the state of the Copy.
+     *
      * @param copyID The copy id of the copy.
      * @return The state of the Copy.
-     * @throws SQLException Thrown if connection to database fails or table does not exist.
+     * @throws SQLException             Thrown if connection to database fails or table does not exist.
      * @throws IllegalArgumentException Thrown if specified copy does not exist.
      */
     private int getCopyState(int copyID) throws SQLException, IllegalArgumentException {
@@ -1117,6 +1155,7 @@ public class ResourceFlowManager {
 
     /**
      * Encases a string in apostrophe marks.
+     *
      * @param str The string to encase.
      * @return The encased string.
      */
@@ -1126,6 +1165,7 @@ public class ResourceFlowManager {
 
     /**
      * Gets the currently logged in user id.
+     *
      * @return User id of the user.
      */
     public int getUserID() {
@@ -1134,6 +1174,7 @@ public class ResourceFlowManager {
 
     /**
      * Sets the user id of the logged user.
+     *
      * @param userID The user id of the user.
      */
     public void setUserID(int userID) {

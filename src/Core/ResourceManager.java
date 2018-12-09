@@ -6,6 +6,7 @@ import java.util.Date;
 
 /**
  * Responsible for fetching, adding and editing resources from the database.
+ *
  * @author Noah Lenagan
  * @version 1.0
  */
@@ -23,6 +24,7 @@ public class ResourceManager {
 
     /**
      * Creates ResourceManager.
+     *
      * @param dbManager An instance of DatabaseManager
      */
     public ResourceManager(DatabaseManager dbManager) {
@@ -33,13 +35,14 @@ public class ResourceManager {
 
     /**
      * Creates a query for a user-specified input for specific type.
-     * @param column An array of columns used for search.
+     *
+     * @param column    An array of columns used for search.
      * @param attribute An array of user input,
-     * @param type Type of resource.
+     * @param type      Type of resource.
      * @return Query string for user-specified search
      */
-    public String createQuery(String[] column, String[] attribute, String type){
-        String sqlQuery = "SELECT * FROM Resource, " + type + " WHERE Resource.RID = " + type +".RID AND ";
+    public String createQuery(String[] column, String[] attribute, String type) {
+        String sqlQuery = "SELECT * FROM Resource, " + type + " WHERE Resource.RID = " + type + ".RID AND ";
         // for every column value in data except the last value, add to the sqlQuery
         for (int iColumn = 0; iColumn < column.length - 1; iColumn++) {
             sqlQuery += column[iColumn] + " LIKE " + attribute[iColumn] + " AND ";
@@ -54,6 +57,7 @@ public class ResourceManager {
 
     /**
      * Gets all resources found in the database.
+     *
      * @return All resources found in the database as Resource object.
      */
     public Resource[] getResourceList() {
@@ -77,10 +81,12 @@ public class ResourceManager {
 
     /**
      * Get specific resource by resource id.
+     *
      * @param resourceID The resource id of the resource.
      * @return The specific resource.
      * @throws IllegalArgumentException Thrown if resource specified does not exist.
-     * @throws SQLException Thrown if column specified is incorrect or connection to database couldn't be established.
+     * @throws SQLException             Thrown if column specified is incorrect or connection to database
+     *                                  couldn't be established.
      */
     public Resource getResource(int resourceID) throws IllegalArgumentException, SQLException {
 
@@ -106,6 +112,7 @@ public class ResourceManager {
 
     /**
      * Gets all resource objects based upon a sql query.
+     *
      * @param SQLQuery The SQL query to execute upon the database.
      * @return An array of resources.
      * @throws SQLException Thrown when the sql query is invalid.
@@ -121,6 +128,7 @@ public class ResourceManager {
 
     /**
      * Gets an array of the resource title and their loan count.
+     *
      * @return An array of the resource title and their loan count.
      */
     public String[][] getPopularityData() {
@@ -140,8 +148,9 @@ public class ResourceManager {
 
     /**
      * Gets all resource objects based upon a search on a column.
+     *
      * @param selectColumn The column to search upon.
-     * @param searchQuery The query to search on the column.
+     * @param searchQuery  The query to search on the column.
      * @return An array of resource objects.
      * @throws SQLException Thrown if column specified is incorrect or connection to database couldn't be established.
      */
@@ -155,6 +164,7 @@ public class ResourceManager {
 
     /**
      * Gets all resource objects based upon searches on the column(s).
+     *
      * @param selectColumns The columns to search upon.
      * @param searchQueries The queries to search on the column(s).
      * @return An array of resource objects.
@@ -170,13 +180,14 @@ public class ResourceManager {
 
     /**
      * Determines whether a copy exists or not.
+     *
      * @param copyID The copy id of the copy.
      * @return True if the copy exists. False if does not exist.
      * @throws SQLException Thrown if connection to database fails or table does not exist.
      */
     public boolean doesCopyExist(int copyID) throws SQLException {
-        if (dbManager.checkIfExist("Copy", new String[] {"CPID"},
-                new String[] {Integer.toString(copyID)})) {
+        if (dbManager.checkIfExist("Copy", new String[]{"CPID"},
+                new String[]{Integer.toString(copyID)})) {
             return true;
         } else {
             return false;
@@ -185,6 +196,7 @@ public class ResourceManager {
 
     /**
      * Gets the copy which corresponds to the copy id.
+     *
      * @param copyID The copy id of the copy.
      * @return The Copy.
      */
@@ -204,9 +216,9 @@ public class ResourceManager {
             //Return the create Copy.
             return copy;
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
-        } catch(ArrayIndexOutOfBoundsException a) {
+        } catch (ArrayIndexOutOfBoundsException a) {
             return null;
         }
 
@@ -214,6 +226,7 @@ public class ResourceManager {
 
     /**
      * Gets all copies.
+     *
      * @return An array of all copies.
      */
     public Copy[] getCopies() {
@@ -226,14 +239,15 @@ public class ResourceManager {
 
             //For every copy associated with the rid, will be constructed and added to the array of copies.
             for (int iCount = 0; iCount < copyRows.length; iCount++) {
-                copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]), Integer.parseInt(copyRows[iCount][1]),
-                        Integer.parseInt(copyRows[iCount][2]), copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
+                copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]),
+                        Integer.parseInt(copyRows[iCount][1]), Integer.parseInt(copyRows[iCount][2]),
+                        copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
                         Integer.parseInt(copyRows[iCount][5]));
             }
 
             return copies;
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
         }
 
@@ -241,6 +255,7 @@ public class ResourceManager {
 
     /**
      * Gets all copies of a resource.
+     *
      * @param resourceID The resource id of a copy.
      * @return All copies of a resource.
      */
@@ -256,14 +271,15 @@ public class ResourceManager {
 
             //For every copy associated with the rid, will be constructed and added to the array of copies.
             for (int iCount = 0; iCount < copyRows.length; iCount++) {
-                copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]), Integer.parseInt(copyRows[iCount][1]),
-                        Integer.parseInt(copyRows[iCount][2]), copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
+                copies[iCount] = new Copy(Integer.parseInt(copyRows[iCount][0]),
+                        Integer.parseInt(copyRows[iCount][1]), Integer.parseInt(copyRows[iCount][2]),
+                        copyRows[iCount][3], Integer.parseInt(copyRows[iCount][4]),
                         Integer.parseInt(copyRows[iCount][5]));
             }
 
             return copies;
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             return null;
         }
 
@@ -271,6 +287,7 @@ public class ResourceManager {
 
     /**
      * Adds multiple copies of a resource to the database.
+     *
      * @param newCopy The copy to add.
      */
     public boolean addBulkCopies(Copy newCopy) {
@@ -281,8 +298,9 @@ public class ResourceManager {
 
     /**
      * Adds multiple copies of a resource to the database.
+     *
      * @param newCopy The copy to add.
-     * @param amount The amount of copies to add.
+     * @param amount  The amount of copies to add.
      */
     public boolean addBulkCopies(Copy newCopy, int amount) {
 
@@ -301,13 +319,14 @@ public class ResourceManager {
 
     /**
      * Adds a copy of a resource to the database.
+     *
      * @param newCopy The copy to add.
      * @return True if operation was a success. False if failure.
      */
     public boolean addCopy(Copy newCopy) {
         try {
             //Add the copy to the database.
-            dbManager.addTuple("Copy", new String[] {"null", Integer.toString(newCopy.getResourceID()),
+            dbManager.addTuple("Copy", new String[]{"null", Integer.toString(newCopy.getResourceID()),
                     Integer.toString(newCopy.getLoanDuration()), "null",
                     Integer.toString(newCopy.getStateID()), Integer.toString(newCopy.getCurrentBorrowerID()),
                     "null", "null"});
@@ -327,27 +346,27 @@ public class ResourceManager {
             if (head == null) {
                 //add copy to head and tail, the row is edited as the auto increment primary key must be found before
                 //adding the id to the queue.
-                dbManager.editTuple("Resource", new String[] {"HeadOfAvailableQueue", "TailOfAvailableQueue"},
-                        new String[] {copyID, copyID}, "RID", resourceID);
+                dbManager.editTuple("Resource", new String[]{"HeadOfAvailableQueue", "TailOfAvailableQueue"},
+                        new String[]{copyID, copyID}, "RID", resourceID);
             } else {
                 //insert at the tail.
 
                 //assign the next queue item for the tail item.
-                dbManager.editTuple("Copy", new String[] {"NextCopyInQueue"}, new String[] {copyID},
+                dbManager.editTuple("Copy", new String[]{"NextCopyInQueue"}, new String[]{copyID},
                         "CPID", tail);
 
                 //assign the previous queue item for the new item.
-                dbManager.editTuple("Copy", new String[] {"PreviousCopyInQueue"}, new String[] {tail},
+                dbManager.editTuple("Copy", new String[]{"PreviousCopyInQueue"}, new String[]{tail},
                         "CPID", copyID);
 
                 //assign the new tail.
-                dbManager.editTuple("Resource", new String[] {"TailOfAvailableQueue"},
-                        new String[] {copyID}, "RID", resourceID);
+                dbManager.editTuple("Resource", new String[]{"TailOfAvailableQueue"},
+                        new String[]{copyID}, "RID", resourceID);
             }
 
             return true;
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
 
             //If an exception, return false to indicate failure to add copy.
             return false;
@@ -357,8 +376,9 @@ public class ResourceManager {
 
     /**
      * Edits/replaces an existing resource with a new resource.
+     *
      * @param newResource The new resource with information to overwrite.
-     * @param type The type of resource.
+     * @param type        The type of resource.
      * @return Returns true if the operation was a success. False if failed.
      */
     private boolean editResource(Resource newResource, int type) {
@@ -377,13 +397,14 @@ public class ResourceManager {
                             Integer.toString(type), resourceRow[5], resourceRow[6], resourceRow[7], resourceRow[8]},
                     "RID", Integer.toString(newResource.resourceID));
             return true;
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             return false;
         }
     }
 
     /**
      * Edits/replaces an existing book resource with the passed new book.
+     *
      * @param newResource The new book with information to overwrite.
      * @return Returns true if the operation was a success. False if failed.
      */
@@ -392,7 +413,7 @@ public class ResourceManager {
         try {
 
             //Attempt to edit the resource table.
-            boolean isEditSuccess = editResource((Resource)newResource, 1);
+            boolean isEditSuccess = editResource((Resource) newResource, 1);
 
             //If the edit of the resource table was a success then continue editing.
             if (isEditSuccess) {
@@ -402,9 +423,10 @@ public class ResourceManager {
 
                 //edit book in book table
                 dbManager.editTuple("Book", new String[]{"BID", "RID", "Author", "Publisher",
-                        "Genre", "ISBN"}, new String[]{bookRow[0], Integer.toString(newResource.resourceID),
-                        encase(newResource.getAuthor()), encase(newResource.getPublisher()), encase(newResource.getGenre()),
-                        encase(newResource.getIsbn())}, "RID", Integer.toString(newResource.resourceID));
+                                "Genre", "ISBN"}, new String[]{bookRow[0], Integer.toString(newResource.resourceID),
+                                encase(newResource.getAuthor()), encase(newResource.getPublisher()),
+                                encase(newResource.getGenre()), encase(newResource.getIsbn())}, "RID",
+                        Integer.toString(newResource.resourceID));
 
                 dbManager.deleteTuple("ResourceLanguage", new String[]{"RID"},
                         new String[]{Integer.toString(newResource.resourceID)});
@@ -416,13 +438,14 @@ public class ResourceManager {
                 return false;
             }
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             return false;
         }
     }
 
     /**
      * Edits/replaces an existing dvd resource with the passed new dvd.
+     *
      * @param newResource The new dvd with information to overwrite.
      * @return Returns true if the operation was a success. False if failed.
      */
@@ -443,19 +466,19 @@ public class ResourceManager {
                 //edit book in dvd table
                 dbManager.editTuple("Dvd", new String[]{"DID", "RID", "Director", "Runtime"},
                         new String[]{dvdRow[0], Integer.toString(newResource.resourceID),
-                        encase(newResource.getDirector()), Integer.toString(newResource.getRunTime())},
+                                encase(newResource.getDirector()), Integer.toString(newResource.getRunTime())},
                         "RID", Integer.toString(newResource.resourceID));
 
                 //remove language
-                dbManager.deleteTuple("ResourceLanguage", new String[] {"RID"},
-                        new String[] {Integer.toString(newResource.resourceID)});
+                dbManager.deleteTuple("ResourceLanguage", new String[]{"RID"},
+                        new String[]{Integer.toString(newResource.resourceID)});
 
                 //add language
                 assignResourceLanguage(Integer.toString(newResource.resourceID), newResource.getLanguage());
 
                 //remove subtitles
-                dbManager.deleteTuple("DvdSubtitleLanguage", new String[] {"RID"},
-                        new String[] {Integer.toString(newResource.resourceID)});
+                dbManager.deleteTuple("DvdSubtitleLanguage", new String[]{"RID"},
+                        new String[]{Integer.toString(newResource.resourceID)});
 
                 //add subtitles
                 assignSubtitleLanguages(Integer.toString(newResource.resourceID), newResource.getSubLang());
@@ -466,38 +489,41 @@ public class ResourceManager {
                 return false;
             }
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             return false;
         }
     }
 
     /**
      * Adds a resource image directory and returns the image id.
+     *
      * @param imageURL The image directory of the image file.
      * @return The image id of the newly added image.
      * @throws SQLException Thrown if connection to database could not be established.
      */
     public int addResourceImage(String imageURL) throws SQLException {
-        dbManager.addTuple("Image", new String[] {"null", encase(imageURL),"0"});
+        dbManager.addTuple("Image", new String[]{"null", encase(imageURL), "0"});
         return Integer.parseInt(dbManager.getFirstTupleByQuery("Select max(ImageID) FROM Image")[0]);
     }
 
     /**
      * Adds a avatar image directory and returns the image id.
+     *
      * @param imageURL The image directory of the image file.
      * @return The image id of the newly added image.
      * @throws SQLException Thrown if connection to database could not be established.
      */
     public int addAvatarImage(String imageURL) throws SQLException {
-        dbManager.addTuple("Image", new String[] {"null", encase(imageURL),"1"});
+        dbManager.addTuple("Image", new String[]{"null", encase(imageURL), "1"});
         return Integer.parseInt(dbManager.getFirstTupleByQuery("Select max(ImageID) FROM Image")[0]);
     }
 
     /**
      * Gets the image directory url for the image associated with the image id.
+     *
      * @param imageID The image id of the image.
      * @return The image directory url.
-     * @throws SQLException Thrown if failed to connect to database.
+     * @throws SQLException             Thrown if failed to connect to database.
      * @throws IllegalArgumentException Thrown if imageID does not exist.
      */
     public String getImageURL(int imageID) throws SQLException, IllegalArgumentException {
@@ -512,9 +538,10 @@ public class ResourceManager {
 
     /**
      * Gets the image id of the image which points to the url.
+     *
      * @param url The url directory of the image.
      * @return The image id of the image.
-     * @throws SQLException Thrown if failed to connect to database.
+     * @throws SQLException             Thrown if failed to connect to database.
      * @throws IllegalArgumentException Thrown if imageID does not exist.
      */
     public int getImageID(String url) throws SQLException, IllegalArgumentException {
@@ -529,28 +556,31 @@ public class ResourceManager {
 
     /**
      * Determines whether an specified image exists or not by the image id.
+     *
      * @param imageID The image id of the image.
      * @return True if the image exists. False if not.
      * @throws SQLException Thrown if connection to database could not be established.
      */
     public boolean isImageExist(int imageID) throws SQLException {
-        return dbManager.checkIfExist("Image", new String[] {"ImageID"},
-                new String[] {Integer.toString(imageID)});
+        return dbManager.checkIfExist("Image", new String[]{"ImageID"},
+                new String[]{Integer.toString(imageID)});
     }
 
     /**
      * Determines whether an specified image exists or not by the image url dir.
+     *
      * @param url The url directory for the image.
      * @return True if the image exists. False if not.
      * @throws SQLException Thrown if connection to database could not be established.
      */
     public boolean isImageExist(String url) throws SQLException {
-        return dbManager.checkIfExist("Image", new String[] {"Image_Address"},
-                new String[] {encase(url)});
+        return dbManager.checkIfExist("Image", new String[]{"Image_Address"},
+                new String[]{encase(url)});
     }
 
     /**
      * Edits/replaces an existing computer resource with the passed new computer.
+     *
      * @param newResource The new computer with information to overwrite.
      * @return Returns true if the operation was a success. False if failed.
      */
@@ -559,7 +589,7 @@ public class ResourceManager {
         try {
 
             //Attempt to edit the resource table.
-            boolean isEditSuccess = editResource((Resource)newResource, 3);
+            boolean isEditSuccess = editResource((Resource) newResource, 3);
 
             //If the edit of the resource table was a success then continue editing.
             if (isEditSuccess) {
@@ -569,10 +599,11 @@ public class ResourceManager {
                         Integer.toString(newResource.getResourceID()))[0];
 
                 //edit book in computer table
-                dbManager.editTuple("Computer", new String[]{"CID", "RID", "Manufacturer", "Model", "Installed_OS"},
+                dbManager.editTuple("Computer", new String[]{"CID", "RID", "Manufacturer",
+                                "Model", "Installed_OS"},
                         new String[]{computerRow[0], Integer.toString(newResource.resourceID),
                                 encase(newResource.getManufacturer()), encase(newResource.getModel()),
-                                encase(newResource.getOs())},"RID", Integer.toString(newResource.resourceID));
+                                encase(newResource.getOs())}, "RID", Integer.toString(newResource.resourceID));
 
                 return true;
 
@@ -580,7 +611,7 @@ public class ResourceManager {
                 return false;
             }
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             return false;
         }
 
@@ -588,6 +619,7 @@ public class ResourceManager {
 
     /**
      * Adds a new book to the database.
+     *
      * @param newBook The new book to add.
      * @return True if the operation was a success. False if failed.
      * @throws ResourceDuplicateException Thrown if a duplicate resource is trying to be added.
@@ -595,8 +627,8 @@ public class ResourceManager {
     public boolean addResource(Book newBook) throws ResourceDuplicateException {
 
         /*
-        Stage indicates how far the progression of the operation has gone. If an exception were to be thrown, the database
-        must be reverted.
+        Stage indicates how far the progression of the operation has gone. If an exception were to be thrown,
+        the database must be reverted.
          */
         int stage = 0;
 
@@ -608,16 +640,15 @@ public class ResourceManager {
         try {
 
             //if the resource doesnt exist then add to the database. Otherwise return false.
-            if (!dbManager.checkIfExist("Resource", new String[] {"Title", "RYear"}, new String[]
-                    {encase(newBook.getTitle()), Integer.toString(newBook.getYear())}))
-            {
+            if (!dbManager.checkIfExist("Resource", new String[]{"Title", "RYear"}, new String[]
+                    {encase(newBook.getTitle()), Integer.toString(newBook.getYear())})) {
                 //The resource type is 1 corresponding to a book.
                 int bookTypeID = 1;
 
                 //Add the the resource to the resource table.
-                dbManager.addTuple("Resource", new String[]{"null", encase(newBook.title), Integer.toString(newBook.year),
-                        Integer.toString(newBook.thumbImageID), Integer.toString(bookTypeID), "null", "null", "null",
-                        "null"});
+                dbManager.addTuple("Resource", new String[]{"null", encase(newBook.title),
+                        Integer.toString(newBook.year), Integer.toString(newBook.thumbImageID),
+                        Integer.toString(bookTypeID), "null", "null", "null", "null"});
 
                 //get the resourceID of the resource by getting the largest primary key in Resource.
                 resourceID = dbManager.getFirstTupleByQuery("SELECT max(RID) FROM Resource")[0];
@@ -653,7 +684,8 @@ public class ResourceManager {
             try {
                 switch (stage) {
                     case 3: //del language entry in db.
-                        dbManager.deleteTuple("ResourceLanguage", new String[]{"RID", "LangID"}, new String[]{resourceID, langID});
+                        dbManager.deleteTuple("ResourceLanguage", new String[]{"RID", "LangID"},
+                                new String[]{resourceID, langID});
                     case 2: //del book entry in db.
                         dbManager.deleteTuple("Book", new String[]{"RID"}, new String[]{resourceID});
                     case 1: //del resource entry in db.
@@ -677,8 +709,9 @@ public class ResourceManager {
 
     /**
      * Gets the resource id of the last resource added.
+     *
      * @return The resource id.
-     * @throws SQLException Thrown if connection to database could not be established.
+     * @throws SQLException          Thrown if connection to database could not be established.
      * @throws IllegalStateException Thrown if there exist no resources.
      */
     public int getLastAddedID() throws SQLException, IllegalStateException {
@@ -693,6 +726,7 @@ public class ResourceManager {
 
     /**
      * Adds a new dvd to the database.
+     *
      * @param newDvd The new dvd to add.
      * @return True if the operation was a success. False if failed.
      * @throws ResourceDuplicateException Thrown if a duplicate resource is trying to be added.
@@ -700,8 +734,8 @@ public class ResourceManager {
     public boolean addResource(Dvd newDvd) throws ResourceDuplicateException {
 
         /*
-        Stage indicates how far the progression of the operation has gone. If an exception were to be thrown, the database
-        must be reverted.
+        Stage indicates how far the progression of the operation has gone. If an exception
+        were to be thrown, the database must be reverted.
          */
         int stage = 0;
 
@@ -721,9 +755,9 @@ public class ResourceManager {
                 int dvdTypeID = 2;
 
                 //Add the the resource to the resource table.
-                dbManager.addTuple("Resource", new String[]{"null", encase(newDvd.title), Integer.toString(newDvd.year),
-                        Integer.toString(newDvd.thumbImageID), Integer.toString(dvdTypeID), "null", "null", "null",
-                        "null"});
+                dbManager.addTuple("Resource", new String[]{"null", encase(newDvd.title),
+                        Integer.toString(newDvd.year), Integer.toString(newDvd.thumbImageID),
+                        Integer.toString(dvdTypeID), "null", "null", "null", "null"});
 
                 //get the resourceID of the resource by getting the largest primary key in Resource.
                 resourceID = dbManager.getFirstTupleByQuery("SELECT max(RID) FROM Resource")[0];
@@ -791,6 +825,7 @@ public class ResourceManager {
 
     /**
      * Adds a new computer to the database.
+     *
      * @param newComputer The new computer to add.
      * @return True if the operation was a success. False if failed.
      * @throws ResourceDuplicateException Thrown if a duplicate resource is trying to be added.
@@ -798,8 +833,8 @@ public class ResourceManager {
     public boolean addResource(Computer newComputer) throws ResourceDuplicateException {
 
         /*
-        Stage indicates how far the progression of the operation has gone. If an exception were to be thrown, the database
-        must be reverted.
+        Stage indicates how far the progression of the operation has gone. If an exception were to be thrown,
+        the database must be reverted.
          */
         int stage = 0;
 
@@ -818,9 +853,9 @@ public class ResourceManager {
                 int computerTypeID = 3;
 
                 //Add the the resource to the resource table.
-                dbManager.addTuple("Resource", new String[]{"null", encase(newComputer.title), Integer.toString(newComputer.year),
-                        Integer.toString(newComputer.thumbImageID), Integer.toString(computerTypeID), "null", "null", "null",
-                        "null"});
+                dbManager.addTuple("Resource", new String[]{"null", encase(newComputer.title),
+                        Integer.toString(newComputer.year), Integer.toString(newComputer.thumbImageID),
+                        Integer.toString(computerTypeID), "null", "null", "null", "null"});
 
                 //get the resourceID of the resource by getting the largest primary key in Resource.
                 resourceID = dbManager.getFirstTupleByQuery("SELECT max(RID) FROM Resource")[0];
@@ -829,7 +864,8 @@ public class ResourceManager {
 
                 //add Computer to Computer table.
                 dbManager.addTuple("Computer", new String[]{"null", resourceID,
-                        encase(newComputer.getManufacturer()), encase(newComputer.getModel()), encase(newComputer.getOs())});
+                        encase(newComputer.getManufacturer()), encase(newComputer.getModel()),
+                        encase(newComputer.getOs())});
 
                 stage = 2;
 
@@ -871,10 +907,12 @@ public class ResourceManager {
 
     /**
      * Assigns a language to the resource in the database.
-     * @param rid Identifies which resource to assign the language to.
+     *
+     * @param rid      Identifies which resource to assign the language to.
      * @param language The language to assign. If it does not already exist it will be added to the database.
      * @return Returns the unique identifier for language.
-     * @throws SQLException Thrown if the resource specified was not found or connection to database could not be established.
+     * @throws SQLException Thrown if the resource specified was not found or connection to
+     *                      database could not be established.
      */
     private String assignResourceLanguage(String rid, String language) throws SQLException {
 
@@ -905,10 +943,12 @@ public class ResourceManager {
 
     /**
      * Assigns multiple subtitle languages to the resource in the database.
-     * @param rid Identifies which resource to assign the subtitle languages to.
+     *
+     * @param rid          Identifies which resource to assign the subtitle languages to.
      * @param subtitleLang The subtitle languages to assign. If they do not exist, they will be added to the database.
      * @return Returns an array of unique identifiers for the subtitle languages.
-     * @throws SQLException Thrown if the resource specified was not found or connection to database could not be established.
+     * @throws SQLException Thrown if the resource specified was not found or connection to database could
+     *                      not be established.
      */
     private String[] assignSubtitleLanguages(String rid, String[] subtitleLang) throws SQLException {
 
@@ -920,7 +960,7 @@ public class ResourceManager {
 
             //check if language already exists in db.
             String[][] result = dbManager.searchTuples("SubtitleLanguage", "Subtitle_Language",
-                        subtitleLang[iCount]);
+                    subtitleLang[iCount]);
 
             //if length is greater than 0, then the language must exist. Otherwise add the language.
             if (result.length > 0) {
@@ -945,6 +985,7 @@ public class ResourceManager {
 
     /**
      * Encases a string in apostrophe marks.
+     *
      * @param str The string to encase.
      * @return The encased string.
      */
@@ -954,6 +995,7 @@ public class ResourceManager {
 
     /**
      * Constructs multiple resources to their respective type from a table of resource data and then returns them.
+     *
      * @param table The data in which to construct the resource objects from.
      * @return The array of resources.
      */
@@ -993,6 +1035,7 @@ public class ResourceManager {
 
     /**
      * Creates a Book object from the database and passed data.
+     *
      * @param row The row data from resources.
      * @return The constructed Book object.
      */
@@ -1030,6 +1073,7 @@ public class ResourceManager {
 
     /**
      * Creates a Dvd object from the database and passed data.
+     *
      * @param row The row data from resources.
      * @return The constructed Dvd object.
      */
@@ -1078,6 +1122,7 @@ public class ResourceManager {
 
     /**
      * Creates a Computer object from the database and passed data.
+     *
      * @param row The row data from resources.
      * @return The constructed Computer object.
      */
@@ -1109,6 +1154,7 @@ public class ResourceManager {
 
     /**
      * Gets the language of the resource.
+     *
      * @param rid Uniquely identifies the resource.
      * @return The language of the resource.
      */
@@ -1126,7 +1172,7 @@ public class ResourceManager {
             } else {
                 return "";
             }
-        } catch(SQLException e) {
+        } catch (SQLException e) {
             //Return an empty string if exception. Most likely will be caused by connection failure or missing table.
             return "";
         }
@@ -1135,6 +1181,7 @@ public class ResourceManager {
 
     /**
      * Gets all subtitle languages of a resource.
+     *
      * @param rid Uniquely identifies the resource.
      * @return All subtitle languages of the resource.
      */
@@ -1143,7 +1190,8 @@ public class ResourceManager {
         try {
 
             //Get the table data for the subtitle languages.
-            String[][] table = dbManager.getTupleListByQuery("SELECT Subtitle_Language FROM DvdSubtitleLanguage, SubtitleLanguage WHERE " +
+            String[][] table = dbManager.getTupleListByQuery("SELECT Subtitle_Language FROM DvdSubtitleLanguage, " +
+                    "SubtitleLanguage WHERE " +
                     rid + " = RID AND DvdSubtitleLanguage.SubID = SubtitleLanguage.SubID");
 
             String[] subLanguages = new String[table.length];
@@ -1155,7 +1203,7 @@ public class ResourceManager {
 
             return subLanguages;
 
-        } catch(SQLException e) {
+        } catch (SQLException e) {
 
             //Return null if an exception has occurred.
             return null;
@@ -1167,6 +1215,7 @@ public class ResourceManager {
 
     /**
      * Gets the book data using a resource id.
+     *
      * @param rid Uniquely identifies the resource.
      * @return The row of book data.
      */
@@ -1185,6 +1234,7 @@ public class ResourceManager {
 
     /**
      * Gets the dvd data using a resource id.
+     *
      * @param rid Uniquely identifies the resource.
      * @return The row of dvd data.
      */
@@ -1203,6 +1253,7 @@ public class ResourceManager {
 
     /**
      * Gets the computer data using a resource id.
+     *
      * @param rid Uniquely identifies the resource.
      * @return The row of computer data.
      */
