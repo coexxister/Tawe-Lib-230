@@ -4,6 +4,7 @@ import Core.LoanEvent;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -87,7 +88,12 @@ public class CopyLogInterfaceController extends SceneController implements Initi
             //styling for the button.
             label.getStylesheets().add("/Resources/CoreStyle.css");
             label.getStyleClass().add("UniversalButton");
+            vbox.getChildren().add(label);
+
         }
+        
+        vbox.setSpacing(10);
+        vbox.setPadding(new Insets(10));
 
         //wrap the vbox in a scroll pane.
         ScrollPane scrollPane = new ScrollPane(vbox);
