@@ -42,8 +42,6 @@ public class ResourceLogController extends SceneController implements Initializa
         loanHistoryRadio.setToggleGroup(radioGroup);
         overdueCopies.setToggleGroup(radioGroup);
 
-        radioGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> System.out.println(newVal
-                + " was selected"));
     }
 
     @FXML

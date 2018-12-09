@@ -2,6 +2,7 @@ package JavaFX;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -66,8 +67,13 @@ public class ComputerSearchMenuController extends SceneController{
             input.add("'%" + computerOS.getText() + "%'");
         }
 
-        setSqlQuery(getResourceManager().createQuery(column.toArray(new String[column.size()]),
-                input.toArray(new String[input.size()]), "Computer"));
-        System.out.println(getSqlQuery());
+        if(!input.isEmpty()) {
+            setSqlQuery(getResourceManager().createQuery(column.toArray(new String[column.size()]),
+                    input.toArray(new String[input.size()]), "Computer"));
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Invalid input.");
+            alert.showAndWait();
+        }
     }
 }

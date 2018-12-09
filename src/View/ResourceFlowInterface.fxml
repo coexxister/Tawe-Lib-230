@@ -58,7 +58,7 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-             <Button mnemonicParsing="false" onAction="#handleSelectIDAction" prefHeight="31.0" prefWidth="90.0" styleClass="UniversalButton" text="Select" translateY="55.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
+             <Button contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleSelectIDAction" prefHeight="31.0" prefWidth="90.0" styleClass="UniversalButton" text="Select" textAlignment="CENTER" translateY="55.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP">
                  <GridPane.margin>
                      <Insets left="10.0" />
                  </GridPane.margin>

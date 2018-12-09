@@ -5,14 +5,13 @@ import Core.Computer;
 import Core.Dvd;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
 
-import javax.swing.*;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -31,9 +30,17 @@ public class RequestResourceByUserController extends SceneController implements 
     public void handleRequestResourceButtonAction() {
         try {
             getResourceFlowManager().requestResource(getRequestResource().getResourceID(), SceneController.USER_ID);
-            JOptionPane.showMessageDialog(null, "Requested Successfully!", "Resource Requested", JOptionPane.INFORMATION_MESSAGE);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Requested successfully!");
+            alert.showAndWait();
         } catch (SQLException e) {
-            System.out.println("Failed request.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        } catch (IllegalStateException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
         }
     }
 
