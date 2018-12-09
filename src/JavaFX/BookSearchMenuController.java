@@ -21,23 +21,14 @@ import java.util.ArrayList;
 public class BookSearchMenuController extends SceneController{
 
     @FXML
-    private TextField title;
-
-    @FXML
-    private TextField author;
-
-    @FXML
-    private TextField year;
-
-    @FXML
-    private TextField genre;
+    private TextField title, author, year, genre, isbn;
 
     /**
      * Executes a search from information specified.
      * @param event Represents the data of the button pressed.
      * @throws IOException Thrown if input is null.
      */
-    public void handleSearchByQueryButtonAction(ActionEvent event) throws IOException {
+    public void handleSearchByQueryButtonAction(ActionEvent event) {
         getInput();
         loadSubscene("/View/BookList.fxml");
     }
@@ -47,7 +38,8 @@ public class BookSearchMenuController extends SceneController{
      * @param event Represents the data of the button pressed.
      * @throws IOException Thrown if input is null.
      */
-    public void handleSearchByISBNButtonAction(ActionEvent event) throws IOException {
+    public void handleSearchByISBNButtonAction(ActionEvent event) {
+        setSqlQuery(getResourceManager().createQuery(new String[]{"ISBN"}, new String[]{isbn.getText()}, "Book"));
         loadSubscene("/View/BookList.fxml");
     }
 
@@ -74,7 +66,7 @@ public class BookSearchMenuController extends SceneController{
             input.add("'%" + genre.getText() + "%'");
         }
 
-        setSqlQuery(getResourceManager().createQuery(column.toArray(new String[column.size()]), input.toArray(new String[input.size()]), "Book"));
-        System.out.println(getSqlQuery());
+        setSqlQuery(getResourceManager().createQuery(column.toArray(new String[column.size()]),
+                input.toArray(new String[input.size()]), "Book"));
     }
 }

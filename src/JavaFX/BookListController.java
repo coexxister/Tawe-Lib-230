@@ -16,6 +16,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -69,27 +70,26 @@ public class BookListController extends SceneController implements Initializable
 
                 VBox element = new VBox(elementsPerPage);
                 element.setId(String.valueOf(i));
-                ImageView image = new ImageView("/Resources/bookIcon.png");
+                ImageView image = new ImageView();
+                try {
+                    image.setImage(new Image(getResourceManager().
+                            getImageURL(resourceList[i].getThumbImage())));
+                } catch (SQLException e) {
+                    image.setImage(new Image("/Resources/bookIcon.png"));
+                }
 
                 image.setFitWidth(100);
                 image.setPreserveRatio(true);
                 image.setSmooth(true);
                 image.setCache(true);
 
-                Label text = new Label(resourceList[i].toString());
+                Label text = new Label(resourceList[i].getTitle());
                 text.wrapTextProperty().setValue(true);
-                Label availability = new Label();
-                availability.setDisable(true);
-                Copy[] copies = getResourceManager().getCopies(resourceList[i].getResourceID());
-                for(Copy copy: copies){
-                    if(copy.getStateID() == 0) {
-                        availability.setDisable(false);
-                        availability = new Label("Available");
-                    }
-                }
-                element.getChildren().addAll(image, text, availability);
+                Label availability = new Label(getAvailableNumberOfCopies(resourceList[i]));
+                element.getChildren().addAll(availability, image, text);
                 element.setAlignment(Pos.TOP_CENTER);
                 element.setSpacing(10);
+                element.setPrefWidth(200);
                 element.setPadding(new Insets(100, 0, 0, 0));
                 box.getChildren().add(element);
                 getOnMouseClicked(resourceList, element);
