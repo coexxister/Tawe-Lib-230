@@ -21,9 +21,9 @@ public class AccountEditorController extends SceneController implements Initiali
 
     int id = getResourceFlowManager().getUserID();
 
-    Path selectedPath;
+    private Path selectedPath;
 
-    FileChooser avatarChooser = new FileChooser();
+    private FileChooser avatarChooser = new FileChooser();
 
     @FXML
     private TextField firstName, surname, streetName, streetNumber, city, county, postCode, phoneNumber, balance;

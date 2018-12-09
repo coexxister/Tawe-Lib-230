@@ -1,7 +1,5 @@
 package Core;
 
-import jdk.management.resource.ResourceId;
-
 /**
  * This class represents a resource and its information.
  * @author Noah Lenagan, Paris Kelly Skopelitis

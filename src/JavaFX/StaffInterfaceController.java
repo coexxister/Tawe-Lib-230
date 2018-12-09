@@ -1,13 +1,11 @@
 package JavaFX;
 
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -73,14 +71,4 @@ public class StaffInterfaceController extends SceneController implements Initial
     public void initialize(URL location, ResourceBundle resources) {
         usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(SceneController.USER_ID).getFirstName());
     }
-
-    /**
-     * Handles the action of clicking the copies button which changes the scene to the copy loan history scene.
-     * @param event The event triggered by clicking the button.
-     */
-    @FXML
-    public void handleCopiesAction(ActionEvent event) {
-        loadSubscene(SceneController.COPY_LOG_INTERFACE);
-    }
-
 }

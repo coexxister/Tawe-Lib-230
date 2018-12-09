@@ -1,8 +1,5 @@
 package JavaFX;
 
-import Core.Copy;
-import Core.DateManager;
-import Core.LoanEvent;
 import Core.Resource;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class RequestedResourcesInterfaceController extends SceneController implements Initializable {

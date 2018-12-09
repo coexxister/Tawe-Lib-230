@@ -1,6 +1,5 @@
 package JavaFX;
 
-import java.io.IOException;
 import java.sql.SQLException;
 
 import Core.ResourceFlowManager;
