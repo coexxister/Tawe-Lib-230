@@ -14,6 +14,8 @@ import java.util.ResourceBundle;
 
 /**
  * Displays resources reserved by a user.
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class ReservedInterfaceController extends SceneController implements Initializable {
 
@@ -21,8 +23,8 @@ public class ReservedInterfaceController extends SceneController implements Init
     private ScrollPane scrollPane;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

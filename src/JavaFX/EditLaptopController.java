@@ -13,6 +13,12 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Handles editing the description for laptops.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
 public class EditLaptopController extends ResourceController implements Initializable {
 
     private Computer computer = (Computer) getRequestResource();
@@ -35,8 +41,10 @@ public class EditLaptopController extends ResourceController implements Initiali
     private ImageView thumbnailImg;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * handles the general retrieval and editing of laptop description.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

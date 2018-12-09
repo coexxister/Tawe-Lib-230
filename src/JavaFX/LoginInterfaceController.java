@@ -9,7 +9,8 @@ import javafx.scene.control.TextField;
 import java.sql.SQLException;
 
 /**
- * Interface controller for the login screen
+ * Interface controller for the login screen.
+ *
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
@@ -20,6 +21,7 @@ public class LoginInterfaceController extends SceneController{
 
     /**
      * Handles the action of clicking the button to login to the user or staff interface.
+     *
      * @param event the event triggered by clicking the button.
      * @throws Exception thrown if no such interface exists.
      */
@@ -55,6 +57,7 @@ public class LoginInterfaceController extends SceneController{
 
     /**
      * When 'Enter' button is pressed, executes the action of the Login Button.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML

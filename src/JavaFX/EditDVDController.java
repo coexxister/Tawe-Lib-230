@@ -43,8 +43,10 @@ public class EditDVDController extends ResourceController implements Initializab
     private ImageView thumbImage;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * retrieves the needed resource and handles the editing.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

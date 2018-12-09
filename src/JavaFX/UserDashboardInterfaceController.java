@@ -12,12 +12,21 @@ import java.util.ResourceBundle;
 
 /**
  * Displays the dashboard of the current user.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class UserDashboardInterfaceController extends SceneController implements Initializable {
 
+    /**
+     * Button to return back to the homepage.
+     */
     @FXML
     private Button homeButton;
 
+    /**
+     * A label that displays the current balance of the user.
+     */
     @FXML
     private Label currentBalance;
 
@@ -133,8 +142,10 @@ public class UserDashboardInterfaceController extends SceneController implements
     }
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * method to initalize the balance label.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

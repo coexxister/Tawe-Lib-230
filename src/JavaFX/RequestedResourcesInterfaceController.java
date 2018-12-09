@@ -22,8 +22,8 @@ public class RequestedResourcesInterfaceController extends SceneController imple
     private ScrollPane scrollPane;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 /**
- * Interface controller for the list all subscene of the staff interface
+ * Interface controller for the list all subscene of the staff interface.
  *
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
@@ -33,17 +33,17 @@ public class ListAllController extends SceneController implements Initializable 
     private Resource resourceList[] = getResourceManager().getResourceList();
 
     /**
-     * Initialises the paginated list of resources
+     * Initialises the paginated list of resources.
      *
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     public void initialize(URL location, ResourceBundle resources) {
         resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
     }
 
     /**
-     * Generates a list of pages as a horizontal box in the interface
+     * Generates a list of pages as a horizontal box in the interface.
      *
      * @param pageIndex ?
      * @return box

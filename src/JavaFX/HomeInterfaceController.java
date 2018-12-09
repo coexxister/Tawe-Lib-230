@@ -115,7 +115,7 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Changes the text of the button to logout to say "Home"
+     * Changes the text of the button to logout to say "Home".
      *
      * @param logoutButton the button to logout
      */

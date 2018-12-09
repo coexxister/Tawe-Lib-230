@@ -94,7 +94,7 @@ public class ResourceController extends SceneController {
     }
 
     /**
-     * Returns from one of the ResourceInterface subscenes to the superscene
+     * Returns from one of the ResourceInterface subscenes to the superscene.
      */
     @FXML
     public void cancel() {

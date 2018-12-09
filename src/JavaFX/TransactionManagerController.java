@@ -18,21 +18,33 @@ import java.util.ResourceBundle;
 
 /**
  * Handles transactions for paying fines and updating balance.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class TransactionManagerController extends SceneController implements Initializable {
 
+    /**
+     * The background pane for the scene.
+     */
     @FXML
     private BorderPane borderPane;
-
+    /**
+     * The textfield to change the balance of the user of the transaction.
+     */
     @FXML
     private TextField balanceChangeText;
-
+    /**
+     * label for the current balance of the user.
+     */
     @FXML
     Label currentBalance;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * intialiszes the connection to the resources.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     public void initialize(URL location, ResourceBundle resources) {
 
