@@ -1,6 +1,5 @@
 package JavaFX;
 
-import Core.Copy;
 import Core.Resource;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,7 +7,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.Pagination;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
