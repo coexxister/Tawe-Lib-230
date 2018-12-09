@@ -85,7 +85,7 @@ public class EditDVDController extends ResourceController implements Initializab
         if (!title.getText().isEmpty() && !year.getText().isEmpty() && !thumbImage.equals(null)
                 && !director.getText().isEmpty() && !runtime.getText().isEmpty()) {
             try {
-                String[] subLang = subtitle.getText().split(", ");
+                String[] subLang = subtitle.getText().replaceAll(" ","").split(",");
                 getResourceManager().editResource(new Dvd(dvd.getResourceID(), title.getText(),
                         Integer.parseInt(year.getText()), getResourceManager().getImageID(path), director.getText(),
                         Integer.parseInt(runtime.getText()), language.getText(), subLang));

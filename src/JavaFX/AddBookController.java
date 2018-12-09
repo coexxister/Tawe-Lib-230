@@ -1,6 +1,7 @@
 package JavaFX;
 
 import Core.Book;
+import Core.Copy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
+import javax.swing.*;
 import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
@@ -25,23 +27,30 @@ import java.util.ResourceBundle;
  */
 public class AddBookController extends ResourceController implements Initializable {
 
-    private FileChooser thumbnailChooser = new FileChooser();
-    private Path selectedPath;
     private String path;
 
     @FXML
     private TextField title, author, genre, publisher, year, isbn, language, numOfCopies;
     @FXML
-    private ImageView thumbImage;
+    private ImageView thumbnail;
 
     @FXML
     public void handleCreateResourceButtonAction(ActionEvent event) {
         if (!title.getText().isEmpty() && !year.getText().isEmpty() && !author.getText().isEmpty()
                 && !publisher.getText().isEmpty()) {
             try {
-                getResourceManager().addResource(new Book(0, title.getText(),
+                Book book = new Book(0, title.getText(),
                         Integer.parseInt(year.getText()), getResourceManager().getImageID(path), author.getText(),
-                        publisher.getText(), genre.getText(), isbn.getText(), language.getText()));
+                        publisher.getText(), genre.getText(), isbn.getText(), language.getText());
+                getResourceManager().addResource(book);
+
+                int copies = Integer.parseInt(numOfCopies.getText());
+                getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(), 14,
+                        "", 0, 0), copies);
+
+                JOptionPane.showMessageDialog(null, "Resource Set.\nResource ID = "
+                        + getResourceManager().getLastAddedID(),
+                        "Resource Set", JOptionPane.INFORMATION_MESSAGE);
             } catch (SQLException e) {
                 System.out.println("Couldn't load an image.");
             }
@@ -49,16 +58,13 @@ public class AddBookController extends ResourceController implements Initializab
             System.out.println("Not enough information.");
             loadSubscene(getResourceInterface());
         }
-
-        int copies = Integer.parseInt(numOfCopies.getText());
-        //addCopies(copies);
-
         loadSubscene(getResourceInterface());
     }
 
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
-        thumbImage.setImage(new Image(setThumbnailImage(event, path)));
+        path = setThumbnailImage(event);
+        thumbnail.setImage(new Image(path));
     }
 
     @Override
