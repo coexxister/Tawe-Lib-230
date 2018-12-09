@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -54,7 +55,7 @@ public class ComputerListController extends SceneController implements Initializ
         for (int i = page; i < page + elementsPerPage; i++) {
             if(i < resourceList.length) {
 
-                HBox element = new HBox(elementsPerPage);
+                VBox element = new VBox(elementsPerPage);
                 element.setId(String.valueOf(i));
                 ImageView image = new ImageView("/Resources/laptopIcon.png");
 

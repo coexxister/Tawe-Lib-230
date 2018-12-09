@@ -11,6 +11,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -49,7 +50,7 @@ public class ListAllController extends SceneController implements Initializable 
         int page = pageIndex * (int)elementsPerPage;
         for (int i = page; i < page + elementsPerPage; i++) {
             if(i < resourceList.length) {
-                HBox element = new HBox(elementsPerPage);
+                VBox element = new VBox(elementsPerPage);
                 element.setId(String.valueOf(i));
                 ImageView image = new ImageView();
 
@@ -80,7 +81,7 @@ public class ListAllController extends SceneController implements Initializable 
                 image.setSmooth(true);
                 image.setCache(true);
 
-                Label text = new Label(resourceList[i].toString());
+                Label text = new Label(resourceList[i].getTitle());
                 text.wrapTextProperty().setValue(true);
                 Label availability = new Label();
                 availability.setDisable(true);
@@ -91,10 +92,11 @@ public class ListAllController extends SceneController implements Initializable 
                         availability = new Label("Available");
                     }
                 }
-                element.getChildren().addAll(image, text, availability);
+                element.getChildren().addAll(availability, image, text);
                 element.setAlignment(Pos.TOP_CENTER);
                 element.setSpacing(10);
                 element.setPadding(new Insets(100, 0, 0, 0));
+                element.setPrefWidth(200);
                 box.getChildren().add(element);
                 getOnMouseClicked(resourceList, element);
             }
