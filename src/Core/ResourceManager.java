@@ -1,5 +1,7 @@
 package Core;
 
+import com.sun.java.util.jar.pack.ConstantPool;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -671,6 +673,22 @@ public class ResourceManager {
                 //Clearly the database tables don't exist or database file has moved!
                 return false;
             }
+        }
+
+    }
+
+    /**
+     * Gets the resource id of the last resource added.
+     * @return The resource id.
+     * @throws SQLException Thrown if connection to database could not be established.
+     * @throws IllegalStateException Thrown if there exist no resources.
+     */
+    public int getLastAddedID() throws SQLException, IllegalStateException {
+
+        try {
+            return Integer.parseInt(dbManager.getFirstTupleByQuery("SELECT max(RID) FROM Resource")[0]);
+        } catch (IndexOutOfBoundsException i) {
+            throw new IllegalStateException("No resource data exists");
         }
 
     }
