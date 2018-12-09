@@ -67,7 +67,17 @@ public class ResourceController extends SceneController {
      */
     @FXML
     public void handleEditResourceButtonAction(ActionEvent event) {
-        loadSubscene(getResourceScene("Edit"));
+        try {
+            loadSubscene(getResourceScene("Edit"));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error in database!");
+            alert.showAndWait();
+        } catch (NullPointerException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error: please select a valid resource identifier");
+            alert.showAndWait();
+        }
     }
 
     /**
@@ -77,15 +87,7 @@ public class ResourceController extends SceneController {
      */
     @FXML
     public void handleResourceLogButtonAction(ActionEvent event) {
-        Resource addResource;
-        try {
-            setRequestResource(getResourceManager().getResource(Integer.parseInt(searchID.getText())));
-            loadSubscene(getResourceLogInterface());
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Error in Database");
-            alert.showAndWait();
-        }
+        loadSubscene(getResourceLogInterface());
     }
 
     /**
@@ -102,28 +104,26 @@ public class ResourceController extends SceneController {
      * @param action Represents the data of the button pressed.
      * @return Subscene depending on resource type.
      */
-    public String getResourceScene(String action) {
+    public String getResourceScene(String action) throws SQLException {
+
         Resource addResource;
-        try {
-            if (!searchID.getText().isEmpty()) {
-                addResource = getResourceManager().getResource(Integer.parseInt(searchID.getText()));
-                if (addResource instanceof Book) {
-                    setRequestResource(addResource);
-                    return "/View/" + action + "BookInterface.fxml";
-                }
-                if (addResource instanceof Dvd) {
-                    setRequestResource(addResource);
-                    return "/View/" + action + "DVDInterface.fxml";
-                }
-                if (addResource instanceof Computer) {
-                    setRequestResource(addResource);
-                    return "/View/" + action + "LaptopInterface.fxml";
-                }
-            } else {
-                System.out.println("Specify the Resource ID.");
+
+        if (!searchID.getText().isEmpty()) {
+            addResource = getResourceManager().getResource(Integer.parseInt(searchID.getText()));
+            if (addResource instanceof Book) {
+                setRequestResource(addResource);
+                return "/View/" + action + "BookInterface.fxml";
             }
-        } catch (SQLException e) {
-            System.out.println("Couldn't find specific resource.");
+            if (addResource instanceof Dvd) {
+                setRequestResource(addResource);
+                return "/View/" + action + "DVDInterface.fxml";
+            }
+            if (addResource instanceof Computer) {
+                setRequestResource(addResource);
+                return "/View/" + action + "LaptopInterface.fxml";
+            }
+        } else {
+            System.out.println("Specify the Resource ID.");
         }
         return null;
     }
