@@ -1,10 +1,10 @@
 package JavaFX;
 
 import Core.Computer;
-import Core.Dvd;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -97,5 +97,8 @@ public class EditLaptopController extends ResourceController implements Initiali
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         path = setThumbnailImage(event);
         thumbnailImg.setImage(new Image(path));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Thumbnail Set");
+        alert.showAndWait();
     }
 }

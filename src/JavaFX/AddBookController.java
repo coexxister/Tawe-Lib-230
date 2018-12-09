@@ -5,17 +5,13 @@ import Core.Copy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 
 import javax.swing.*;
-import java.io.File;
 import java.net.URL;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -65,6 +61,9 @@ public class AddBookController extends ResourceController implements Initializab
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         path = setThumbnailImage(event);
         thumbnail.setImage(new Image(path));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Thumbnail Set");
+        alert.showAndWait();
     }
 
     @Override
