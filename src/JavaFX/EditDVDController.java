@@ -114,6 +114,7 @@ public class EditDVDController extends ResourceController implements Initializab
      */
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
-        thumbImage.setImage(new Image(setThumbnailImage(event, path)));
+        path = setThumbnailImage(event);
+        thumbImage.setImage(new Image(path));
     }
 }

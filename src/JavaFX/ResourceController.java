@@ -128,13 +128,13 @@ public class ResourceController extends SceneController {
         return null;
     }
 
-    public String setThumbnailImage(ActionEvent event, String path) {
+    public String setThumbnailImage(ActionEvent event){
         thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
         Node node = (Node) event.getSource();
         File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
         selectedPath = Paths.get(file.getAbsolutePath());
 
-        path = selectedPath.toString();
+        String path = selectedPath.toString();
         path = path.replace("\\", "/");
         final int LENGTH_OF_SRC = 3;
         path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
