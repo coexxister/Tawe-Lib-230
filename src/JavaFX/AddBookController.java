@@ -58,16 +58,7 @@ public class AddBookController extends ResourceController implements Initializab
 
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
-        thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
-        Node node = (Node) event.getSource();
-        File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
-        selectedPath = Paths.get(file.getAbsolutePath());
-
-        path = selectedPath.toString();
-        path = path.replace("\\", "/");
-        final int LENGTH_OF_SRC = 3;
-        path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
-        thumbImage.setImage(new Image(path));
+        thumbImage.setImage(new Image(setThumbnailImage(event, path)));
     }
 
     @Override

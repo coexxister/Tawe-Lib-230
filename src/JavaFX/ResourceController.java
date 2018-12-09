@@ -6,23 +6,21 @@ import Core.Dvd;
 import Core.Resource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 /**
  * Interface for resource management.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class ResourceController extends SceneController {
 
@@ -34,50 +32,55 @@ public class ResourceController extends SceneController {
 
     /**
      * Loads subscene to Add Book.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
-    public void handleAddBookButtonAction(ActionEvent event){
-        loadSubscene("/View/AddBookInterface.fxml");
+    public void handleAddBookButtonAction(ActionEvent event) {
+        loadSubscene(getAddBookInterface());
     }
 
     /**
      * Loads subscene to Add DVD.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
-    public void handleAddDVDButtonAction(ActionEvent event){
-        loadSubscene("/View/AddDVDInterface.fxml");
+    public void handleAddDVDButtonAction(ActionEvent event) {
+        loadSubscene(getAddDvdInterface());
     }
 
     /**
      * Loads subscene to Add Computer.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
-    public void handleAddComputerButtonAction(ActionEvent event){
-        loadSubscene("/View/AddLaptopInterface.fxml");
+    public void handleAddComputerButtonAction(ActionEvent event) {
+        loadSubscene(getAddLaptopInterface());
     }
 
     /**
      * Loads subscene to Edit a resource.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
-    public void handleEditResourceButtonAction(ActionEvent event){
+    public void handleEditResourceButtonAction(ActionEvent event) {
         loadSubscene(getResourceScene("Edit"));
     }
 
     /**
      * Loads subscene to display log for specified resource.
+     *
      * @param event Represents the data of the button pressed.
      */
     @FXML
-    public void handleResourceLogButtonAction(ActionEvent event){
+    public void handleResourceLogButtonAction(ActionEvent event) {
         Resource addResource[] = new Resource[1];
         try {
             setRequestResource(getResourceManager().getResource(Integer.parseInt(searchID.getText())));
-            loadSubscene("/View/ResourceLogInterface.fxml");
+            loadSubscene(getResourceLogInterface());
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setContentText("Error in Database");
@@ -90,28 +93,29 @@ public class ResourceController extends SceneController {
      */
     @FXML
     public void cancel() {
-        loadSubscene("/View/ResourceInterface.fxml");
+        loadSubscene(getResourceInterface());
     }
 
     /**
      * Displays the Add Resource subscene depending on the resource type.
+     *
      * @param action Represents the data of the button pressed.
      * @return Subscene depending on resource type.
      */
-    public String getResourceScene(String action){
+    public String getResourceScene(String action) {
         Resource addResource[] = new Resource[1];
         try {
-            if(!searchID.getText().isEmpty()) {
+            if (!searchID.getText().isEmpty()) {
                 addResource[0] = getResourceManager().getResource(Integer.parseInt(searchID.getText()));
-                if(addResource[0] instanceof Book){
+                if (addResource[0] instanceof Book) {
                     setRequestResource(addResource[0]);
                     return "/View/" + action + "BookInterface.fxml";
                 }
-                if(addResource[0] instanceof Dvd){
+                if (addResource[0] instanceof Dvd) {
                     setRequestResource(addResource[0]);
                     return "/View/" + action + "DVDInterface.fxml";
                 }
-                if(addResource[0] instanceof Computer){
+                if (addResource[0] instanceof Computer) {
                     setRequestResource(addResource[0]);
                     return "/View/" + action + "LaptopInterface.fxml";
                 }
@@ -124,7 +128,7 @@ public class ResourceController extends SceneController {
         return null;
     }
 
-    public String setThumbnailImage(ActionEvent event, String path){
+    public String setThumbnailImage(ActionEvent event, String path) {
         thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
         Node node = (Node) event.getSource();
         File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());

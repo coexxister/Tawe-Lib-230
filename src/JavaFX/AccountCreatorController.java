@@ -5,15 +5,12 @@ import Core.Staff;
 import Core.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
 /**
  * Interface controller for the account creator interface

@@ -34,6 +34,11 @@ public class SceneController {
     private static final String POPULAR_LISTING = "/View/PopularListing.fxml";
     private static final String STAFF_INTERFACE = "/View/StaffInterface.fxml";
     private static final String RESOURCE_INTERFACE = "/View/ResourceInterface.fxml";
+    private static final String ADD_BOOK_INTERFACE = "/View/AddBookInterface.fxml";
+    private static final String ADD_DVD_INTERFACE = "/View/AddDVDInterface.fxml";
+    private static final String ADD_LAPTOP_INTERFACE = "/View/AddLaptopInterface.fxml";
+    private static final String RESOURCE_LOG_INTERFACE = "/View/ResourceLogInterface.fxml";
+
     private static final String ACCOUNTS_SEARCH_INTERFACE = "/View/AccountSearchInterface.fxml";
     private static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountCreatorInterface.fxml";
     private static final String ACCOUNT_EDITOR_INTERFACE = "/View/AccountEditorInterface.fxml";
@@ -233,6 +238,41 @@ public class SceneController {
     }
 
     /**
+     * Getter for add book interface FXML path
+     *
+     * @return ADD_BOOK_INTERFACE the FXML path
+     */
+    public static String getAddBookInterface() {
+        return ADD_BOOK_INTERFACE;
+    }
+
+    /**
+     * Getter for add DVD interface FXML path
+     *
+     * @return ADD_DVD_INTERFACE the FXML path
+     */
+    public static String getAddDvdInterface() {
+        return ADD_DVD_INTERFACE;
+    }
+
+    /**
+     * Getter for add laptop interface FXML path
+     *
+     * @return ADD_LAPTOP_INTERFACE the FXML path
+     */
+    public static String getAddLaptopInterface() {
+        return ADD_LAPTOP_INTERFACE;
+    }
+
+    /**
+     * Getter for resource log interface FXML path
+     * @return RESOURCE_LOG_INTERFACE the FXML path
+     */
+    public static String getResourceLogInterface() {
+        return RESOURCE_LOG_INTERFACE;
+    }
+
+    /**
      * Handles the action of clicking a button to change scenes
      *
      * @param event the event triggered by clicking the button
@@ -344,7 +384,7 @@ public class SceneController {
      * @param resourceList List of resources.
      * @param element      Searched resource.
      */
-    public void getOnMouseClicked(Resource[] resourceList, VBox element){
+    public void getOnMouseClicked(Resource[] resourceList, VBox element) {
         element.getStylesheets().add("/Resources/CoreStyle.css");
         element.getStyleClass().add("UniversalButton");
         element.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
