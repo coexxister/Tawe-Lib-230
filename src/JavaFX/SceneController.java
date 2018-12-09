@@ -3,14 +3,18 @@ package JavaFX;
 import Core.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -312,6 +316,21 @@ public class SceneController {
         } catch (IOException e) {
             System.out.println("Couldn't load specified subscene.");
         }
+    }
+
+    public void consentPopUp(ActionEvent event){
+        Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(((Node)event.getSource()).getScene().getWindow());
+        BorderPane dialogPane = new BorderPane();
+        dialogPane.setCenter(new Label("Consent"));
+        HBox buttonPane = new HBox();
+        buttonPane.setAlignment(Pos.CENTER);
+        buttonPane.setSpacing(20);
+        dialogPane.setBottom(buttonPane);
+        Scene dialogScene = new Scene(dialogPane, 500, 500);
+        dialog.setScene(dialogScene);
+        dialog.show();
     }
 
     /**
