@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -23,6 +24,9 @@ import java.util.ResourceBundle;
 public class AddBookController extends ResourceController implements Initializable {
 
     private String path;
+
+    @FXML
+    private ChoiceBox loanDuration;
 
     @FXML
     private TextField title;
@@ -54,7 +58,7 @@ public class AddBookController extends ResourceController implements Initializab
                 getResourceManager().addResource(book);
 
                 int copies = Integer.parseInt(numOfCopies.getText());
-                getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(), 14,
+                getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(), (int)loanDuration.getValue(),
                         "", 0, 0), copies);
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -87,6 +91,7 @@ public class AddBookController extends ResourceController implements Initializab
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        loanDuration.getItems().addAll(1, 7, 14, 28);
+        loanDuration.setValue(14);
     }
 }
