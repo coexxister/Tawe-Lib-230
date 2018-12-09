@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.Pagination;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -95,5 +97,41 @@ public class ListAllController extends SceneController implements Initializable 
         }
         box.setAlignment(Pos.CENTER);
         return box;
+    }
+
+    @FXML
+    public void handleSortByBookButtonAction(){
+        try {
+            resourceList = getResourceManager().searchResources("TID", "1");
+            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Couldn't set type as book.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void handleSortByDVDButtonAction(){
+        try {
+            resourceList = getResourceManager().searchResources("TID", "2");
+            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Couldn't set type as DVD.");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    public void handleSortByComputerButtonAction(){
+        try {
+            resourceList = getResourceManager().searchResources("TID", "3");
+            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setContentText("Couldn't set type as Computer.");
+            alert.showAndWait();
+        }
     }
 }
