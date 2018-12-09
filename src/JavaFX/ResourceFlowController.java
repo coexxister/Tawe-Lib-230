@@ -16,6 +16,8 @@ import java.util.ResourceBundle;
 
 /**
  * Handles user specific operations regarding resources.
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class ResourceFlowController extends SceneController implements Initializable {
 
@@ -31,8 +33,8 @@ public class ResourceFlowController extends SceneController implements Initializ
     private int selectedCopyID = -1;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -61,7 +63,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     /**
      * Displays Transaction Manager subscene.
      *
-     * @param event
+     * @param event the event of clicking the button.
      */
     @FXML
     private void handleTransactionAction(ActionEvent event) {
@@ -71,7 +73,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     /**
      * Displays Loan History subscene.
      *
-     * @param event
+     * @param event the event of clicking the loan history option.
      */
     @FXML
     private void handleViewLoanHistoryAction(ActionEvent event) {
@@ -81,7 +83,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     /**
      * Displays Items Due subscene.
      *
-     * @param event
+     * @param event the event triggered by clicking the due items button.
      */
     @FXML
     private void handleDueItemsAction(ActionEvent event) {
@@ -91,7 +93,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     /**
      * Displays Reserve History subscene.
      *
-     * @param event
+     * @param event the event triggered by selecting the reserved resources option.
      */
     @FXML
     private void handleReservedResourcesAction(ActionEvent event) {
@@ -101,7 +103,7 @@ public class ResourceFlowController extends SceneController implements Initializ
     /**
      * Displays Account Editor subscene.
      *
-     * @param event
+     * @param event the event triggered by clicking the button.
      */
     @FXML
     private void handleEditAccountAction(ActionEvent event) {

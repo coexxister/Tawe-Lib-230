@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 
 /**
  * Lists all overdue copies.
+ *
  * @author Noah Lenagan
  * @version 1.0
  */
@@ -29,6 +30,7 @@ public class ListAllOverdueCopiesController extends SceneController implements I
     private BorderPane borderPane;
 
     /**
+     * Handles retrieving overdue copies.
      *
      * @param location The location used to resolve relative paths for the root object.
      * @param resources The resources used to localize the root object.

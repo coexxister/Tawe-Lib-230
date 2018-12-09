@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Interface controller for the main staff interface
+ * Interface controller for the main staff interface.
  *
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
@@ -24,9 +24,10 @@ public class StaffInterfaceController extends SceneController implements Initial
     private Label usernameDisplay;
 
     /**
-     * Handles the action of clicking the button to return to the home interface
+     * Handles the action of clicking the button to return to the home interface.
      *
-     * @param event the event triggered by clicking the button
+     * @param event the event triggered by clicking the button.
+     *
      */
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) {
@@ -38,9 +39,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     }
 
     /**
-     * Handles the action of clicking the button to change to the resources interface
+     * Handles the action of clicking the button to change to the resources interface.
      *
-     * @param event the event triggered by clicking the button
+     * @param event the event triggered by clicking the button.
      */
     @FXML
     protected void handleResourcesButtonAction(ActionEvent event) {
@@ -49,9 +50,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     }
 
     /**
-     * Handles the action of clicking the button to change to the accounts interface
+     * Handles the action of clicking the button to change to the accounts interface.
      *
-     * @param event the event triggered by clicking the button
+     * @param event the event triggered by clicking the button.
      */
     @FXML
     protected void handleAccountsButtonAction(ActionEvent event) {
@@ -60,9 +61,9 @@ public class StaffInterfaceController extends SceneController implements Initial
     }
 
     /**
-     * Handles the action of clicking the button to change to the account creator interface
+     * Handles the action of clicking the button to change to the account creator interface.
      *
-     * @param event the event triggered by clicking the button
+     * @param event the event triggered by clicking the button.
      */
     @FXML
     protected void handleAccountCreatorButtonAction(ActionEvent event) {
@@ -71,22 +72,32 @@ public class StaffInterfaceController extends SceneController implements Initial
     }
 
     /**
-     * Initialises the label in the interface to display the first name of the user based on the account currently logged in
+     * Initialises the label in the interface to display the first name of the user based on the account currently logged in.
      *
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(SceneController.USER_ID).getFirstName());
     }
 
+    /**
+     * displays the copies requested.
+     *
+     * @param event the event triggered when the corresponding button is clicked.
+     */
     @FXML
     public void handleCopiesAction(ActionEvent event) {
         loadSubscene(SceneController.getCopyLogInterface());
         changeLogoutToHome(logoutButton);
     }
 
+    /**
+     * Handles displaying the overdue copies.
+     *
+     * @param event the event triggered when the corresponding option is clicked.
+     */
     @FXML
     public void handleAllOverdueCopies(ActionEvent event) {
         loadSubscene(SceneController.getListOverDueCopies());

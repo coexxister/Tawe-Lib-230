@@ -16,6 +16,12 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ *  Handles the retrieval of sources for users.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
 public class RequestResourceByUserController extends SceneController implements Initializable {
     @FXML
     private ImageView resourceImg;
@@ -26,6 +32,9 @@ public class RequestResourceByUserController extends SceneController implements 
     @FXML
     private GridPane descriptionPane;
 
+    /**
+     * Handles the requesting of a resource for the button.
+     */
     @FXML
     public void handleRequestResourceButtonAction() {
         try {
@@ -45,8 +54,8 @@ public class RequestResourceByUserController extends SceneController implements 
     }
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -60,6 +69,9 @@ public class RequestResourceByUserController extends SceneController implements 
         setResourceDesc();
     }
 
+    /**
+     * Handles the setting of a resource's description.
+     */
     public void setResourceDesc() {
         int rowCounter = 0;
         if (getRequestResource() instanceof Book) {

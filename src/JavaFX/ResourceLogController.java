@@ -12,6 +12,12 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ *  Responsible for handling the logs of each resource.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
+ */
 public class ResourceLogController extends SceneController implements Initializable {
 
     @FXML
@@ -32,8 +38,10 @@ public class ResourceLogController extends SceneController implements Initializa
     private ToggleGroup radioGroup;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * initilizes the connection to the resources.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,6 +54,11 @@ public class ResourceLogController extends SceneController implements Initializa
 
     }
 
+    /**
+     *  handles the searching of a resource copy.
+     *
+     * @param event , the event of clicking button or option selected.
+     */
     @FXML
     private void handleSearchAction(ActionEvent event) {
 
@@ -81,6 +94,12 @@ public class ResourceLogController extends SceneController implements Initializa
 
     }
 
+    /**
+     * handles the listing of the copies specified.
+     *
+     * @param resourceID the unique ID of the resource.
+     *
+     */
     private void listAllCopies(int resourceID) {
 
         //the copies to list
@@ -106,6 +125,11 @@ public class ResourceLogController extends SceneController implements Initializa
 
     }
 
+    /**
+     * Handles the loan history option for listing.
+     *
+     * @param resourceID the unique ID of the resource.
+     */
     private void listloanHistoryRadio(int resourceID) {
 
         //the copies to list
@@ -133,6 +157,11 @@ public class ResourceLogController extends SceneController implements Initializa
 
     }
 
+    /**
+     * Handles the option for listing overdue copies.
+     *
+     * @param resourceID the unique ID of the resource.
+     */
     private void listOverdueCopies(int resourceID) {
 
         //the copies to list

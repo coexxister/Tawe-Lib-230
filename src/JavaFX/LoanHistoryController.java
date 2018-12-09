@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 
 /**
  * Lists all loaned items to date for the specific user.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class LoanHistoryController extends SceneController implements Initializable {
 
@@ -21,8 +24,10 @@ public class LoanHistoryController extends SceneController implements Initializa
     private ScrollPane scrollPane;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * handles retrieving resources and their loan history.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

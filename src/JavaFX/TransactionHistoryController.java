@@ -22,9 +22,6 @@ import javafx.geometry.Insets;
  */
 public class TransactionHistoryController extends SceneController implements Initializable {
 
-    /**
-     * The scroll pane which lists transactions.
-     */
     @FXML
     private ScrollPane scrollPane;
 

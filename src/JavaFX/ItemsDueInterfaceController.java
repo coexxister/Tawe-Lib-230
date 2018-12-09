@@ -17,15 +17,19 @@ import java.util.ResourceBundle;
 
 /**
  * Lists all items currently due.
+ *
+ * @author Noah Lenagan
+ * @version 1.0
  */
 public class ItemsDueInterfaceController extends SceneController implements Initializable {
 
     @FXML
     private ScrollPane scrollPane;
 
-    /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+    /** handles retrieving items due.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {

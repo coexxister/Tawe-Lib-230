@@ -74,198 +74,198 @@ public class SceneController {
     private static ResourceFlowManager rfm = new ResourceFlowManager(db, am, rm, USER_ID);
 
     /**
-     * Getter for main interface FXML path
+     * Getter for main interface FXML path.
      *
-     * @return MAIN_INTERFACE the FXML path
+     * @return MAIN_INTERFACE the FXML path.
      */
     public static String getMainInterface() {
         return MAIN_INTERFACE;
     }
 
     /**
-     * Getter for home interface FXML path
+     * Getter for home interface FXML path.
      *
-     * @return HOME_INTERFACE the FXML path
+     * @return HOME_INTERFACE the FXML path.
      */
     public static String getHomeInterface() {
         return HOME_INTERFACE;
     }
 
     /**
-     * Getter for user dashboard interface FXML path
+     * Getter for user dashboard interface FXML path.
      *
-     * @return USER_DASHBOARD_INTERFACE the FXML path
+     * @return USER_DASHBOARD_INTERFACE the FXML path.
      */
     public static String getUserDashboardInterface() {
         return USER_DASHBOARD_INTERFACE;
     }
 
     /**
-     * Getter for popular listing interface FXML path
+     * Getter for popular listing interface FXML path.
      *
-     * @return POPULAR_LISTING the FXML path
+     * @return POPULAR_LISTING the FXML path.
      */
     public static String getPopularListing() {
         return POPULAR_LISTING;
     }
 
     /**
-     * Getter for staff listing interface FXML path
+     * Getter for staff listing interface FXML path.
      *
-     * @return STAFF_INTERFACE the FXML path
+     * @return STAFF_INTERFACE the FXML path.
      */
     public static String getStaffInterface() {
         return STAFF_INTERFACE;
     }
 
     /**
-     * Getter for resource interface FXML path
+     * Getter for resource interface FXML path.
      *
-     * @return RESOURCE_INTERFACE the FXML path
+     * @return RESOURCE_INTERFACE the FXML path.
      */
     public static String getResourceInterface() {
         return RESOURCE_INTERFACE;
     }
 
     /**
-     * Getter for accounts search interface FXML path
+     * Getter for accounts search interface FXML path.
      *
-     * @return ACCOUNTS_SEARCH_INTERFACE the FXML path
+     * @return ACCOUNTS_SEARCH_INTERFACE the FXML path.
      */
     public static String getAccountsSearchInterface() {
         return ACCOUNTS_SEARCH_INTERFACE;
     }
 
     /**
-     * Getter for account creator interface FXML path
+     * Getter for account creator interface FXML path.
      *
-     * @return ACCOUNT_CREATOR_INTERFACE the FXML path
+     * @return ACCOUNT_CREATOR_INTERFACE the FXML path.
      */
     public static String getAccountCreatorInterface() {
         return ACCOUNT_CREATOR_INTERFACE;
     }
 
     /**
-     * Getter for account editor interface FXML path
+     * Getter for account editor interface FXML path.
      *
-     * @return ACCOUNT_EDITOR_INTERFACE the FXML path
+     * @return ACCOUNT_EDITOR_INTERFACE the FXML path.
      */
     public static String getAccountEditorInterface() {
         return ACCOUNT_EDITOR_INTERFACE;
     }
 
     /**
-     * Getter for avatar change interface FXML path
+     * Getter for avatar change interface FXML path.
      *
-     * @return AVATAR_CHANGE_INTERFACE the FXML path
+     * @return AVATAR_CHANGE_INTERFACE the FXML path.
      */
     public static String getAvatarChangeInterface() {
         return AVATAR_CHANGE_INTERFACE;
     }
 
     /**
-     * Getter for drawing interface FXML path
+     * Getter for drawing interface FXML path.
      *
-     * @return DRAWING_INTERFACE the FXML path
+     * @return DRAWING_INTERFACE the FXML path.
      */
     public static String getDrawingInterface() {
         return DRAWING_INTERFACE;
     }
 
     /**
-     * Getter for transaction history interface FXML path
+     * Getter for transaction history interface FXML path.
      *
-     * @return TRANSACTION_HISTORY_INTERFACE the FXML path
+     * @return TRANSACTION_HISTORY_INTERFACE the FXML path.
      */
     public static String getTransactionHistoryInterface() {
         return TRANSACTION_HISTORY_INTERFACE;
     }
 
     /**
-     * Getter for loan history interface FXML path
+     * Getter for loan history interface FXML path.
      *
-     * @return LOAN_HISTORY_INTERFACE the FXML path
+     * @return LOAN_HISTORY_INTERFACE the FXML path.
      */
     public static String getLoanHistoryController() {
         return LOAN_HISTORY_CONTROLLER;
     }
 
     /**
-     * Getter for reserve history interface FXML path
+     * Getter for reserve history interface FXML path.
      *
-     * @return RESERVE_HISTORY_INTERFACE the FXML path
+     * @return RESERVE_HISTORY_INTERFACE the FXML path.
      */
     public static String getReserveHistoryController() {
         return RESERVE_HISTORY_CONTROLLER;
     }
 
     /**
-     * Getter for items due interface FXML path
+     * Getter for items due interface FXML path.
      *
-     * @return ITEMS_DUE_INTERFACE the FXML path
+     * @return ITEMS_DUE_INTERFACE the FXML path.
      */
     public static String getItemsDue() {
         return ITEMS_DUE;
     }
 
     /**
-     * Getter for requested resource interface FXML path
+     * Getter for requested resource interface FXML path.
      *
-     * @return REQUESTED_RESOURCE the FXML path
+     * @return REQUESTED_RESOURCE the FXML path.
      */
     public static String getRequestedResource() {
         return REQUESTED_RESOURCE;
     }
 
     /**
-     * Getter for resource flow interface FXML path
+     * Getter for resource flow interface FXML path.
      *
-     * @return RESOURCE_FLOW_INTERFACE the FXML path
+     * @return RESOURCE_FLOW_INTERFACE the FXML path.
      */
     public static String getResourceFlowInterface() {
         return RESOURCE_FLOW_INTERFACE;
     }
 
     /**
-     * Getter for transaction manager interface FXML path
+     * Getter for transaction manager interface FXML path.
      *
-     * @return TRANSACTION_MANAGER_INTERFACE the FXML path
+     * @return TRANSACTION_MANAGER_INTERFACE the FXML path.
      */
     public static String getTransactionManagerInterface() {
         return TRANSACTION_MANAGER_INTERFACE;
     }
 
     /**
-     * Getter for copy log interface FXML path
+     * Getter for copy log interface FXML path.
      *
-     * @return COPY_LOG_INTERFACE the FXML path
+     * @return COPY_LOG_INTERFACE the FXML path.
      */
     public static String getCopyLogInterface() {
         return COPY_LOG_INTERFACE;
     }
 
     /**
-     * Getter for add book interface FXML path
+     * Getter for add book interface FXML path.
      *
-     * @return ADD_BOOK_INTERFACE the FXML path
+     * @return ADD_BOOK_INTERFACE the FXML path.
      */
     public static String getAddBookInterface() {
         return ADD_BOOK_INTERFACE;
     }
 
     /**
-     * Getter for add DVD interface FXML path
+     * Getter for add DVD interface FXML path.
      *
-     * @return ADD_DVD_INTERFACE the FXML path
+     * @return ADD_DVD_INTERFACE the FXML path.
      */
     public static String getAddDvdInterface() {
         return ADD_DVD_INTERFACE;
     }
 
     /**
-     * Getter for add laptop interface FXML path
+     * Getter for add laptop interface FXML path.
      *
-     * @return ADD_LAPTOP_INTERFACE the FXML path
+     * @return ADD_LAPTOP_INTERFACE the FXML path.
      */
     public static String getAddLaptopInterface() {
         return ADD_LAPTOP_INTERFACE;

@@ -11,6 +11,9 @@ import java.util.ResourceBundle;
 
 /**
  * Displays most popular resources currently.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class PopularListingController extends SceneController implements Initializable {
 
@@ -18,8 +21,10 @@ public class PopularListingController extends SceneController implements Initial
     private PieChart popularPie;
 
     /**
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
+     * retrieves the resources specified as popular.
+     *
+     * @param location  The location used to resolve relative paths for the root object.
+     * @param resources The resources used to localize the root object.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
