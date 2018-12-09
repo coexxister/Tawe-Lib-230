@@ -70,11 +70,18 @@ public class EditLaptopController extends ResourceController implements Initiali
                 getResourceManager().editResource(new Computer(computer.getResourceID(), title.getText(),
                         Integer.parseInt(year.getText()), getResourceManager().getImageID(path), manufacturer.getText(),
                         model.getText(), os.getText()));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Changes Saved Successfully!");
+                alert.showAndWait();
             } catch (SQLException e) {
-                System.out.println("Couldn't load an image.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Couldn't load an image.");
+                alert.showAndWait();
             }
         } else {
-            System.out.println("Not enough information.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Not enough information.");
+            alert.showAndWait();
         }
     }
 
