@@ -233,6 +233,4 @@ public class ResourceFlowController extends SceneController implements Initializ
         }
     }
 
-
-
 }
