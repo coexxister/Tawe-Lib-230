@@ -39,14 +39,19 @@ public class AddDVDController extends ResourceController implements Initializabl
                 getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(), 14,
                         "", 0, 0), copies);
 
-                JOptionPane.showMessageDialog(null, "Resource Set.\nResource ID = "
-                                + getResourceManager().getLastAddedID(),
-                        "Resource Set", JOptionPane.INFORMATION_MESSAGE);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Resource Created Successfully!\nResource ID = \"\n" +
+                        + getResourceManager().getLastAddedID());
+                alert.showAndWait();
             } catch (SQLException e) {
-                System.out.println("Couldn't load an image.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Couldn't load an image.");
+                alert.showAndWait();
             }
         } else {
-            System.out.println("Not enough information.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Not enough information.");
+            alert.showAndWait();
             loadSubscene(getResourceInterface());
         }
         loadSubscene(getResourceInterface());

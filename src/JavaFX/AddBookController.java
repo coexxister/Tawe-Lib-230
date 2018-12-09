@@ -1,16 +1,17 @@
 package JavaFX;
 
 import Core.Book;
+import Core.Copy;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 
+import javax.swing.*;
 import java.net.URL;
-import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
@@ -22,40 +23,52 @@ import java.util.ResourceBundle;
  */
 public class AddBookController extends ResourceController implements Initializable {
 
-    private FileChooser thumbnailChooser = new FileChooser();
-    private Path selectedPath;
     private String path;
 
     @FXML
     private TextField title, author, genre, publisher, year, isbn, language, numOfCopies;
     @FXML
-    private ImageView thumbImage;
+    private ImageView thumbnail;
 
     @FXML
     public void handleCreateResourceButtonAction(ActionEvent event) {
         if (!title.getText().isEmpty() && !year.getText().isEmpty() && !author.getText().isEmpty()
                 && !publisher.getText().isEmpty()) {
             try {
-                getResourceManager().addResource(new Book(0, title.getText(),
+                Book book = new Book(0, title.getText(),
                         Integer.parseInt(year.getText()), getResourceManager().getImageID(path), author.getText(),
-                        publisher.getText(), genre.getText(), isbn.getText(), language.getText()));
+                        publisher.getText(), genre.getText(), isbn.getText(), language.getText());
+                getResourceManager().addResource(book);
+
+                int copies = Integer.parseInt(numOfCopies.getText());
+                getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(), 14,
+                        "", 0, 0), copies);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Resource Created Successfully!\nResource ID = \"\n" +
+                        + getResourceManager().getLastAddedID());
+                alert.showAndWait();
             } catch (SQLException e) {
-                System.out.println("Couldn't load an image.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Couldn't load an image");
+                alert.showAndWait();
             }
         } else {
-            System.out.println("Not enough information.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Not enough information.");
+            alert.showAndWait();
             loadSubscene(getResourceInterface());
         }
-
-        int copies = Integer.parseInt(numOfCopies.getText());
-        //addCopies(copies);
-
         loadSubscene(getResourceInterface());
     }
 
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
-        thumbImage.setImage(new Image(setThumbnailImage(event)));
+        path = setThumbnailImage(event);
+        thumbnail.setImage(new Image(path));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Thumbnail Set");
+        alert.showAndWait();
     }
 
     @Override

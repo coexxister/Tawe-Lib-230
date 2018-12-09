@@ -30,6 +30,8 @@ public class rfmManager {
         rmManager.addBulkCopies(copy);
         //System.out.print(acManager.isExist(2));
 
+        System.out.println(rfm.showOverdueCopies().length);
+
     }
 
 }

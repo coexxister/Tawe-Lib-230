@@ -82,11 +82,18 @@ public class EditBookController extends ResourceController implements Initializa
                 getResourceManager().editResource(new Book(book.getResourceID(), title.getText(),
                         Integer.parseInt(year.getText()), getResourceManager().getImageID(path), author.getText(),
                         publisher.getText(), genre.getText(), isbn.getText(), language.getText()));
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText("Changes Saved Successfully!");
+                alert.showAndWait();
             } catch (SQLException e) {
-                System.out.println("Couldn't load an image.");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Couldn't load an image.");
+                alert.showAndWait();
             }
         } else {
-            System.out.println("Not enough information.");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Not enough information.");
+            alert.showAndWait();
         }
     }
 

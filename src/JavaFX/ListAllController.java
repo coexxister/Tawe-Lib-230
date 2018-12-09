@@ -83,15 +83,7 @@ public class ListAllController extends SceneController implements Initializable 
 
                 Label text = new Label(resourceList[i].getTitle());
                 text.wrapTextProperty().setValue(true);
-                Label availability = new Label();
-                availability.setDisable(true);
-                Copy[] copies = getResourceManager().getCopies(resourceList[i].getResourceID());
-                for(Copy copy: copies){
-                    if(copy.getStateID() == 0) {
-                        availability.setDisable(false);
-                        availability = new Label("Available");
-                    }
-                }
+                Label availability = new Label(getAvailableNumberOfCopies(resourceList[i]));
                 element.getChildren().addAll(availability, image, text);
                 element.setAlignment(Pos.TOP_CENTER);
                 element.setSpacing(10);
