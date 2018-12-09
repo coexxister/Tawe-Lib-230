@@ -1,5 +1,6 @@
 package Core;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -105,6 +106,32 @@ public class DateManager {
 
         cal.add(Calendar.DAY_OF_MONTH, days);
         return (df.format(cal.getTime()));
+    }
+
+    /**
+     * Method to calculate the due date from a specified date.
+     *
+     * @param currentDate The current date to calculate the dueDate from.
+     * @param days The number days forward from the current date.
+     * @return The new date. As yyyy-MM-dd
+     */
+    public static String returnDueDate(String currentDate, int days) {
+
+        try {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = new Date();
+
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(df.parse(currentDate));
+
+            cal.add(Calendar.DAY_OF_MONTH, days);
+            return (df.format(cal.getTime()));
+
+        } catch (ParseException p) {
+            //If returning due date failed. We return an empty string.
+            return "";
+        }
+
     }
 
 }

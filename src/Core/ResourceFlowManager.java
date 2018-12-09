@@ -1,6 +1,9 @@
 package Core;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -621,9 +624,40 @@ public class ResourceFlowManager {
                             dbManager.getFirstTupleByQuery("SELECT Loan_Duration FROM Copy " +
                                     "WHERE CPID = " + Integer.toString(currentCopy))[0]);
 
+                    //Get the amount of days relative to the due date.
+                    Copy copy = rmManager.getCopy(currentCopy);
+                    LoanEvent[] loanEvents = getBorrowHistoryByCopy(currentCopy);
+
+                    //find the loan date for the resource.
+                    /*String borrowDate = dbManager.getFirstTupleByQuery("SELECT Date_Out FROM BorrowHistory" +
+                            " WHERE CID = " + Integer.toString(currentCopy) + " AND Date_Returned IS NULL")[0];*/
+
+                    String borrowDate = dbManager.getFirstTupleByQuery("SELECT Date_Out FROM BorrowHistory" +
+                            " WHERE CID = " + Integer.toString(currentCopy) + " AND Date_Returned IS NULL")[0];
+
+                    String estimateDue = "";
+
+                    //add loan duration to borrow date
+                    estimateDue = DateManager.returnDueDate(borrowDate, loanDuration);
+
+                    //get the offset
+                    int offset = Math.toIntExact(ChronoUnit.DAYS.between(LocalDate.parse(DateManager.returnCurrentDate()), LocalDate.parse(estimateDue)));
+
+                    //get the due date
+                    String dueDate;
+
+                    //if user has borrowed for longer than loan duration, then set due date for next day
+                    //otherwise set due date for the loan duration + borrow date.
+                    if (offset <= 0) {
+                        dueDate = DateManager.returnDueDate(1);
+                    } else {
+                        dueDate = DateManager.returnDueDate(offset);
+                    }
+
+
                     //set due date
                     dbManager.editTuple("Copy", new String[]{"Due_Date"},
-                            new String[]{encase(DateManager.returnDueDate(loanDuration))},
+                            new String[]{encase(dueDate)},
                             "CPID", Integer.toString(currentCopy));
 
                     isFound = true;

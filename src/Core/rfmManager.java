@@ -1,6 +1,9 @@
 package Core;
 
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class rfmManager {
 
@@ -30,7 +33,33 @@ public class rfmManager {
         rmManager.addBulkCopies(copy);
         //System.out.print(acManager.isExist(2));
 
-        System.out.println(rfm.showOverdueCopies().length);
+        /*String borrowDate = dbManager.getFirstTupleByQuery("SELECT Date_Out FROM BorrowHistory" +
+                " WHERE CID = " + Integer.toString(55) + " AND Date_Returned IS NULL")[0];
+
+        int loanDuration = 14;
+
+        String estimateDue = "";
+
+        try {
+            //add loan duration to borrow date
+            estimateDue = DateManager.returnDueDate(borrowDate, loanDuration);
+        } catch (ParseException p) {
+            estimateDue = "WEll shit";
+        }
+
+        //get the offset
+        int offset = Math.toIntExact(ChronoUnit.DAYS.between(LocalDate.parse(DateManager.returnCurrentDate()), LocalDate.parse(estimateDue)));
+
+        //get the due date
+        String dueDate;
+
+        //if user has borrowed for longer than loan duration, then set due date for next day
+        //otherwise set due date for the loan duration + borrow date.
+        if (offset <= 0) {
+            dueDate = DateManager.returnDueDate(1);
+        } else {
+            dueDate = DateManager.returnDueDate(offset);
+        }*/
 
     }
 
