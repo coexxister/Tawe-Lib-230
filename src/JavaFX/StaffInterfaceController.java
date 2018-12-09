@@ -74,6 +74,6 @@ public class StaffInterfaceController extends SceneController implements Initial
 
     @FXML
     public void handleCopiesAction(ActionEvent event) {
-        loadSubscene(SceneController.COPY_LOG_INTERFACE);
+        loadSubscene(SceneController.getCopyLogInterface());
     }
 }

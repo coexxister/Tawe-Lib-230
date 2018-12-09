@@ -19,6 +19,9 @@ import java.util.ResourceBundle;
 
 /**
  * Handles editing data of an existing book in the database.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class EditBookController extends ResourceController implements Initializable {
 
@@ -28,61 +31,40 @@ public class EditBookController extends ResourceController implements Initializa
     private String path;
 
     @FXML
-    private TextField title;
-
-    @FXML
-    private TextField author;
-
-    @FXML
-    private TextField genre;
-
-    @FXML
-    private TextField publisher;
-
-    @FXML
-    private TextField year;
-
-    @FXML
-    private TextField isbn;
-
-    @FXML
-    private TextField language;
-
-    @FXML
-    private TextField numOfCopies;
+    private TextField title, author, genre, publisher, year, isbn, language, numOfCopies;
 
     @FXML
     private ImageView thumbImage;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        if(!book.getTitle().isEmpty()){
+        if (!book.getTitle().isEmpty()) {
             title.setText(book.getTitle());
         }
-        if(!book.getAuthor().isEmpty()){
+        if (!book.getAuthor().isEmpty()) {
             author.setText(book.getAuthor());
         }
-        if(!book.getGenre().isEmpty()){
+        if (!book.getGenre().isEmpty()) {
             genre.setText(book.getGenre());
         }
-        if(!book.getPublisher().isEmpty()){
+        if (!book.getPublisher().isEmpty()) {
             publisher.setText(book.getPublisher());
         }
-        if(book.getYear() != 0){
+        if (book.getYear() != 0) {
             year.setText(String.valueOf(book.getYear()));
         }
-        if(!book.getIsbn().isEmpty()){
+        if (!book.getIsbn().isEmpty()) {
             isbn.setText(book.getIsbn());
         }
-        if(!book.getLang().isEmpty()){
+        if (!book.getLang().isEmpty()) {
             language.setText(book.getLang());
         }
-        if(getResourceManager().getCopies(book.getResourceID()).length != 0){
+        if (getResourceManager().getCopies(book.getResourceID()).length != 0) {
             numOfCopies.setText(String.valueOf(getResourceManager().getCopies(book.getResourceID()).length));
         } else {
             numOfCopies.setText("0");
         }
-        if(book.getThumbImage() != 0){
+        if (book.getThumbImage() != 0) {
             try {
                 thumbImage.setImage(new Image(getResourceManager().getImageURL(book.getThumbImage())));
             } catch (SQLException e) {
@@ -98,8 +80,8 @@ public class EditBookController extends ResourceController implements Initializa
      * @param event Represents the data of the button pressed.
      */
     @FXML
-    public void handleSaveButtonAction(ActionEvent event){
-        if(!title.getText().isEmpty() && !year.getText().isEmpty() && !thumbImage.equals(null)
+    public void handleSaveButtonAction(ActionEvent event) {
+        if (!title.getText().isEmpty() && !year.getText().isEmpty() && !thumbImage.equals(null)
                 && !author.getText().isEmpty() && !publisher.getText().isEmpty()) {
             try {
                 getResourceManager().editResource(new Book(book.getResourceID(), title.getText(),
@@ -119,7 +101,7 @@ public class EditBookController extends ResourceController implements Initializa
      * @param event Represents the data of the button pressed.
      */
     @FXML
-    public void handleCancelButtonAction(ActionEvent event){
+    public void handleCancelButtonAction(ActionEvent event) {
         cancel();
     }
 
@@ -132,11 +114,11 @@ public class EditBookController extends ResourceController implements Initializa
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));
         Node node = (Node) event.getSource();
-        File file  = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
+        File file = thumbnailChooser.showOpenDialog(node.getScene().getWindow());
         selectedPath = Paths.get(file.getAbsolutePath());
 
         path = selectedPath.toString();
-        path = path.replace("\\","/");
+        path = path.replace("\\", "/");
         final int LENGTH_OF_SRC = 3;
         path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
         thumbImage.setImage(new Image(path));

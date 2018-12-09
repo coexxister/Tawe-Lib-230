@@ -18,6 +18,7 @@ import static javafx.fxml.FXMLLoader.load;
 
 /**
  * Superclass of FXML controllers for the user interface.
+ *
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
@@ -26,25 +27,25 @@ public class SceneController {
     public static int USER_ID;
 
     //File paths for interface FXML files
-    public static final String MAIN_INTERFACE = "/View/LoginInterface.fxml";
-    public static final String HOME_INTERFACE = "/View/HomeInterface.fxml";
-    public static final String USER_DASHBOARD_INTERFACE = "/View/UserDashboardInterface.fxml";
-    public static final String POPULAR_LISTING = "/View/PopularListing.fxml";
-    public static final String STAFF_INTERFACE = "/View/StaffInterface.fxml";
-    public static final String RESOURCE_INTERFACE = "/View/ResourceInterface.fxml";
-    public static final String ACCOUNTS_SEARCH_INTERFACE = "/View/AccountSearchInterface.fxml";
-    public static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountCreatorInterface.fxml";
-    public static final String ACCOUNT_EDITOR_INTERFACE = "/View/AccountEditorInterface.fxml";
-    public static final String AVATAR_CHANGE_INTERFACE ="/View/ProfileImageSelector.fxml";
-    public static final String DRAWING_INTERFACE = "/View/DrawingEnvironment.fxml";
-    public static final String TRANSACTION_HISTORY_INTERFACE = "/View/TransactionHistoryPage.fxml";
-    public static final String LOAN_HISTORY_CONTROLLER = "/View/LoanHistory.fxml";
-    public static final String RESERVE_HISTORY_CONTROLLER = "/View/ReservedInterface.fxml";
-    public static final String ITEMS_DUE = "/View/ItemsDueInterface.fxml";
-    public static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
-    public static final String RESOURCE_FLOW_INTERFACE = "/View/ResourceFlowInterface.fxml";
-    public static final String TRANSACTION_MANAGER_INTERFACE = "/View/TransactionManager.fxml";
-    public static final String COPY_LOG_INTERFACE = "/View/CopyLogInterface.fxml";
+    private static final String MAIN_INTERFACE = "/View/LoginInterface.fxml";
+    private static final String HOME_INTERFACE = "/View/HomeInterface.fxml";
+    private static final String USER_DASHBOARD_INTERFACE = "/View/UserDashboardInterface.fxml";
+    private static final String POPULAR_LISTING = "/View/PopularListing.fxml";
+    private static final String STAFF_INTERFACE = "/View/StaffInterface.fxml";
+    private static final String RESOURCE_INTERFACE = "/View/ResourceInterface.fxml";
+    private static final String ACCOUNTS_SEARCH_INTERFACE = "/View/AccountSearchInterface.fxml";
+    private static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountCreatorInterface.fxml";
+    private static final String ACCOUNT_EDITOR_INTERFACE = "/View/AccountEditorInterface.fxml";
+    private static final String AVATAR_CHANGE_INTERFACE = "/View/ProfileImageSelector.fxml";
+    private static final String DRAWING_INTERFACE = "/View/DrawingEnvironment.fxml";
+    private static final String TRANSACTION_HISTORY_INTERFACE = "/View/TransactionHistoryPage.fxml";
+    private static final String LOAN_HISTORY_CONTROLLER = "/View/LoanHistory.fxml";
+    private static final String RESERVE_HISTORY_CONTROLLER = "/View/ReservedInterface.fxml";
+    private static final String ITEMS_DUE = "/View/ItemsDueInterface.fxml";
+    private static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
+    private static final String RESOURCE_FLOW_INTERFACE = "/View/ResourceFlowInterface.fxml";
+    private static final String TRANSACTION_MANAGER_INTERFACE = "/View/TransactionManager.fxml";
+    private static final String COPY_LOG_INTERFACE = "/View/CopyLogInterface.fxml";
 
     //Query for requesting resource and the requested resource.
     private static String sqlQuery;
@@ -61,6 +62,7 @@ public class SceneController {
 
     /**
      * Getter for main interface FXML path
+     *
      * @return MAIN_INTERFACE the FXML path
      */
     public static String getMainInterface() {
@@ -69,6 +71,7 @@ public class SceneController {
 
     /**
      * Getter for home interface FXML path
+     *
      * @return HOME_INTERFACE the FXML path
      */
     public static String getHomeInterface() {
@@ -77,6 +80,7 @@ public class SceneController {
 
     /**
      * Getter for user dashboard interface FXML path
+     *
      * @return USER_DASHBOARD_INTERFACE the FXML path
      */
     public static String getUserDashboardInterface() {
@@ -85,6 +89,7 @@ public class SceneController {
 
     /**
      * Getter for popular listing interface FXML path
+     *
      * @return POPULAR_LISTING the FXML path
      */
     public static String getPopularListing() {
@@ -93,6 +98,7 @@ public class SceneController {
 
     /**
      * Getter for staff listing interface FXML path
+     *
      * @return STAFF_INTERFACE the FXML path
      */
     public static String getStaffInterface() {
@@ -101,6 +107,7 @@ public class SceneController {
 
     /**
      * Getter for resource interface FXML path
+     *
      * @return RESOURCE_INTERFACE the FXML path
      */
     public static String getResourceInterface() {
@@ -109,6 +116,7 @@ public class SceneController {
 
     /**
      * Getter for accounts search interface FXML path
+     *
      * @return ACCOUNTS_SEARCH_INTERFACE the FXML path
      */
     public static String getAccountsSearchInterface() {
@@ -117,6 +125,7 @@ public class SceneController {
 
     /**
      * Getter for account creator interface FXML path
+     *
      * @return ACCOUNT_CREATOR_INTERFACE the FXML path
      */
     public static String getAccountCreatorInterface() {
@@ -125,6 +134,7 @@ public class SceneController {
 
     /**
      * Getter for account editor interface FXML path
+     *
      * @return ACCOUNT_EDITOR_INTERFACE the FXML path
      */
     public static String getAccountEditorInterface() {
@@ -133,6 +143,7 @@ public class SceneController {
 
     /**
      * Getter for avatar change interface FXML path
+     *
      * @return AVATAR_CHANGE_INTERFACE the FXML path
      */
     public static String getAvatarChangeInterface() {
@@ -141,6 +152,7 @@ public class SceneController {
 
     /**
      * Getter for drawing interface FXML path
+     *
      * @return DRAWING_INTERFACE the FXML path
      */
     public static String getDrawingInterface() {
@@ -149,6 +161,7 @@ public class SceneController {
 
     /**
      * Getter for transaction history interface FXML path
+     *
      * @return TRANSACTION_HISTORY_INTERFACE the FXML path
      */
     public static String getTransactionHistoryInterface() {
@@ -157,6 +170,7 @@ public class SceneController {
 
     /**
      * Getter for loan history interface FXML path
+     *
      * @return LOAN_HISTORY_INTERFACE the FXML path
      */
     public static String getLoanHistoryController() {
@@ -165,6 +179,7 @@ public class SceneController {
 
     /**
      * Getter for reserve history interface FXML path
+     *
      * @return RESERVE_HISTORY_INTERFACE the FXML path
      */
     public static String getReserveHistoryController() {
@@ -173,6 +188,7 @@ public class SceneController {
 
     /**
      * Getter for items due interface FXML path
+     *
      * @return ITEMS_DUE_INTERFACE the FXML path
      */
     public static String getItemsDue() {
@@ -181,6 +197,7 @@ public class SceneController {
 
     /**
      * Getter for requested resource interface FXML path
+     *
      * @return REQUESTED_RESOURCE the FXML path
      */
     public static String getRequestedResource() {
@@ -189,6 +206,7 @@ public class SceneController {
 
     /**
      * Getter for resource flow interface FXML path
+     *
      * @return RESOURCE_FLOW_INTERFACE the FXML path
      */
     public static String getResourceFlowInterface() {
@@ -197,6 +215,7 @@ public class SceneController {
 
     /**
      * Getter for transaction manager interface FXML path
+     *
      * @return TRANSACTION_MANAGER_INTERFACE the FXML path
      */
     public static String getTransactionManagerInterface() {
@@ -204,9 +223,19 @@ public class SceneController {
     }
 
     /**
+     * Getter for copy log interface FXML path
+     *
+     * @return COPY_LOG_INTERFACE the FXML path
+     */
+    public static String getCopyLogInterface() {
+        return COPY_LOG_INTERFACE;
+    }
+
+    /**
      * Handles the action of clicking a button to change scenes
+     *
      * @param event the event triggered by clicking the button
-     * @param fxml the fxml file corresponding to the new scene
+     * @param fxml  the fxml file corresponding to the new scene
      */
     public void handleSceneChangeButtonAction(ActionEvent event, String fxml) {
         Parent root = null;
@@ -218,16 +247,17 @@ public class SceneController {
         Scene userScreen = new Scene(root);
         mainPane = (BorderPane) root;
 
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(userScreen);
         window.show();
     }
 
     /**
      * Sets the mainPane to a different scene
+     *
      * @param fxml the fxml file corresponding to the new scene
      */
-    public void loadSubscene(String fxml){
+    public void loadSubscene(String fxml) {
         try {
             mainPane.setCenter(load(getClass().getResource(fxml)));
         } catch (IOException e) {
@@ -237,17 +267,19 @@ public class SceneController {
 
     /**
      * Changes the text of the button to logout to say "Home"
+     *
      * @param logoutButton the button to logout
      */
     @FXML
-    public void changeLogoutToHome(Button logoutButton){
+    public void changeLogoutToHome(Button logoutButton) {
         logoutButton.setText("Home");
     }
 
     /**
      * Getter for resource database
+     *
      * @return db
-     * 			the database
+     * the database
      */
     public static DatabaseManager getDatabase() {
         return db;
@@ -255,13 +287,17 @@ public class SceneController {
 
     /**
      * Getter for account manager
+     *
      * @return am
-     * 			the account manager
+     * the account manager
      */
-    public static AccountManager getAccountManager() { return am; }
+    public static AccountManager getAccountManager() {
+        return am;
+    }
 
     /**
      * Gets the resource flow manager instance.
+     *
      * @return The resource flow manager instance.
      */
     public static ResourceFlowManager getResourceFlowManager() {
@@ -270,20 +306,24 @@ public class SceneController {
 
     /**
      * Getter for resource manager
+     *
      * @return rm the resource manager
      */
-    public static ResourceManager getResourceManager(){ return rm;}
+    public static ResourceManager getResourceManager() {
+        return rm;
+    }
 
-    public String getSqlQuery(){
+    public String getSqlQuery() {
         return sqlQuery;
     }
 
-    public void setSqlQuery(String newSqlQuery){
+    public void setSqlQuery(String newSqlQuery) {
         sqlQuery = newSqlQuery;
     }
 
     /**
      * Getter for searched resource.
+     *
      * @return Requested resource.
      */
     public Resource getRequestResource() {
@@ -292,6 +332,7 @@ public class SceneController {
 
     /**
      * Setter of searched resource.
+     *
      * @param newRequestResource Searched resource.
      */
     public void setRequestResource(Resource newRequestResource) {
@@ -300,10 +341,11 @@ public class SceneController {
 
     /**
      * Method for calling the setter of searched resource when it is clicked on the screen and move to the requesting scene.
+     *
      * @param resourceList List of resources.
-     * @param element Searched resource.
+     * @param element      Searched resource.
      */
-    public void getOnMouseClicked(Resource[] resourceList, HBox element){
+    public void getOnMouseClicked(Resource[] resourceList, HBox element) {
         element.getStylesheets().add("/Resources/CoreStyle.css");
         element.getStyleClass().add("UniversalButton");
         element.addEventFilter(MouseEvent.MOUSE_PRESSED, event -> {
