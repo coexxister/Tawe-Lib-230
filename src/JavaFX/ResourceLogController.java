@@ -18,6 +18,7 @@ public class ResourceLogController extends SceneController {
     @FXML
     ScrollPane scrollPane = new ScrollPane();
 
+
     public void setReservedListing() {
 
         FlowPane root = new FlowPane();

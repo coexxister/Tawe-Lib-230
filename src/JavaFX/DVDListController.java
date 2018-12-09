@@ -16,6 +16,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Creates a list of DVDs from a query.
+ */
 public class DVDListController extends SceneController implements Initializable {
 
     @FXML
@@ -26,7 +29,7 @@ public class DVDListController extends SceneController implements Initializable 
 
 
     /**
-     * Initialises
+     * Initialises Computer List.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -40,6 +43,12 @@ public class DVDListController extends SceneController implements Initializable 
         dvdView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
     }
 
+    /**
+     * Creates pages using pagination to fill the list with DVDs.
+     *
+     * @param pageIndex Index of the page
+     * @return box An HBox containing pagination with the list of DVDs.
+     */
     public HBox createPage(int pageIndex) {
         HBox box = new HBox(elementsPerPage);
         dvdView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));

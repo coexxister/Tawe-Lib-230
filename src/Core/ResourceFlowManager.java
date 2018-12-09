@@ -92,8 +92,8 @@ public class ResourceFlowManager {
     }
 
     /**
-     * Gets the borrow history of a copy.
-     * @param resourceID The copy id of the copy.
+     * Gets the borrow history of a resource
+     * @param resourceID The resource id of the resource.
      * @return The array of loan events.
      */
     public LoanEvent[] getBorrowHistoryByResource(int resourceID) {

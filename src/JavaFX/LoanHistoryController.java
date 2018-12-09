@@ -14,6 +14,9 @@ import javafx.scene.layout.VBox;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Lists all loaned items to date for the specific user.
+ */
 public class LoanHistoryController extends SceneController implements Initializable {
 
     @FXML

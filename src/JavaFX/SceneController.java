@@ -44,6 +44,7 @@ public class SceneController {
     public static final String REQUESTED_RESOURCE = "/View/RequestedResourcesInterface.fxml";
     public static final String RESOURCE_FLOW_INTERFACE = "/View/ResourceFlowInterface.fxml";
     public static final String TRANSACTION_MANAGER_INTERFACE = "/View/TransactionManager.fxml";
+    public static final String COPY_LOG_INTERFACE = "/View/CopyLogInterface.fxml";
 
     //Query for requesting resource and the requested resource.
     private static String sqlQuery;

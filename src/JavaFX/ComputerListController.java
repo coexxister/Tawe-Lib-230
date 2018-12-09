@@ -14,6 +14,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Creates a list of computers from a query.
+ */
 public class ComputerListController extends SceneController implements Initializable {
 
     @FXML
@@ -24,7 +27,7 @@ public class ComputerListController extends SceneController implements Initializ
 
 
     /**
-     * Initialises
+     * Initialises Computer List.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -38,6 +41,12 @@ public class ComputerListController extends SceneController implements Initializ
         computerView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
     }
 
+    /**
+     * Creates pages using pagination to fill the list with computers.
+     *
+     * @param pageIndex Index of the page
+     * @return box An HBox containing pagination with the list of computers.
+     */
     public HBox createPage(int pageIndex) {
         HBox box = new HBox(elementsPerPage);
         computerView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
@@ -56,7 +65,8 @@ public class ComputerListController extends SceneController implements Initializ
 
                 Label text = new Label(resourceList[i].toString());
                 text.wrapTextProperty().setValue(true);
-                Label numberOfCopies = new Label (String.valueOf(getResourceManager().getCopies(resourceList[i].getResourceID()).length));
+                Label numberOfCopies = new Label (String.valueOf(getResourceManager().
+                        getCopies(resourceList[i].getResourceID()).length));
                 element.getChildren().addAll(image, text, numberOfCopies);
                 element.setAlignment(Pos.TOP_CENTER);
                 element.setSpacing(10);

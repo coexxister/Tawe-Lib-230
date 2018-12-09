@@ -22,11 +22,19 @@ public class DVDSearchMenuController extends SceneController{
     @FXML
     private TextField dvdYear;
 
+    /**
+     * Executes a search from information specified.
+     * @param event Represents the data of the button pressed.
+     * @throws IOException Thrown if input is null.
+     */
     public void handleDVDSearchButton(ActionEvent event) throws IOException {
         getInput();
         loadSubscene("/View/DVDList.fxml");
     }
 
+    /**
+     * Reads the input for the query from text fields.
+     */
     public void getInput(){
         ArrayList<String> column = new ArrayList<>();
         ArrayList<String> input = new ArrayList<>();

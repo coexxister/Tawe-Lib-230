@@ -17,7 +17,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-
+/**
+ * Handles transactions for paying fines and updating balance.
+ */
 public class TransactionManagerController extends SceneController implements Initializable {
 
     @FXML
@@ -39,6 +41,11 @@ public class TransactionManagerController extends SceneController implements Ini
 
     }
 
+    /**
+     * Performs calculations and sets the balance for the user.
+     * @param event Represents the data of the button pressed.
+     * @throws IOException Thrown when input is null.
+     */
     @FXML
     private void handleSubmitAction(ActionEvent event) throws IOException {
 

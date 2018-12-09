@@ -1,12 +1,5 @@
 package JavaFX;
 
-/**
- * Drawing Environment Class
- *
- * @author Marcos Pallikaras
- * @version 1.1
- */
-
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -39,13 +32,19 @@ import javafx.util.Pair;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
+/**
+ * Creates a Drawing Environment
+ *
+ * @author Marcos Pallikaras
+ * @version 1.1
+ */
 public class DrawingEnvironment implements Initializable{
-    // The ID of the current user
+    //The ID of the current user
     private static final String USER_ID = String.valueOf(SceneController.USER_ID);
-    // The number of avatars in user's folder
+    //The number of avatars in user's folder
     private static long aNo = 0;
 
-    // Holds the coordinates for drawing straight lines
+    //Holds the coordinates for drawing straight lines
     private Pair<Double, Double> initialTouch;
 
     @FXML
@@ -80,7 +79,6 @@ public class DrawingEnvironment implements Initializable{
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
         graphicsContext.setFill(Color.WHITE);
         graphicsContext.fillRect(0,0, canvas.getWidth(), canvas.getHeight());
-//        root.setCenter(canvas);
         BufferedImage image = new BufferedImage((int)canvas.getWidth(), (int)canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
 
         final ToggleGroup group = new ToggleGroup();
@@ -88,9 +86,9 @@ public class DrawingEnvironment implements Initializable{
         straightButton.setToggleGroup(group);
         eraserButton.setToggleGroup(group);
 
-        // Creates event handlers for mouse actions on canvas
+        //Creates event handlers for mouse actions on canvas
 
-        // Begins the path for particle drawing on MOUSE_PRESSED
+        //Begins the path for particle drawing on MOUSE_PRESSED
         EventHandler beginFreeDraw = new EventHandler<MouseEvent>() {
 
             @Override
@@ -106,7 +104,7 @@ public class DrawingEnvironment implements Initializable{
             }
         };
 
-        // Continues the path for particle drawing on MOUSE_DRAGGED
+        //Continues the path for particle drawing on MOUSE_DRAGGED
         EventHandler dragFreeDraw = new EventHandler<MouseEvent>() {
 
             @Override
@@ -119,7 +117,7 @@ public class DrawingEnvironment implements Initializable{
             }
         };
 
-        // Begins the path for erasing on MOUSE_PRESSED
+        //Begins the path for erasing on MOUSE_PRESSED
         EventHandler beginErase = new EventHandler<MouseEvent>() {
 
             @Override
@@ -133,7 +131,7 @@ public class DrawingEnvironment implements Initializable{
             }
         };
 
-        // Continues the path for erasing on MOUSE_DRAGGED
+        //Continues the path for erasing on MOUSE_DRAGGED
         EventHandler dragErase = new EventHandler<MouseEvent>() {
 
             @Override
@@ -145,7 +143,7 @@ public class DrawingEnvironment implements Initializable{
             }
         };
 
-        // Closes the current path on MOUSE_RELEASE
+        //Closes the current path on MOUSE_RELEASE
         EventHandler closePath = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -153,7 +151,7 @@ public class DrawingEnvironment implements Initializable{
             }
         };
 
-        // Begins the creation of a straight line by holding initial X,Y coordinates
+        //Begins the creation of a straight line by holding initial X,Y coordinates
         EventHandler startStraightLine = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -166,7 +164,7 @@ public class DrawingEnvironment implements Initializable{
             }
         };
 
-        // Draws straight line after taking final X,Y coordinates
+        //Draws straight line after taking final X,Y coordinates
         EventHandler endStraightLine = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -177,7 +175,7 @@ public class DrawingEnvironment implements Initializable{
 
         };
 
-        // Allow the buttons to grow in width to fill the panel space
+        //Allow the buttons to grow in width to fill the panel space
         colorPicker.setMaxWidth(Double.MAX_VALUE);
         penButton.setMaxWidth(Double.MAX_VALUE);
         straightButton.setMaxWidth(Double.MAX_VALUE);
@@ -185,7 +183,7 @@ public class DrawingEnvironment implements Initializable{
         clearButton.setMaxWidth(Double.MAX_VALUE);
         saveButton.setMaxWidth(Double.MAX_VALUE);
 
-        // Set events for Pen button and remove other events
+        //Set events for Pen button and remove other events
         penButton.setOnAction(e -> {
             canvas.removeEventHandler(MouseEvent.MOUSE_PRESSED, beginErase);
             canvas.removeEventHandler(MouseEvent.MOUSE_DRAGGED, dragErase);
@@ -197,7 +195,7 @@ public class DrawingEnvironment implements Initializable{
             canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, closePath);
         });
 
-        // Set events for Straight Line button and remove other events
+        //Set events for Straight Line button and remove other events
         straightButton.setOnAction(e -> {
             canvas.removeEventHandler(MouseEvent.MOUSE_PRESSED, beginFreeDraw);
             canvas.removeEventHandler(MouseEvent.MOUSE_DRAGGED, dragFreeDraw);
@@ -209,7 +207,7 @@ public class DrawingEnvironment implements Initializable{
             canvas.addEventHandler(MouseEvent.MOUSE_RELEASED, endStraightLine);
         });
 
-        // Set events for Eraser button and remove other events
+        //Set events for Eraser button and remove other events
         eraserButton.setOnAction(e -> {
             canvas.removeEventHandler(MouseEvent.MOUSE_PRESSED, beginFreeDraw);
             canvas.removeEventHandler(MouseEvent.MOUSE_DRAGGED, dragFreeDraw);
@@ -222,7 +220,7 @@ public class DrawingEnvironment implements Initializable{
 
         });
 
-        // Set action for Clear Canvas button
+        //Set action for Clear Canvas button
         clearButton.setOnAction(e -> {
             graphicsContext.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
             graphicsContext.setFill(Color.WHITE);
@@ -230,22 +228,22 @@ public class DrawingEnvironment implements Initializable{
             graphicsContext.setFillRule(null);
         });
 
-        // Set action for Save Avatar button
-        // Saves canvas in png format under the user's avatar folder and notifies with pop up
+        //Set action for Save Avatar button
+        //Saves canvas in png format under the user's avatar folder and notifies with pop up
         saveButton.setOnAction(new EventHandler<ActionEvent>() {
 
             @Override
             public void handle(ActionEvent t) {
-                // Gets path of CustomAvatars folder
+                //Gets path of CustomAvatars folder
                 Path pathCA = Paths.get( "src/CustomAvatars");
-                // Counts number of avatars in user's folder and adds 1 to aNo
+                //Counts number of avatars in user's folder and adds 1 to aNo
                 try (Stream<Path> files = Files.list(Paths.get(String.valueOf(pathCA)))) {
                     aNo = files.count() + 1;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                // Creates file under user's avatar folder with the name USER_ID(aNo).png
+                //Creates file under user's avatar folder with the name USER_ID(aNo).png
                 File file = new File(pathCA + "\\" + USER_ID + "(" + aNo + ").png");
 
                 if (file != null) {

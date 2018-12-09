@@ -47,7 +47,8 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Handles the action of clicking the button to logout of the user interface, or to return to the home scene if another scene is displayed .
+     * Handles the action of clicking the button to logout of the user interface,
+     * or to return to the home scene if another scene is displayed.
      * @param event the event triggered by clicking the button.
      */
     @FXML
@@ -139,14 +140,16 @@ public class HomeInterfaceController extends SceneController implements Initiali
     }
 
     /**
-     * Initialises the label in the interface to display the first name of the user based on the account currently logged in.
+     * Initialises the label in the interface to display the
+     * first name of the user based on the account currently logged in.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameDisplay.setText("Welcome, " + getAccountManager().
                 getAccount(SceneController.USER_ID).getFirstName());
         try {
-            avatarImage.setImage(new Image(getResourceManager().getImageURL(getAccountManager().getAccount(SceneController.USER_ID).getAvatarID())));
+            avatarImage.setImage(new Image(getResourceManager().
+                    getImageURL(getAccountManager().getAccount(SceneController.USER_ID).getAvatarID())));
         } catch (SQLException e) {
             avatarImage.setImage(new Image("/DefaultAvatar/Avatar1.png"));
         }

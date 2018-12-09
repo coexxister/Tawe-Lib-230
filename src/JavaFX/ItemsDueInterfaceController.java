@@ -17,6 +17,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Lists all items currently due.
+ */
 public class ItemsDueInterfaceController extends SceneController implements Initializable {
 
     @FXML

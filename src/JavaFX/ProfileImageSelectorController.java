@@ -13,6 +13,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 
+/**
+ * Allows the user to select an avatar.
+ */
 public class ProfileImageSelectorController extends SceneController {
 
     Path selectedPath;

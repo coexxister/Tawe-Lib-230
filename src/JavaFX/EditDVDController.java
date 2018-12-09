@@ -17,6 +17,9 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Handles editing data of an existing book in the database.
+ */
 public class EditDVDController extends ResourceController implements Initializable {
 
     private Dvd dvd = (Dvd) getRequestResource();
@@ -82,6 +85,12 @@ public class EditDVDController extends ResourceController implements Initializab
         }
     }
 
+    /**
+     * Saves all details set in text fields to respective variables,
+     * to change the values in the database.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleSaveButtonAction(ActionEvent event){
         if(!title.getText().isEmpty() && !year.getText().isEmpty() && !thumbImage.equals(null)
@@ -99,11 +108,21 @@ public class EditDVDController extends ResourceController implements Initializab
         }
     }
 
+    /**
+     * Cancels all changes.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleCancelButtonAction(ActionEvent event){
         cancel();
     }
 
+    /**
+     * Assigns the thumbnail selected to the specific DVD.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));

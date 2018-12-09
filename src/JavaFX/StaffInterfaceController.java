@@ -64,13 +64,16 @@ public class StaffInterfaceController extends SceneController implements Initial
         loadSubscene(SceneController.ACCOUNT_CREATOR_INTERFACE);
         changeLogoutToHome(logoutButton);
     }
-
     /**
-     * Initialises the label in the interface to display the first name of the user based on the account currently
-     * logged in
+     * Initialises the label in the interface to display the first name of the user based on the account currently logged in
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         usernameDisplay.setText("Welcome, " + getAccountManager().getAccount(SceneController.USER_ID).getFirstName());
+    }
+
+    @FXML
+    public void handleCopiesAction(ActionEvent event) {
+        loadSubscene(SceneController.COPY_LOG_INTERFACE);
     }
 }

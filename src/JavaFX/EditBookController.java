@@ -17,6 +17,9 @@ import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Handles editing data of an existing book in the database.
+ */
 public class EditBookController extends ResourceController implements Initializable {
 
     private Book book = (Book) getRequestResource();
@@ -88,6 +91,12 @@ public class EditBookController extends ResourceController implements Initializa
         }
     }
 
+    /**
+     * Saves all details set in text fields to respective variables,
+     * to change the values in the database.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleSaveButtonAction(ActionEvent event){
         if(!title.getText().isEmpty() && !year.getText().isEmpty() && !thumbImage.equals(null)
@@ -104,11 +113,21 @@ public class EditBookController extends ResourceController implements Initializa
         }
     }
 
+    /**
+     * Cancels all changes.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleCancelButtonAction(ActionEvent event){
         cancel();
     }
 
+    /**
+     * Assigns the thumbnail selected to the specific book.
+     *
+     * @param event Represents the data of the button pressed.
+     */
     @FXML
     public void handleSetThumbnailButtonAction(ActionEvent event) {
         thumbnailChooser.setInitialDirectory(new File("src/ResourceImages"));

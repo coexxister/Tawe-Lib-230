@@ -25,6 +25,9 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+/**
+ * Creates a list of books from a query.
+ */
 public class BookListController extends SceneController implements Initializable {
 
     @FXML
@@ -36,7 +39,7 @@ public class BookListController extends SceneController implements Initializable
 
 
     /**
-     * Initialises
+     * Initialises Book List.
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -50,6 +53,12 @@ public class BookListController extends SceneController implements Initializable
         bookView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
     }
 
+    /**
+     * Creates pages using pagination to fill the list with books.
+     *
+     * @param pageIndex Index of the page
+     * @return box An HBox containing pagination with the list of books.
+     */
     public HBox createPage(int pageIndex) {
         HBox box = new HBox(elementsPerPage);
         bookView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
