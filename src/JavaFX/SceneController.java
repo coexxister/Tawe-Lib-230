@@ -2,13 +2,16 @@ package JavaFX;
 
 import Core.*;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -320,17 +323,35 @@ public class SceneController {
 
     public void consentPopUp(ActionEvent event){
         Stage dialog = new Stage();
+        dialog.setTitle("User acknowledgment for data usage");
+        dialog.getIcons().add(new Image("/Icons/NightMode.png"));
         dialog.initModality(Modality.APPLICATION_MODAL);
         dialog.initOwner(((Node)event.getSource()).getScene().getWindow());
         BorderPane dialogPane = new BorderPane();
-        dialogPane.setCenter(new Label("Consent"));
+        Label consent = new Label("By creating an account, the user " +
+                "acknowledges that their information is being stored on the Tawe-Lib database.");
+        consent.setAlignment(Pos.CENTER);
+        consent.setPadding(new Insets(0,10,0,10));
+        consent.setWrapText(Boolean.TRUE);
+        dialogPane.setCenter(consent);
         HBox buttonPane = new HBox();
+        Button accept = new Button("Accept");
+        Button deny = new Button("Do not accept");
         buttonPane.setAlignment(Pos.CENTER);
         buttonPane.setSpacing(20);
+        buttonPane.setPadding(new Insets(0,0,20,0));
+        buttonPane.getChildren().setAll(accept, deny);
         dialogPane.setBottom(buttonPane);
-        Scene dialogScene = new Scene(dialogPane, 500, 500);
+        Scene dialogScene = new Scene(dialogPane, 500, 150);
         dialog.setScene(dialogScene);
         dialog.show();
+        accept.setOnAction(e ->{
+            dialog.close();
+        });
+        deny.setOnAction(e ->{
+            handleSceneChangeButtonAction(event, getStaffInterface());
+            dialog.close();
+        });
     }
 
     /**
