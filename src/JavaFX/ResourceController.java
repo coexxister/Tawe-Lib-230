@@ -60,15 +60,6 @@ public class ResourceController extends SceneController {
     }
 
     /**
-     * Loads subscene to Delete a resource.
-     * @param event Represents the data of the button pressed.
-     */
-    @FXML
-    public void handleDeleteResourceButtonAction(ActionEvent event){
-        loadSubscene(getResourceScene("Delete"));
-    }
-
-    /**
      * Loads subscene to display log for specified resource.
      * @param event Represents the data of the button pressed.
      */

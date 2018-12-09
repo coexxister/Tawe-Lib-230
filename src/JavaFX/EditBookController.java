@@ -67,6 +67,7 @@ public class EditBookController extends ResourceController implements Initializa
         if (book.getThumbImage() != 0) {
             try {
                 thumbImage.setImage(new Image(getResourceManager().getImageURL(book.getThumbImage())));
+                path = getResourceManager().getImageURL(book.getThumbImage());
             } catch (SQLException e) {
                 System.out.println("Couldn't find image.");
             }
