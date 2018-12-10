@@ -39,6 +39,8 @@ public class Transaction {
 	 * @param userID The account id of the transaction.
 	 * @param date   The data of the transaction.
 	 * @param change The money change in the transaction.
+	 * @param time   The time of the transaction.
+	 * @param tranID The ID of the transaction.
 	 */
 	public Transaction(int userID, String date, String time, float change, int tranID) {
 		this.tranID = tranID;
@@ -78,7 +80,7 @@ public class Transaction {
 	/**
 	 * Gets the time of the transaction.
 	 *
-	 * @return
+	 * @return The time of the transaction.
 	 */
 	public String getTime() {
 		return time;

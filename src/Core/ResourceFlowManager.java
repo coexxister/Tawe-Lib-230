@@ -31,11 +31,12 @@ public class ResourceFlowManager {
 	private int userID;
 
 	/**
-	 * Creates the ResourceFlowManager
+	 * Creates the ResourceFlowManager.
 	 *
 	 * @param dbManager The database manager instance.
 	 * @param acManager The account manager instance.
 	 * @param rmManager The resource manager instance.
+	 * @param userID    The ID of a user.
 	 */
 	public ResourceFlowManager(DatabaseManager dbManager, AccountManager acManager,
 							   ResourceManager rmManager, int userID) {
@@ -337,7 +338,9 @@ public class ResourceFlowManager {
 	 * Un-reserves a copy and puts it on loan for the user.
 	 *
 	 * @param copyID The copy id of the copy.
-	 * @param userID THe user id of the copy.
+	 * @param userID The user id of the copy.
+	 * @throws SQLException          When connection to database fails.
+	 * @throws IllegalStateException When copyID is not currently reserved.
 	 */
 	public void borrowFromReserve(int copyID, int userID) throws SQLException, IllegalStateException {
 

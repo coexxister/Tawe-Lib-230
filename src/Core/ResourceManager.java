@@ -282,6 +282,7 @@ public class ResourceManager {
 	 * Adds multiple copies of a resource to the database.
 	 *
 	 * @param newCopy The copy to add.
+	 * @return True if addition was successful.
 	 */
 	public boolean addBulkCopies(Copy newCopy) {
 
@@ -294,6 +295,7 @@ public class ResourceManager {
 	 *
 	 * @param newCopy The copy to add.
 	 * @param amount  The amount of copies to add.
+	 * @return True if addition was successful.
 	 */
 	public boolean addBulkCopies(Copy newCopy, int amount) {
 
@@ -399,7 +401,6 @@ public class ResourceManager {
 	 * Edits/replaces an existing book resource with the passed new book.
 	 *
 	 * @param newResource The new book with information to overwrite.
-	 * @return Returns true if the operation was a success. False if failed.
 	 */
 	public void editResource(Book newResource) {
 
@@ -437,7 +438,6 @@ public class ResourceManager {
 	 * Edits/replaces an existing dvd resource with the passed new dvd.
 	 *
 	 * @param newResource The new dvd with information to overwrite.
-	 * @return Returns true if the operation was a success. False if failed.
 	 */
 	public void editResource(Dvd newResource) {
 
@@ -484,7 +484,6 @@ public class ResourceManager {
 	 * Adds a resource image directory and returns the image id.
 	 *
 	 * @param imageURL The image directory of the image file.
-	 * @return The image id of the newly added image.
 	 * @throws SQLException Thrown if connection to database could not be established.
 	 */
 	public void addResourceImage(String imageURL) throws SQLException {
@@ -568,7 +567,6 @@ public class ResourceManager {
 	 * Edits/replaces an existing computer resource with the passed new computer.
 	 *
 	 * @param newResource The new computer with information to overwrite.
-	 * @return Returns true if the operation was a success. False if failed.
 	 */
 	public void editResource(Computer newResource) {
 
@@ -603,7 +601,6 @@ public class ResourceManager {
 	 * Adds a new book to the database.
 	 *
 	 * @param newBook The new book to add.
-	 * @return True if the operation was a success. False if failed.
 	 * @throws ResourceDuplicateException Thrown if a duplicate resource is trying to be added.
 	 */
 	public void addResource(Book newBook) throws ResourceDuplicateException {
@@ -705,7 +702,6 @@ public class ResourceManager {
 	 * Adds a new dvd to the database.
 	 *
 	 * @param newDvd The new dvd to add.
-	 * @return True if the operation was a success. False if failed.
 	 * @throws ResourceDuplicateException Thrown if a duplicate resource is trying to be added.
 	 */
 	public void addResource(Dvd newDvd) throws ResourceDuplicateException {
@@ -799,7 +795,6 @@ public class ResourceManager {
 	 * Adds a new computer to the database.
 	 *
 	 * @param newComputer The new computer to add.
-	 * @return True if the operation was a success. False if failed.
 	 * @throws ResourceDuplicateException Thrown if a duplicate resource is trying to be added.
 	 */
 	public void addResource(Computer newComputer) throws ResourceDuplicateException {

@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class AuthenticationManager {
 
 	/**
-	 * The username
+	 * The username.
 	 */
 	private final String username;
 
@@ -21,9 +21,10 @@ public class AuthenticationManager {
 	private final DatabaseManager dbManager;
 
 	/**
-	 * Constructor for the Authentication manager
+	 * Constructor for the Authentication manager.
 	 *
-	 * @param username
+	 * @param username  Username of an account.
+	 * @param dbManager The database manager.
 	 */
 	public AuthenticationManager(String username, DatabaseManager dbManager) {
 		this.username = username;

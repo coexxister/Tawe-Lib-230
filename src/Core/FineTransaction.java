@@ -1,5 +1,8 @@
 package Core;
 
+/**
+ * Represents a transaction which is a fine.
+ */
 public class FineTransaction extends Transaction {
 
 	/**
@@ -12,12 +15,17 @@ public class FineTransaction extends Transaction {
 	 */
 	private final int days;
 
+
 	/**
 	 * Creates a transaction.
 	 *
-	 * @param userID The account id of the transaction.
-	 * @param date   The data of the transaction.
-	 * @param change The money change in the transaction.
+	 * @param userID The account ID of the user with whom the transaction is created.
+	 * @param date   The date of the transaction.
+	 * @param time   The time of the transaction.
+	 * @param change The change in money from the transaction.
+	 * @param tranID The ID of the transaction.
+	 * @param copyID The copy ID of the resource being returned.
+	 * @param days   The amount of days by which copy is overdue.
 	 */
 	public FineTransaction(int userID, String date, String time, float change, int tranID, int copyID, int days) {
 		super(userID, date, time, change, tranID);

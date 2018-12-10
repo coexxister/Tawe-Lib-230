@@ -10,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -96,73 +95,73 @@ public class AccountCreatorController extends ResourceController implements Init
 	 */
 	private int avatarID = 0;
 
-    /**
-     * Adds a user or staff member to the database based on the information entered in the text fields on the interface.
-     *
-     * @param event the event triggered by clicking the button.
-     */
-    public void handleCreateUserButtonAction(ActionEvent event) throws IOException {
+	/**
+	 * Adds a user or staff member to the database based on the information entered in the text fields on the interface.
+	 *
+	 * @param event the event triggered by clicking the button.
+	 */
+	public void handleCreateUserButtonAction(ActionEvent event) {
 
-        //Boolean to check if user agreed to consent.
-        boolean isCheck = false;
+		//Boolean to check if user agreed to consent.
+		boolean isCheck = false;
 
-        //Create a popup alert with accept and do not accept button.
-        ButtonType foo = new ButtonType("Accept", ButtonBar.ButtonData.OK_DONE);
-        ButtonType bar = new ButtonType("Do not accept", ButtonBar.ButtonData.CANCEL_CLOSE);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION,
-                "By creating an account, the user " +
-                        "acknowledges that their information is being stored on the Tawe-Lib database.", foo, bar);
-        alert.setTitle("User acknowledgment for data usage");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.orElse(bar) == foo) {
-            isCheck = true;
-        }
-
-
-        //Check if user accepted consent.
-        if(isCheck) {
-            int userID = 0;
-            //if the radio button for user is selected, add the details of a user to the database.
-            if (user.isSelected()) {
-                User newAccount = new User(0, firstName.getText(), surname.getText(), phoneNumber.getText(),
-                        streetNumber.getText(), streetName.getText(), county.getText(), city.getText(), postCode.getText(),
-                        avatarID);
-			/*
-			try to set the user's avatar, add them to the database and then set their balance. If adding user to
-			 database fails, output an error.
-			 */
-			try {
-				newAccount.setAvatarID(getResourceManager().getImageID(path));
-				userID = getAccountManager().addAccount(newAccount);
-				getAccountManager().changeBalance(userID, Float.parseFloat(balance.getText()));
-			} catch (SQLException e) {
-				System.out.println("Invalid user in the database.");
-			}
-			//if the radio button for staff is selected, add the details of a user as a staff member to the database.
-		} else if (staff.isSelected()) {
-			Staff newAccount = new Staff(0, firstName.getText(), surname.getText(), phoneNumber.getText(),
-					streetNumber.getText(), streetName.getText(), county.getText(), city.getText(), postCode.getText(),
-					DateManager.returnCurrentDate(), 0, avatarID);
-			/*
-			try to set the user's avatar, add them to the database and then set their balance. If adding user to
-			 database fails, output an error.
-			 */
-			try {
-				newAccount.setAvatarID(getResourceManager().getImageID(path));
-				userID = getAccountManager().addAccount(newAccount)[0];
-				getAccountManager().changeBalance(userID, Float.parseFloat(balance.getText()));
-			} catch (SQLException e) {
-				System.out.println("Invalid user in the database.");
-			}
+		//Create a popup alert with accept and do not accept button.
+		ButtonType foo = new ButtonType("Accept", ButtonBar.ButtonData.OK_DONE);
+		ButtonType bar = new ButtonType("Do not accept", ButtonBar.ButtonData.CANCEL_CLOSE);
+		Alert alert = new Alert(Alert.AlertType.INFORMATION,
+				"By creating an account, the user " +
+						"acknowledges that their information is being stored on the Tawe-Lib database.", foo, bar);
+		alert.setTitle("User acknowledgment for data usage");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.orElse(bar) == foo) {
+			isCheck = true;
 		}
 
-            //Throw message if user is added and show UserID
-            Alert userAdd = new Alert(Alert.AlertType.INFORMATION);
-            userAdd.setContentText("User added. UserID: " + userID);
-            userAdd.showAndWait();
-            handleSceneChangeButtonAction(event, getStaffInterface());
-        }
-    }
+
+		//Check if user accepted consent.
+		if (isCheck) {
+			int userID = 0;
+			//if the radio button for user is selected, add the details of a user to the database.
+			if (user.isSelected()) {
+				User newAccount = new User(0, firstName.getText(), surname.getText(), phoneNumber.getText(),
+						streetNumber.getText(), streetName.getText(), county.getText(), city.getText(), postCode.getText(),
+						avatarID);
+			/*
+			try to set the user's avatar, add them to the database and then set their balance. If adding user to
+			 database fails, output an error.
+			 */
+				try {
+					newAccount.setAvatarID(getResourceManager().getImageID(path));
+					userID = getAccountManager().addAccount(newAccount);
+					getAccountManager().changeBalance(userID, Float.parseFloat(balance.getText()));
+				} catch (SQLException e) {
+					System.out.println("Invalid user in the database.");
+				}
+				//if the radio button for staff is selected, add the details of a user as a staff member to the database.
+			} else if (staff.isSelected()) {
+				Staff newAccount = new Staff(0, firstName.getText(), surname.getText(), phoneNumber.getText(),
+						streetNumber.getText(), streetName.getText(), county.getText(), city.getText(), postCode.getText(),
+						DateManager.returnCurrentDate(), 0, avatarID);
+			/*
+			try to set the user's avatar, add them to the database and then set their balance. If adding user to
+			 database fails, output an error.
+			 */
+				try {
+					newAccount.setAvatarID(getResourceManager().getImageID(path));
+					userID = getAccountManager().addAccount(newAccount)[0];
+					getAccountManager().changeBalance(userID, Float.parseFloat(balance.getText()));
+				} catch (SQLException e) {
+					System.out.println("Invalid user in the database.");
+				}
+			}
+
+			//Throw message if user is added and show UserID
+			Alert userAdd = new Alert(Alert.AlertType.INFORMATION);
+			userAdd.setContentText("User added. UserID: " + userID);
+			userAdd.showAndWait();
+			handleSceneChangeButtonAction(event, getStaffInterface());
+		}
+	}
 
 	/**
 	 * Sets the avatar for the user.
@@ -187,13 +186,13 @@ public class AccountCreatorController extends ResourceController implements Init
 		try to set the values of avatarID and path and the image of avatar. If getting the avatarID fails,
 		output an error.
 		*/
-        try {
-            String DEFAULT_URL = "/DefaultAvatars/Avatar1.png";
-            avatarID = getResourceManager().getImageID(DEFAULT_URL);
-            path = getResourceManager().getImageURL(avatarID);
-            avatar.setImage(new Image(getResourceManager().getImageURL(avatarID)));
-        } catch (SQLException e) {
-            System.out.println("Default avatarID is invalid.");
-        }
-    }
+		try {
+			String DEFAULT_URL = "/DefaultAvatars/Avatar1.png";
+			avatarID = getResourceManager().getImageID(DEFAULT_URL);
+			path = getResourceManager().getImageURL(avatarID);
+			avatar.setImage(new Image(getResourceManager().getImageURL(avatarID)));
+		} catch (SQLException e) {
+			System.out.println("Default avatarID is invalid.");
+		}
+	}
 }

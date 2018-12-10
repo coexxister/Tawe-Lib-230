@@ -98,6 +98,8 @@ public class ResourceController extends SceneController {
 	 * Returns the path of the add resource subscene depending on the resource type.
 	 *
 	 * @param action The Add action selected by the user.
+	 * @return Constructed FXML path for add resource subscene.
+	 * @throws SQLException When connection to database fails.
 	 */
 	public String getResourceScene(String action) throws SQLException {
 
@@ -127,7 +129,8 @@ public class ResourceController extends SceneController {
 	 * Sets the thumbnail image of a resource.
 	 *
 	 * @param event the event triggered by clicking the button.
-	 * @return the file path of the thumvnail image.
+	 * @return the file path of the thumbnail image.
+	 * @throws MalformedURLException When method creates an invalid URL.
 	 */
 	public String setThumbnailImage(ActionEvent event) throws MalformedURLException {
 		imageChooser.setInitialDirectory(new File("src/ResourceImages"));
