@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -167,7 +168,11 @@ public class EditBookController extends ResourceController implements Initializa
 	 */
 	@FXML
 	public void handleSetThumbnailButtonAction(ActionEvent event) {
-		path = setThumbnailImage(event);
+		try {
+			path = setThumbnailImage(event);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 		thumbImage.setImage(new Image(path));
 	}
 }

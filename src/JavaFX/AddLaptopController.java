@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -113,7 +114,11 @@ public class AddLaptopController extends ResourceController implements Initializ
 	 */
 	@FXML
 	public void handleSetThumbnailButtonAction(ActionEvent event) {
-		path = setThumbnailImage(event);
+		try {
+			path = setThumbnailImage(event);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 
 		try {
 			//if image doesnt exist then add image url to database

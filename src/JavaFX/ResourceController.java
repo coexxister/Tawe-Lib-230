@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
@@ -128,16 +129,16 @@ public class ResourceController extends SceneController {
 	 * @param event the event triggered by clicking the button.
 	 * @return the file path of the thumvnail image.
 	 */
-	public String setThumbnailImage(ActionEvent event) {
+	public String setThumbnailImage(ActionEvent event) throws MalformedURLException {
 		imageChooser.setInitialDirectory(new File("src/ResourceImages"));
 		Node node = (Node) event.getSource();
 		File file = imageChooser.showOpenDialog(node.getScene().getWindow());
-		Path selectedPath = Paths.get(file.getAbsolutePath());
 
-		String path = selectedPath.toString();
+		//Call setAvatar on absolute path
+		String path = file.toURI().toURL().toExternalForm();
 		path = path.replace("\\", "/");
-		final int LENGTH_OF_SRC = 3;
-		path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
+//		final int LENGTH_OF_SRC = 3;
+//		path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
 		return path;
 	}
 

@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -124,7 +125,11 @@ public class AddBookController extends ResourceController implements Initializab
 	 */
 	@FXML
 	public void handleSetThumbnailButtonAction(ActionEvent event) {
-		path = setThumbnailImage(event);
+		try {
+			path = setThumbnailImage(event);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 
 		try {
 		    //if image doesnt exist then add image url to database
@@ -134,7 +139,7 @@ public class AddBookController extends ResourceController implements Initializab
 
             }
             System.out.println(path);
-            Image image = new Image(path);
+            Image image = new Image(getResourceManager().getImageURL(getResourceManager().getImageID(path)));
             thumbnail.setImage(image);
 
         } catch (SQLException e) {

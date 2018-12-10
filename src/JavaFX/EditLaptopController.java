@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -151,7 +152,11 @@ public class EditLaptopController extends ResourceController implements Initiali
 	 */
 	@FXML
 	public void handleSetThumbnailButtonAction(ActionEvent event) {
-		path = setThumbnailImage(event);
+		try {
+			path = setThumbnailImage(event);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
 		thumbnailImg.setImage(new Image(path));
 	}
 }
