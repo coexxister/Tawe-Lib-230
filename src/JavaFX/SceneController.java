@@ -44,7 +44,9 @@ public class SceneController {
     private static final String ADD_BOOK_INTERFACE = "/View/AddBookInterface.fxml";
     private static final String ADD_DVD_INTERFACE = "/View/AddDVDInterface.fxml";
     private static final String ADD_LAPTOP_INTERFACE = "/View/AddLaptopInterface.fxml";
-    private static final String RESOURCE_LOG_INTERFACE = "/View/ResourceLogInterface.fxml";
+    private static final String BOOK_LIST_INTERFACE = "/View/BookList.fxml";
+    private static final String COMPUTER_LIST_INTERFACE = "/View/ComputerList.fxml";
+	private static final String RESOURCE_LOG_INTERFACE = "/View/ResourceLogInterface.fxml";
     private static final String ACCOUNTS_SEARCH_INTERFACE = "/View/AccountSearchInterface.fxml";
     private static final String ACCOUNT_CREATOR_INTERFACE = "/View/AccountCreatorInterface.fxml";
     private static final String ACCOUNT_EDITOR_INTERFACE = "/View/AccountEditorInterface.fxml";
@@ -287,7 +289,15 @@ public class SceneController {
         return RESOURCE_LOG_INTERFACE;
     }
 
-    /**
+	public static String getBookListInterface() {
+		return BOOK_LIST_INTERFACE;
+	}
+
+	public static String getComputerListInterface() {
+		return COMPUTER_LIST_INTERFACE;
+	}
+
+	/**
      * Handles the action of clicking a button to change scenes.
      *
      * @param event the event triggered by clicking the button.

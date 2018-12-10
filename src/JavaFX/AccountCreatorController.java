@@ -92,10 +92,6 @@ public class AccountCreatorController extends ResourceController implements Init
 	private RadioButton staff;
 
 	/**
-	 * Default file path for the user avatar.
-	 */
-	private final String DEFAULT_URL = "/DefaultAvatars/Avatar1.png";
-	/**
 	 * ID of the user's avatar.
 	 */
 	private int avatarID = 0;
@@ -167,6 +163,7 @@ public class AccountCreatorController extends ResourceController implements Init
 		output an error.
 		*/
 		try {
+			String DEFAULT_URL = "/DefaultAvatars/Avatar1.png";
 			avatarID = getResourceManager().getImageID(DEFAULT_URL);
 			path = getResourceManager().getImageURL(avatarID);
 			avatar.setImage(new Image(getResourceManager().getImageURL(avatarID)));

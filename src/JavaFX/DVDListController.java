@@ -21,11 +21,13 @@ import java.util.ResourceBundle;
  */
 public class DVDListController extends SceneController implements Initializable {
 
+	/**
+	 * paginated viewer of DVDs.
+	 */
     @FXML
     private Pagination dvdView;
 
-    private double elementsPerPage = 3;
-    private Resource resourceList[] = null;
+	private Resource[] resourceList = null;
 
 
     /**
@@ -43,7 +45,7 @@ public class DVDListController extends SceneController implements Initializable 
                 e.printStackTrace();
             }
         }
-        dvdView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+        dvdView.setPageFactory(this::createPage);
     }
 
     /**
@@ -52,8 +54,9 @@ public class DVDListController extends SceneController implements Initializable 
      * @param pageIndex Index of the page
      * @return box An HBox containing pagination with the list of DVDs.
      */
-    public HBox createPage(int pageIndex) {
-        HBox box = new HBox(elementsPerPage);
+	private HBox createPage(int pageIndex) {
+		double elementsPerPage = 3;
+		HBox box = new HBox(elementsPerPage);
         dvdView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
         int page = pageIndex * (int) elementsPerPage;
         for (int i = page; i < page + elementsPerPage; i++) {
