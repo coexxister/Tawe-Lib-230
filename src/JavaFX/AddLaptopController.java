@@ -114,7 +114,23 @@ public class AddLaptopController extends ResourceController implements Initializ
 	@FXML
 	public void handleSetThumbnailButtonAction(ActionEvent event) {
 		path = setThumbnailImage(event);
-		thumbImage.setImage(new Image(path));
+
+		try {
+			//if image doesnt exist then add image url to database
+			if (!getResourceManager().isImageExist(path)) {
+
+				getResourceManager().addResourceImage(path);
+
+			}
+			System.out.println(path);
+			Image image = new Image(path);
+			thumbImage.setImage(image);
+
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Error in Database!");
+			alert.showAndWait();
+		}
 	}
 
 	/**

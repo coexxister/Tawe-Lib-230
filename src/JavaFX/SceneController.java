@@ -355,6 +355,7 @@ public class SceneController {
         Scene dialogScene = new Scene(dialogPane, 500, 150);
         dialog.setScene(dialogScene);
         dialog.show();
+
         accept.setOnAction(e ->{
             dialog.close();
         });

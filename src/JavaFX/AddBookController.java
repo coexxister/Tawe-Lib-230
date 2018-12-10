@@ -125,7 +125,25 @@ public class AddBookController extends ResourceController implements Initializab
 	@FXML
 	public void handleSetThumbnailButtonAction(ActionEvent event) {
 		path = setThumbnailImage(event);
-		thumbnail.setImage(new Image(path));
+
+		try {
+		    //if image doesnt exist then add image url to database
+            if (!getResourceManager().isImageExist(path)) {
+
+                getResourceManager().addResourceImage(path);
+
+            }
+            System.out.println(path);
+            Image image = new Image(path);
+            thumbnail.setImage(image);
+
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("Error in Database!");
+            alert.showAndWait();
+        }
+
+
 	}
 
 	/**
