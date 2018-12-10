@@ -54,20 +54,20 @@ public class BookListController extends SceneController implements Initializable
 		bookView.setPageFactory(this::createPage);
 	}
 
-    /**
-     * Creates pages using pagination to fill the list with books.
-     *
-     * @param pageIndex Index of the page
-     * @return box An HBox containing pagination with the list of books.
-     */
+	/**
+	 * Creates pages using pagination to fill the list with books.
+	 *
+	 * @param pageIndex Index of the page
+	 * @return An HBox containing pagination with the list of books.
+	 */
 	private HBox createPage(int pageIndex) {
 		double elementsPerPage = 3;
 		HBox box = new HBox(elementsPerPage);
-        bookView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
-        int page = pageIndex * (int) elementsPerPage;
+		bookView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
+		int page = pageIndex * (int) elementsPerPage;
 		int i;
 		for (i = page; i < page + elementsPerPage; i++) {
-            if(i < resourceList.length) {
+			if (i < resourceList.length) {
 
 				VBox element = new VBox(elementsPerPage);
 				element.setId(String.valueOf(i));

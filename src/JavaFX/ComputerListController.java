@@ -58,7 +58,7 @@ public class ComputerListController extends SceneController implements Initializ
 	 * Creates pages using pagination to fill the list with computers.
 	 *
 	 * @param pageIndex Index of the page
-	 * @return box An HBox containing pagination with the list of computers.
+	 * @return An HBox containing pagination with the list of computers.
 	 */
 	private HBox createPage(int pageIndex) {
 		double elementsPerPage = 3;

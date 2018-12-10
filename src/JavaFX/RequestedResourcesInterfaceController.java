@@ -18,60 +18,65 @@ import java.util.ResourceBundle;
  */
 public class RequestedResourcesInterfaceController extends SceneController implements Initializable {
 
-    @FXML
-    private ScrollPane scrollPane;
+	/**
+	 * ScrollPane to display requested resources.
+	 */
+	@FXML
+	private ScrollPane scrollPane;
 
-    /**
-     * @param location  The location used to resolve relative paths for the root object.
-     * @param resources The resources used to localize the root object.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+	/**
+	 * Initialises the ScrollPane with the resources.
+	 *
+	 * @param location  The location used to resolve relative paths for the root object.
+	 * @param resources The resources used to localize the root object.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 
-        scrollPane.setFitToHeight(true);
-        scrollPane.setFitToWidth(true);
+		scrollPane.setFitToHeight(true);
+		scrollPane.setFitToWidth(true);
 
-        VBox root = new VBox();
+		VBox root = new VBox();
 
-        Resource[] requestedResources = getResourceFlowManager().
-                getRequestedResources(SceneController.USER_ID);
+		Resource[] requestedResources = getResourceFlowManager().
+				getRequestedResources(SceneController.USER_ID);
 
-        //If returned resources is null, then create empty array to avoid null pointer exceptions.
-        if (requestedResources == null) {
-            requestedResources = new Resource[0];
-        }
+		//If returned resources is null, then create empty array to avoid null pointer exceptions.
+		if (requestedResources == null) {
+			requestedResources = new Resource[0];
+		}
 
-        GridPane[] titleContainer = new GridPane[requestedResources.length];
-        //For every copy create the grid pane and the labels inside it.
-        for (int iCount = 0; iCount < requestedResources.length; iCount++) {
+		GridPane[] titleContainer = new GridPane[requestedResources.length];
+		//For every copy create the grid pane and the labels inside it.
+		for (int iCount = 0; iCount < requestedResources.length; iCount++) {
 
-            //The labels to be contained in the grid pane (copy container).
-            Label titleLabel = new Label();
+			//The labels to be contained in the grid pane (copy container).
+			Label titleLabel = new Label();
 
-            //Setup the copy container and add styling.
-            titleContainer[iCount] = new GridPane();
-            titleContainer[iCount].getStylesheets().add("/Resources/CoreStyle.css");
-            titleContainer[iCount].getStyleClass().add("ScrollListItem");
-            titleContainer[iCount].setMinHeight(50);
-            titleContainer[iCount].setMinWidth(300);
-            titleContainer[iCount].setAlignment(Pos.CENTER);
+			//Setup the copy container and add styling.
+			titleContainer[iCount] = new GridPane();
+			titleContainer[iCount].getStylesheets().add("/Resources/CoreStyle.css");
+			titleContainer[iCount].getStyleClass().add("ScrollListItem");
+			titleContainer[iCount].setMinHeight(50);
+			titleContainer[iCount].setMinWidth(300);
+			titleContainer[iCount].setAlignment(Pos.CENTER);
 
-            //Setup title label and styling.
-            titleLabel.getStylesheets().add("/Resources/CoreStyle.css");
-            titleLabel.getStyleClass().add("ScrollTitle");
-            titleLabel.setMinHeight(100);
-            titleLabel.setText(requestedResources[iCount].getTitle());
+			//Setup title label and styling.
+			titleLabel.getStylesheets().add("/Resources/CoreStyle.css");
+			titleLabel.getStyleClass().add("ScrollTitle");
+			titleLabel.setMinHeight(100);
+			titleLabel.setText(requestedResources[iCount].getTitle());
 
-            //Set the titleLabel and contentLabel in the copyContainer.
-            titleContainer[iCount].add(titleLabel, 1, 1);
+			//Set the titleLabel and contentLabel in the copyContainer.
+			titleContainer[iCount].add(titleLabel, 1, 1);
 
-        }
+		}
 
-        root.getChildren().addAll(titleContainer);
-        root.setSpacing(10);
-        root.setPadding(new Insets(10));
-        scrollPane.setContent(root);
+		root.getChildren().addAll(titleContainer);
+		root.setSpacing(10);
+		root.setPadding(new Insets(10));
+		scrollPane.setContent(root);
 
-    }
+	}
 
 }

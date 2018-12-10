@@ -20,49 +20,52 @@ import java.util.ResourceBundle;
  */
 public class LoanHistoryController extends SceneController implements Initializable {
 
-    @FXML
-    private ScrollPane scrollPane;
+	/**
+	 * scrollPane to display the loan history.
+	 */
+	@FXML
+	private ScrollPane scrollPane;
 
-    /**
-     * handles retrieving resources and their loan history.
-     *
-     * @param location  The location used to resolve relative paths for the root object.
-     * @param resources The resources used to localize the root object.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+	/**
+	 * handles retrieving resources and their loan history.
+	 *
+	 * @param location  The location used to resolve relative paths for the root object.
+	 * @param resources The resources used to localize the root object.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 
-        int userID = getResourceFlowManager().getUserID();
+		int userID = getResourceFlowManager().getUserID();
 
-        scrollPane.setFitToHeight(true);
-        scrollPane.setFitToWidth(true);
+		scrollPane.setFitToHeight(true);
+		scrollPane.setFitToWidth(true);
 
-        LoanEvent[] loanHistory = getResourceFlowManager().getBorrowHistory(userID);
+		LoanEvent[] loanHistory = getResourceFlowManager().getBorrowHistory(userID);
 
-        Label[] loanText = new Label[loanHistory.length];
+		Label[] loanText = new Label[loanHistory.length];
 
-        //For every loan history event. Add to a label.
-        for (int iCount = 0; iCount < loanHistory.length; iCount++) {
-            loanText[iCount] = new Label(loanHistory[iCount].toString());
-            loanText[iCount].getStylesheets().add("/Resources/CoreStyle.css");
-            loanText[iCount].getStyleClass().add("ScrollListItem");
-            loanText[iCount].setMinHeight(100);
-            loanText[iCount].setPrefWidth(300);
-            loanText[iCount].setAlignment(Pos.CENTER);
-        }
+		//For every loan history event. Add to a label.
+		for (int iCount = 0; iCount < loanHistory.length; iCount++) {
+			loanText[iCount] = new Label(loanHistory[iCount].toString());
+			loanText[iCount].getStylesheets().add("/Resources/CoreStyle.css");
+			loanText[iCount].getStyleClass().add("ScrollListItem");
+			loanText[iCount].setMinHeight(100);
+			loanText[iCount].setPrefWidth(300);
+			loanText[iCount].setAlignment(Pos.CENTER);
+		}
 
-        //Wrap all labels in a vBox
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(loanText);
+		//Wrap all labels in a vBox
+		VBox vBox = new VBox();
+		vBox.getChildren().addAll(loanText);
 
-        //Make listing center.
-        HBox hBox = new HBox(vBox);
-        hBox.setAlignment(Pos.CENTER);
+		//Make listing center.
+		HBox hBox = new HBox(vBox);
+		hBox.setAlignment(Pos.CENTER);
 
 
-        //Set the content of the scroll pane to the vBox
-        scrollPane.setContent(hBox);
+		//Set the content of the scroll pane to the vBox
+		scrollPane.setContent(hBox);
 
-    }
+	}
 
 }

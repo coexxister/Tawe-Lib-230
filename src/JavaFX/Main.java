@@ -14,32 +14,36 @@ import javafx.stage.Stage;
  * @version 1.0
  */
 public class Main extends Application {
-    /**
-     * Main method to launch the program.
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
+	/**
+	 * Main method to launch the program.
+	 *
+	 * @param args Java command line arguments.
+	 */
+	public static void main(String[] args) {
+		launch(args);
+	}
 
-    /**
-     * Starts the program.
-     */
-    @Override
-    public void start(Stage primaryStage) {
-        //Tries to load the main interface screen and show it to the user
-        try {
-            Parent stage = FXMLLoader.load(getClass().getResource(SceneController.getMainInterface()));
-            Scene scene = new Scene(stage);
+	/**
+	 * Starts the interface.
+	 *
+	 * @param primaryStage The primary window on which the interface is displayed.
+	 */
+	@Override
+	public void start(Stage primaryStage) {
+		//Tries to load the main interface screen and show it to the user
+		try {
+			Parent stage = FXMLLoader.load(getClass().getResource(SceneController.getMainInterface()));
+			Scene scene = new Scene(stage);
 
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("TaweLib");
-            primaryStage.getIcons().add(new Image("/Resources/bookIcon.png"));
-            primaryStage.show();
+			primaryStage.setScene(scene);
+			primaryStage.setTitle("TaweLib");
+			primaryStage.getIcons().add(new Image("/Resources/bookIcon.png"));
+			primaryStage.show();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 
 }

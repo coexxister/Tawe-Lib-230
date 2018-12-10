@@ -1,7 +1,6 @@
 package JavaFX;
 
 import Core.Copy;
-import Core.LoanEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -23,62 +22,62 @@ import java.util.ResourceBundle;
  */
 public class ListAllOverdueCopiesController extends SceneController implements Initializable {
 
-    /**
-     * The border pane than contains the scroll pane.
-     */
-    @FXML
-    private BorderPane borderPane;
+	/**
+	 * The border pane than contains the scroll pane.
+	 */
+	@FXML
+	private BorderPane borderPane;
 
-    /**
-     * Handles retrieving overdue copies.
-     *
-     * @param location The location used to resolve relative paths for the root object.
-     * @param resources The resources used to localize the root object.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+	/**
+	 * Handles retrieving overdue copies.
+	 *
+	 * @param location  The location used to resolve relative paths for the root object.
+	 * @param resources The resources used to localize the root object.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 
-        //get all overdue copies
-        Copy[] copies = getResourceFlowManager().showOverdueCopies();
+		//get all overdue copies
+		Copy[] copies = getResourceFlowManager().showOverdueCopies();
 
-        //Wrap all labels in a vBox
-        VBox vBox = new VBox();
+		//Wrap all labels in a vBox
+		VBox vBox = new VBox();
 
-        //For every loan history event. Add to a label.
-        for (int iCount = 0; iCount < copies.length; iCount++) {
+		//For every loan history event. Add to a label.
+		for (int iCount = 0; iCount < copies.length; iCount++) {
 
-            //create message to display
-            String message = "Borrowed by User ID - " + copies[iCount].getCurrentBorrowerID();
-            message+= copies[iCount].toString();
+			//create message to display
+			String message = "Borrowed by User ID - " + copies[iCount].getCurrentBorrowerID();
+			message += copies[iCount].toString();
 
-            //create label and style
-            Label label = new Label(message);
-            label.getStylesheets().add("/Resources/CoreStyle.css");
-            label.getStyleClass().add("ScrollListItem");
-            label.setAlignment(Pos.CENTER);
-            label.setPrefWidth(560);
+			//create label and style
+			Label label = new Label(message);
+			label.getStylesheets().add("/Resources/CoreStyle.css");
+			label.getStyleClass().add("ScrollListItem");
+			label.setAlignment(Pos.CENTER);
+			label.setPrefWidth(560);
 
-            //add label to vbox.
-            vBox.getChildren().add(label);
+			//add label to vbox.
+			vBox.getChildren().add(label);
 
-        }
+		}
 
-        vBox.setSpacing(10);
-        vBox.setPadding(new Insets(10));
+		vBox.setSpacing(10);
+		vBox.setPadding(new Insets(10));
 
-        //Make listing center.
-        HBox hBox = new HBox(vBox);
-        hBox.setAlignment(Pos.CENTER);
+		//Make listing center.
+		HBox hBox = new HBox(vBox);
+		hBox.setAlignment(Pos.CENTER);
 
-        //wrap in hbox
-        ScrollPane scrollPane = new ScrollPane(hBox);
-        //scroll pane styling
-        scrollPane.getStylesheets().add("/Resources/CoreStyle.css");
-        scrollPane.getStyleClass().add("UserDashboard");
+		//wrap in hbox
+		ScrollPane scrollPane = new ScrollPane(hBox);
+		//scroll pane styling
+		scrollPane.getStylesheets().add("/Resources/CoreStyle.css");
+		scrollPane.getStyleClass().add("UserDashboard");
 
-        //wrap scroll pane in border pane
-        borderPane.setCenter(scrollPane);
+		//wrap scroll pane in border pane
+		borderPane.setCenter(scrollPane);
 
-    }
+	}
 
 }

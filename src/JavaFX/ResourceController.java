@@ -24,132 +24,139 @@ import java.sql.SQLException;
  */
 public class ResourceController extends SceneController {
 
-    private FileChooser imageChooser = new FileChooser();
+	/**
+	 * FileChooser used to select a resource image.
+	 */
+	private FileChooser imageChooser = new FileChooser();
 
-    @FXML
-    private TextField searchID;
+	/**
+	 * TextField for the resource ID to be searched for.
+	 */
+	@FXML
+	private TextField searchID;
 
-    /**
-     * Loads subscene to Add Book.
-     *
-     * @param event Represents the data of the button pressed.
-     */
-    @FXML
-    public void handleAddBookButtonAction(ActionEvent event) {
-        loadSubscene(getAddBookInterface());
-    }
+	/**
+	 * Loads subscene to add book.
+	 */
+	@FXML
+	public void handleAddBookButtonAction() {
+		loadSubscene(getAddBookInterface());
+	}
 
-    /**
-     * Loads subscene to Add DVD.
-     *
-     * @param event Represents the data of the button pressed.
-     */
-    @FXML
-    public void handleAddDVDButtonAction(ActionEvent event) {
-        loadSubscene(getAddDvdInterface());
-    }
+	/**
+	 * Loads subscene to add DVD.
+	 */
+	@FXML
+	public void handleAddDVDButtonAction() {
+		loadSubscene(getAddDvdInterface());
+	}
 
-    /**
-     * Loads subscene to Add Computer.
-     *
-     * @param event Represents the data of the button pressed.
-     */
-    @FXML
-    public void handleAddComputerButtonAction(ActionEvent event) {
-        loadSubscene(getAddLaptopInterface());
-    }
+	/**
+	 * Loads subscene to add laptop.
+	 */
+	@FXML
+	public void handleAddComputerButtonAction() {
+		loadSubscene(getAddLaptopInterface());
+	}
 
-    /**
-     * Loads subscene to Edit a resource.
-     *
-     * @param event Represents the data of the button pressed.
-     */
-    @FXML
-    public void handleEditResourceButtonAction(ActionEvent event) {
-        try {
-            loadSubscene(getResourceScene("Edit"));
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Error in database!");
-            alert.showAndWait();
-        } catch (NullPointerException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Error: please select a valid resource identifier");
-            alert.showAndWait();
-        }
-    }
+	/**
+	 * Loads subscene to edit a resource.
+	 */
+	@FXML
+	public void handleEditResourceButtonAction() {
+		try {
+			loadSubscene(getResourceScene("Edit"));
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Error in database!");
+			alert.showAndWait();
+		} catch (NullPointerException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Error: please select a valid resource identifier");
+			alert.showAndWait();
+		}
+	}
 
-    /**
-     * Loads subscene to display log for specified resource.
-     *
-     * @param event Represents the data of the button pressed.
-     */
-    @FXML
-    public void handleResourceLogButtonAction(ActionEvent event) {
-        loadSubscene(getResourceLogInterface());
-    }
+	/**
+	 * Loads subscene to display log for specified resource.
+	 */
+	@FXML
+	public void handleResourceLogButtonAction() {
+		loadSubscene(getResourceLogInterface());
+	}
 
-    /**
-     * Returns from one of the ResourceInterface subscenes to the superscene.
-     */
-    @FXML
-    public void cancel() {
-        loadSubscene(getResourceInterface());
-    }
+	/**
+	 * Cancels all current changes and returns to resource manager scene.
+	 */
+	@FXML
+	public void cancel() {
+		loadSubscene(getResourceInterface());
+	}
 
-    /**
-     * Displays the Add Resource subscene depending on the resource type.
-     *
-     * @param action Represents the data of the button pressed.
-     * @return Subscene depending on resource type.
-     */
-    public String getResourceScene(String action) throws SQLException {
+	/**
+	 * Returns the path of the add resource subscene depending on the resource type.
+	 *
+	 * @param action The Add action selected by the user.
+	 */
+	public String getResourceScene(String action) throws SQLException {
 
-        Resource addResource;
+		Resource addResource;
 
-        if (!searchID.getText().isEmpty()) {
-            addResource = getResourceManager().getResource(Integer.parseInt(searchID.getText()));
-            if (addResource instanceof Book) {
-                setRequestResource(addResource);
-                return "/View/" + action + "BookInterface.fxml";
-            }
-            if (addResource instanceof Dvd) {
-                setRequestResource(addResource);
-                return "/View/" + action + "DVDInterface.fxml";
-            }
-            if (addResource instanceof Computer) {
-                setRequestResource(addResource);
-                return "/View/" + action + "LaptopInterface.fxml";
-            }
-        } else {
-            System.out.println("Specify the Resource ID.");
-        }
-        return null;
-    }
+		if (!searchID.getText().isEmpty()) {
+			addResource = getResourceManager().getResource(Integer.parseInt(searchID.getText()));
+			if (addResource instanceof Book) {
+				setRequestResource(addResource);
+				return "/View/" + action + "BookInterface.fxml";
+			}
+			if (addResource instanceof Dvd) {
+				setRequestResource(addResource);
+				return "/View/" + action + "DVDInterface.fxml";
+			}
+			if (addResource instanceof Computer) {
+				setRequestResource(addResource);
+				return "/View/" + action + "LaptopInterface.fxml";
+			}
+		} else {
+			System.out.println("Specify the Resource ID.");
+		}
+		return null;
+	}
 
-    public String setThumbnailImage(ActionEvent event) {
-        imageChooser.setInitialDirectory(new File("src/ResourceImages"));
-        Node node = (Node) event.getSource();
-        File file = imageChooser.showOpenDialog(node.getScene().getWindow());
-        Path selectedPath = Paths.get(file.getAbsolutePath());
+	/**
+	 * Sets the thumbnail image of a resource.
+	 *
+	 * @param event the event triggered by clicking the button.
+	 * @return the file path of the thumvnail image.
+	 */
+	public String setThumbnailImage(ActionEvent event) {
+		imageChooser.setInitialDirectory(new File("src/ResourceImages"));
+		Node node = (Node) event.getSource();
+		File file = imageChooser.showOpenDialog(node.getScene().getWindow());
+		Path selectedPath = Paths.get(file.getAbsolutePath());
 
-        String path = selectedPath.toString();
-        path = path.replace("\\", "/");
-        final int LENGTH_OF_SRC = 3;
-        path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
-        return path;
-    }
+		String path = selectedPath.toString();
+		path = path.replace("\\", "/");
+		final int LENGTH_OF_SRC = 3;
+		path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
+		return path;
+	}
 
-    public String setAvatar(ActionEvent event) {
-        imageChooser.setInitialDirectory(new File("src/DefaultAvatars"));
-        Node node = (Node) event.getSource();
-        File file = imageChooser.showOpenDialog(node.getScene().getWindow());
-        Path selectedPath = Paths.get(file.getAbsolutePath());
+	/**
+	 * Sets the avatar image of a user.
+	 *
+	 * @param event the event triggered by clicking the button.
+	 * @return the file path of the avatar image.
+	 */
+	public String setAvatar(ActionEvent event) {
+		imageChooser.setInitialDirectory(new File("src/DefaultAvatars"));
+		Node node = (Node) event.getSource();
+		File file = imageChooser.showOpenDialog(node.getScene().getWindow());
+		Path selectedPath = Paths.get(file.getAbsolutePath());
 
-        String path = selectedPath.toString();
-        path = path.replace("\\", "/");
-        final int LENGTH_OF_SRC = 3;
-        path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
-        return path;
-    }
+		String path = selectedPath.toString();
+		path = path.replace("\\", "/");
+		final int LENGTH_OF_SRC = 3;
+		path = path.substring(path.indexOf("src") + LENGTH_OF_SRC);
+		return path;
+	}
 }

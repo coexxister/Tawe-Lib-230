@@ -22,56 +22,59 @@ import javafx.geometry.Insets;
  */
 public class TransactionHistoryController extends SceneController implements Initializable {
 
-    @FXML
-    private ScrollPane scrollPane;
+	/**
+	 * ScrollPane to display the transaction history.
+	 */
+	@FXML
+	private ScrollPane scrollPane;
 
-    /**
-     * Sets the transaction history in the scroll pane.
-     *
-     * @param location  The location used to resolve relative paths for the root object.
-     * @param resources The resources used to localize the root object.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        scrollPane.setFitToHeight(true);
-        scrollPane.setFitToWidth(true);
+	/**
+	 * Initialises the ScrollPane to display the transaction history.
+	 *
+	 * @param location  The location used to resolve relative paths for the root object.
+	 * @param resources The resources used to localize the root object.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		scrollPane.setFitToHeight(true);
+		scrollPane.setFitToWidth(true);
 
-        //get all transactions of a user
-        Transaction[] transactions = getAccountManager().
-                getTransactionHistory(SceneController.USER_ID);
+		//get all transactions of a user
+		Transaction[] transactions = getAccountManager().
+				getTransactionHistory(SceneController.USER_ID);
 
-        //create transactions
-        Label[] transactionText = new Label[transactions.length];
+		//create transactions
+		Label[] transactionText = new Label[transactions.length];
 
-        //for every transaction, add transaction to a label.
-        for (int iCount = 0; iCount < transactions.length; iCount++) {
-            transactionText[iCount] = new Label(transactions[iCount].toString());
+		//for every transaction, add transaction to a label.
+		for (int iCount = 0; iCount < transactions.length; iCount++) {
+			transactionText[iCount] = new Label(transactions[iCount].toString());
 
-            //Styling of label.
-            transactionText[iCount].getStylesheets().add("/Resources/CoreStyle.css");
-            transactionText[iCount].getStyleClass().add("ScrollListItem");
-            transactionText[iCount].setMinHeight(200);
-            transactionText[iCount].setPrefWidth(400);
-            transactionText[iCount].setAlignment(Pos.CENTER);
+			//Styling of label.
+			transactionText[iCount].getStylesheets().add("/Resources/CoreStyle.css");
+			transactionText[iCount].getStyleClass().add("ScrollListItem");
+			transactionText[iCount].setMinHeight(200);
+			transactionText[iCount].setPrefWidth(400);
+			transactionText[iCount].setAlignment(Pos.CENTER);
 
-            //if negative change in transaction, change colour to red. Otherwise change to green.
-            if (transactions[iCount].getChange() < 0) {
-                transactionText[iCount].setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
-            } else {
-                transactionText[iCount].setStyle("-fx-background-color: #2acb5a; -fx-text-fill: WHITE;");
-            }
-        }
+			//if negative change in transaction, change colour to red. Otherwise change to green.
+			if (transactions[iCount].getChange() < 0) {
+				transactionText[iCount].setStyle("-fx-background-color: #ff5b5f; -fx-text-fill: WHITE;");
+			} else {
+				transactionText[iCount].setStyle("-fx-background-color: #2acb5a; -fx-text-fill: WHITE;");
+			}
+		}
 
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(transactionText);
-        vBox.setSpacing(10);
-        vBox.setPadding(new Insets(10));
+		VBox vBox = new VBox();
+		vBox.getChildren().addAll(transactionText);
+		vBox.setSpacing(10);
+		vBox.setPadding(new Insets(10));
 
-        //center align listing
-        HBox hBox = new HBox(vBox);
-        hBox.setAlignment(Pos.CENTER);
+		//center align listing
+		HBox hBox = new HBox(vBox);
+		hBox.setAlignment(Pos.CENTER);
 
-        scrollPane.setContent(hBox);
-    }
+		scrollPane.setContent(hBox);
+	}
 
 }

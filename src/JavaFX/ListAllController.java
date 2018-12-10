@@ -108,13 +108,13 @@ public class ListAllController extends SceneController implements Initializable 
 	}
 
 	/**
-	 * sorts the
+	 * sorts the list to only show books.
 	 */
 	@FXML
 	public void handleSortByBookButtonAction() {
 		try {
 			resourceList = getResourceManager().searchResources("TID", "1");
-			resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+			resourceView.setPageFactory(this::createPage);
 		} catch (SQLException e) {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText("Couldn't set type as book.");
@@ -122,11 +122,14 @@ public class ListAllController extends SceneController implements Initializable 
 		}
 	}
 
+	/**
+	 * sorts the list to only show DVDs.
+	 */
 	@FXML
 	public void handleSortByDVDButtonAction() {
 		try {
 			resourceList = getResourceManager().searchResources("TID", "2");
-			resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+			resourceView.setPageFactory(this::createPage);
 		} catch (SQLException e) {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText("Couldn't set type as DVD.");
@@ -134,11 +137,14 @@ public class ListAllController extends SceneController implements Initializable 
 		}
 	}
 
+	/**
+	 * sorts the list to only show laptops.
+	 */
 	@FXML
 	public void handleSortByComputerButtonAction() {
 		try {
 			resourceList = getResourceManager().searchResources("TID", "3");
-			resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+			resourceView.setPageFactory(this::createPage);
 		} catch (SQLException e) {
 			Alert alert = new Alert(Alert.AlertType.WARNING);
 			alert.setContentText("Couldn't set type as Computer.");
