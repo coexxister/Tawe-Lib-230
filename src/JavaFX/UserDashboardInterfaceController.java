@@ -2,8 +2,13 @@ package JavaFX;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 /**
  * Displays the dashboard of the current user.
@@ -11,7 +16,7 @@ import javafx.scene.control.Label;
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
-public class UserDashboardInterfaceController extends SceneController {
+public class UserDashboardInterfaceController extends SceneController implements Initializable {
 
 	/**
 	 * Button to return back to the homepage.
@@ -99,5 +104,40 @@ public class UserDashboardInterfaceController extends SceneController {
 	private void handleItemsDueAction() {
 		loadSubscene(SceneController.getItemsDue());
 		changeDashboardButton();
+	}
+
+	/**
+	 * Updates Balance label.
+	 */
+	private void updateBalanceLabel() {
+
+		float balance;
+		try {
+			//get balance and round to 2 decimal places.
+			balance = Math.round(getAccountManager().getAccountBalance(SceneController.USER_ID) * 100) / 100;
+		} catch (SQLException e) {
+			balance = 0.0F;
+		}
+
+		currentBalance.setText("£" + balance);
+
+		//if the balance is less than 0, then change background color to red. Otherwise change to green.
+		if (balance < 0) {
+			currentBalance.setStyle("-fx-background-color: #ff644e; -fx-text-fill: WHITE;");
+		} else {
+			currentBalance.setStyle("-fx-background-color: #228022; -fx-text-fill: WHITE;");
+		}
+	}
+
+	/**
+	 * method to initalize the balance label.
+	 *
+	 * @param location  The location used to resolve relative paths for the root object.
+	 * @param resources The resources used to localize the root object.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		updateBalanceLabel();
+
 	}
 }
