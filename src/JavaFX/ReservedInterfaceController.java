@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 /**
  * Displays resources reserved by a user.
  *
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @author Noah Lenagan
  * @version 1.0
  */
 public class ReservedInterfaceController extends SceneController implements Initializable {

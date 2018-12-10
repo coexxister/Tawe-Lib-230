@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Handles user specific operations regarding resources.
  *
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @author Noah Lenagan
  * @version 1.0
  */
 public class ResourceFlowController extends SceneController implements Initializable {

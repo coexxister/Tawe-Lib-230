@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 
 /**
  * Displays all resources requested by a user.
+ * @author Noah Lenagan
  */
 public class RequestedResourcesInterfaceController extends SceneController implements Initializable {
 

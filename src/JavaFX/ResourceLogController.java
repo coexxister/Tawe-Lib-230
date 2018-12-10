@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
 /**
  * Responsible for handling the logs of each resource.
  *
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @author Noah Lenagan
  * @version 1.0
  */
 public class ResourceLogController extends SceneController implements Initializable {

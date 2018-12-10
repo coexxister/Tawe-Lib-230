@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 /**
  * Displays most popular resources currently.
  *
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @author Noah Lenagan
  * @version 1.0
  */
 public class PopularListingController extends SceneController implements Initializable {

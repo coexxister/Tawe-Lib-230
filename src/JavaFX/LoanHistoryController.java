@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
 /**
  * Lists all loaned items to date for the specific user.
  *
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @author Noah Lenagan
  * @version 1.0
  */
 public class LoanHistoryController extends SceneController implements Initializable {

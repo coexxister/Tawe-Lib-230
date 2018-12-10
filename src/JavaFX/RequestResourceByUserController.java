@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Handles the retrieval of resources for users.
  *
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @author Noah Lenagan
  * @version 1.0
  */
 public class RequestResourceByUserController extends SceneController implements Initializable {
