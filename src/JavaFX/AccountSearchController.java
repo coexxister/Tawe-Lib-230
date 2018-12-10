@@ -9,44 +9,58 @@ import java.io.IOException;
 
 /**
  * Performs User search by User ID.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  */
 public class AccountSearchController extends SceneController {
 
-    @FXML
-    private TextField accountName;
-    public static int userID;
+	/**
+	 * TextField for the user ID of the account to be searched for.
+	 */
+	@FXML
+	private TextField accountName;
+	/**
+	 * user ID of the account to be searched for.
+	 */
+	public static int userID;
 
-    /**
-     * Takes in a User ID and loads the Resource Flow Interface for the specific User.
-     *
-     * @param event Represents the data of the button pressed.
-     * @throws IOException Thrown if a non-numeric value is inputted.
-     */
-    @FXML
-    private void handleAccountSearchButtonAction(ActionEvent event) throws IOException {
+	/**
+	 * Takes in a User ID and loads the Resource Flow Interface for the specific User.
+	 *
+	 * @param event the event triggered by clicking the button.
+	 */
+	@FXML
+	private void handleAccountSearchButtonAction(ActionEvent event) {
 
-        try {
-            //get entered user id
-            userID = Integer.parseInt(accountName.getText());
+		/*
+		try to get the entered user ID and pass it into the resource flow manager interface in order to view
+		the selected user. If the entered value is not numerical, show the user an error.
+		 */
+		try {
+			//get entered user ID.
+			userID = Integer.parseInt(accountName.getText());
 
-            //change subscene.
-            if (getAccountManager().isExist(userID)) {
-                //set the user id in resourceflowmanager to select a user for operations.
-                getResourceFlowManager().setUserID(userID);
-                loadSubscene(SceneController.getResourceFlowInterface());
-            } else {
-                //create alert that user does not exist.
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("Specified user does not exist.");
-                alert.showAndWait();
-            }
-        } catch (NumberFormatException n) {
+			/*
+			if the account exists in the database, change subscene to the resource flow manager. If not, show the user
+			an error.
+			 */
+			if (getAccountManager().isExist(userID)) {
+				//set the user ID in resource flow manager to select a user for operations.
+				getResourceFlowManager().setUserID(userID);
+				loadSubscene(SceneController.getResourceFlowInterface());
+			} else {
+				//create alert that user does not exist.
+				Alert alert = new Alert(Alert.AlertType.WARNING);
+				alert.setContentText("Specified user does not exist.");
+				alert.showAndWait();
+			}
+		} catch (NumberFormatException n) {
 
-            //create alert if non integer is typed.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Must be a numeric value");
-            alert.showAndWait();
+			//create alert if non integer is typed.
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("Must be a numeric value");
+			alert.showAndWait();
 
-        }
-    }
+		}
+	}
 }

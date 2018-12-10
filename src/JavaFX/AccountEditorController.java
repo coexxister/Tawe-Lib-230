@@ -15,162 +15,202 @@ import java.util.ResourceBundle;
 
 /**
  * Handles editing data of an existing user in the database.
+ *
+ * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @version 1.0
  */
 public class AccountEditorController extends ResourceController implements Initializable {
 
-    private int id = getResourceFlowManager().getUserID();
-    private String path;
+	/**
+	 * user ID of the user to be edited.
+	 */
+	private int id = getResourceFlowManager().getUserID();
+	/**
+	 * file path for the avatar image.
+	 */
+	private String path;
 
+	/**
+	 * TextField for the first name of the account.
+	 */
+	@FXML
+	private TextField firstName;
+	/**
+	 * TextField for the surname of the account.
+	 */
+	@FXML
+	private TextField surname;
+	/**
+	 * TextField for the street name of the account's address.
+	 */
+	@FXML
+	private TextField streetName;
+	/**
+	 * TextField for the house number of the account's address.
+	 */
+	@FXML
+	private TextField streetNumber;
+	/**
+	 * TextField for the city of the account's address.
+	 */
+	@FXML
+	private TextField city;
+	/**
+	 * TextField for the county of the account's address.
+	 */
+	@FXML
+	private TextField county;
+	/**
+	 * TextField for the post code of the account's address.
+	 */
+	@FXML
+	private TextField postCode;
+	/**
+	 * TextField for the phone number of the account.
+	 */
+	@FXML
+	private TextField phoneNumber;
 
-    @FXML
-    private TextField firstName;
+	/**
+	 * TextField for the balance of the account.
+	 */
+	@FXML
+	private TextField balance;
 
-    @FXML
-    private TextField surname;
+	/**
+	 * avatar image displayed on the avatar selection button.
+	 */
+	@FXML
+	private ImageView avatar;
 
-    @FXML
-    private TextField streetName;
+	/**
+	 * Sets the avatar for the user.
+	 *
+	 * @param event the event triggered by clicking the button.
+	 */
+	@FXML
+	private void handleSetAvatarButtonAction(ActionEvent event) {
+		//set the image on the button to set the avatar
+		path = setAvatar(event);
+		avatar.setImage(new Image(path));
+	}
 
-    @FXML
-    private TextField streetNumber;
+	/**
+	 * Saves all details set in text fields to respective variables,
+	 * to change the values in the database.
+	 *
+	 * @param event the event triggered by clicking the button.
+	 */
+	@FXML
+	public void handleSaveAction(ActionEvent event) {
+		/*try to get the account by its ID and edit its details. If getting the account from the database fails or the
+		avatar image doesn't exist, output an error.
+		*/
+		try {
+			//get the account.
+			User account = getAccountManager().getAccount(id);
 
-    @FXML
-    private TextField city;
+			/*
+			check for each text field if it is empty or not. If not, assign its text value to the equivalent attribute
+			of the user in the database.
+			 */
+			if (!(firstName.getText().isEmpty())) {
+				account.setFirstName(firstName.getText());
+			}
+			if (!(surname.getText().isEmpty())) {
+				account.setLastName(surname.getText());
+			}
+			if (!(streetName.getText().isEmpty())) {
+				account.setStreetName(streetName.getText());
+			}
+			if (!(streetNumber.getText().isEmpty())) {
+				account.setStreetNum(streetNumber.getText());
+			}
+			if (!(city.getText().isEmpty())) {
+				account.setCity(city.getText());
+			}
+			if (!(county.getText().isEmpty())) {
+				account.setCounty(county.getText());
+			}
+			if (!(postCode.getText().isEmpty())) {
+				account.setPostCode(postCode.getText());
+			}
+			if (!(phoneNumber.getText().isEmpty())) {
+				account.setTelNum(phoneNumber.getText());
+			}
 
-    @FXML
-    private TextField county;
+			//set the user's avatar in the database.
+			account.setAvatarID(getResourceManager().getImageID(path));
 
-    @FXML
-    private TextField postCode;
+			//edit the account with the new details.
+			getAccountManager().editAccount(account);
 
-    @FXML
-    private TextField phoneNumber;
+			//Show the user a window indicating that their save was successful.
+			Alert alert = new Alert(Alert.AlertType.INFORMATION);
+			alert.setContentText("Save success.");
+			alert.showAndWait();
 
-    @FXML
-    private TextField balance;
+			goBack();
 
-    @FXML
-    private ImageView avatar;
+		} catch (SQLException e) {
+			//sql error in database.
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Error in database!");
+			alert.showAndWait();
+		} catch (IllegalArgumentException e) {
+			//image specified does not exist.
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("Image specified must already exist!");
+			alert.showAndWait();
+		}
+	}
 
-    @FXML
-    private void handleSetAvatarButtonAction(ActionEvent event) {
-        path = setAvatar(event);
-        avatar.setImage(new Image(path));
-    }
+	/**
+	 * Cancels all changes and returns back to Resource Flow Interface.
+	 *
+	 * @param event the event triggered by clicking the button.
+	 */
+	@FXML
+	public void handleCancelAction(ActionEvent event) {
+		goBack();
+	}
 
-    /**
-     * Saves all details set in text fields to respective variables,
-     * to change the values in the database.
-     *
-     * @param event Represents the data of the button pressed.
-     */
-    @FXML
-    public void handleSaveAction(ActionEvent event) {
-        try {
-            //get the account
-            User account = getAccountManager().getAccount(id);
-            Boolean isEdited = false;
-            if (!(firstName.getText().isEmpty())) {
-                account.setFirstName(firstName.getText());
-                isEdited = true;
-            }
-            if (!(surname.getText().isEmpty())) {
-                account.setLastName(surname.getText());
-                isEdited = true;
-            }
-            if (!(streetName.getText().isEmpty())) {
-                account.setStreetName(streetName.getText());
-                isEdited = true;
-            }
-            if (!(streetNumber.getText().isEmpty())) {
-                account.setStreetNum(streetNumber.getText());
-                isEdited = true;
-            }
-            if (!(city.getText().isEmpty())) {
-                account.setCity(city.getText());
-                isEdited = true;
-            }
-            if (!(county.getText().isEmpty())) {
-                account.setCounty(county.getText());
-                isEdited = true;
-            }
-            if (!(postCode.getText().isEmpty())) {
-                account.setPostCode(postCode.getText());
-                isEdited = true;
-            }
-            if (!(phoneNumber.getText().isEmpty())) {
-                account.setTelNum(phoneNumber.getText());
-                isEdited = true;
-            }
+	/**
+	 * Changes the scene to the resource flow interface.
+	 */
+	private void goBack() {
+		loadSubscene(SceneController.getResourceFlowInterface());
+	}
 
-            account.setAvatarID(getResourceManager().getImageID(path));
-
-            if (isEdited) {
-                getAccountManager().editAccount(account);
-            }
-            //edit the account
-            getAccountManager().editAccount(account);
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Save success.");
-            alert.showAndWait();
-
-            goBack();
-
-        } catch (SQLException e) {
-            //sql error in database.
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Error in database!");
-            alert.showAndWait();
-        } catch (IllegalArgumentException e) {
-            //image specified does not exist.
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Image specified must already exist!");
-            alert.showAndWait();
-        }
-    }
-
-    /**
-     * Cancels all changes and returns back to Resource Flow Interface.
-     *
-     * @param event Represents the data of the button pressed.
-     */
-    @FXML
-    public void handleCancelAction(ActionEvent event) {
-        goBack();
-    }
-
-    /**
-     * Changes the scene to the resource flow interface.
-     */
-    private void goBack() {
-        loadSubscene(SceneController.getResourceFlowInterface());
-    }
-
-    /**
-     * Initialises the interface to display the current details of the user in the text fields
-     *
-     * @param location  The location used to resolve relative paths for the root object
-     * @param resources The resources used to localize the root object
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        User account = getAccountManager().getAccount(id);
-        firstName.setText(account.getFirstName());
-        surname.setText(account.getLastName());
-        streetName.setText(account.getStreetName());
-        streetNumber.setText(account.getStreetNum());
-        city.setText(account.getCity());
-        county.setText(account.getCounty());
-        postCode.setText(account.getPostCode());
-        phoneNumber.setText(account.getTelNum());
-        try {
-            path = getResourceManager().getImageURL(account.getAvatarID());
-            avatar.setImage(new Image(path));
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Couldn't load an avatar.");
-            alert.showAndWait();
-        }
-    }
+	/**
+	 * Initialises the interface to display the current details of the user in the text fields.
+	 *
+	 * @param location  The location used to resolve relative paths for the root object
+	 * @param resources The resources used to localize the root object
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		User account = getAccountManager().getAccount(id);
+		firstName.setText(account.getFirstName());
+		surname.setText(account.getLastName());
+		streetName.setText(account.getStreetName());
+		streetNumber.setText(account.getStreetNum());
+		city.setText(account.getCity());
+		county.setText(account.getCounty());
+		postCode.setText(account.getPostCode());
+		phoneNumber.setText(account.getTelNum());
+		/*
+		try to get the file path of the existing avatar for the user and set the image for the select avatar button to
+		the image at that path. If getting the URL from the database fails, tell the user that the avatar
+		could not be loaded.
+		*/
+		try {
+			path = getResourceManager().getImageURL(account.getAvatarID());
+			avatar.setImage(new Image(path));
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Couldn't load an avatar.");
+			alert.showAndWait();
+		}
+	}
 }

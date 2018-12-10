@@ -113,46 +113,59 @@ public class AccountCreatorController extends ResourceController implements Init
 			User newAccount = new User(0, firstName.getText(), surname.getText(), phoneNumber.getText(),
 					streetNumber.getText(), streetName.getText(), county.getText(), city.getText(), postCode.getText(),
 					avatarID);
-			/*try to set the user's avatar, add them to the database and then set their balance. if adding user to
-			 database fails, outputs an error.
+			/*
+			try to set the user's avatar, add them to the database and then set their balance. If adding user to
+			 database fails, output an error.
 			 */
 			try {
 				newAccount.setAvatarID(getResourceManager().getImageID(path));
 				userID = getAccountManager().addAccount(newAccount);
 				getAccountManager().changeBalance(userID, Float.parseFloat(balance.getText()));
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println("Invalid user in the database.");
 			}
+			//if the radio button for staff is selected, add the details of a user as a staff member to the database.
 		} else if (staff.isSelected()) {
 			Staff newAccount = new Staff(0, firstName.getText(), surname.getText(), phoneNumber.getText(),
 					streetNumber.getText(), streetName.getText(), county.getText(), city.getText(), postCode.getText(),
 					DateManager.returnCurrentDate(), 0, avatarID);
+			/*
+			try to set the user's avatar, add them to the database and then set their balance. If adding user to
+			 database fails, output an error.
+			 */
 			try {
 				newAccount.setAvatarID(getResourceManager().getImageID(path));
 				userID = getAccountManager().addAccount(newAccount)[0];
 				getAccountManager().changeBalance(userID, Float.parseFloat(balance.getText()));
 			} catch (SQLException e) {
-				e.printStackTrace();
+				System.out.println("Invalid user in the database.");
 			}
 		}
 	}
 
 	/**
-	 * Sets the avatar for the user
+	 * Sets the avatar for the user.
 	 *
-	 * @param event the event triggered by clicking the button
+	 * @param event the event triggered by clicking the button.
 	 */
 	public void handleSetAvatarButtonAction(ActionEvent event) {
+		//set the image on the button to set the avatar
 		path = setAvatar(event);
 		avatar.setImage(new Image(path));
 	}
 
 	/**
+	 * initialises the values of the avatarID and the file path and the image on the button to set the avatar
+	 *
 	 * @param location  The location used to resolve relative paths for the root object
 	 * @param resources The resources used to localize the root object
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		/*
+		try to set the values of avatarID and path and the image of avatar. If getting the avatarID fails,
+		output an error.
+		*/
 		try {
 			avatarID = getResourceManager().getImageID(DEFAULT_URL);
 			path = getResourceManager().getImageURL(avatarID);
