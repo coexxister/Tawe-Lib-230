@@ -36,33 +36,50 @@ public class EditBookController extends ResourceController implements Initializa
 	@FXML
 	private TextField title;
 	/**
-	 * extField for the author of the book.
+	 * TextField for the author of the book.
 	 */
 	@FXML
 	private TextField author;
 	/**
-	 * extField for the genre of the book.
+	 * TextField for the genre of the book.
 	 */
 	@FXML
 	private TextField genre;
 	/**
-	 * 
+	 * TextField for the publisher of the book.
 	 */
 	@FXML
 	private TextField publisher;
+	/**
+	 * TextField for the year of release of the book.
+	 */
 	@FXML
 	private TextField year;
+	/**
+	 * TextField for the ISBN of the book.
+	 */
 	@FXML
 	private TextField isbn;
+	/**
+	 * TextField for the language of the book.
+	 */
 	@FXML
 	private TextField language;
+	/**
+	 * TextField for the number of copies of the book.
+	 */
 	@FXML
 	private TextField numOfCopies;
 
+	/**
+	 * thumbnail image displayed on the select thumbnail button.
+	 */
 	@FXML
 	private ImageView thumbImage;
 
 	/**
+	 * retrieves the needed resource and handles the editing.
+	 *
 	 * @param location  The location used to resolve relative paths for the root object.
 	 * @param resources The resources used to localize the root object.
 	 */
@@ -108,7 +125,7 @@ public class EditBookController extends ResourceController implements Initializa
 	 * Saves all details set in text fields to respective variables,
 	 * to change the values in the database.
 	 *
-	 * @param event Represents the data of the button pressed.
+	 * @param event the event triggered by clicking the button.
 	 */
 	@FXML
 	public void handleSaveButtonAction(ActionEvent event) {
@@ -136,7 +153,7 @@ public class EditBookController extends ResourceController implements Initializa
 	/**
 	 * Cancels all changes.
 	 *
-	 * @param event Represents the data of the button pressed.
+	 * @param event the event triggered by clicking the button.
 	 */
 	@FXML
 	public void handleCancelButtonAction(ActionEvent event) {
@@ -146,7 +163,7 @@ public class EditBookController extends ResourceController implements Initializa
 	/**
 	 * Assigns the thumbnail selected to the specific book.
 	 *
-	 * @param event Represents the data of the button pressed.
+	 * @param event the event triggered by clicking the button.
 	 */
 	@FXML
 	public void handleSetThumbnailButtonAction(ActionEvent event) {

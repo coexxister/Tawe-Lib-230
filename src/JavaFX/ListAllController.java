@@ -26,115 +26,123 @@ import java.util.ResourceBundle;
 
 public class ListAllController extends SceneController implements Initializable {
 
-    @FXML
-    private Pagination resourceView;
+	/**
+	 * paginated viewer of resources.
+	 */
+	@FXML
+	private Pagination resourceView;
 
-    private double elementsPerPage = 3;
-    private Resource resourceList[] = getResourceManager().getResourceList();
+	/**
+	 * list of resources.
+	 */
+	private Resource[] resourceList = getResourceManager().getResourceList();
 
-    /**
-     * Initialises the paginated list of resources.
-     *
-     * @param location  The location used to resolve relative paths for the root object.
-     * @param resources The resources used to localize the root object.
-     */
-    public void initialize(URL location, ResourceBundle resources) {
-        resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
-    }
+	/**
+	 * Initialises the paginated list of resources.
+	 *
+	 * @param location  The location used to resolve relative paths for the root object.
+	 * @param resources The resources used to localize the root object.
+	 */
+	public void initialize(URL location, ResourceBundle resources) {
+		resourceView.setPageFactory(this::createPage);
+	}
 
-    /**
-     * Generates a list of pages as a horizontal box in the interface.
-     *
-     * @param pageIndex ?
-     * @return box
-     * The generated horizontal box, containing the pages of the list
-     */
-    public HBox createPage(int pageIndex) {
-        HBox box = new HBox(elementsPerPage);
-        resourceView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
-        int page = pageIndex * (int) elementsPerPage;
-        for (int i = page; i < page + elementsPerPage; i++) {
-            if (i < resourceList.length) {
-                VBox element = new VBox(elementsPerPage);
-                element.setId(String.valueOf(i));
-                ImageView image = new ImageView();
+	/**
+	 * Generates a list of pages as a horizontal box in the interface.
+	 *
+	 * @param pageIndex the page number displayed beneath the box.
+	 * @return box the generated horizontal box, containing the pages of the list.
+	 */
+	private HBox createPage(int pageIndex) {
+		double elementsPerPage = 3;
+		HBox box = new HBox(elementsPerPage);
+		resourceView.setPageCount((int) (Math.ceil((double) resourceList.length / elementsPerPage)));
+		int page = pageIndex * (int) elementsPerPage;
+		for (int i = page; i < page + elementsPerPage; i++) {
+			if (i < resourceList.length) {
+				VBox element = new VBox(elementsPerPage);
+				element.setId(String.valueOf(i));
+				ImageView image = new ImageView();
 
-                if (resourceList[i].toString().contains("Type - Book")) {
-                    try {
-                        image.setImage(new Image(getResourceManager().
-                                getImageURL(resourceList[i].getThumbImage())));
-                    } catch (SQLException e) {
-                        image.setImage(new Image("/Resources/bookIcon.png"));
-                    }
-                } else if (resourceList[i].toString().contains("Type - Dvd")) {
-                    try {
-                        image.setImage(new Image(getResourceManager().
-                                getImageURL(resourceList[i].getThumbImage())));
-                    } catch (SQLException e) {
-                        image.setImage(new Image("/Resources/dvdIcon.png"));
-                    }
-                } else if (resourceList[i].toString().contains("Type - Computer")) {
-                    try {
-                        image.setImage(new Image(getResourceManager().
-                                getImageURL(resourceList[i].getThumbImage())));
-                    } catch (SQLException e) {
-                        image.setImage(new Image("/Resources/laptopIcon.png"));
-                    }
-                }
-                image.setFitWidth(100);
-                image.setPreserveRatio(true);
-                image.setSmooth(true);
-                image.setCache(true);
+				if (resourceList[i].toString().contains("Type - Book")) {
+					try {
+						image.setImage(new Image(getResourceManager().
+								getImageURL(resourceList[i].getThumbImage())));
+					} catch (SQLException e) {
+						image.setImage(new Image("/Resources/bookIcon.png"));
+					}
+				} else if (resourceList[i].toString().contains("Type - Dvd")) {
+					try {
+						image.setImage(new Image(getResourceManager().
+								getImageURL(resourceList[i].getThumbImage())));
+					} catch (SQLException e) {
+						image.setImage(new Image("/Resources/dvdIcon.png"));
+					}
+				} else if (resourceList[i].toString().contains("Type - Computer")) {
+					try {
+						image.setImage(new Image(getResourceManager().
+								getImageURL(resourceList[i].getThumbImage())));
+					} catch (SQLException e) {
+						image.setImage(new Image("/Resources/laptopIcon.png"));
+					}
+				}
+				image.setFitWidth(100);
+				image.setPreserveRatio(true);
+				image.setSmooth(true);
+				image.setCache(true);
 
-                Label text = new Label(resourceList[i].getTitle());
-                text.wrapTextProperty().setValue(true);
-                Label availability = new Label(getAvailableNumberOfCopies(resourceList[i]));
-                element.getChildren().addAll(availability, image, text);
-                element.setAlignment(Pos.TOP_CENTER);
-                element.setSpacing(10);
-                element.setPadding(new Insets(100, 0, 0, 0));
-                element.setPrefWidth(200);
-                box.getChildren().add(element);
-                getOnMouseClicked(resourceList, element);
-            }
-        }
-        box.setAlignment(Pos.CENTER);
-        return box;
-    }
+				Label text = new Label(resourceList[i].getTitle());
+				text.wrapTextProperty().setValue(true);
+				Label availability = new Label(getAvailableNumberOfCopies(resourceList[i]));
+				element.getChildren().addAll(availability, image, text);
+				element.setAlignment(Pos.TOP_CENTER);
+				element.setSpacing(10);
+				element.setPadding(new Insets(100, 0, 0, 0));
+				element.setPrefWidth(200);
+				box.getChildren().add(element);
+				getOnMouseClicked(resourceList, element);
+			}
+		}
+		box.setAlignment(Pos.CENTER);
+		return box;
+	}
 
-    @FXML
-    public void handleSortByBookButtonAction() {
-        try {
-            resourceList = getResourceManager().searchResources("TID", "1");
-            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Couldn't set type as book.");
-            alert.showAndWait();
-        }
-    }
+	/**
+	 * sorts the
+	 */
+	@FXML
+	public void handleSortByBookButtonAction() {
+		try {
+			resourceList = getResourceManager().searchResources("TID", "1");
+			resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("Couldn't set type as book.");
+			alert.showAndWait();
+		}
+	}
 
-    @FXML
-    public void handleSortByDVDButtonAction() {
-        try {
-            resourceList = getResourceManager().searchResources("TID", "2");
-            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Couldn't set type as DVD.");
-            alert.showAndWait();
-        }
-    }
+	@FXML
+	public void handleSortByDVDButtonAction() {
+		try {
+			resourceList = getResourceManager().searchResources("TID", "2");
+			resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("Couldn't set type as DVD.");
+			alert.showAndWait();
+		}
+	}
 
-    @FXML
-    public void handleSortByComputerButtonAction() {
-        try {
-            resourceList = getResourceManager().searchResources("TID", "3");
-            resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setContentText("Couldn't set type as Computer.");
-            alert.showAndWait();
-        }
-    }
+	@FXML
+	public void handleSortByComputerButtonAction() {
+		try {
+			resourceList = getResourceManager().searchResources("TID", "3");
+			resourceView.setPageFactory((Integer pageIndex) -> createPage(pageIndex));
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.WARNING);
+			alert.setContentText("Couldn't set type as Computer.");
+			alert.showAndWait();
+		}
+	}
 }
