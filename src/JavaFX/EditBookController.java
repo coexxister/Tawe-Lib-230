@@ -25,7 +25,7 @@ public class EditBookController extends ResourceController implements Initializa
 	/**
 	 * book to be edited.
 	 */
-	private Book book = (Book) getRequestResource();
+	private final Book book = (Book) getRequestResource();
 	/**
 	 * file path for the thumbnail image of the book.
 	 */

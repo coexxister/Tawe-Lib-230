@@ -31,11 +31,6 @@ import static javafx.fxml.FXMLLoader.load;
 public class SceneController {
 
 	/**
-	 * User ID used in various methods.
-	 */
-	public static int USER_ID;
-
-	/**
 	 * File path for main interface FXML.
 	 */
 	private static final String MAIN_INTERFACE = "/View/LoginInterface.fxml";
@@ -155,38 +150,38 @@ public class SceneController {
 	 * File path for list overdue copies interface FXML.
 	 */
 	private static final String LIST_OVERDUE_COPIES_INTERFACE = "/View/ListAllOverdueCopiesInterface.fxml";
-
+	/**
+	 * Instance of DatabaseManager class for use with other interfaces.
+	 */
+	private static final DatabaseManager db = new DatabaseManager("./TaweLibDB.db");
+	/**
+	 * Instance of ResourceManager class for use with other interfaces.
+	 */
+	private static final ResourceManager rm = new ResourceManager(db);
+	/**
+	 * Instance of AccountManager class for use with other interfaces.
+	 */
+	private static final AccountManager am = new AccountManager(db);
+	/**
+	 * User ID used in various methods.
+	 */
+	public static int USER_ID;
+	/**
+	 * Instance of ResourceFlowManager class for use with other interfaces.
+	 */
+	private static final ResourceFlowManager rfm = new ResourceFlowManager(db, am, rm, USER_ID);
 	/**
 	 * Query for requesting resource and the requested resource.
 	 */
 	private static String sqlQuery;
-
 	/**
 	 * Requested resource used in various subclasses.
 	 */
 	private static Resource requestResource;
-
 	/**
 	 * Main BorderPane of the interface for changing scenes.
 	 */
 	private static BorderPane mainPane = new BorderPane();
-
-	/**
-	 * Instance of DatabaseManager class for use with other interfaces.
-	 */
-	private static DatabaseManager db = new DatabaseManager("./TaweLibDB.db");
-	/**
-	 * Instance of ResourceManager class for use with other interfaces.
-	 */
-	private static ResourceManager rm = new ResourceManager(db);
-	/**
-	 * Instance of AccountManager class for use with other interfaces.
-	 */
-	private static AccountManager am = new AccountManager(db);
-	/**
-	 * Instance of ResourceFlowManager class for use with other interfaces.
-	 */
-	private static ResourceFlowManager rfm = new ResourceFlowManager(db, am, rm, USER_ID);
 
 	/**
 	 * Getter for main interface FXML path.
@@ -458,6 +453,41 @@ public class SceneController {
 		return LIST_ALL_INTERFACE;
 	}
 
+	/**
+	 * Getter for resource database manager instance.
+	 *
+	 * @return The database manager instance.
+	 */
+	public static DatabaseManager getDatabase() {
+		return db;
+	}
+
+	/**
+	 * Getter for account manager instance.
+	 *
+	 * @return The account manager instance.
+	 */
+	public static AccountManager getAccountManager() {
+		return am;
+	}
+
+	/**
+	 * Getter for the resource flow manager instance.
+	 *
+	 * @return The resource flow manager instance.
+	 */
+	public static ResourceFlowManager getResourceFlowManager() {
+		return rfm;
+	}
+
+	/**
+	 * Getter for the resource manager instance.
+	 *
+	 * @return The resource manager instance.
+	 */
+	public static ResourceManager getResourceManager() {
+		return rm;
+	}
 
 	/**
 	 * Handles the action of clicking a button to change scenes.
@@ -540,42 +570,6 @@ public class SceneController {
 	@FXML
 	public void changeLogoutToHome(Button logoutButton) {
 		logoutButton.setText("Home");
-	}
-
-	/**
-	 * Getter for resource database manager instance.
-	 *
-	 * @return The database manager instance.
-	 */
-	public static DatabaseManager getDatabase() {
-		return db;
-	}
-
-	/**
-	 * Getter for account manager instance.
-	 *
-	 * @return The account manager instance.
-	 */
-	public static AccountManager getAccountManager() {
-		return am;
-	}
-
-	/**
-	 * Getter for the resource flow manager instance.
-	 *
-	 * @return The resource flow manager instance.
-	 */
-	public static ResourceFlowManager getResourceFlowManager() {
-		return rfm;
-	}
-
-	/**
-	 * Getter for the resource manager instance.
-	 *
-	 * @return The resource manager instance.
-	 */
-	public static ResourceManager getResourceManager() {
-		return rm;
 	}
 
 	/**

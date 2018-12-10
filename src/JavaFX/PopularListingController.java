@@ -1,10 +1,10 @@
 package JavaFX;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.PieChart.Data;
-import javafx.collections.FXCollections;
 
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -1,11 +1,8 @@
 package JavaFX;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
-
-import java.io.IOException;
 
 /**
  * Performs User search by User ID.
@@ -19,18 +16,12 @@ public class AccountSearchController extends SceneController {
 	 */
 	@FXML
 	private TextField accountName;
-	/**
-	 * user ID of the account to be searched for.
-	 */
-	public static int userID;
 
 	/**
 	 * Takes in a User ID and loads the Resource Flow Interface for the specific User.
-	 *
-	 * @param event the event triggered by clicking the button.
 	 */
 	@FXML
-	private void handleAccountSearchButtonAction(ActionEvent event) {
+	private void handleAccountSearchButtonAction() {
 
 		/*
 		try to get the entered user ID and pass it into the resource flow manager interface in order to view
@@ -38,7 +29,10 @@ public class AccountSearchController extends SceneController {
 		 */
 		try {
 			//get entered user ID.
-			userID = Integer.parseInt(accountName.getText());
+			/**
+			 * user ID of the account to be searched for.
+			 */
+			int userID = Integer.parseInt(accountName.getText());
 
 			/*
 			if the account exists in the database, change subscene to the resource flow manager. If not, show the user

@@ -8,165 +8,164 @@ package Core;
  */
 public class Book extends Resource {
 
-    /**
-     * The author of the book.
-     */
-    private String author;
+	/**
+	 * The author of the book.
+	 */
+	private String author;
 
-    /**
-     * The publisher of the book.
-     */
-    private String publisher;
+	/**
+	 * The publisher of the book.
+	 */
+	private String publisher;
 
-    /**
-     * The genre of the book.
-     */
-    private String genre;
+	/**
+	 * The genre of the book.
+	 */
+	private String genre;
 
-    /**
-     * The isbn of the book.
-     */
-    private String isbn;
+	/**
+	 * The isbn of the book.
+	 */
+	private String isbn;
 
-    /**
-     * The language of the book.
-     */
-    private String lang;
+	/**
+	 * The language of the book.
+	 */
+	private String lang;
 
-    /**
-     * Creates a book.
-     *
-     * @param resourceID   Uniquely identifies the book.
-     * @param title        The title of the book.
-     * @param year         The release date of the book.
-     * @param thumbImageID Identifies the thumbnail image.
-     * @param author       The author of the book.
-     * @param publisher    The publisher of the book.
-     * @param genre        The genre of the book.
-     * @param isbn         The isbn of the book.
-     * @param lang         The language of the book.
-     */
-    public Book(int resourceID, String title, int year, int thumbImageID, String author, String publisher, String genre,
-                String isbn, String lang) {
+	/**
+	 * Creates a book.
+	 *
+	 * @param resourceID   Uniquely identifies the book.
+	 * @param title        The title of the book.
+	 * @param year         The release date of the book.
+	 * @param thumbImageID Identifies the thumbnail image.
+	 * @param author       The author of the book.
+	 * @param publisher    The publisher of the book.
+	 * @param genre        The genre of the book.
+	 * @param isbn         The isbn of the book.
+	 * @param lang         The language of the book.
+	 */
+	public Book(int resourceID, String title, int year, int thumbImageID, String author, String publisher, String genre,
+				String isbn, String lang) {
 
-        super(resourceID, title, year, thumbImageID);
+		super(resourceID, title, year, thumbImageID);
 
-        this.author = author;
-        this.publisher = publisher;
-        this.genre = genre;
-        this.isbn = isbn;
-        this.lang = lang;
+		this.author = author;
+		this.publisher = publisher;
+		this.genre = genre;
+		this.isbn = isbn;
+		this.lang = lang;
 
-    }
+	}
 
-    /**
-     * Gets the author.
-     *
-     * @return The author.
-     */
-    public String getAuthor() {
-        return author;
-    }
+	/**
+	 * Gets the author.
+	 *
+	 * @return The author.
+	 */
+	public String getAuthor() {
+		return author;
+	}
 
-    /**
-     * Gets the publisher.
-     *
-     * @return The publisher.
-     */
-    public String getPublisher() {
-        return publisher;
-    }
+	/**
+	 * Set the author of the book.
+	 *
+	 * @param author The new author.
+	 */
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
-    /**
-     * Gets the genre.
-     *
-     * @return The genre.
-     */
-    public String getGenre() {
-        return genre;
-    }
+	/**
+	 * Gets the publisher.
+	 *
+	 * @return The publisher.
+	 */
+	public String getPublisher() {
+		return publisher;
+	}
 
-    /**
-     * Gets the isbn.
-     *
-     * @return The isbn.
-     */
-    public String getIsbn() {
-        return isbn;
-    }
+	/**
+	 * Sets the publisher of the book.
+	 *
+	 * @param publisher The new publisher.
+	 */
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
 
-    /**
-     * Gets the language.
-     *
-     * @return The language.
-     */
-    public String getLang() {
-        return lang;
-    }
+	/**
+	 * Gets the genre.
+	 *
+	 * @return The genre.
+	 */
+	public String getGenre() {
+		return genre;
+	}
 
-    /**
-     * Set the author of the book.
-     *
-     * @param author The new author.
-     */
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+	/**
+	 * Sets the genre of the book.
+	 *
+	 * @param genre The new genre.
+	 */
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
 
-    /**
-     * Sets the publisher of the book.
-     *
-     * @param publisher The new publisher.
-     */
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
+	/**
+	 * Gets the isbn.
+	 *
+	 * @return The isbn.
+	 */
+	public String getIsbn() {
+		return isbn;
+	}
 
-    /**
-     * Sets the genre of the book.
-     *
-     * @param genre The new genre.
-     */
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+	/**
+	 * Sets the isbn of the book.
+	 *
+	 * @param isbn The new isbn.
+	 */
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
+	}
 
-    /**
-     * Sets the isbn of the book.
-     *
-     * @param isbn The new isbn.
-     */
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
+	/**
+	 * Gets the language.
+	 *
+	 * @return The language.
+	 */
+	public String getLang() {
+		return lang;
+	}
 
-    /**
-     * Sets the language of the book.
-     *
-     * @param lang The new language.
-     */
-    public void setLang(String lang) {
-        this.lang = lang;
-    }
+	/**
+	 * Sets the language of the book.
+	 *
+	 * @param lang The new language.
+	 */
+	public void setLang(String lang) {
+		this.lang = lang;
+	}
 
-    /**
-     * Creates a summary of information for the Book.
-     *
-     * @return Returns a summary of the Book.
-     */
-    public String toString() {
+	/**
+	 * Creates a summary of information for the Book.
+	 *
+	 * @return Returns a summary of the Book.
+	 */
+	public String toString() {
 
-        //create summary
-        String out = super.toString() +
-                "\nType - Book" +
-                "\nAuthor - " + author +
-                "\nPublisher - " + publisher +
-                "\nGenre - " + genre +
-                "\nISBN - " + isbn +
-                "\nLanguage - " + lang;
+		//create summary
 
-        return out;
+		return super.toString() +
+				"\nType - Book" +
+				"\nAuthor - " + author +
+				"\nPublisher - " + publisher +
+				"\nGenre - " + genre +
+				"\nISBN - " + isbn +
+				"\nLanguage - " + lang;
 
-    }
+	}
 
 }

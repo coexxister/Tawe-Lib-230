@@ -10,24 +10,16 @@
     -fx-background-color: lightblue;
 }
 
-.HomeInterfaceBorder {
-    -fx-background-color: lightblue;
-}
-
 .HomeInterfaceFlow {
     -fx-background-color: lightblue;
 }
 
 .UniversalButton {
-    -fx-background-color: rgba(215,243,245,0.5);
-}
-
-.scroll-pane > .viewport {
-    -fx-background-color: rgba(215,243,245,0.5);
+    -fx-background-color: rgba(215, 243, 245, 0.5);
 }
 
 .UniversalButton:hover {
-    -fx-background-color: rgba(215,243,245,1);
+    -fx-background-color: rgba(215, 243, 245, 1);
 }
 
 .UniversalTextBox {
@@ -39,20 +31,8 @@
     -fx-border-color: white;
 }
 
-.ScrollListItem {
-    -fx-background-color: rgba(215,243,245,0.5);
-    -fx-padding: 20px;
-    -fx-text-alignment: center;
-    -fx-min-width: 50px;
-
-}
-
-.ScrollListItem:hover {
-    -fx-background-color: rgba(215,243,245,1);
-}
-
 .ScrollContainer {
-    -fx-background-color: rgba(215,243,245,1);
+    -fx-background-color: rgba(215, 243, 245, 1);
 }
 
 .ScrollTitle {
@@ -60,34 +40,9 @@
 }
 
 /* Remove spacing */
-.pagination > .pagination-control > .control-box {
-    -fx-spacing: 0;
-}
 
 /* You can control the actual button sizes here */
-.pagination > .pagination-control > .control-box > .number-button,
-.pagination > .pagination-control > .control-box > .bullet-button,
-.pagination > .pagination-control > .control-box > .left-arrow-button,
-.pagination > .pagination-control > .control-box > .right-arrow-button {
-    -fx-background-insets: 0, 1;
-    -fx-background-color: lightgray, #FAFAFA;
-    -fx-min-width: 30;
-    -fx-min-height: 30;
-}
 
 /* Colors on hover */
-.pagination > .pagination-control > .control-box > .number-button:hover,
-.pagination > .pagination-control > .control-box > .bullet-button:hover,
-.pagination > .pagination-control > .control-box > .left-arrow-button:hover,
-.pagination > .pagination-control > .control-box > .right-arrow-button:hover {
-    -fx-background-insets: 0;
-    -fx-background-color: lightgray;
-}
 
 /* Selected toggle color */
-.pagination > .pagination-control > .control-box > .number-button:selected,
-.pagination > .pagination-control > .control-box > .bullet-button:selected{
-    -fx-background-insets: 0;
-    -fx-background-color: #58379A;
-    -fx-text-fill: white;
-}

@@ -8,7 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,6 +24,11 @@ import java.util.ResourceBundle;
 public class TransactionManagerController extends SceneController implements Initializable {
 
 	/**
+	 * Label for the current balance of the user.
+	 */
+	@FXML
+	Label currentBalance;
+	/**
 	 * Background pane for the scene.
 	 */
 	@FXML
@@ -32,11 +38,6 @@ public class TransactionManagerController extends SceneController implements Ini
 	 */
 	@FXML
 	private TextField balanceChangeText;
-	/**
-	 * Label for the current balance of the user.
-	 */
-	@FXML
-	Label currentBalance;
 
 	/**
 	 * Initialises the BorderPane to display the transaction history and balance of the requested user.
@@ -97,7 +98,7 @@ public class TransactionManagerController extends SceneController implements Ini
 			balance = 0.0F;
 		}
 
-		currentBalance.setText("£" + Float.toString(balance));
+		currentBalance.setText("£" + balance);
 
 		//if the balance is less than 0, then change background color to red. Otherwise change to green.
 		if (balance < 0) {

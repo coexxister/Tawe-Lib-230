@@ -28,7 +28,7 @@ public class ResourceController extends SceneController {
 	/**
 	 * FileChooser used to select a resource image.
 	 */
-	private FileChooser imageChooser = new FileChooser();
+	private final FileChooser imageChooser = new FileChooser();
 
 	/**
 	 * TextField for the resource ID to be searched for.

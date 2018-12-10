@@ -8,13 +8,11 @@ package Core;
  */
 public class ResourceDuplicateException extends IllegalArgumentException {
 
-    /**
-     * Creates the class.
-     *
-     * @param message The exception message.
-     */
-    ResourceDuplicateException(String message) {
-        super(message);
-    }
+	/**
+	 * Creates the class.
+	 */
+	ResourceDuplicateException() {
+		super("Resource already exists in database.");
+	}
 
 }

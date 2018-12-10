@@ -32,7 +32,7 @@ public class AddBookController extends ResourceController implements Initializab
 	 * ChoiceBox to select the loan duration for the book
 	 */
 	@FXML
-	private ChoiceBox loanDuration;
+	private ChoiceBox<Integer> loanDuration;
 
 	/**
 	 * TextField for the title of the book.
@@ -98,7 +98,7 @@ public class AddBookController extends ResourceController implements Initializab
 
 				int copies = Integer.parseInt(numOfCopies.getText());
 				getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(),
-						(int) loanDuration.getValue(), "", 0, 0), copies);
+						loanDuration.getValue(), "", 0, 0), copies);
 
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setContentText("Resource Created Successfully!\nResource ID = \"\n" +
@@ -132,21 +132,21 @@ public class AddBookController extends ResourceController implements Initializab
 		}
 
 		try {
-		    //if image doesnt exist then add image url to database
-            if (!getResourceManager().isImageExist(path)) {
+			//if image doesnt exist then add image url to database
+			if (!getResourceManager().isImageExist(path)) {
 
-                getResourceManager().addResourceImage(path);
+				getResourceManager().addResourceImage(path);
 
-            }
-            System.out.println(path);
-            Image image = new Image(getResourceManager().getImageURL(getResourceManager().getImageID(path)));
-            thumbnail.setImage(image);
+			}
+			System.out.println(path);
+			Image image = new Image(getResourceManager().getImageURL(getResourceManager().getImageID(path)));
+			thumbnail.setImage(image);
 
-        } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("Error in Database!");
-            alert.showAndWait();
-        }
+		} catch (SQLException e) {
+			Alert alert = new Alert(Alert.AlertType.ERROR);
+			alert.setContentText("Error in Database!");
+			alert.showAndWait();
+		}
 
 
 	}

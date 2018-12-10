@@ -25,7 +25,7 @@ public class EditDVDController extends ResourceController implements Initializab
 	/**
 	 * DVD to be edited.
 	 */
-	private Dvd dvd = (Dvd) getRequestResource();
+	private final Dvd dvd = (Dvd) getRequestResource();
 
 	/**
 	 * file path for the thumbnail image of the DVD.

@@ -8,119 +8,117 @@ package Core;
  */
 public class Resource {
 
-    /**
-     * Uniquely identifies the resource.
-     */
-    protected int resourceID;
+	/**
+	 * Uniquely identifies the resource.
+	 */
+	protected final int resourceID;
 
-    /**
-     * The title of the resource.
-     */
-    protected String title;
+	/**
+	 * The title of the resource.
+	 */
+	protected String title;
 
-    /**
-     * The release year of the resource.
-     */
-    protected int year;
+	/**
+	 * The release year of the resource.
+	 */
+	protected int year;
 
-    /**
-     * The thumbnail image id the identifies an image.
-     */
-    protected int thumbImageID;
+	/**
+	 * The thumbnail image id the identifies an image.
+	 */
+	protected int thumbImageID;
 
-    /**
-     * Creates a resource with specified id, title, release year and image id.
-     *
-     * @param resourceID   A unique identifier for the resource.
-     * @param title        The resource title/name.
-     * @param year         The release year.
-     * @param thumbImageID The thumbnail image id which identifies a certain image.
-     */
-    public Resource(int resourceID, String title, int year, int thumbImageID) {
+	/**
+	 * Creates a resource with specified id, title, release year and image id.
+	 *
+	 * @param resourceID   A unique identifier for the resource.
+	 * @param title        The resource title/name.
+	 * @param year         The release year.
+	 * @param thumbImageID The thumbnail image id which identifies a certain image.
+	 */
+	public Resource(int resourceID, String title, int year, int thumbImageID) {
 
-        this.resourceID = resourceID;
-        this.title = title;
-        this.year = year;
-        this.thumbImageID = thumbImageID;
+		this.resourceID = resourceID;
+		this.title = title;
+		this.year = year;
+		this.thumbImageID = thumbImageID;
 
-    }
+	}
 
-    /**
-     * Get the resource id.
-     *
-     * @return The resource id.
-     */
-    public int getResourceID() {
-        return resourceID;
-    }
+	/**
+	 * Get the resource id.
+	 *
+	 * @return The resource id.
+	 */
+	public int getResourceID() {
+		return resourceID;
+	}
 
-    /**
-     * Get the resource title.
-     *
-     * @return The resource title.
-     */
-    public String getTitle() {
-        return title;
-    }
+	/**
+	 * Get the resource title.
+	 *
+	 * @return The resource title.
+	 */
+	public String getTitle() {
+		return title;
+	}
 
-    /**
-     * Get the release year.
-     *
-     * @return The release year.
-     */
-    public int getYear() {
-        return year;
-    }
+	/**
+	 * Set the resource title.
+	 *
+	 * @param title The new resource title.
+	 */
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-    /**
-     * Get the thumbnail image id.
-     *
-     * @return The thumbnail image id.
-     */
-    public int getThumbImage() {
-        return thumbImageID;
-    }
+	/**
+	 * Get the release year.
+	 *
+	 * @return The release year.
+	 */
+	public int getYear() {
+		return year;
+	}
 
-    /**
-     * Set the resource title.
-     *
-     * @param title The new resource title.
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
+	/**
+	 * Set the release year.
+	 *
+	 * @param year The new release year.
+	 */
+	public void setYear(int year) {
+		this.year = year;
+	}
 
-    /**
-     * Set the release year.
-     *
-     * @param year The new release year.
-     */
-    public void setYear(int year) {
-        this.year = year;
-    }
+	/**
+	 * Get the thumbnail image id.
+	 *
+	 * @return The thumbnail image id.
+	 */
+	public int getThumbImage() {
+		return thumbImageID;
+	}
 
-    /**
-     * Set the thumbnail image id.
-     *
-     * @param thumbImage The new thumbnail image id.
-     */
-    public void setThumbImage(int thumbImage) {
-        this.thumbImageID = thumbImage;
-    }
+	/**
+	 * Set the thumbnail image id.
+	 *
+	 * @param thumbImage The new thumbnail image id.
+	 */
+	public void setThumbImage(int thumbImage) {
+		this.thumbImageID = thumbImage;
+	}
 
-    /**
-     * Creates a summary of information for the resource.
-     *
-     * @return Returns a summary of the resource.
-     */
-    public String toString() {
+	/**
+	 * Creates a summary of information for the resource.
+	 *
+	 * @return Returns a summary of the resource.
+	 */
+	public String toString() {
 
-        String out =
-                "\nTitle - " + title +
-                        "\nRid - " + resourceID +
-                        "\nRelease Year - " + year;
-        return out;
+		return "\nTitle - " + title +
+				"\nRid - " + resourceID +
+				"\nRelease Year - " + year;
 
-    }
+	}
 
 }

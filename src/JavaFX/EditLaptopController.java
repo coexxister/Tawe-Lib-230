@@ -25,7 +25,7 @@ public class EditLaptopController extends ResourceController implements Initiali
 	/**
 	 * laptop to be edited.
 	 */
-	private Computer computer = (Computer) getRequestResource();
+	private final Computer computer = (Computer) getRequestResource();
 	/**
 	 * file path for the thumbnail image of the laptop.
 	 */

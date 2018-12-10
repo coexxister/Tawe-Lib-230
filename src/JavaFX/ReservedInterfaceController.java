@@ -1,12 +1,15 @@
 package JavaFX;
 
-import Core.*;
+import Core.Copy;
+import Core.Resource;
+import Core.Staff;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -129,7 +132,7 @@ public class ReservedInterfaceController extends SceneController implements Init
 			//try and get the resource object.
 			try {
 				resource = getResourceManager().getResourceList("SELECT * FROM Resource WHERE " +
-						"RID = " + Integer.toString(reservedCopies[iCount].getResourceID()))[0];
+						"RID = " + reservedCopies[iCount].getResourceID())[0];
 
 				//if the resource is not null then get the summary of the resource.
 				if (resource != null) {

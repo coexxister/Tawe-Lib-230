@@ -24,7 +24,7 @@ public class AccountEditorController extends ResourceController implements Initi
 	/**
 	 * user ID of the user to be edited.
 	 */
-	private int id = getResourceFlowManager().getUserID();
+	private final int id = getResourceFlowManager().getUserID();
 	/**
 	 * file path for the avatar image.
 	 */
@@ -72,12 +72,6 @@ public class AccountEditorController extends ResourceController implements Initi
 	private TextField phoneNumber;
 
 	/**
-	 * TextField for the balance of the account.
-	 */
-	@FXML
-	private TextField balance;
-
-	/**
 	 * avatar image displayed on the avatar selection button.
 	 */
 	@FXML
@@ -98,11 +92,9 @@ public class AccountEditorController extends ResourceController implements Initi
 	/**
 	 * Saves all details set in text fields to respective variables,
 	 * to change the values in the database.
-	 *
-	 * @param event the event triggered by clicking the button.
 	 */
 	@FXML
-	public void handleSaveAction(ActionEvent event) {
+	public void handleSaveAction() {
 		/*try to get the account by its ID and edit its details. If getting the account from the database fails or the
 		avatar image doesn't exist, output an error.
 		*/
@@ -167,11 +159,9 @@ public class AccountEditorController extends ResourceController implements Initi
 
 	/**
 	 * Cancels all changes and returns back to Resource Flow Interface.
-	 *
-	 * @param event the event triggered by clicking the button.
 	 */
 	@FXML
-	public void handleCancelAction(ActionEvent event) {
+	public void handleCancelAction() {
 		goBack();
 	}
 

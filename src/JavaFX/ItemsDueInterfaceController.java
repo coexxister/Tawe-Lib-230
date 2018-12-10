@@ -78,7 +78,7 @@ public class ItemsDueInterfaceController extends SceneController implements Init
 			try {
 				titleLabel.setText("\n" + getResourceManager().
 						getResourceList("SELECT * FROM Resource WHERE RID = " +
-								Integer.toString(copiesOnLoan[iCount].getResourceID()))[0].getTitle());
+								copiesOnLoan[iCount].getResourceID())[0].getTitle());
 			} catch (SQLException e) {
 				titleLabel.setText("");
 			}

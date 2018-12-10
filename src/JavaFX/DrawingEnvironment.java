@@ -1,5 +1,18 @@
 package JavaFX;
 
+import javafx.embed.swing.SwingFXUtils;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 import java.io.File;
@@ -12,21 +25,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
-
-import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.*;
-import javafx.scene.image.WritableImage;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
-import javafx.util.Pair;
-
-import javax.imageio.ImageIO;
 
 /**
  * Creates a Drawing Environment.
@@ -43,11 +41,6 @@ public class DrawingEnvironment implements Initializable {
 	 * The number of avatars in user's folder.
 	 */
 	private static long aNo = 0;
-
-	/**
-	 * Holds the coordinates for drawing straight lines.
-	 */
-	private Pair<Double, Double> initialTouch;
 
 	/**
 	 * ToggleButton to use pen.
@@ -94,13 +87,13 @@ public class DrawingEnvironment implements Initializable {
 	/**
 	 * Create the GUI.
 	 */
-	@SuppressWarnings("unchecked")
 	private void buildGUI() {
 
 		GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
 		graphicsContext.setFill(Color.WHITE);
 		graphicsContext.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		BufferedImage image = new BufferedImage((int) canvas.getWidth(), (int) canvas.getHeight(), BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage((int) canvas.getWidth(), (int) canvas.getHeight(),
+				BufferedImage.TYPE_INT_RGB);
 
 		final ToggleGroup group = new ToggleGroup();
 		penButton.setToggleGroup(group);

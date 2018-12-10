@@ -93,7 +93,7 @@ public class AddDVDController extends ResourceController implements Initializabl
 
 				int copies = Integer.parseInt(numOfCopies.getText());
 				getResourceManager().addBulkCopies(new Copy(0, getResourceManager().getLastAddedID(),
-						(int) loanDuration.getValue(),"", 0, 0), copies);
+						(int) loanDuration.getValue(), "", 0, 0), copies);
 
 				Alert alert = new Alert(Alert.AlertType.INFORMATION);
 				alert.setContentText("Resource Created Successfully!\nResource ID = " +

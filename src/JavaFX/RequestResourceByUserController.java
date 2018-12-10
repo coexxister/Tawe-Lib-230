@@ -99,7 +99,7 @@ public class RequestResourceByUserController extends SceneController implements 
 				rowCounter++;
 			}
 			if (book.getYear() != 0) {
-				Label year = new Label("Year:\t\t " + String.valueOf(book.getYear()));
+				Label year = new Label("Year:\t\t " + book.getYear());
 				descriptionPane.addRow(rowCounter, year);
 				rowCounter++;
 			}
