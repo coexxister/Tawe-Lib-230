@@ -36,8 +36,6 @@ public class RequestedResourcesInterfaceController extends SceneController imple
         Resource[] requestedResources = getResourceFlowManager().
                 getRequestedResources(SceneController.USER_ID);
 
-        Resource[] requestedHistory;
-
         //If returned resources is null, then create empty array to avoid null pointer exceptions.
         if (requestedResources == null) {
             requestedResources = new Resource[0];

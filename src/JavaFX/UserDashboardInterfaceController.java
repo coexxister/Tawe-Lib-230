@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
-public class UserDashboardInterfaceController extends SceneController implements Initializable {
+public class UserDashboardInterfaceController extends SceneController {
 
     /**
      * Button to return back to the homepage.
@@ -37,7 +37,6 @@ public class UserDashboardInterfaceController extends SceneController implements
      */
     @FXML
     private void handleHomeButtonAction(ActionEvent event) {
-        //if button contains home then go to home interface. Otherwise go to user dashboard.
         if (homeButton.getText().contains("Home")) {
             handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
         } else {
@@ -141,16 +140,4 @@ public class UserDashboardInterfaceController extends SceneController implements
             currentBalance.setStyle("-fx-background-color: #228022; -fx-text-fill: WHITE;");
         }
     }
-
-    /**
-     * Method to initalize and update the balance label.
-     *
-     * @param location  The location used to resolve relative paths for the root object.
-     * @param resources The resources used to localize the root object.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        updateBalanceLabel();
-    }
-
 }
