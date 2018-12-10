@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -21,7 +20,6 @@ public class BookSearchMenuController extends SceneController{
     /**
      * Executes a search from information specified.
      * @param event Represents the data of the button pressed.
-     * @throws IOException Thrown if input is null.
      */
     public void handleSearchByQueryButtonAction(ActionEvent event) {
         getInput();
@@ -31,7 +29,6 @@ public class BookSearchMenuController extends SceneController{
     /**
      * Executes a search by ISBN specified.
      * @param event Represents the data of the button pressed.
-     * @throws IOException Thrown if input is null.
      */
     public void handleSearchByISBNButtonAction(ActionEvent event) {
         if(!isbn.getText().isEmpty()) {

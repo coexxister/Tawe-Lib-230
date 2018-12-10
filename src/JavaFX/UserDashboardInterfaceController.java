@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
  * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
  * @version 1.0
  */
-public class UserDashboardInterfaceController extends SceneController implements Initializable {
+public class UserDashboardInterfaceController extends SceneController {
 
     /**
      * Button to return back to the homepage.
@@ -140,16 +140,4 @@ public class UserDashboardInterfaceController extends SceneController implements
             currentBalance.setStyle("-fx-background-color: #228022; -fx-text-fill: WHITE;");
         }
     }
-
-    /**
-     * method to initalize the balance label.
-     *
-     * @param location  The location used to resolve relative paths for the root object.
-     * @param resources The resources used to localize the root object.
-     */
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        updateBalanceLabel();
-    }
-
 }

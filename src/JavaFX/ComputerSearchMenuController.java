@@ -37,7 +37,7 @@ public class ComputerSearchMenuController extends SceneController {
      * @param event Represents the data of the button pressed.
      * @throws IOException Thrown if input is null.
      */
-    public void handleSearchComputerButtonAction(ActionEvent event) throws IOException {
+    public void handleSearchComputerButtonAction(ActionEvent event) {
         getInput();
         loadSubscene("/View/ComputerList.fxml");
     }

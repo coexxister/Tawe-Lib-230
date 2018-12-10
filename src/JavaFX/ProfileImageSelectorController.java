@@ -134,7 +134,7 @@ public class ProfileImageSelectorController extends SceneController {
     }
 
     @FXML
-    private void handleDrawingEnvironmentButtonAction(ActionEvent event) throws Exception {
+    private void handleDrawingEnvironmentButtonAction(ActionEvent event){
         loadSubscene(SceneController.getDrawingInterface());
     }
 }

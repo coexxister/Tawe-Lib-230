@@ -38,9 +38,6 @@ public class ListAllOverdueCopiesController extends SceneController implements I
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        //get the user id.
-        int userID = getResourceFlowManager().getUserID();
-
         //get all overdue copies
         Copy[] copies = getResourceFlowManager().showOverdueCopies();
 
