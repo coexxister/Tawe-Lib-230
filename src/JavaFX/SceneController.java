@@ -524,45 +524,6 @@ public class SceneController {
 	}
 
 	/**
-	 * Displays pop-up window asking for the consent of the user to store their personal data in accordance with GDPR.
-	 *
-	 * @param event The event triggered by clicking the button used to save a new user in the account creation interface.
-	 */
-	public void consentPopUp(ActionEvent event) {
-		Stage dialog = new Stage();
-		dialog.setTitle("User acknowledgment for data usage");
-		dialog.getIcons().add(new Image("/Icons/NightMode.png"));
-		dialog.initModality(Modality.APPLICATION_MODAL);
-		dialog.initOwner(((Node) event.getSource()).getScene().getWindow());
-		BorderPane dialogPane = new BorderPane();
-		Label consent = new Label("By creating an account, the user " +
-				"acknowledges that their information is being stored on the Tawe-Lib database.");
-		consent.setAlignment(Pos.CENTER);
-		consent.setPadding(new Insets(0, 10, 0, 10));
-		consent.setWrapText(Boolean.TRUE);
-		dialogPane.setCenter(consent);
-		HBox buttonPane = new HBox();
-		Button accept = new Button("Accept");
-		Button deny = new Button("Do not accept");
-		buttonPane.setAlignment(Pos.CENTER);
-		buttonPane.setSpacing(20);
-		buttonPane.setPadding(new Insets(0, 0, 20, 0));
-		buttonPane.getChildren().setAll(accept, deny);
-		dialogPane.setBottom(buttonPane);
-		Scene dialogScene = new Scene(dialogPane, 500, 150);
-		dialog.setScene(dialogScene);
-		dialog.show();
-
-		accept.setOnAction(e -> {
-			dialog.close();
-		});
-		deny.setOnAction(e -> {
-			handleSceneChangeButtonAction(event, getStaffInterface());
-			dialog.close();
-		});
-	}
-
-	/**
 	 * Changes the text of the button to logout to say "Home".
 	 *
 	 * @param logoutButton the button to logout.
