@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 /**
  * Handles transactions for paying fines and updating balance.
  *
- * @author Grzegorz Debicki, Marcos Pallikaras, Dominic Woodman
+ * @author Noah Lenagan
  * @version 1.0
  */
 public class TransactionManagerController extends SceneController implements Initializable {

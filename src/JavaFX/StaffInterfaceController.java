@@ -31,6 +31,7 @@ public class StaffInterfaceController extends SceneController implements Initial
      */
     @FXML
     protected void handleLogoutButtonAction(ActionEvent event) {
+        //If button is in logout mode, logout. Otherwise go to the staff interface.
         if (logoutButton.getText().equals("Logout")) {
             handleSceneChangeButtonAction(event, SceneController.getMainInterface());
         } else {

@@ -37,6 +37,7 @@ public class UserDashboardInterfaceController extends SceneController implements
      */
     @FXML
     private void handleHomeButtonAction(ActionEvent event) {
+        //if button contains home then go to home interface. Otherwise go to user dashboard.
         if (homeButton.getText().contains("Home")) {
             handleSceneChangeButtonAction(event, SceneController.getHomeInterface());
         } else {
@@ -142,7 +143,7 @@ public class UserDashboardInterfaceController extends SceneController implements
     }
 
     /**
-     * method to initalize the balance label.
+     * Method to initalize and update the balance label.
      *
      * @param location  The location used to resolve relative paths for the root object.
      * @param resources The resources used to localize the root object.
